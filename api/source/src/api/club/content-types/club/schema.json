@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clubs",
+  "info": {
+    "singularName": "club",
+    "pluralName": "clubs",
+    "displayName": "club",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "short_content": {
+      "type": "text"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "thub": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "deleted"
+      ]
+    },
+    "order": {
+      "type": "integer"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "showhome": {
+      "type": "boolean"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "skincare",
+        "news",
+        "knowledge"
+      ]
+    },
+    "title_en": {
+      "type": "string"
+    },
+    "short_content_en": {
+      "type": "text"
+    },
+    "content_en": {
+      "type": "richtext"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  pdh.apis:
+    container_name: pdh.apis
+    image: pdh.apis
+    build: .
+    ports:
+      - "1338:1338"
+    volumes:
+      - ../uploads:/app/node/public/uploads
+    network_mode: bridge

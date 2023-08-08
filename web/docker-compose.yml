@@ -1,0 +1,10 @@
+version: "3.5"
+
+services:
+    pdh.site:
+        container_name: pdh.site
+        image: pdh.site
+        build: .
+        ports:
+        - "8086:8086"
+        network_mode: bridge

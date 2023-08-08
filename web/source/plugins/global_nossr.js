@@ -1,0 +1,22 @@
+import Vue from 'vue'
+import Paginate from 'vuejs-paginate'
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
+import VueQuillEditor from 'vue-quill-editor'
+import '~/static/quill/quill.core.css' // import styles
+import '~/static/quill/quill.snow.css' // for snow theme
+import '~/static/quill/quill.bubble.css' // for bubble theme
+
+
+Vue.use(VueQuillEditor, /* { default global options } */)
+Vue.use(VueVideoPlayer)
+Vue.component('Paginate', Paginate)
+
+import quillHtml from "~/components/common/quill-editor";
+import uploadImage from "~/components/common/uploadImage";
+import uploadButton from "~/components/common/uploadButton";
+Vue.component('quill-html', quillHtml)
+Vue.component('upload-button', uploadButton)
+Vue.component('upload-image', uploadImage)
+
+

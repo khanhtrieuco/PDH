@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "singularName": "address",
+    "pluralName": "addresses",
+    "displayName": "address",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "full_address": {
+      "type": "text"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "address"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "address"
+    },
+    "name": {
+      "type": "string"
+    },
+    "wards": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::ward.ward",
+      "inversedBy": "addresses"
+    },
+    "provinces": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::province.province",
+      "inversedBy": "addresses"
+    },
+    "districts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::district.district",
+      "inversedBy": "addresses"
+    }
+  }
+}

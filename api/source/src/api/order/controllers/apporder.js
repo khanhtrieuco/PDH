@@ -1,0 +1,194 @@
+const { createCoreController } = require('@strapi/strapi').factories;
+const moment = require('moment');
+
+module.exports = createCoreController('api::order.order', ({ strapi }) => ({
+	async create(ctx) {
+		const { user } = ctx.state
+		let { shipping_id, listProductItem, code, address_name, address_email, address_phone, address_full, provinces, districts, wards, payment_type } = ctx.request.body;
+		if (!code) {
+			return { message: 'Không tìm thấy mã đơn' };
+		}
+		if (!payment_type) {
+			return { message: 'Không tìm thấy thông tin thanh toán' };
+		}
+		if (!address_name || !address_phone || !address_full || !provinces || !districts || !wards) {
+			return { message: 'Không tìm thấy thông tin nhận đơn' };
+		}
+		if (!shipping_id) {
+			return { message: 'Không tìm thấy thông tin vận chuyển' };
+		}
+		let ship = await strapi.db.query('api::shipping.shipping').findOne({
+			select: ['id', 'price'],
+			where: { id: shipping_id }
+		});
+		if (listProductItem && listProductItem.length > 0) {
+			let listCartId = []
+			let listProductId = []
+			let listCartAdd = []
+			let total_price = 0
+			let priceShip = ship.price
+			let checkCart = true
+			let productName = ''
+			for (let i = 0; i < listProductItem.length; i++) {
+				let product = await strapi.db.query('api::product.product').findOne({
+					select: ['id', 'price', 'name'],
+					where: { id: listProductItem[i].id }
+				});
+				listProductId.push(product.id)
+				if (i === listProductItem.length - 1) {
+					productName += product.name
+				} else {
+					productName += product.name + ', '
+				}
+				total_price += listProductItem[i].quantity * product.price
+
+				if (listProductItem[i].quantity <= 0) {
+					checkCart = false
+				}
+				listCartAdd.push({
+					id: listProductItem[i].id,
+					quantity: listProductItem[i].quantity,
+					price: product.price
+				})
+			}
+
+			if (!checkCart || total_price <= 0) {
+				return { message: 'Thông tin giỏ hàng không hợp lệ' };
+			}
+			for (let i = 0; i < listCartAdd.length; i++) {
+				let cart = {
+					total_price: listCartAdd[i].quantity * listCartAdd[i].price,
+					product: listCartAdd[i].id,
+					quantity: listCartAdd[i].quantity,
+					user: user?.id
+				}
+				let resCart = await strapi.entityService.create('api::cart.cart', { data: cart });
+				if (resCart && resCart.id) {
+					listCartId.push(resCart.id)
+				}
+			}
+			let pick_date = moment().add(1, 'days').format('YYYY-MM-DD')
+			let end_date = moment().add(4, 'days').format('YYYY-MM-DD')
+			let _order = {
+				code,
+				state: 'new',
+				price: total_price,
+				price_ship: priceShip,
+				address_name,
+				address_email,
+				address_phone,
+				address_full,
+				payment_type,
+				provinces,
+				districts,
+				wards,
+				pick_date,
+				end_date,
+				discount_price: 0,
+				cod: payment_type === 'cod' ? total_price + priceShip : 0,
+				cartitems: listCartId,
+				products: listProductId,
+				user: user?.id
+			}
+			let res = await strapi.entityService.create('api::order.order', { data: _order });
+
+			ctx.send({ data: { ...res, productName } });
+		}
+		return { message: 'Không tìm thấy thông tin giỏ hàng' };
+	},
+
+	async deletelike(ctx) {
+		const { user } = ctx.state
+		let { like_id, product_id } = ctx.request.body;
+		let like = await strapi.db.query('api::like.like').findOne({
+			select: ['id'],
+			where: { id: like_id }
+		});
+		if (!like) {
+			return { message: 'Không tìm thấy mã đơn' };
+		}
+		await strapi.db.query('api::like.like').delete({
+			where: { id: 1 },
+		});
+		let product = strapi.db.query('api::product.product').findOne({
+			select: ['id','likes'],
+			where: { id: product_id }
+		});
+		console.log(product)
+		if(product) {
+			let listId = product.likes.filter(o=>o.id !== like_id)
+			let _data = {
+				code,
+				likes: listId
+			}
+			let res = await strapi.entityService.create('api::product.product',{
+				where: { id: product_id },
+				data: {
+					likes: listId
+				},
+			  });
+			return {product}
+		} else {
+			return {}
+		}
+	},
+
+	async statistic(ctx) {
+		let { start, end } = ctx.query;
+		let all_user = await strapi.db.query("plugin::users-permissions.user").count();
+		let all_order = await strapi.db.query("api::order.order").count();
+		let new_user = await strapi.db.query("plugin::users-permissions.user").count({
+			where: {
+				$and: [
+					{ createdAt: { $gte: start } },
+					{ createdAt: { $lte: end } }
+				]
+			},
+		});
+		let new_order = await strapi.db.query("api::order.order").count({
+			where: {
+				$and: [
+					{ createdAt: { $gte: start } },
+					{ createdAt: { $lte: end } }
+				]
+			},
+		});
+		let listOrder = await strapi.db.query('api::order.order').findMany({
+			select: ['price', 'created_at'],
+			where: { state: 'complete' }
+		});
+		let all_money = listOrder.reduce((_sum, o) => _sum + o.price, 0)
+		let new_money = listOrder.filter(f => f.createdAt > start).reduce((_sum, o) => _sum + o.price, 0)
+
+		return { all_user, all_order, new_user, new_order, all_money, new_money };
+	},
+	async chartmoney(ctx) {
+		let _time = moment()
+		let rs = await strapi.db.connection.raw(
+			`SELECT SUM(price) as total, DATE(created_at) DateOnly FROM orders 
+			WHERE created_at >= ${_time.startOf('day').add(-30, 'days').format('YYYY-MM-DD')} and state = 'complete'
+			GROUP BY DateOnly`);
+		if (rs && rs.length > 0)
+			return { data: rs[0] }
+		return { data: [] }
+
+	},
+	async chartuser(ctx) {
+		let _time = moment()
+		let rs = await strapi.db.connection.raw(
+			`SELECT COUNT(id) as total, DATE(created_at) DateOnly FROM up_users WHERE created_at >= ${_time.startOf('day').add(-15, 'days').format('YYYY-MM-DD')} GROUP BY DateOnly`);
+		if (rs && rs.length > 0)
+			return { data: rs[0] }
+		return { data: [] }
+	},
+
+	async chartorder(ctx) {
+		let _time = moment()
+		let rs = await strapi.db.connection.raw(
+			`SELECT COUNT(id) as total, DATE(created_at) DateOnly FROM orders WHERE created_at >= ${_time.startOf('day').add(-15, 'days').format('YYYY-MM-DD')} GROUP BY DateOnly`);
+		if (rs && rs.length > 0)
+			return { data: rs[0] }
+		return { data: [] }
+	}
+
+}));

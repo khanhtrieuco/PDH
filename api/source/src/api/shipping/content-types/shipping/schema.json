@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shippings",
+  "info": {
+    "singularName": "shipping",
+    "pluralName": "shippings",
+    "displayName": "shipping",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "name_en": {
+      "type": "string"
+    },
+    "date": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "price_primary": {
+      "type": "integer"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "string"
+    },
+    "description_en": {
+      "type": "string"
+    }
+  }
+}

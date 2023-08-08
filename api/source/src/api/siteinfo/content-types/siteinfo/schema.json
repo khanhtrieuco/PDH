@@ -1,0 +1,43 @@
+{
+  "kind": "singleType",
+  "collectionName": "siteinfos",
+  "info": {
+    "singularName": "siteinfo",
+    "pluralName": "siteinfos",
+    "displayName": "siteinfo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ceo1": {
+      "type": "string"
+    },
+    "ceo2": {
+      "type": "string"
+    },
+    "link_lazada": {
+      "type": "string"
+    },
+    "link_tiki": {
+      "type": "string"
+    },
+    "link_tiktok": {
+      "type": "string"
+    },
+    "link_shopee": {
+      "type": "string"
+    },
+    "link_facebook": {
+      "type": "string"
+    },
+    "link_instagram": {
+      "type": "string"
+    },
+    "link_zalo_support": {
+      "type": "string"
+    }
+  }
+}
