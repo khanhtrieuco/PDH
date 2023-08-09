@@ -9,7 +9,6 @@ function interopDefault(promise) {
 const HomePage = () => interopDefault(import(/* webpackChunkName: "HomePage" */ './pages/home/index.vue'))
 const AboutPage = () => interopDefault(import(/* webpackChunkName: "WorkPage" */ './pages/about/index.vue'))
 // const InnovationPage = () => interopDefault(import(/* webpackChunkName: "InnovationPage" */ './pages/innovation/index.vue'))
-const DistributorPage = () => interopDefault(import(/* webpackChunkName: "AboutPage" */ './pages/distributor/index.vue'))
 const ContactPage = () => interopDefault(import(/* webpackChunkName: "ContactPage" */ './pages/contact/index.vue'))
 const CategoryDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/category/index.vue'))
 const ProductDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/product/index.vue'))
@@ -60,14 +59,6 @@ export function createRouter() {
             {
                 path: '/ve-nas',
                 component: AboutPage
-            },
-            // {
-            //     path: '/innovation',
-            //     component: InnovationPage
-            // },
-            {
-                path: '/kinh-doanh-cung-nas',
-                component: DistributorPage
             },
             {
                 path: '/lien-he',

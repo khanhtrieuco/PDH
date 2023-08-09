@@ -1,9 +1,9 @@
 import qs from 'qs';
 import ApiService from '@/service/api.service'
 export default {
-    getListBanner: async ({ commit, rootState }, data = {}) => {
+    getListBannerTop: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
-            filters: data.filters ?? { type : 'Trang chủ' },
+            filters: data.filters ?? { type : 'home_top' },
             sort: 'order:desc,id:desc',
             populate:'*'
           }, {
@@ -15,6 +15,23 @@ export default {
           })
         commit('set_list_banner', {
             list_banner: res.data.filter(i=> i.attributes.state === 'active')
+        })
+    },
+
+    getListBannerAbout: async ({ commit, rootState }, data = {}) => {
+        const query = qs.stringify({
+            filters: data.filters ?? { type : 'home_about' },
+            sort: 'order:desc,id:desc',
+            populate:'*'
+          }, {
+            encodeValuesOnly: true, // prettify URL
+          });
+          let res = await ApiService.request({
+              method: 'get',
+              url: `/api/banners?${query}`
+          })
+        commit('set_list_banner_about', {
+            list_banner_about: res.data.filter(i=> i.attributes.state === 'active')
         })
     },
 

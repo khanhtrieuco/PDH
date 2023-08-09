@@ -50,6 +50,9 @@
     },
     "order": {
       "type": "integer"
+    },
+    "time": {
+      "type": "string"
     }
   }
 }

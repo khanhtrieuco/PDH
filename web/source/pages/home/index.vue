@@ -1,16 +1,22 @@
 <template>
   <div>
-    <Banner :isMobile="isMobile" type="Trang chủ"/>
+    <Banner :isMobile="isMobile"/>
+    <BannerAbout :isMobile="isMobile"/>
+    <Store :isMobile="isMobile"/>
   </div>
 </template>
 
 <script>
 import Banner from "~/components/home/banner.vue"
+import BannerAbout from "~/components/home/bannerAbout.vue"
+import Store from "~/components/home/store.vue"
 
 export default {
   name: 'IndexPage',
   components: {
-    Banner
+    Banner,
+    BannerAbout,
+    Store
   },
   data() {
     return {

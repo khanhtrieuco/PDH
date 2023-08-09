@@ -20,30 +20,30 @@
                 </b-col>
             </b-row>
         </b-container>
-        <Founder :isMobile="isMobile" :ceo1="siteInfo?.ceo1" :ceo2="siteInfo?.ceo2" />
+        <!-- <Founder :isMobile="isMobile" :ceo1="siteInfo?.ceo1" :ceo2="siteInfo?.ceo2" />
         <Mission :isMobile="isMobile" />
         <BValue :isMobile="isMobile" />
         <Aura :isMobile="isMobile" />
-        <Blog :isMobile="isMobile" />
+        <Blog :isMobile="isMobile" /> -->
     </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex"
-import Mission from "~/components/about/mission.vue"
-import Founder from "~/components/about/founder.vue"
-import BValue from "~/components/about/bvalue.vue"
-import Aura from "~/components/home/aura.vue"
-import Blog from "~/components/home/blog.vue"
+// import Mission from "~/components/about/mission.vue"
+// import Founder from "~/components/about/founder.vue"
+// import BValue from "~/components/about/bvalue.vue"
+// import Aura from "~/components/home/aura.vue"
+// import Blog from "~/components/home/blog.vue"
 export default {
     name: 'AboutPage',
-    components: {
-        Mission,
-        Founder,
-        BValue,
-        Aura,
-        Blog
-    },
+    // components: {
+    //     Mission,
+    //     Founder,
+    //     BValue,
+    //     Aura,
+    //     Blog
+    // },
     computed: {
       ...mapGetters({
         siteInfo: "common/getSiteinfo"
