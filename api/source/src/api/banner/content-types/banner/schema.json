@@ -47,9 +47,8 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "Trang chủ",
-        "Kinh doanh",
-        "Khuyến mãi"
+        "home_top",
+        "home_about"
       ]
     },
     "title": {
