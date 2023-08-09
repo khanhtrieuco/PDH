@@ -4,10 +4,10 @@
     <Header />
     <div id="main">
       <nuxt />
-      <div class="zalo-support-content">
+      <!-- <div class="zalo-support-content">
         <img class="zalo-support" src="/images/zalo.png" fluid alt="Support" />
         <div class="zalo-text-content">Tư vấn từ chuyên gia</div>
-      </div>
+      </div> -->
     </div>
     <Footer ref="footer" />
   </div>

@@ -73,18 +73,23 @@ export default {
 
   .list-banner-about {
     .slick-prev {
+      width: 45px;
       z-index: 1;
       left: calc(50% - 670px);
       top: 75%;
-      img{
+
+      img {
         width: 45px;
       }
     }
+
     .slick-next {
+      width: 45px;
       z-index: 1;
       right: calc(50% - 670px);
       top: 75%;
-      img{
+
+      img {
         width: 45px;
       }
     }

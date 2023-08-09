@@ -2,6 +2,7 @@
   <div>
     <Banner :isMobile="isMobile"/>
     <BannerAbout :isMobile="isMobile"/>
+    <News :isMobile="isMobile"/>
     <Store :isMobile="isMobile"/>
   </div>
 </template>
@@ -9,6 +10,7 @@
 <script>
 import Banner from "~/components/home/banner.vue"
 import BannerAbout from "~/components/home/bannerAbout.vue"
+import News from "~/components/home/news.vue"
 import Store from "~/components/home/store.vue"
 
 export default {
@@ -16,7 +18,8 @@ export default {
   components: {
     Banner,
     BannerAbout,
-    Store
+    News,
+    Store,
   },
   data() {
     return {

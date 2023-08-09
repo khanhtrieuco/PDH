@@ -51,31 +51,29 @@ export default {
 </script>
 <style lang="scss">
 .select-list-panel {
-    width: 225px;
+    width: 100%;
     position: relative;
 
     .input-choice {
-        border-bottom: 1px solid #000 !important;
-        height: 30px;
-        line-height: 28px;
-        padding-bottom: 5px;
+        border: 1px solid #000 !important;
+        height: 40px;
+        line-height: 40px;
+        padding: 10px;
     }
 
     .input-choice-image {
-        width: 16px;
-        height: 8px;
+        width: 12px;
     }
 
     .select-list-list {
         position: absolute;
-        top: 32px;
+        top: 40px;
         left: 0px;
         width: 100%;
         background-color: white;
         z-index: 1;
-        padding-bottom: 20px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        padding: 10px;
+        border: 1px solid #000 !important;
 
         .select-item {
             margin-top: 8px;

@@ -14,8 +14,22 @@
             :listItem="$i18n.locale === 'vn' ? select_data_2 : select_data_2" />
         </div>
         <div class="store-btn">{{ $t('Store_select_3') }}</div>
+        <div class="store-item">
+          <img class="store-item-maker" src="/images/place-maker.png" />
+          <div class="store-item-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city</div>
+          <div class="store-item-text">House today: 10:00 AM - 9:00 PM</div>
+          <div class="store-item-text">T: 0868284222</div>
+          <div class="store-btn">{{ $t('Store_select_4') }}</div>
+        </div>
+        <div class="store-item">
+          <img class="store-item-maker" src="/images/place-maker.png" />
+          <div class="store-item-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city</div>
+          <div class="store-item-text">House today: 10:00 AM - 9:00 PM</div>
+          <div class="store-item-text">T: 0868284222</div>
+          <div class="store-btn">{{ $t('Store_select_4') }}</div>
+        </div>
       </div>
-      <img class="store-image" src="/images/store.png" />
+      <img class="store-image" src="/images/ple.jpg" />
     </div>
   </div>
 </template>
@@ -51,67 +65,83 @@ export default {
       cate3: {},
     }
   },
-  computed: {
-    ...mapGetters({
-      listCategory: "category/getListCategory"
-    }),
-  },
-  async mounted() {
-    if (this.listCategory.length === 0) {
-      await this.getListCategory()
-    }
-    if (this.listCategory.length >= 3) {
-      this.cate1 = this.listCategory[0].attributes
-      this.cate2 = this.listCategory[1].attributes
-      this.cate3 = this.listCategory[2].attributes
-    }
-  },
-  methods: {
-    ...mapActions({
-      getListCategory: "category/getListCategory"
-    }),
-  }
+  // computed: {
+  //   ...mapGetters({
+  //     listCategory: "category/getListCategory"
+  //   }),
+  // },
+  // async mounted() {
+  //   if (this.listCategory.length === 0) {
+  //     await this.getListCategory()
+  //   }
+  //   if (this.listCategory.length >= 3) {
+  //     this.cate1 = this.listCategory[0].attributes
+  //     this.cate2 = this.listCategory[1].attributes
+  //     this.cate3 = this.listCategory[2].attributes
+  //   }
+  // },
+  // methods: {
+  //   ...mapActions({
+  //     getListCategory: "category/getListCategory"
+  //   }),
+  // }
 }
 </script>
 <style lang="scss">
-.solution-title {
+.store-container {
   text-align: center;
-  font-size: 36px;
-}
+  padding: 100px 0px;
 
-.s-item {
-  position: relative;
-}
+  .store-content {
+    margin-top: 75px;
+    width: 360px;
+    margin-right: 40px;
+    text-align: left;
 
-.s-content {
-  width: 50%;
-  position: absolute;
-  text-align: center;
-}
+    .store-filter-item {
+      margin-bottom: 10px;
+      .filter-title {
+        margin-bottom: 10px;
+      }
+    }
 
-.s-title {
-  font-weight: 500;
-  font-size: 30px;
-}
+    .store-item {
+      background-color: #D9D9D980;
+      padding: 20px;
+      margin-top: 30px;
+      .store-item-maker {
+        width: 30px;
+        margin-bottom: 20px;
+      }
 
-.s-desc {
-  font-family: 'inter';
-  font-size: 14px;
-  text-transform: capitalize;
-}
+      .store-item-text {
+        color: #000;
+        font-family: 'Aeroport-light';
+        font-size: 15px;
+        font-weight: 300;
+      }
+    }
 
-.s-img {
-  width: 100%;
-  border-radius: 3px;
-  // box-sizing: border-box;
-  // box-shadow: 1px 1px 2px 0px rgba(13, 13, 13, 0.31);
+    .store-btn {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-family: 'Aeroport-light';
+      font-size: 15px;
+      font-weight: 300;
+      text-transform: uppercase;
+      margin-top: 20px;
+    }
+  }
 
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  .s-title {
-    font-size: 26px;
-    margin-bottom: 10px;
+  .store-image {
+    margin-top: 75px;
+    width: calc(100% - 400px);
+    object-fit: cover;
   }
 }
 
