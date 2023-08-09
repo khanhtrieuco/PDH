@@ -1,25 +1,19 @@
 <template>
-  <div class="cproduct-item">
-    <div class="cproduct-img d-flex justify-content-center">
+  <div class="product-item">
+    <div class="product-img d-flex justify-content-center" @mouseover="showHover()" @mouseleave="hideHover()">
       <div class="d-flex justify-content-center align-self-end">
-        <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
-          <img :src="item.attributes?.thub.data?.attributes.formats?.medium.url" fluid alt="image" />
+        <NuxtLink :to="`/san-pham/123`">
+          <img :src="product_image" fluid alt="image" />
         </NuxtLink>
       </div>
       <img class="img-heart" :src="likeImage" @click="onLike(item)" @mouseover="showLike()" @mouseleave="hideLike()"
         alt="Like" />
     </div>
-    <div class="cproduct-item-content text-center">
-      <div class="cproduct-title" v-if="!isMobile && $i18n.locale === 'vn'">{{ item.attributes.title }}</div>
-      <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
-        <div class="cproduct-name">{{ item.attributes.name }}</div>
+    <div class="product-item-content text-left">
+      <NuxtLink :to="`/san-pham/123`">
+        <div class="product-name">{{ item.name }}</div>
       </NuxtLink>
-      <div class="cproduct-des">{{ $i18n.locale === 'vn' ? item.attributes.description : item.attributes.description_en }}</div>
-      <div class="cproduct-price" v-if="isMobile">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
-      <transition name="fade">
-        <div class="cproduct-price-hide" v-if="!isMobile">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
-      </transition>
-      <div class="cproduct-btn" @click="addProductToCart">{{ $t('Product_add_cart_1') }}</div>
+      <div class="product-price">{{ item.price | numberWithCommas }}{{ ' ' }}đ</div>
     </div>
   </div>
 </template>
@@ -36,6 +30,7 @@ export default {
       default: () => {
         return {
           image: '/images/product1.png',
+          image_hover: '/images/hover.png',
           name: 'Spot Eraser Gel',
           title: 'Rạng ngời dung nhan',
           description: 'Kem hỗ trợ giảm mụn & vết thâm',
@@ -58,14 +53,16 @@ export default {
     return {
       description: '',
       isLike: false,
-      likeImage: '/images/heart.png'
+      likeImage: '/images/heart.png',
+      product_image: ''
     }
   },
   mounted() {
-    this.isLike = this.checkIsLiked(this.item.attributes.likes?.data)
-    if(this.isLike) {
+    // this.isLike = this.checkIsLiked(this.item.attributes.likes?.data)
+    if (this.isLike) {
       this.likeImage = '/images/liked.png'
     }
+    this.product_image = '/images/sp1.jpg'
   },
   methods: {
     ...mapActions({
@@ -77,8 +74,14 @@ export default {
       this.likeImage = '/images/liked.png'
     },
     hideLike() {
-      if(!this.isLike)
+      if (!this.isLike)
         this.likeImage = '/images/heart.png'
+    },
+    showHover() {
+      this.product_image = '/images/hover.png'
+    },
+    hideHover() {
+      this.product_image = '/images/sp1.jpg'
     },
     async onLike(_product) {
       if (!this.loggedIn) {
@@ -86,7 +89,7 @@ export default {
         return
       }
       if (this.isLike) {
-        let rs = await this.deleteLike( this.isLike.id )
+        let rs = await this.deleteLike(this.isLike.id)
         if (rs && rs.id) {
           this.isLike = false
           this.likeImage = '/images/heart.png'
@@ -144,143 +147,46 @@ export default {
 }
 </script>
 <style lang="scss">
-.cproduct-item {
+.product-item {
   padding: 5px;
-  .cproduct-price-hide {
-    display: block;
-  }
 
-  &:hover {
-    .cproduct-price-hide {
-      display: block;
-    }
-
-    .cproduct-img {
-      background-color: #F5F5F5;
-      border-radius: 16px;
-      overflow: hidden;
-      // height: 349px;
-
-      img {
-        transform: scale(1.2)
-      }
-    }
-  }
-}
-
-.cproduct-img {
-  position: relative;
-  margin-bottom: 45px;
-  height: 350px;
-  padding-bottom: 10px;
-
-  img {
-    cursor: pointer;
-    transition: all .6s ease-in-out;
-    max-height: 320px;
-    max-width: 220px;
-  }
-}
-
-.cproduct-title {
-  font-family: 'inter';
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #B9B9B9;
-  height: 30px;
-}
-
-.cproduct-name {
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 26px;
-  text-align: center;
-  margin-top: 12px;
-  height: 55px;
-  cursor: pointer;
-  width: 275px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.cproduct-des {
-  font-family: 'inter-light';
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 18px;
-  margin-top: 8px;
-  height: 40px;
-}
-
-.cproduct-btn {
-  font-family: 'inter';
-  margin: auto;
-  margin-top: 16px;
-  cursor: pointer;
-  width: 100%;
-  max-width: 210px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 35px;
-  font-size: 13px;
-  line-height: 35px;
-  background: #FFFFFF;
-  border: 0.25px solid #000000;
-  border-radius: 18px;
-
-  &:hover {
-    background: #F7B2C2;
-    border: none;
-    color: #fff;
-  }
-
-  &:active {
-    background: #000000;
-    color: #ffffff;
-  }
-}
-
-.img-heart {
-  position: absolute;
-  top: 25px;
-  right: 14px;
-  cursor: pointer;
-  width: 32px;
-}
-
-.img-eye {
-  position: absolute;
-  top: 63px;
-  right: 9px;
-  cursor: pointer;
-  width: 42px;
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  .cproduct-img {
-    height: 330px;
+  .product-img {
+    position: relative;
+    margin-bottom: 20px;
+    height: 600px;
+    width: 100%;
+    padding-bottom: 10px;
+    background-color: #F5F5F5;
 
     img {
-      max-height: 260px;
+      cursor: pointer;
+      transition: all .6s ease-in-out;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    &:hover {
+      background-color: #fff;
     }
   }
 
-  .cproduct-name {
+  .product-name {
+    color: #000;
+    font-family: 'Aeroport';
     font-size: 22px;
+  }
+  .product-price {
+    color: #000;
+    font-family: 'Aeroport-light';
+    font-size: 20px;
   }
 
   .img-heart {
+    position: absolute;
     top: 25px;
-    width: 25px;
-  }
-
-  .img-eye {
-    top: 50px;
-    right: 8px;
-    width: 35px;
+    right: 14px;
+    cursor: pointer;
+    width: 32px;
   }
 }
 
@@ -344,5 +250,4 @@ export default {
     margin-top: 240px;
     font-size: 20px;
   }
-}
-</style>
+}</style>

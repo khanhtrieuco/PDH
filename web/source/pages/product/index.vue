@@ -1,8 +1,5 @@
 <template>
     <div class="product-content">
-        <b-container v-if="!isMobile">
-            <b-breadcrumb class="breadcrumb" :items="breadcrumb" />
-        </b-container>
         <div v-if="!isMobile" class="product-info-panel"
             :style="`background-image: url('${product?.attributes?.detail_backgroud.data?.attributes.formats?.large.url}')`">
             <b-container class="d-flex justify-content-between" style="position: relative;">
@@ -96,119 +93,18 @@
             </div>
             <!-- </transition> -->
         </b-container>
-        <div v-if="!isMobile" class="product-related-list-data">
-            <RelatedList :isMobile="isMobile" :listRelated="listRelated" />
-        </div>
-        <div v-if="isMobile">
-            <b-container>
-                <img class="mobile-product-back" src="/images/back.png" @click="$router.go(-1)" />
-            </b-container>
-            <div class="mobile-product-backgroud" style="position: relative;">
-                <ThumbImage class="mobile-product-back" ratio="1-1"
-                    :src="product?.attributes?.detail_backgroud_mobile?.data?.attributes.formats?.medium.url"></ThumbImage>
-                <div class="product-div-image align-self-center">
-                    <Transition name="bounce">
-                        <img class="product-image-main" v-if="showImage"
-                            :src="product?.attributes?.thub.data?.attributes.formats?.small.url" />
-                    </Transition>
-                </div>
-            </div>
-            <b-container>
-                <div class="product-div-info">
-                    <div class="product-info-title" v-if="$i18n.locale === 'vn'">{{ product?.attributes?.title }}</div>
-                    <div class="product-info-name">{{ product?.attributes?.name }}</div>
-                    <div class="product-info-des">
-                        {{ $i18n.locale === 'vn' ? product?.attributes?.description : product?.attributes?.description_en }}
-                    </div>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <div class="product-tips-price">{{ product?.attributes?.price_primary | numberWithCommas }}{{ ' ' }}đ
-                    </div>
-                    <div class="product-tips-promotion-price">
-                        {{ product?.attributes?.price | numberWithCommas }}{{ ' ' }}đ</div>
-                </div>
-                <div class="product-list-tips">
-                    <b-row>
-                        <b-col class="product-tips-item" cols="6" v-for="(itip, idx) in product?.attributes?.tips.data"
-                            :key="idx">
-                            {{ $i18n.locale === 'vn' ? itip?.attributes?.name : itip?.attributes?.name_en }}
-                        </b-col>
-                    </b-row>
-                </div>
-                <div class="product-add-cart-btn d-flex justify-content-between">
-                    <div class="product-add-left-text" @click="addProductToCart">{{ $t('Product_used_text') }}</div>
-                    <div class="product-add-right-control d-flex justify-content-between">
-                        <div class="product-control-btn" @click="() => updateValue(-1)">-</div>
-                        <div class="product-control-quantity">{{ quantity }}</div>
-                        <div class="product-control-btn" @click="() => updateValue(1)">+</div>
-                    </div>
-                </div>
-                <div class="product-mobile-info">
-                    <b-row>
-                        <b-col cols="6" class="product-mobile-info-title">
-                            {{ $t('Product_used_text') }}
-                        </b-col>
-                        <b-col cols="6">
-                            <div class="product-mobile-info-html"
-                                v-html="showHtmlText($i18n.locale === 'vn' ? product?.attributes?.used_content : product?.attributes?.used_content_en)">
-                            </div>
-                        </b-col>
-                    </b-row>
-                </div>
-
-            </b-container>
-            <b-container class="product-mobile-info-detail">
-                <div class="product-content-tab d-flex justify-content-between align-items-center"
-                    @click="menuTab !== 'tab1' ? menuTab = 'tab1' : menuTab = ''">
-                    <div class="product-content-tab-text">{{ $t('Product_media') }}</div>
-                    <img src="/images/plus.png" v-if="menuTab !== 'tab1'" />
-                    <img src="/images/minus.png" v-else />
-                </div>
-                <div class="product-block-content" v-show="menuTab === 'tab1'">
-                    <ListMedia :listMedia="product?.attributes?.media?.data ?? []" />
-                </div>
-                <div class="product-content-tab d-flex justify-content-between align-items-center"
-                    @click="menuTab !== 'tab2' ? menuTab = 'tab2' : menuTab = ''">
-                    <div class="product-content-tab-text">{{ $t('Product_contruct_text') }}</div>
-                    <img src="/images/plus.png" v-if="menuTab !== 'tab2'" />
-                    <img src="/images/minus.png" v-else />
-                </div>
-                <div class="product-block-content tab2" v-if="menuTab === 'tab2'">
-                    <div class="product-extra-text"
-                        v-html="showHtmlText($i18n.locale === 'vn' ? product?.attributes?.structure_content : product?.attributes?.structure_content_en)">
-                    </div>
-                </div>
-                <div class="product-content-tab d-flex justify-content-between align-items-center"
-                    @click="menuTab !== 'tab3' ? menuTab = 'tab3' : menuTab = ''">
-                    <div class="product-content-tab-text">{{ $t('Product_guide_text') }}</div>
-                    <img src="/images/plus.png" v-if="menuTab !== 'tab3'" />
-                    <img src="/images/minus.png" v-else />
-                </div>
-                <div class="product-block-content tab2" v-if="menuTab === 'tab3'">
-                    <div class="product-extra-text"
-                        v-html="showHtmlText($i18n.locale === 'vn' ? product?.attributes?.guide_content : product?.attributes?.guide_content_en)">
-                    </div>
-                    <div class="product-extra-text">{{ product?.attributes?.ingredient }}</div>
-                </div>
-            </b-container>
-            <div>
-                <RelatedList :isMobile="isMobile" :listRelated="listRelated" />
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
 import ListMedia from "~/components/product/mediaList.vue"
-import RelatedList from "~/components/product/relatedList.vue"
 import general from "~/mixins/general"
 
 export default {
     name: 'IndexPage',
     components: {
         ListMedia,
-        RelatedList
     },
     mixins: [general],
     data() {

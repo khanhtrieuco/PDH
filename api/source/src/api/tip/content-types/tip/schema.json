@@ -15,12 +15,6 @@
     "name": {
       "type": "string"
     },
-    "products": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::product.product",
-      "mappedBy": "tips"
-    },
     "name_en": {
       "type": "string"
     }

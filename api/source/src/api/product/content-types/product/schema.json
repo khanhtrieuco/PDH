@@ -50,14 +50,8 @@
         "deleted"
       ]
     },
-    "title": {
-      "type": "string"
-    },
     "order": {
       "type": "integer"
-    },
-    "showhome": {
-      "type": "boolean"
     },
     "price": {
       "type": "integer"
@@ -77,54 +71,8 @@
       "target": "api::cart.cart",
       "mappedBy": "product"
     },
-    "used_content": {
-      "type": "richtext"
-    },
-    "guide_content": {
-      "type": "richtext"
-    },
-    "structure_content": {
-      "type": "richtext"
-    },
-    "tips": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tip.tip",
-      "inversedBy": "products"
-    },
-    "detail_backgroud": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "description_en": {
       "type": "text"
-    },
-    "used_content_en": {
-      "type": "richtext"
-    },
-    "guide_content_en": {
-      "type": "richtext"
-    },
-    "structure_content_en": {
-      "type": "richtext"
-    },
-    "thub_header": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
     },
     "price_primary": {
       "type": "integer"
@@ -141,31 +89,20 @@
       "target": "api::like.like",
       "mappedBy": "product"
     },
-    "related": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::product.product",
-      "inversedBy": "products"
+    "sku_code": {
+      "type": "string"
     },
-    "products": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::product.product",
-      "inversedBy": "related"
-    },
-    "ingredient": {
+    "material": {
       "type": "text"
     },
-    "detail_backgroud_mobile": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "material_en": {
+      "type": "text"
+    },
+    "care": {
+      "type": "text"
+    },
+    "care_en": {
+      "type": "text"
     }
   }
 }
