@@ -1,30 +1,18 @@
 <template>
     <div class="collection-content">
         <div class="collection-banner">
-            <ThumbImage class="customer-image" ratio="21-9" :src="collection.attributes?.main_thub?.data?.attributes.url">
+            <ThumbImage class="customer-image" ratio="21-9" :src="collection.attributes?.detail_thub?.data?.attributes.url">
             </ThumbImage>
         </div>
         <div class="container">
-            <h1 class="collection-title">
-                {{ $i18n.locale === 'vn' ? collection.attributes?.name : collection.attributes?.name_en ??
-                    collection.attributes?.name }}
-            </h1>
-            <div class="collection-des">
-                {{ $i18n.locale === 'vn' ? collection.attributes?.description : collection.attributes?.description_en ??
-                    collection.attributes?.description }}
+            <div class="photo-wrap">
+                <div class="photo" v-for="imgData, index in imgDataArray" :key="index"
+                    :style="{ 'width': imgData.size.width * 800 / imgData.size.height + 'px', 'flex-grow': imgData.size.width * 800 / imgData.size.height }">
+                    <i :style="{ 'padding-bottom': imgData.size.height / imgData.size.width * 100 + '%' }"></i>
+                    <img :src="imgData.src" :alt="imgData.title" @load="loaded(index)" crossorigin="Anonymous" />
+                </div>
             </div>
-            <div class="collection-more">READ MORE</div>
-            <div class="collection-products">
-                <b-row v-if="listProduct">
-                    <b-col class="mb-3" cols="4" v-for="index in 6" :key="index">
-                        <ProductItem :isMobile="isMobile" />
-                    </b-col>
-                </b-row>
-                <!-- <div v-else>
-                    <div class="collection-empty">{{ $t('Catogory_empty_product') }}</div>
-                </div> -->
-            </div>
-            <div class="btn-collection-top">Back to top</div>
+            <div class="btn-collection-top">SHOP NOW</div>
         </div>
     </div>
 </template>
@@ -32,23 +20,20 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
-import ProductItem from "~/components/product/productItem.vue"
 
 export default {
     name: 'IndexPage',
-    components: {
-        ProductItem
-    },
     mixins: [general],
     data() {
         return {
             isMobile: false,
+            imgDataArray: [],
+            isLoadedImages: []
         }
     },
     computed: {
         ...mapGetters({
-            collection: "collection/getCollection",
-            listProduct: "product/getListProduct"
+            collection: "collection/getCollection"
         }),
     },
     async mounted() {
@@ -58,12 +43,20 @@ export default {
             await this.getCollectionBySlug('women-aw') //(this.$route.params.id)
         }
         // await this.loadProducts()
-        this.listProduct = [1,2,3,4,5,6]
+        this.collection.attributes.media.data.map(o => {
+            this.imgDataArray.push({
+                src: o.attributes.url,  // for spotlight too
+                title: o.attributes.name,
+                size: {
+                    width: o.attributes.width,
+                    height: o.attributes.height,
+                }
+            });
+        })
     },
     methods: {
         ...mapActions({
-            getCollectionBySlug: "collection/getCollectionBySlug",
-            getListProduct: "product/getListProduct"
+            getCollectionBySlug: "collection/getCollectionBySlug"
         }),
         checkMobile() {
             if (!process.server) {
@@ -74,6 +67,13 @@ export default {
                 }
             }
         },
+        loaded(index) {
+            const removeDuplicateValues = ([...array]) => {
+                return array.filter((value, index, self) => self.indexOf(value) === index);
+            }
+            removeDuplicateValues(this.isLoadedImages);
+            this.isLoadedImages = this.isLoadedImages.concat([index]);
+        }
         // async loadProducts(_data) {
         //     if (this.collection && this.collection.id) {
         //         let arrayFilter = [{ categories: this.collection.id }]
@@ -95,35 +95,41 @@ export default {
 <style lang="scss">
 .collection-content {
     padding-bottom: 100px;
-    .collection-title {
-        color: #000;
-        text-align: center;
-        font-family: 'Aeroport';
-        font-size: 35px;
-        font-weight: 500;
-        margin-top: 45px;
+
+    .photo-wrap {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
-    .collection-des {
-        color: #000;
-        text-align: center;
-        font-family: 'Aeroport-light';
-        font-size: 15px;
-        font-weight: 500;
-        margin-top: 15px;
+
+    .photo {
+        position: relative;
+        flex-grow: 1;
+        margin: 8px;
+        cursor: pointer;
     }
-    .collection-more{
-        color: #000;
-        text-align: center;
-        font-family: 'Aeroport-light';
-        font-size: 15px;
-        font-weight: 500;
-        margin-top: 55px;
+
+    i {
+        display: block;
     }
-    .collection-products{
-        margin-top: 60px;
-        margin-bottom: 60px;
+
+    img {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        flex-grow: 1;
+        object-fit: cover;
+        vertical-align: bottom;
+        border-radius: 3px;
+        box-sizing: border-box;
+        box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
     }
-    .btn-collection-top{
+
+    .btn-collection-top {
         width: 240px;
         height: 30px;
         line-height: 28px;

@@ -13,7 +13,9 @@
                 {{ $i18n.locale === 'vn' ? collection.attributes?.description : collection.attributes?.description_en ??
                     collection.attributes?.description }}
             </div>
-            <div class="collection-more">READ MORE</div>
+            <NuxtLink to="/collection/detail/dd-of">
+                <div class="collection-more">READ MORE</div>
+            </NuxtLink>
             <div class="collection-products">
                 <b-row v-if="listProduct">
                     <b-col class="mb-3" cols="4" v-for="index in 6" :key="index">
@@ -58,7 +60,7 @@ export default {
             await this.getCollectionBySlug('women-aw') //(this.$route.params.id)
         }
         // await this.loadProducts()
-        this.listProduct = [1,2,3,4,5,6]
+        this.listProduct = [1, 2, 3, 4, 5, 6]
     },
     methods: {
         ...mapActions({
@@ -95,6 +97,7 @@ export default {
 <style lang="scss">
 .collection-content {
     padding-bottom: 100px;
+
     .collection-title {
         color: #000;
         text-align: center;
@@ -103,6 +106,7 @@ export default {
         font-weight: 500;
         margin-top: 45px;
     }
+
     .collection-des {
         color: #000;
         text-align: center;
@@ -111,7 +115,8 @@ export default {
         font-weight: 500;
         margin-top: 15px;
     }
-    .collection-more{
+
+    .collection-more {
         color: #000;
         text-align: center;
         font-family: 'Aeroport-light';
@@ -119,11 +124,13 @@ export default {
         font-weight: 500;
         margin-top: 55px;
     }
-    .collection-products{
+
+    .collection-products {
         margin-top: 60px;
         margin-bottom: 60px;
     }
-    .btn-collection-top{
+
+    .btn-collection-top {
         width: 240px;
         height: 30px;
         line-height: 28px;
@@ -187,5 +194,4 @@ export default {
     .user-list-cart-panel {
         width: 100%;
     }
-}
-</style>
+}</style>
