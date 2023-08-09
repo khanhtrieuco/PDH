@@ -2,18 +2,23 @@
   <div class="collection-container">
     <img class="collection-title-image" src="/images/collection-lable.png" />
     <carousel-3d class="collection-slide" :width="1000" :height="800" :autoplay="false" :autoplay-timeout="5000"
-      :display="3" :space="2000" :inverse-scaling="700" :controls-visible="true" 
+      :display="3" :space="2000" :inverse-scaling="700" :controls-visible="true"
       :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
-      :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'" :controls-width="45">
+      :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'"
+      :controls-width="45">
       <slide v-for="(collection, i) in listcollection" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
-          <div class="collection-item d-flex justify-content-center align-items-center" style="background-image: url(/images/coll.jpg)">
+          <div class="collection-item d-flex justify-content-center align-items-center"
+            style="background-image: url(/images/coll.jpg)">
             <div class="collection-item-content">
-              <div class="collection-item-title">LA PEINTURE</div>
-              <div class="collection-item-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla urna,
-                rutrum ut est quis, imperdiet
-                auctor ipsum. </div>
-              <div class="collection-item-more">Shop now</div>
+              <NuxtLink :to="`/collection/123`">
+                <div class="collection-item-title">LA PEINTURE</div>
+                <div class="collection-item-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla
+                  urna,
+                  rutrum ut est quis, imperdiet
+                  auctor ipsum. </div>
+                <div class="collection-item-more">Shop now</div>
+              </NuxtLink>
             </div>
           </div>
         </template>
@@ -119,13 +124,15 @@ export default {
         }
       }
     }
-    .col-img-left{
+
+    .col-img-left {
       width: 45px;
       position: absolute;
       bottom: -300px;
       left: calc(50% + 300px);
     }
-    .col-img-right{
+
+    .col-img-right {
       width: 45px;
       position: absolute;
       bottom: -300px;
@@ -162,5 +169,4 @@ export default {
     text-transform: capitalize;
     color: #2F3036;
   }
-}
-</style>
+}</style>

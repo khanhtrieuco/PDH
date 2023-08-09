@@ -8,7 +8,7 @@
             <span>/</span>
             <span :class="`lang-btn ${$i18n.locale === 'vn' ? 'lang-btn-active' : ''}`" @click="changeLang()">VI</span>
           </div>
-          <NuxtLink :to="`/bo-suu-tap/${_i.attributes.slug}`" v-for="(_i, idx) in listCollection" :key="idx">
+          <NuxtLink :to="`/collection/${_i.attributes.slug}`" v-for="(_i, idx) in listCollection" :key="idx">
             <span class="menu-text">
               {{ $i18n.locale === 'vn' ? _i.attributes.name : _i.attributes.name_en ?? _i.attributes.name
               }}</span>

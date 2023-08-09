@@ -93,6 +93,12 @@
         "man",
         "gift"
       ]
+    },
+    "slub": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }

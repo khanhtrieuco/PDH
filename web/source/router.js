@@ -10,7 +10,7 @@ const HomePage = () => interopDefault(import(/* webpackChunkName: "HomePage" */ 
 const AboutPage = () => interopDefault(import(/* webpackChunkName: "WorkPage" */ './pages/about/index.vue'))
 // const InnovationPage = () => interopDefault(import(/* webpackChunkName: "InnovationPage" */ './pages/innovation/index.vue'))
 const ContactPage = () => interopDefault(import(/* webpackChunkName: "ContactPage" */ './pages/contact/index.vue'))
-const CategoryDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/category/index.vue'))
+const CollectionDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/collection/index.vue'))
 const ProductDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/product/index.vue'))
 const UserCart = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/cart/index.vue'))
 const Payment = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/payment/index.vue'))
@@ -65,8 +65,8 @@ export function createRouter() {
                 component: ContactPage
             },
             {
-                path: '/chuyen-muc/:id',
-                component: CategoryDetail
+                path: '/collection/:id',
+                component: CollectionDetail
             },
             {
                 path: '/san-pham/:id',
