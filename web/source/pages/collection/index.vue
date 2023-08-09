@@ -1,59 +1,29 @@
 <template>
-    <div class="category-content">
-        <b-container v-if="!isMobile" style="position: relative;">
-            <b-breadcrumb class="breadcrumb" :items="breadcrumb"></b-breadcrumb>
-        </b-container>
-        <div class="category-banner">
-            <img v-if="isMobile" class="w-100" :src="category.attributes?.thub_mobile?.data?.attributes.url"></img>
-            <img v-else class="w-100" :src="category.attributes?.thub?.data?.attributes.url"></img>
+    <div class="collection-content">
+        <div class="collection-banner">
+            <ThumbImage class="customer-image" ratio="21-9" :src="collection.attributes?.main_thub?.data?.attributes.url">
+            </ThumbImage>
         </div>
         <div class="container">
-            <h1 class="category-title">
-                {{ $i18n.locale === 'vn' ? category.attributes?.name : category.attributes?.name_en ??
-                    category.attributes?.name }}
+            <h1 class="collection-title">
+                {{ $i18n.locale === 'vn' ? collection.attributes?.name : collection.attributes?.name_en ??
+                    collection.attributes?.name }}
             </h1>
-            <div class="category-des">
-                {{ $i18n.locale === 'vn' ? category.attributes?.description : category.attributes?.description_en ??
-                    category.attributes?.description }}
+            <div class="collection-des">
+                {{ $i18n.locale === 'vn' ? collection.attributes?.description : collection.attributes?.description_en ??
+                    collection.attributes?.description }}
             </div>
-            <div class="category-filter w-100">
-                <div class="filter-item">
-                    <div class="filter-title">{{ $t('Category_sort') }}</div>
-                    <!-- <b-form-select v-model="sort" :options="sortOpt" class="mb-3 filter-select" value-field="item"
-                        text-field="name" disabled-field="notEnabled" @change="loadProducts()"></b-form-select> -->
-                    <Select :default="$i18n.locale === 'vn' ? 'Mặc định' : 'Default'"
-                        :listItem="$i18n.locale === 'vn' ? sortOpt : sortEnOpt"
-                        @onChange="(e) => loadProducts({ sort: e })" />
-                </div>
-                <div class="filter-item">
-                    <div class="filter-title">{{ $t('Category_filter') }}</div>
-                    <!-- <b-form-select v-model="filterSub" :options="filterOpt" class="mb-3 filter-select" value-field="item"
-                        text-field="name" disabled-field="notEnabled" @change="loadProducts()"></b-form-select> -->
-                    <Select :default="$i18n.locale === 'vn' ? 'Tất cả' : 'All'"
-                        :listItem="$i18n.locale === 'vn' ? filterOpt : filterEnOpt"
-                        @onChange="(e) => loadProducts({ filterSub: e })" />
-                </div>
-            </div>
-            <div class="category-products" v-if="isMobile">
-                <b-row v-if="listProduct && listProduct.length > 0">
-                    <b-col class="mb-3" cols="6" v-for="(item, index) in listProduct" :key="index">
-                        <ProductItem :item="item" :isMobile="isMobile" />
-                    </b-col>
-                </b-row>
-                <div v-else>
-                    <div class="category-empty">{{ $t('Catogory_empty_product') }}</div>
-                </div>
-            </div>
-            <div class="category-products" v-if="!isMobile">
+            <div>READ MORE</div>
+            <!-- <div class="collection-products" v-if="!isMobile">
                 <b-row v-if="listProduct && listProduct.length > 0">
                     <b-col class="mb-3" cols="3" v-for="(item, index) in listProduct" :key="index">
                         <ProductItem :item="item" :isMobile="isMobile" />
                     </b-col>
                 </b-row>
                 <div v-else>
-                    <div class="category-empty">{{ $t('Catogory_empty_product') }}</div>
+                    <div class="collection-empty">{{ $t('Catogory_empty_product') }}</div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -61,102 +31,37 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
-import ProductItem from "~/components/category/productItem.vue"
-import Select from "~/components/common/select.vue"
+import ProductItem from "~/components/product/productItem.vue"
 
 export default {
     name: 'IndexPage',
     components: {
-        ProductItem,
-        Select
+        ProductItem
     },
     mixins: [general],
     data() {
         return {
-            breadcrumb: [
-                {
-                    text: this.$t('Home'),
-                    href: '/'
-                },
-                {
-                    text: this.$i18n.locale === 'vn' ? this.category?.attributes?.name : this.category?.attributes?.name_en,
-                    active: true
-                }
-            ],
             isMobile: false,
-            sort: null,
-            sortOpt: [
-                { item: 'order:desc', name: 'Mặc định' },
-                { item: 'price:asc', name: 'Giá từ thấp tới cao' },
-                { item: 'price:desc', name: 'Giá từ cao tới thấp' },
-                { item: 'sold:desc', name: 'Lượt mua' }
-            ],
-            sortEnOpt: [
-                { item: 'order:desc', name: 'Default' },
-                { item: 'price:asc', name: 'Price from low to high' },
-                { item: 'price:desc', name: 'Price from hight to low' },
-                { item: 'sold:desc', name: 'Purchases' }
-            ],
-            filterSub: '',
-            filterOpt: [],
-            filterEnOpt: [],
         }
-    },
-    watch: {
-        '$i18n.locale': function (val) {
-            if (val) {
-                this.breadcrumb = [
-                    {
-                        text: this.$t('Home'),
-                        href: '/'
-                    },
-                    {
-                        text: this.$i18n.locale === 'vn' ? this.category?.attributes?.name : this.category?.attributes?.name_en,
-                        active: true
-                    }
-                ]
-            }
-        },
     },
     computed: {
         ...mapGetters({
-            category: "category/getCategory",
-            listProduct: "product/getListProduct",
-            listSubCategory: "category/getListSubCategory",
+            collection: "collection/getCollection",
+            listProduct: "product/getListProduct"
         }),
     },
     async mounted() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
-        await this.loadData()
-        await this.getListSubCategory()
-        if (this.listSubCategory && this.listSubCategory.length > 0) {
-            this.filterOpt = [{ item: null, name: 'Tất cả' }]
-            let temp = this.listSubCategory.map(o => {
-                return {
-                    item: o.id,
-                    name: o.attributes.name,
-                }
-            })
-            this.filterOpt = [...this.filterOpt, ...temp]
-            this.filterEnOpt = [{ item: null, name: 'All' }]
-            temp = this.listSubCategory.map(o => {
-                return {
-                    item: o.id,
-                    name: o.attributes.name_en,
-                }
-            })
-            this.filterEnOpt = [...this.filterEnOpt, ...temp]
+        if (this.$route.params.id) {
+            await this.getCollectionBySlug('women-aw') //(this.$route.params.id)
         }
-        await this.loadProducts()
-        await this.getListCartUser()
+        // await this.loadProducts()
     },
     methods: {
         ...mapActions({
-            getCategoryBySlug: "category/getCategoryBySlug",
-            getListProduct: "product/getListProduct",
-            getListSubCategory: "category/getListSubCategory",
-            getListCartUser: "cart/getListCartUser"
+            getCollectionBySlug: "collection/getCollectionBySlug",
+            getListProduct: "product/getListProduct"
         }),
         checkMobile() {
             if (!process.server) {
@@ -167,32 +72,26 @@ export default {
                 }
             }
         },
-        async loadData() {
-            if (this.$route.params.id) {
-                await this.getCategoryBySlug(this.$route.params.id)
-                this.breadcrumb[1].text = this.$i18n.locale === 'vn' ? this.category?.attributes?.name : this.category?.attributes?.name_en
-            }
-        },
-        async loadProducts(_data) {
-            if (this.category && this.category.id) {
-                let arrayFilter = [{ categories: this.category.id }]
-                let sort = 'order:desc,id:desc'
-                if (_data && _data.sort) {
-                    sort = _data.sort + ',order:desc'
-                } else {
-                    sort = 'order:desc'
-                }
-                if (_data && _data.filterSub) {
-                    arrayFilter.push({ subcategories: _data.filterSub })
-                }
-                await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
-            }
-        }
+        // async loadProducts(_data) {
+        //     if (this.collection && this.collection.id) {
+        //         let arrayFilter = [{ categories: this.collection.id }]
+        //         let sort = 'order:desc,id:desc'
+        //         if (_data && _data.sort) {
+        //             sort = _data.sort + ',order:desc'
+        //         } else {
+        //             sort = 'order:desc'
+        //         }
+        //         if (_data && _data.filterSub) {
+        //             arrayFilter.push({ subcategories: _data.filterSub })
+        //         }
+        //         await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
+        //     }
+        // }
     }
 }
 </script>
 <style lang="scss">
-.category-content {
+.collection-content {
     margin-top: 180px;
     margin-bottom: 160px;
 }
@@ -246,7 +145,7 @@ export default {
     }
 }
 
-.category-title {
+.collection-title {
     margin-top: 45px;
     font-size: 36px;
     line-height: 47px;
@@ -255,7 +154,7 @@ export default {
     color: #515151;
 }
 
-.category-des {
+.collection-des {
     margin-top: 27px;
     font-family: 'inter-light';
     font-weight: 300;
@@ -268,7 +167,7 @@ export default {
     margin-right: auto;
 }
 
-.category-filter {
+.collection-filter {
     margin-top: 80px;
     margin-bottom: 40px;
     text-align: right;
@@ -279,6 +178,7 @@ export default {
     display: inline-block;
     margin-left: 20px;
     text-align: left;
+
     .filter-title {
         font-size: 14px;
         line-height: 20px;
@@ -300,22 +200,22 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .category-content {
+    .collection-content {
         margin-top: 0px;
     }
 
-    .category-title {
+    .collection-title {
         font-size: 24px;
         line-height: 31px;
     }
 
-    .category-des {
+    .collection-des {
         width: 328px;
         font-size: 10px;
         line-height: 14px;
     }
 
-    .category-filter {
+    .collection-filter {
         margin-top: 32px;
 
         .filter-item {

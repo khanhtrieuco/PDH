@@ -3,9 +3,8 @@ import getters from './getters';
 import mutations from './mutations';
 
 export const state = () => ({
-    category: {},
-    list_category : [],
-    list_subcategory : []
+    collection: {},
+    list_collection : [],
 });
 
 export default {

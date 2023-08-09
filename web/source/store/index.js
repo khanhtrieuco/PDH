@@ -6,6 +6,7 @@ import orderModule from './modules/order'
 import productModule from './modules/product'
 import clubModule from './modules/club'
 import categoryModule from './modules/category'
+import collectionModule from './modules/collection'
 import cartModule from './modules/cart'
 import authModule from './modules/auth'
 import distributorModule from './modules/distributor'
@@ -27,6 +28,7 @@ const createStore = () => {
             product: productModule,
             club: clubModule,
             category: categoryModule,
+            collection: collectionModule,
             cart: cartModule,
             auth: authModule,
             distributor: distributorModule,

@@ -1,11 +1,8 @@
 export default {
-    set_list_category(state, payload) {
-        state.list_category = payload.list_category;
+    set_list_collection(state, payload) {
+        state.list_collection = payload.list_collection;
     },
-    set_category(state, payload) {
-        state.category = payload.category;
-    },
-    set_list_subcategory(state, payload) {
-        state.list_subcategory = payload.list_subcategory;
-    },
+    set_collection(state, payload) {
+        state.collection = payload.collection;
+    }
 };

@@ -94,7 +94,7 @@
         "gift"
       ]
     },
-    "slub": {
+    "slug": {
       "type": "string"
     },
     "order": {
