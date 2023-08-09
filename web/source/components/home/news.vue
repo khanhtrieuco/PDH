@@ -44,8 +44,8 @@ export default {
         "dots": false,
         "arrows": true,
         "edgeFriction": 0.35,
-        "infinite": true,
-        "speed": 500,
+        "infinite": false,
+        "speed": 1000,
         "slidesToShow": 3,
         "slidesToScroll": 1
       },

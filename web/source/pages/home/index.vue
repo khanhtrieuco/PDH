@@ -1,6 +1,7 @@
 <template>
   <div>
     <Banner :isMobile="isMobile"/>
+    <Collections :isMobile="isMobile" />
     <BannerAbout :isMobile="isMobile"/>
     <News :isMobile="isMobile"/>
     <Store :isMobile="isMobile"/>
@@ -9,6 +10,7 @@
 
 <script>
 import Banner from "~/components/home/banner.vue"
+import Collections from "~/components/home/collection.vue"
 import BannerAbout from "~/components/home/bannerAbout.vue"
 import News from "~/components/home/news.vue"
 import Store from "~/components/home/store.vue"
@@ -17,6 +19,7 @@ export default {
   name: 'IndexPage',
   components: {
     Banner,
+    Collections,
     BannerAbout,
     News,
     Store,

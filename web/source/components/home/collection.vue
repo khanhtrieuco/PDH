@@ -1,0 +1,166 @@
+<template>
+  <div class="collection-container">
+    <img class="collection-title-image" src="/images/collection-lable.png" />
+    <carousel-3d class="collection-slide" :width="1000" :height="800" :autoplay="false" :autoplay-timeout="5000"
+      :display="3" :space="2000" :inverse-scaling="700" :controls-visible="true" 
+      :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
+      :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'" :controls-width="45">
+      <slide v-for="(collection, i) in listcollection" :index="i" :key="i">
+        <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
+          <div class="collection-item d-flex justify-content-center align-items-center" style="background-image: url(/images/coll.jpg)">
+            <div class="collection-item-content">
+              <div class="collection-item-title">LA PEINTURE</div>
+              <div class="collection-item-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla urna,
+                rutrum ut est quis, imperdiet
+                auctor ipsum. </div>
+              <div class="collection-item-more">Shop now</div>
+            </div>
+          </div>
+        </template>
+      </slide>
+    </carousel-3d>
+  </div>
+</template>
+<script>
+import { mapGetters, mapActions } from "vuex"
+import general from "~/mixins/general"
+
+export default {
+  // components: {
+  //   NewItem
+  // },
+  props: {
+    isMobile: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      settings: {
+        "dots": false,
+        "arrows": true,
+        "edgeFriction": 0.35,
+        "infinite": false,
+        "speed": 1000,
+        "slidesToShow": 3,
+        "slidesToScroll": 1
+      },
+      listcollection: [1, 2, 3, 4, 5]
+    }
+  },
+  // computed: {
+  //   ...mapGetters({
+  //     listCategory: "category/getListCategory"
+  //   }),
+  // },
+  // async mounted() {
+  //   if (this.listCategory.length === 0) {
+  //     await this.getListCategory()
+  //   }
+  //   if (this.listCategory.length >= 3) {
+  //     this.cate1 = this.listCategory[0].attributes
+  //     this.cate2 = this.listCategory[1].attributes
+  //     this.cate3 = this.listCategory[2].attributes
+  //   }
+  // },
+  // methods: {
+  //   ...mapActions({
+  //     getListCategory: "category/getListCategory"
+  //   }),
+  // }
+}
+</script>
+<style lang="scss">
+.collection-container {
+  text-align: center;
+  padding: 100px 0px;
+
+  .collection-title-image {
+    margin-bottom: 40px;
+  }
+
+  .collection-slide {
+    .collection-item {
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+
+      .collection-item-content {
+        .collection-item-title {
+          color: #FFF;
+          text-align: center;
+          font-family: 'Aeroport';
+          font-size: 25px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        .collection-item-des {
+          color: #FFF;
+          text-align: center;
+          font-family: 'Aeroport-light';
+          font-size: 15px;
+          font-weight: 300;
+          width: 330px;
+          margin-top: 10px;
+        }
+
+        .collection-item-more {
+          color: #FFF;
+          text-align: center;
+          font-family: 'Aeroport-light';
+          font-size: 15px;
+          font-weight: 700;
+          text-transform: uppercase;
+          cursor: pointer;
+          margin-top: 20px;
+        }
+      }
+    }
+    .col-img-left{
+      width: 45px;
+      position: absolute;
+      bottom: -300px;
+      left: calc(50% + 300px);
+    }
+    .col-img-right{
+      width: 45px;
+      position: absolute;
+      bottom: -300px;
+      right: calc(50% + 300px);
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .solution-title {
+    text-align: center;
+    white-space: nowrap;
+    font-size: 24px;
+  }
+
+  .s-content {
+    position: relative;
+    margin-top: 35px;
+    margin-bottom: 42px;
+    width: 100%;
+  }
+
+  .s-title {
+    font-size: 20px;
+    line-height: 20px;
+    color: #2F3036;
+    margin-bottom: 8px;
+  }
+
+  .s-desc {
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 16px;
+    text-transform: capitalize;
+    color: #2F3036;
+  }
+}
+</style>

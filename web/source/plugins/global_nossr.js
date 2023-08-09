@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Paginate from 'vuejs-paginate'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
+import Carousel3d from 'vue-carousel-3d';
 import VueQuillEditor from 'vue-quill-editor'
 import '~/static/quill/quill.core.css' // import styles
 import '~/static/quill/quill.snow.css' // for snow theme
@@ -11,6 +12,7 @@ import '~/static/quill/quill.bubble.css' // for bubble theme
 Vue.use(VueQuillEditor, /* { default global options } */)
 Vue.use(VueVideoPlayer)
 Vue.component('Paginate', Paginate)
+Vue.use(Carousel3d)
 
 import quillHtml from "~/components/common/quill-editor";
 import uploadImage from "~/components/common/uploadImage";
