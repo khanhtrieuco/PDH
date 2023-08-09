@@ -62,12 +62,6 @@
     "price": {
       "type": "integer"
     },
-    "categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "mappedBy": "products"
-    },
     "subcategories": {
       "type": "relation",
       "relation": "manyToMany",

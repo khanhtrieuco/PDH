@@ -1,160 +1,103 @@
 <template>
   <div class="container-footer">
-    <div class="container pt-5 pb-3" v-if="isMobile">
-      <div class="mb-3">
-        <h5 class="footer-title mb-4">{{ $t('Footer_title_1') }}</h5>
-        <div class="row">
-          <div class="col-6">
-            <div class="footer-text mb-2">{{ $t('Footer_des_4') }}</div>
-            <div class="footer-text mb-2">{{ $t('Footer_des_5') }}</div>
-            <div class="footer-text mb-2">{{ $t('Footer_des_6') }}</div>
-          </div>
-          <div class="col-6">
-            <div class="footer-text mb-2">{{ $t('Footer_des_7') }}</div>
-            <div class="footer-text mb-2">{{ $t('Footer_des_8') }}</div>
-          </div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <h5 class="footer-title mb-4">{{ $t('Footer_title_3') }}</h5>
-        <div class="row">
-          <div class="col-6">
-            <a :href="siteInfo.link_lazada" target="_blank">
-              <div class="footer-text mb-2">Lazada</div>
-            </a>
-            <a :href="siteInfo.link_tiktok" target="_blank">
-              <div class="footer-text mb-2">Tiktok Shop</div>
-            </a>
-          </div>
-          <div class="col-6">
-            <a :href="siteInfo.link_tiki" target="_blank">
-              <div class="footer-text mb-2">Tiki</div>
-            </a>
-            <a :href="siteInfo.link_shopee" target="_blank">
-              <div class="footer-text mb-2">Shopee</div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <NuxtLink to="/kinh-doanh-cung-nas">
-          <h5 class="footer-title mb-4">{{ $t('Footer_title_2') }}</h5>
-        </NuxtLink>
-      </div>
-      <div class="mb-3">
-        <h5 class="footer-title mb-4">Nas Beauty and Health care</h5>
-        <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_0') }}</b> | 
-          {{ $i18n.locale === 'vn' ? nasInfo.msdn : nasInfo.msdn_en }} </div>
-        <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_1') }}</b> | 
-          {{ $i18n.locale === 'vn' ? nasInfo.address : nasInfo.address_en }} </div>
-        <!-- <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_2') }}</b> | {{ $t('Footer_des_2') }}</div> -->
-        <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_3') }}</b> | 
-          {{ $i18n.locale === 'vn' ? nasInfo.company : nasInfo.company_en }}</div>
-        <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_4') }}</b> | {{ nasInfo.phone }}</div>
-        <div class="footer-text mb-2"><b>Email</b> | {{ nasInfo.email }}</div>
-      </div>
-      <div class="footer-image d-flex flex-column align-items-end">
-        <b-img class="w-100" src="/images/mfooter.png" fluid alt="image"></b-img>
-        <div class="footer-content">
-          <div class="footer-follow">{{ $t('Footer_title_4') }}</div>
-          <div class="d-flex">
-            <a :href="siteInfo.link_tiktok" target="_blank">
-              <img class="footer-icon" src="/images/tiktok.png" />
-            </a>
-            <a :href="siteInfo.link_facebook" target="_blank">
-              <img class="footer-icon" src="/images/facebook.png" />
-            </a>
-            <a :href="siteInfo.link_instagram" target="_blank">
-              <img class="footer-icon" src="/images/instaram.png" />
-            </a>
-            <a :href="siteInfo.link_youtube" target="_blank">
-              <img class="footer-icon" src="/images/youtube.png" />
-            </a>
-            <a :href="siteInfo.link_tiki" target="_blank">
-              <img class="footer-icon" src="/images/tiki.png" />
-            </a>
-            <a :href="siteInfo.link_shopee" target="_blank">
-              <img class="footer-icon" src="/images/shopee.png" />
-            </a>
-            <a :href="siteInfo.link_lazada" target="_blank">
-              <img class="footer-icon" src="/images/lazada.png" />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copy mt-5">© 2023 NAS BEAUTY AND HEALTH CARE</div>
-    </div>
-    <div class="container py-7" v-if="!isMobile">
-      <div class="row justify-content-between">
+    <div class="container py-5" v-if="!isMobile">
+      <div class="row">
         <div class="col-3">
-          <h5 class="footer-title mb-3">Nas Beauty and Health care</h5>
-          <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_0') }}</b> |
-            {{ $i18n.locale === 'vn' ? nasInfo.msdn : nasInfo.msdn_en }} </div>
-          <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_1') }}</b> |
-            {{ $i18n.locale === 'vn' ? nasInfo.address : nasInfo.address_en }} </div>
-          <!-- <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_2') }}</b> | {{ $t('Footer_des_2') }}</div> -->
-          <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_3') }}</b> |
-            {{ $i18n.locale === 'vn' ? nasInfo.company : nasInfo.company_en }} </div>
-          <div class="footer-text mb-2"><b>{{ $t('Footer_des_main_4') }}</b> | {{ nasInfo.phone }}</div>
-          <div class="footer-text mb-2"><b>Email</b> | {{ nasInfo.email }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_title_1') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_1') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_2') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_3') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_4') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_5') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_title_2') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_6') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_7') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_8') }}</div>
         </div>
-        <div class="col-2">
-          <h5 class="footer-title mb-3">{{ $t('Footer_title_1') }}</h5>
-          <div class="footer-text mb-2">{{ $t('Footer_des_4') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_des_5') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_des_6') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_des_7') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_des_8') }}</div>
-          <NuxtLink to="/kinh-doanh-cung-nas">
-            <h5 class="footer-title mt-4">{{ $t('Footer_title_2') }}</h5>
-          </NuxtLink>
+        <div class="col-3">
+          <div class="footer-text mb-2">{{ $t('Footer_title_3') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_9') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_10') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_11') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_12') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_13') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_14') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_15') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_16') }}</div>
         </div>
-        <div class="col-2 pr-4">
-          <h5 class="footer-title mb-3">{{ $t('Footer_title_3') }}</h5>
-          <a :href="siteInfo.link_lazada" target="_blank">
-            <div class="footer-text mb-2">Lazada</div>
-          </a>
-          <a :href="siteInfo.link_tiktok" target="_blank">
-            <div class="footer-text mb-2">Tiktok Shop</div>
-          </a>
-          <a :href="siteInfo.link_tiki" target="_blank">
-            <div class="footer-text mb-2">Tiki</div>
-          </a>
-          <a :href="siteInfo.link_shopee" target="_blank">
-            <div class="footer-text mb-2">Shopee</div>
-          </a>
-        </div>
-        <div class="col-5 d-flex flex-column align-items-end">
-          <b-img class="w-100" src="/images/footer.jpg" fluid alt="image"></b-img>
-          <div class="footer-content">
-            <div class="footer-follow">{{ $t('Footer_title_4') }}</div>
-            <div class="d-flex">
-              <a :href="siteInfo.link_tiktok" target="_blank">
-                <img class="footer-icon" src="/images/tiktok.png" />
-              </a>
-              <a :href="siteInfo.link_facebook" target="_blank">
-                <img class="footer-icon" src="/images/facebook.png" />
-              </a>
-              <a :href="siteInfo.link_instagram" target="_blank">
-                <img class="footer-icon" src="/images/instaram.png" />
-              </a>
-              <a :href="siteInfo.link_youtube" target="_blank">
-                <img class="footer-icon" src="/images/youtube.png" />
-              </a>
-              <a :href="siteInfo.link_tiki" target="_blank">
-                <img class="footer-icon" src="/images/tiki.png" />
-              </a>
-              <a :href="siteInfo.link_shopee" target="_blank">
-                <img class="footer-icon" src="/images/shopee.png" />
-              </a>
-              <a :href="siteInfo.link_lazada" target="_blank">
-                <img class="footer-icon" src="/images/lazada.png" />
-              </a>
-            </div>
+        <div class="col-6">
+          <div class="footer-text mb-2">{{ $t('Footer_title_4') }}</div>
+          <div>{{ $t('Footer_text_22') }}</div>
+          <div>
+            <span>{{ $t('Footer_text_18') }}</span>
+            <span>{{ $t('Footer_text_19') }}</span>
           </div>
+          <input type="text">
+          <div>
+            <label class="container">{{ $t('Footer_text_20') }}
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">{{ $t('Footer_text_21') }}
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div>{{ $t('Footer_text_22') }}</div>
+          <div>{{ $t('Footer_text_23') }}</div>
+          <div class="footer-copy mt-5">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
         </div>
       </div>
-      <div class="footer-copy">© 2023 NAS BEAUTY AND HEALTH CARE</div>
+    </div>
+    <div class="container pt-5 pb-5" v-if="isMobile">
+      <div class="row">
+        <div class="col-3">
+          <div class="footer-text mb-2">{{ $t('Footer_title_1') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_1') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_2') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_3') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_4') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_5') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_title_2') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_6') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_7') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_8') }}</div>
+        </div>
+        <div class="col-3">
+          <div class="footer-text mb-2">{{ $t('Footer_title_3') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_9') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_10') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_11') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_12') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_13') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_14') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_15') }}</div>
+          <div class="footer-text mb-2">{{ $t('Footer_text_16') }}</div>
+        </div>
+        <div class="col-6">
+          <div class="footer-text mb-2">{{ $t('Footer_title_4') }}</div>
+          <div>{{ $t('Footer_text_22') }}</div>
+          <div>
+            <span>{{ $t('Footer_text_18') }}</span>
+            <span>{{ $t('Footer_text_19') }}</span>
+          </div>
+          <input type="text">
+          <div>
+            <label class="container">{{ $t('Footer_text_20') }}
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">{{ $t('Footer_text_21') }}
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div>{{ $t('Footer_text_22') }}</div>
+          <div>{{ $t('Footer_text_23') }}</div>
+          <div class="footer-copy mt-5">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -169,8 +112,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      siteInfo: "common/getSiteinfo",
-      nasInfo: "common/getNasinfo",
+      siteInfo: "common/getSiteinfo"
     }),
   },
   mounted() {

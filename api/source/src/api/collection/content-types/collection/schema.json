@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "collections",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "category",
+    "singularName": "collection",
+    "pluralName": "collections",
+    "displayName": "collection",
     "description": ""
   },
   "options": {
@@ -15,7 +15,60 @@
     "name": {
       "type": "string"
     },
-    "thub": {
+    "name_en": {
+      "type": "string"
+    },
+    "slider_thub": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "slider_thub_mobile": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "description_en": {
+      "type": "text"
+    },
+    "media": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "main_thub": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "main_thub_mobile": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -33,64 +86,13 @@
         "deleted"
       ]
     },
-    "description": {
-      "type": "text"
-    },
-    "products": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::product.product",
-      "inversedBy": "categories"
-    },
-    "slug": {
-      "type": "string"
-    },
-    "thub_mobile": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "women",
+        "man",
+        "gift"
       ]
-    },
-    "order": {
-      "type": "integer"
-    },
-    "name_en": {
-      "type": "string"
-    },
-    "description_en": {
-      "type": "text"
-    },
-    "home_thub": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "stort_des": {
-      "type": "string"
-    },
-    "stort_des_en": {
-      "type": "string"
-    },
-    "home_thub_mobile": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
     }
   }
 }
