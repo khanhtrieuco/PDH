@@ -1,35 +1,16 @@
 <template>
   <div>
-    <!-- <Loading /> -->
     <Banner :isMobile="isMobile" type="Trang chủ"/>
-    <Introduce :isMobile="isMobile"/>
-    <Product :isMobile="isMobile"/>
-    <Solution :isMobile="isMobile"/>
-    <Promotion :isMobile="isMobile"/>
-    <Aura :isMobile="isMobile"/>
-    <Blog :isMobile="isMobile"/>
   </div>
 </template>
 
 <script>
 import Banner from "~/components/home/banner.vue"
-import Introduce from "~/components/home/introduce.vue"
-import Product from "~/components/home/product.vue"
-import Solution from "~/components/home/solution.vue"
-import Promotion from "~/components/home/promotion.vue"
-import Aura from "~/components/home/aura.vue"
-import Blog from "~/components/home/blog.vue"
 
 export default {
   name: 'IndexPage',
   components: {
-    Banner,
-    Introduce,
-    Product,
-    Solution,
-    Promotion,
-    Aura,
-    Blog
+    Banner
   },
   data() {
     return {

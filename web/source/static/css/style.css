@@ -4,8 +4,8 @@
 }
 
 @font-face {
-  font-family: 'inter-light';
-  src: url('../font/Inter-Light.ttf');
+  font-family: 'Aeroport-light';
+  src: url('../font/FSAeroportLight.ttf');
 }
 
 @font-face {
@@ -88,14 +88,6 @@ body {
   margin: 0px;
   overflow-x: hidden;
   overflow-y: scroll;
-}
-
-div,
-h1,
-h2,
-h3 {
-  color: #515151;
-  font-family: 'bodrum-sans';
 }
 
 a {
