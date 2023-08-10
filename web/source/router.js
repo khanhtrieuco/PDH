@@ -16,12 +16,14 @@ const ProductDetail = () => interopDefault(import(/* webpackChunkName: "WorkDeta
 const UserCart = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/cart/index.vue'))
 const Payment = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/payment/index.vue'))
 const Order = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/order/index.vue'))
-const Club = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/club/index.vue'))
+const News = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/news/index.vue'))
+const NewsDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/news/detail.vue'))
+const Show = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/show/index.vue'))
+const ShowDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/show/detail.vue'))
 const Customer = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/customer/index.vue'))
 const Faq = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/faq/index.vue'))
 const NasUser = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/nas-user/index.vue'))
 const Place = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/place/index.vue'))
-const ClubDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/club/detail.vue'))
 const BlogDetail = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/blog/index.vue'))
 const Login = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/login/index.vue'))
 const CallBackGoogle = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/login/google.vue'))
@@ -58,7 +60,7 @@ export function createRouter() {
                 component: CallBackFacebook
             },
             {
-                path: '/ve-nas',
+                path: '/house-of-pdh',
                 component: AboutPage
             },
             {
@@ -90,8 +92,16 @@ export function createRouter() {
                 component: Order
             },
             {
-                path: '/aura-club',
-                component: Club
+                path: '/news',
+                component: News
+            },
+            {
+                path: '/show',
+                component: Show
+            },
+            {
+                path: '/show/:id',
+                component: ShowDetail
             },
             {
                 path: '/cham-soc-khach-hang',
@@ -110,8 +120,8 @@ export function createRouter() {
                 component: Place
             },
             {
-                path: '/club/:id',
-                component: ClubDetail
+                path: '/news/:id',
+                component: NewsDetail
             },
             {
                 path: '/blog/:id',

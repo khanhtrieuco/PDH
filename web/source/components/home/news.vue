@@ -26,7 +26,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
-import NewItem from "~/components/home/newsItem.vue"
+import NewItem from "~/components/news/newsItem.vue"
 
 export default {
   components: {

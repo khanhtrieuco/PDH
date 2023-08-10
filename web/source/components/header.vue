@@ -16,7 +16,7 @@
           <NuxtLink to="/">
             <img class="menu-logo" src="/images/logo-head.png" />
           </NuxtLink>
-          <NuxtLink to="/house-of">
+          <NuxtLink to="/house-of-pdh">
             <span class="menu-text">{{ $t('About') }}</span>
           </NuxtLink>
           <NuxtLink to="/friendship">

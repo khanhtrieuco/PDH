@@ -55,6 +55,7 @@
           <div class="footer-copy mt-5">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
         </div>
       </div>
+      <img class="footer-logo" src="/images/footer.png" />
     </div>
     <div class="container" v-if="isMobile">
       <div class="row">
@@ -274,6 +275,11 @@ export default {
     font-family: 'Aeroport-light';
     font-size: 16px;
     color: #7D7C7C;
+  }
+
+  .footer-logo{
+    margin-top: 100px;
+    max-width: 100%;
   }
 }
 

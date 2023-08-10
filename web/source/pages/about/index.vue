@@ -1,85 +1,100 @@
 <template>
     <div class="about-content">
-        <b-container v-if="!isMobile">
-            <b-breadcrumb class="breadcrumb" :items="breadcrumb"></b-breadcrumb>
-        </b-container>
         <div class="about-banner">
-            <img v-if="isMobile" class="w-100" src="/images/abanner_mobile.jpg"></img>
-            <img v-else class="w-100" src="/images/about-banner.jpg"></img>
+            <img class="w-100" src="/images/about.jpg"></img>
+            <div class="about-banner-content">
+                <div class="about-title">ABOUT P.D.H</div>
+                <img class="about-name-img" src="/images/about-name.png"></img>
+                <div class="about-des">A VIETNAMESE CHILD ARTIST HAS DECIDED PASS INTO THE WORLD OF FASHION AND CREATE THE
+                    NAME
+                    BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE TRADITIONAL
+                    VALUES OF THE COUNTRY OF THE COUNTRIES BRING CONtemporaries. HE LOVES EXPERIENCE WITH USE OF TECHNOLOGY
+                    IN
+                    THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW GENERATION IN THIS INDUSTRY.
+                </div>
+            </div>
         </div>
-        <b-container class="about-description">
-            <b-row>
-                <b-col cols="6" style="padding-right: 20px;">
-                    <div class="about-title">{{ $t('About_main_text') }}</div>
-                    <img class="des-img" src="/images/about-bg.png"></img>
-                </b-col>
-                <b-col cols="6" style="padding: 0px;">
-                    <div class="about-text">{{ $t('About_des_1') }}</div>
-                    <div class="about-text">{{ $t('About_des_2') }}</div>
-                    <div class="about-text">{{ $t('About_des_3') }}</div>
-                </b-col>
-            </b-row>
-        </b-container>
-        <!-- <Founder :isMobile="isMobile" :ceo1="siteInfo?.ceo1" :ceo2="siteInfo?.ceo2" />
-        <Mission :isMobile="isMobile" />
-        <BValue :isMobile="isMobile" />
-        <Aura :isMobile="isMobile" />
-        <Blog :isMobile="isMobile" /> -->
+        <img class="w-100" src="/images/about-top.jpg"></img>
+        <div class="about-info">
+            <div class="about-achievement">achievement</div>
+            <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
+            <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012, 2011
+            </div>
+            <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003</div>
+            <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore Fashion
+                Connection</div>
+            <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
+            <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London Fashion
+                Week</div>
+        </div>
+        <div class="about-mid">
+            <img class="w-100" src="/images/about-mid.jpg"></img>
+            <div class="about-mid-content">
+                <div class="about-mid-des">
+                    From one-off pieces created by independent designers using Gucci materials, to the House's archived
+                    pieces that have been restored by its artisans, Vault is a treasure trove of unique objects representing
+                    beauty, dreams, passions, and above all, the search for ideas beyond the confines of time and space.
+                </div>
+            </div>
+        </div>
+        <div class="container about-list">
+            <div class="about-item">
+                <div class="about-item-img">
+                    <img src="/images/about1.jpg"></img>
+                    <div class="about-item-dot about-item-dot1">
+                        <div></div>
+                    </div>
+                    <div class="about-item-dot about-item-dot2">
+                        <div></div>
+                    </div>
+                    <div class="about-item-dot about-item-dot3">
+                        <div></div>
+                    </div>
+                    <div class="about-item-dot about-item-dot4">
+                        <div></div>
+                    </div>
+                </div>
+                <div class="about-item-content">
+                    <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
+                    <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante collection
+                        here in 1996, and then came
+                        again with Eye in the autumn of 1999.</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex"
-// import Mission from "~/components/about/mission.vue"
-// import Founder from "~/components/about/founder.vue"
-// import BValue from "~/components/about/bvalue.vue"
-// import Aura from "~/components/home/aura.vue"
-// import Blog from "~/components/home/blog.vue"
 export default {
     name: 'AboutPage',
-    // components: {
-    //     Mission,
-    //     Founder,
-    //     BValue,
-    //     Aura,
-    //     Blog
-    // },
     computed: {
-      ...mapGetters({
-        siteInfo: "common/getSiteinfo"
-      }),
+        ...mapGetters({
+            siteInfo: "common/getSiteinfo"
+        }),
     },
     data() {
         return {
-            breadcrumb: [
-                {
-                    text: this.$t('Home'),
-                    href: '/'
-                },
-                {
-                    text: this.$t('About'),
-                    active: true
-                }
-            ],
             isMobile: false
         }
     },
-    watch: {
-        '$i18n.locale': function (val) {
-            if (val) {
-                this.breadcrumb = [
-                    {
-                        text: this.$t('Home'),
-                        href: '/'
-                    },
-                    {
-                        text: this.$t('About'),
-                        active: true
-                    }
-                ]
-            }
-        },
-    },
+    // watch: {
+    //     '$i18n.locale': function (val) {
+    //         if (val) {
+    //             this.breadcrumb = [
+    //                 {
+    //                     text: this.$t('Home'),
+    //                     href: '/'
+    //                 },
+    //                 {
+    //                     text: this.$t('About'),
+    //                     active: true
+    //                 }
+    //             ]
+    //         }
+    //     },
+    // },
     async mounted() {
         if (!this.$route.hash) {
             window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -110,43 +125,162 @@ export default {
 </script>
 <style lang="scss">
 .about-content {
-    margin-top: 180px;
-}
+    .about-banner {
+        position: relative;
 
-.breadcrumb {
-    background-color: white;
-    padding-left: 0px;
-}
+        .about-banner-content {
+            position: absolute;
+            top: 40%;
+            text-align: center;
+            left: 50%;
+            transform: translate(-50%);
 
-.about-description {
-    margin-top: 68px;
-    margin-bottom: 80px;
-}
+            .about-title {
+                color: #FFF;
+                text-align: center;
+                font-family: 'Aeroport';
+                font-size: 15px;
+            }
 
-.about-title {
-    font-size: 36px;
-    font-weight: 400;
-    line-height: 40px;
-    color: #2F3036;
-    z-index: 1;
-    position: relative;
-}
+            .about-name-img {
+                width: 750px;
+                margin: 40px 0px;
+            }
 
-.about-text {
-    font-size: 22px;
-    font-weight: 300;
-    line-height: 29px;
-    color: #2F3036;
-    margin-bottom: 16px;
-    font-family: 'bodrum-light';
-}
+            .about-des {
+                color: #FFF;
+                text-align: center;
+                font-family: 'Aeroport-light';
+                font-size: 16px;
+                text-transform: uppercase;
+                width: 670px;
+                margin: auto;
+            }
+        }
+    }
 
-.des-img {
-    position: relative;
-    margin-right: 0px;
-    width: calc(100% + 50px);
-    margin-top: -65px;
-    float: right;
+    .about-info {
+        text-align: center;
+        padding: 60px 0px;
+
+        .about-achievement {
+            margin-bottom: 30px;
+            color: #000;
+            text-align: center;
+            font-family: 'Aeroport';
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .about-text {
+            color: #000;
+            text-align: center;
+            font-family: 'Aeroport-light';
+            font-size: 15px;
+            line-height: 30px;
+            font-weight: 200;
+        }
+    }
+
+    .about-mid {
+        position: relative;
+
+        .about-mid-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            .about-mid-des {
+                color: #FFF;
+                text-align: center;
+                font-family: 'Aeroport';
+                text-transform: uppercase;
+                font-size: 26px;
+                width: 750px;
+                margin: auto;
+            }
+        }
+    }
+
+    .about-list {
+        padding: 100px 0px;
+
+        .about-item {
+            display: flex;
+            align-items: center;
+            .about-item-img {
+                position: relative;
+                width: 50%;
+                border: 1px solid #000;
+                padding: 6px;
+                img{
+                    width: 100%;
+                }
+
+                .about-item-dot {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    position: absolute;
+                    background-color: #fff;
+                    padding: 4px;
+
+                    div {
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        background-color: #000;
+                    }
+                }
+
+                .about-item-dot1 {
+                    left: -7px;
+                    top: -7px;
+                }
+
+                .about-item-dot2 {
+                    right: -5px;
+                    top: -7px;
+                }
+
+                .about-item-dot3 {
+                    left: -7px;
+                    bottom: -4px;
+                }
+
+                .about-item-dot4 {
+                    right: -5px;
+                    bottom: -4px;
+                }
+            }
+
+            .about-item-content {
+                text-align: center;
+                width: 400px;
+                margin: auto;
+                .about-item-content-title {
+                    color: #000;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    font-size: 35px;
+                    margin-bottom: 30px;
+                }
+
+                .about-item-content-des {
+                    color: #5A5552;
+                    text-align: center;
+                    font-family: 'Aeroport-light';
+                    font-size: 16px;
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 520px) {
