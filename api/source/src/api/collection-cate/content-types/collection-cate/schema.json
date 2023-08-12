@@ -53,6 +53,16 @@
       "relation": "oneToMany",
       "target": "api::collection-cate.collection-cate",
       "mappedBy": "collection_child"
+    },
+    "thub_mobile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
