@@ -86,14 +86,6 @@
         "deleted"
       ]
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "women",
-        "man",
-        "gift"
-      ]
-    },
     "slug": {
       "type": "string"
     },
@@ -101,24 +93,32 @@
       "type": "integer"
     },
     "detail_thub": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "detail_thub_mobile": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "collection_cate": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::collection-cate.collection-cate",
+      "inversedBy": "collections"
     }
   }
 }

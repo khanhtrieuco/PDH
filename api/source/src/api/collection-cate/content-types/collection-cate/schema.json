@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "collection_cates",
+  "info": {
+    "singularName": "collection-cate",
+    "pluralName": "collection-cates",
+    "displayName": "collection_cate",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "name_en": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "main",
+        "sub"
+      ]
+    },
+    "thub": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection.collection",
+      "mappedBy": "collection_cate"
+    },
+    "collection_child": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::collection-cate.collection-cate",
+      "inversedBy": "collection_parent"
+    },
+    "collection_parent": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection-cate.collection-cate",
+      "mappedBy": "collection_child"
+    }
+  }
+}

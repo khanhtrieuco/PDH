@@ -103,6 +103,12 @@
     },
     "care_en": {
       "type": "text"
+    },
+    "variants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::variant.variant",
+      "mappedBy": "product"
     }
   }
 }
