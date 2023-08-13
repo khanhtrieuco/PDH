@@ -7,5 +7,8 @@ export default {
     },
     set_banner(state, payload) {
         state.banner = payload.banner;
-    }
+    },
+    set_banner_top(state, payload) {
+        state.banner_top = payload.banner_top;
+    },
 };

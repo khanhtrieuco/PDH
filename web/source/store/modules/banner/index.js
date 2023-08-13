@@ -4,6 +4,7 @@ import mutations from './mutations';
 
 export const state = () => ({
     banner: {},
+    banner_top: {},
     list_banner : [],
     list_banner_about : [],
 });

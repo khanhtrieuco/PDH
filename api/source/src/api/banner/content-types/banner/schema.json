@@ -59,6 +59,22 @@
     },
     "order": {
       "type": "integer"
+    },
+    "description_en": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "name": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
