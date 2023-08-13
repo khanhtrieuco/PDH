@@ -14,7 +14,10 @@
                     collection.attributes?.description }}
             </div>
             <NuxtLink to="/collection/detail/dd-of">
-                <div class="collection-more">READ MORE</div>
+                <div class="shop-now-link-black">
+                    <span class="shop-now-link-black-text">READ MORE</span>
+                    <img class="shop-now-link-black-img" src="/images/moreb.png" />
+                </div>
             </NuxtLink>
             <div class="collection-products">
                 <b-row v-if="listProduct">
@@ -26,7 +29,7 @@
                     <div class="collection-empty">{{ $t('Catogory_empty_product') }}</div>
                 </div> -->
             </div>
-            <div class="btn-collection-top">Back to top</div>
+            <div class="btn-collection-top" @click="goTop()">Back to top</div>
         </div>
     </div>
 </template>
@@ -76,6 +79,9 @@ export default {
                 }
             }
         },
+        goTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
         // async loadProducts(_data) {
         //     if (this.collection && this.collection.id) {
         //         let arrayFilter = [{ categories: this.collection.id }]
@@ -114,15 +120,7 @@ export default {
         font-size: 15px;
         font-weight: 500;
         margin-top: 15px;
-    }
-
-    .collection-more {
-        color: #000;
-        text-align: center;
-        font-family: 'Aeroport-light';
-        font-size: 15px;
-        font-weight: 500;
-        margin-top: 55px;
+        margin-bottom: 20px;
     }
 
     .collection-products {
@@ -141,6 +139,26 @@ export default {
         cursor: pointer;
         margin: auto;
         font-size: 18px;
+    }
+}
+
+.shop-now-link-black {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 50%;
+    transform: translate(-50%);
+
+    .shop-now-link-black-text {
+        color: #000;
+        font-family: 'Aeroport-light';
+        font-size: 15px;
+        text-transform: uppercase;
+        margin-right: 10px;
+    }
+
+    .shop-now-link-black-img {
+        width: 12px;
     }
 }
 
@@ -194,4 +212,5 @@ export default {
     .user-list-cart-panel {
         width: 100%;
     }
-}</style>
+}
+</style>

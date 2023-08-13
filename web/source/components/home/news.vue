@@ -50,27 +50,42 @@ export default {
         "slidesToShow": 3,
         "slidesToScroll": 1
       },
-      listNews: [1,2,3,4],
       active: 1
     }
   },
   computed: {
     ...mapGetters({
-      listItem: "newCategory/getListItem"
+      listItem: "newCategory/getListItem",
+      listNews: "news/getListItem",
     }),
   },
   async mounted() {
     await this.getListItem()
     if (this.listItem.length >= 3) {
       this.active = this.listItem[0].id
+      this.getListNews({
+        filters: {
+          new_category: this.active
+        },
+        pagination: {
+          page: 1,
+          pageSize: 5
+        }
+      })
     }
   },
   methods: {
     ...mapActions({
-      getListItem: "newCategory/getListItem"
+      getListItem: "newCategory/getListItem",
+      getListNews: "news/getListItem"
     }),
     choiceCate(_cate) {
       this.active = _cate.id
+      this.getListNews({
+        filters: {
+          new_category: this.active
+        }
+      })
     }
   }
 }

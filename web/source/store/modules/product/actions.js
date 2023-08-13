@@ -50,14 +50,20 @@ export default {
                 likes: '*',
                 categories: '*',
                 media: '*',
+                variants: {
+                    populate: {
+                        color: '*',
+                        size: '*'
+                    }
+                },
                 related: {
                     populate: {
                         likes: '*',
                         thub: '*',
                     }
                 },
+                thub_main: '*',
                 thub: '*',
-                tips: '*',
             }
         }, {
             encodeValuesOnly: true, // prettify URL

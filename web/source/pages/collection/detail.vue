@@ -9,7 +9,7 @@
                 <div class="photo" v-for="imgData, index in imgDataArray" :key="index"
                     :style="{ 'width': imgData.size.width * 800 / imgData.size.height + 'px', 'flex-grow': imgData.size.width * 800 / imgData.size.height }">
                     <i :style="{ 'padding-bottom': imgData.size.height / imgData.size.width * 100 + '%' }"></i>
-                    <img :src="imgData.src" :alt="imgData.title" @load="loaded(index)" crossorigin="Anonymous" />
+                    <img class="collection-detail-image" :src="imgData.src" :alt="imgData.title" @load="loaded(index)" crossorigin="Anonymous" />
                 </div>
             </div>
             <div class="btn-collection-top">SHOP NOW</div>
@@ -115,7 +115,7 @@ export default {
         display: block;
     }
 
-    img {
+    .collection-detail-image {
         position: absolute;
         top: 0;
         width: 100%;

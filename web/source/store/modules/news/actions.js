@@ -4,6 +4,7 @@ export default {
     getListItem: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             filters: data.filters,
+            pagination: data.pagination,
             sort: 'order:desc,id:asc',
             populate:'*'
           }, {
