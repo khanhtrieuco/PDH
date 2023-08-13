@@ -4,7 +4,8 @@
   "info": {
     "singularName": "new",
     "pluralName": "news",
-    "displayName": "news"
+    "displayName": "news",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -30,14 +31,21 @@
       "type": "text"
     },
     "thub": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "new_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::new-category.new-category",
+      "inversedBy": "news"
     }
   }
 }

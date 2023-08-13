@@ -2,13 +2,14 @@
   <div class="container news-container">
     <img class="news-title-image" src="/images/neck_label_1.png" />
     <div class="news-category">
-      <div class="news-cate-item news-cate-active">FASHION SHOW, </div>
-      <div class="news-cate-item">KOLS, </div>
-      <div class="news-cate-item">BLOGS, </div>
+      <div v-for="(_cate, idx) in  listItem" :key="idx" @click="choiceCate(_cate)"
+      :class="`news-cate-item ${active === _cate.id ? 'news-cate-active' : ''}`">{{ _cate.attributes.name }}, </div>
+      <!-- <div class="news-cate-item">KOLS, </div>
+      <div class="news-cate-item">BLOGS, </div> -->
     </div>
-    <VueSlickCarousel v-bind="settings" class="list-news" v-if="listNews && listNews.length">
-      <div v-for="(item, index) in listNews" :key="index">
-        <NewItem :isMobile="isMobile" />
+    <VueSlickCarousel v-bind="settings" class="list-news" v-if=" listNews && listNews.length ">
+      <div v-for="( item, index ) in  listNews " :key=" index ">
+        <NewItem :isMobile=" isMobile " />
       </div>
       <template slot="prevArrow">
         <div class="pre-arrow">
@@ -49,29 +50,29 @@ export default {
         "slidesToShow": 3,
         "slidesToScroll": 1
       },
-      listNews: [1, 2, 3, 4]
+      listNews: [1,2,3,4],
+      active: 1
     }
   },
-  // computed: {
-  //   ...mapGetters({
-  //     listCategory: "category/getListCategory"
-  //   }),
-  // },
-  // async mounted() {
-  //   if (this.listCategory.length === 0) {
-  //     await this.getListCategory()
-  //   }
-  //   if (this.listCategory.length >= 3) {
-  //     this.cate1 = this.listCategory[0].attributes
-  //     this.cate2 = this.listCategory[1].attributes
-  //     this.cate3 = this.listCategory[2].attributes
-  //   }
-  // },
-  // methods: {
-  //   ...mapActions({
-  //     getListCategory: "category/getListCategory"
-  //   }),
-  // }
+  computed: {
+    ...mapGetters({
+      listItem: "newCategory/getListItem"
+    }),
+  },
+  async mounted() {
+    await this.getListItem()
+    if (this.listItem.length >= 3) {
+      this.active = this.listItem[0].id
+    }
+  },
+  methods: {
+    ...mapActions({
+      getListItem: "newCategory/getListItem"
+    }),
+    choiceCate(_cate) {
+      this.active = _cate.id
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -96,6 +97,7 @@ export default {
       font-weight: 700;
       cursor: pointer;
       display: inline-block;
+      text-transform: uppercase;
     }
 
     .news-cate-active {
@@ -160,4 +162,5 @@ export default {
     text-transform: capitalize;
     color: #2F3036;
   }
-}</style>
+}
+</style>

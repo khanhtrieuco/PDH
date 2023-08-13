@@ -9,7 +9,8 @@ import categoryModule from './modules/category'
 import collectionModule from './modules/collection'
 import cartModule from './modules/cart'
 import authModule from './modules/auth'
-import distributorModule from './modules/distributor'
+import newCategoryModule from './modules/new_category'
+import newsModule from './modules/news'
 import supportModule from './modules/support'
 import faqModule from './modules/faq'
 import userModule from './modules/user'
@@ -31,7 +32,8 @@ const createStore = () => {
             collection: collectionModule,
             cart: cartModule,
             auth: authModule,
-            distributor: distributorModule,
+            newCategory: newCategoryModule,
+            news: newsModule,
             support: supportModule,
             faq: faqModule,
             user: userModule,

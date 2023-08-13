@@ -17,7 +17,10 @@
                   urna,
                   rutrum ut est quis, imperdiet
                   auctor ipsum. </div>
-                <div class="collection-item-more">Shop now</div>
+                <div class="shop-now-link">
+                  <span class="shop-now-link-text">Shop now</span>
+                  <img class="shop-now-link-img" src="/images/more.png" />
+                </div>
               </NuxtLink>
             </div>
           </div>
@@ -110,17 +113,7 @@ export default {
           font-weight: 300;
           width: 330px;
           margin-top: 10px;
-        }
-
-        .collection-item-more {
-          color: #FFF;
-          text-align: center;
-          font-family: 'Aeroport-light';
-          font-size: 15px;
-          font-weight: 700;
-          text-transform: uppercase;
-          cursor: pointer;
-          margin-top: 20px;
+          margin-bottom: 30px;
         }
       }
     }
@@ -129,15 +122,35 @@ export default {
       width: 45px;
       position: absolute;
       bottom: -300px;
-      left: calc(50% + 300px);
+      left: 200px;
     }
 
     .col-img-right {
       width: 45px;
       position: absolute;
       bottom: -300px;
-      right: calc(50% + 300px);
+      right: 200px;
     }
+  }
+}
+
+.shop-now-link {
+  
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 50%;
+  transform: translate(-50%);
+  .shop-now-link-text {
+    color: #FFF;
+    font-family: 'Aeroport-light';
+    font-size: 15px;
+    text-transform: uppercase;
+    margin-right: 10px;
+  }
+
+  .shop-now-link-img {
+    width: 12px;
   }
 }
 

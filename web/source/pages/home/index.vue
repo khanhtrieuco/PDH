@@ -1,9 +1,15 @@
 <template>
   <div>
-    <div>
-      <div v-if="!isMobile" class="home-top-video">
-        <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink.data?.attributes.url"
-          :nameClass="'image-banner'" :contain="false" :video="true" ratio="16-9" />
+    <div v-if="!isMobile" class="home-top-video">
+      <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink.data?.attributes.url"
+        :nameClass="'image-banner'" :contain="false" :video="true" ratio="16-9" />
+      <div class="home-top-content">
+        <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
+        <div class="home-top-name-des">{{ banner.attributes?.description }}</div>
+        <div class="shop-now-link">
+          <span class="shop-now-link-text">Shop now</span>
+          <img class="shop-now-link-img" src="/images/more.png" />
+        </div>
       </div>
     </div>
     <Collections :isMobile="isMobile" />
@@ -68,3 +74,43 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.home-top-video {
+  position: relative;
+
+  .home-top-content {
+    position: absolute;
+    bottom: 160px;
+    left: 20%;
+    width: 300px;
+
+    .home-top-name-img {
+      width: 100%;
+    }
+
+    .home-top-name-des {
+      color: #FFF;
+      font-family: 'Aeroport-light';
+      font-size: 15px;
+      font-style: normal;
+      margin: 30px 0px;
+    }
+  }
+}
+
+.shop-now-link {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  .shop-now-link-text {
+    color: #FFF;
+    font-family: 'Aeroport-light';
+    font-size: 15px;
+    text-transform: uppercase;
+    margin-right: 10px;
+  }
+  .shop-now-link-img{
+    width: 12px;
+  }
+}
+</style>

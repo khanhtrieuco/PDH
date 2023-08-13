@@ -16,6 +16,12 @@
     },
     "name_en": {
       "type": "string"
+    },
+    "news": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::new.new",
+      "mappedBy": "new_category"
     }
   }
 }
