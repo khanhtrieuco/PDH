@@ -8,20 +8,15 @@
             <span>/</span>
             <span :class="`lang-btn ${$i18n.locale === 'vn' ? 'lang-btn-active' : ''}`" @click="changeLang()">VI</span>
           </div>
-          <NuxtLink :to="`/collection/${_i.attributes.slug}`" v-for="(_i, idx) in listCollection" :key="idx">
-            <span class="menu-text">
-              {{ $i18n.locale === 'vn' ? _i.attributes.name : _i.attributes.name_en ?? _i.attributes.name
-              }}</span>
-          </NuxtLink>
+          <span @click="choicetab(idx + 1)" class="menu-text" v-for="(_i, idx) in listCollection" :key="idx">
+            {{ $i18n.locale === 'vn' ? _i.attributes.name : _i.attributes.name_en ?? _i.attributes.name }}
+          </span>
           <NuxtLink to="/">
-            <img class="menu-logo" src="/images/logo-head.png" />
+            <img v-if="!tab" class="menu-logo" src="/images/logo-head.png" />
+            <img v-else class="menu-logo" src="/images/menu.png" />
           </NuxtLink>
-          <NuxtLink to="/house-of-pdh">
-            <span class="menu-text">{{ $t('About') }}</span>
-          </NuxtLink>
-          <NuxtLink to="/friendship">
-            <span class="menu-text">{{ $t('Friendship') }}</span>
-          </NuxtLink>
+          <span class="menu-text" @click="choicetab(4)">{{ $t('About') }}</span>
+          <span class="menu-text" @click="choicetab(5)">{{ $t('Friendship') }}</span>
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
@@ -65,12 +60,88 @@
         </div>
       </div> -->
     </header>
+    <div v-if="tab === 1" class="header-tab-menu">
+      <div class="container header-tab-menu-container d-flex justify-content-start">
+        <div class="header-tab-menu-col-1">
+          <div class="header-tab-menu-title">EVENING GOWN</div>
+          <div class="header-tab-menu-text" @click="goPage('/collection/121')">Women’s SS23 Collection</div>
+          <div class="header-tab-menu-text" @click="goPage('/collection/121')">Women’s AW23 Collection</div>
+        </div>
+        <div class="header-tab-menu-col-1">
+          <div class="header-tab-menu-title">READY TO WEAR</div>
+          <div class="header-tab-menu-text">View all</div>
+          <div class="header-tab-menu-text">Tailoring</div>
+          <div class="header-tab-menu-text">Coats and Outerwear</div>
+          <div class="header-tab-menu-text">Jackets and Blazes</div>
+          <div class="header-tab-menu-text">Dresses</div>
+          <div class="header-tab-menu-text">Top and Shirts</div>
+        </div>
+        <div class="header-tab-menu-col-1">
+          <div class="header-tab-menu-text">T-Shirts and Sweatshirts</div>
+          <div class="header-tab-menu-text">Skirts</div>
+          <div class="header-tab-menu-text">Trousers</div>
+          <div class="header-tab-menu-text">Knitwear</div>
+          <div class="header-tab-menu-text">Denim</div>
+        </div>
+        <div class="header-tab-menu-col-1">
+          <div class="header-tab-menu-title">HAND BAGS</div>
+          <div class="header-tab-menu-text">View all</div>
+          <div class="header-tab-menu-text">Shoulder Bags</div>
+          <div class="header-tab-menu-text">Crossbody Bags</div>
+          <div class="header-tab-menu-text">Top Handles</div>
+          <div class="header-tab-menu-text">Mini Bags</div>
+          <div class="header-tab-menu-text">Clutches</div>
+          <div class="header-tab-menu-text">Tote Bags (or Totes)</div>
+        </div>
+        <div class="header-tab-menu-col-1">
+          <div class="header-tab-menu-title">SHOES</div>
+          <div class="header-tab-menu-text">View all</div>
+          <div class="header-tab-menu-text">Boots</div>
+          <div class="header-tab-menu-text">Pumps</div>
+          <div class="header-tab-menu-text">Sanddals and Slides</div>
+          <div class="header-tab-menu-text">Flat Shoes</div>
+          <div class="header-tab-menu-text">Sneakers</div>
+        </div>
+      </div>
+    </div>
+    <div v-if="tab === 4" class="header-tab-menu">
+      <div class="container header-tab-menu-container d-flex justify-content-start">
+        <div class="header-tab-menu-col-1">
+          <div @click="subTab = 1" class="header-tab-menu-title">Shows</div>
+          <div @click="subTab = 1" class="header-tab-menu-title">Lookbook</div>
+          <div @click="subTab = 1" class="header-tab-menu-title">Campaigns</div>
+          <div @click="subTab = 1" class="header-tab-menu-title">News</div>
+          <div @click="subTab = 3" class="header-tab-menu-title">About P.D.H</div>
+        </div>
+        <div class="header-tab-menu-col-2">
+          <div class="header-tab-menu-sub" v-if="subTab === 3">
+            <div class="header-tab-menu-text" @click="goPage('/house-of-pdh')">brand story</div>
+            <div class="header-tab-menu-text" @click="goPage('/house-of-pdh')">vision - mission - value</div>
+          </div>
+          <div class="header-tab-menu-sub" v-if="subTab === 1">
+            <div @click="goPage('/show/121')" class="header-tab-menu-sub-item"
+               v-for="_item, index in listShow" :key="index">
+              <MenuItem >
+              </MenuItem>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="tab === 5" class="header-tab-menu">
+      <div class="container header-tab-menu-container">
+        <div @click="goPage('/account')" class="header-tab-menu-title">My account
+        </div>
+        <div @click="goPage('/client-service')" class="header-tab-menu-title">Client service</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
+import MenuItem from "~/components/home/menuItem.vue"
 // import Select from "~/components/common/select.vue"
 export default {
   mixins: [general],
@@ -79,6 +150,8 @@ export default {
       className: 'header',
       lang: 'en',
       isMobile: false,
+      tab: null,
+      subTab: null,
       listCollection: [
         {
           attributes: {
@@ -99,7 +172,8 @@ export default {
             slug: 'Gifts'
           }
         }
-      ]
+      ],
+      listShow: [1, 2]
     }
   },
   computed: {
@@ -109,12 +183,9 @@ export default {
       // listCategory: "category/getListCategory",
     }),
   },
-  // components: {
-  //   ListCartItem,
-  //   LoginPopup,
-  //   ProductItem,
-  //   Select
-  // },
+  components: {
+    MenuItem,
+  },
   // watch: {
   //   searchText: function (val) {
   //     if (this.timeOut) {
@@ -180,6 +251,7 @@ export default {
     //   this.lastScrollTop = scrollTop
     // },
     goPage(url) {
+      this.tab = null
       this.showMenu = false;
       this.$router.push({ path: this.localePath(url) })
     },
@@ -200,6 +272,16 @@ export default {
     },
     openLoginPopup() {
       this.showLogin = true
+    },
+    choicetab(_tab) {
+      if (this.tab === _tab) {
+        this.tab = null
+      } else {
+        this.tab = _tab
+      }
+      if (_tab === 4) {
+        this.subTab = 1
+      }
     },
     // closeUpdate() {
     //   this.showLogin = false
@@ -290,6 +372,7 @@ export default {
   height: 67px;
   line-height: 67px;
   background-color: #fff;
+
   .header-lang-content {
     display: inline-flex;
 
@@ -342,6 +425,53 @@ export default {
     margin-top: 25px;
   }
 
+}
+
+.header-tab-menu {
+  position: fixed;
+  width: 100vw;
+  background-color: #fff;
+  padding: 50px;
+  bottom: 50px;
+
+  .header-tab-menu-container {
+    padding: 0px 135px;
+
+    .header-tab-menu-title {
+      color: #1E1E1E;
+      font-family: 'Aeroport';
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 40px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration-line: underline;
+      }
+    }
+
+    .header-tab-menu-col-1 {
+      width: 250px;
+      min-height: 400px;
+    }
+
+    .header-tab-menu-text {
+      color: #000;
+      font-family: 'Aeroport-light';
+      font-size: 13px;
+      line-height: 40px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .header-tab-menu-sub-item {
+      display: inline-block;
+      float: left;
+      width: 280px;
+      margin-right: 35px;
+    }
+  }
 }
 
 @media (min-width: 1200px) and (max-width: 1400px) {

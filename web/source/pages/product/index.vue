@@ -67,7 +67,7 @@
                 <div class="product-detail-list-title">Recommend</div>
                 <b-row v-if="listRelated">
                     <b-col class="mb-3" cols="3" v-for="index in 4" :key="index">
-                        <ProductItem :isMobile="isMobile" />
+                        <ProductItem :isMobile="isMobile" height="440px" />
                     </b-col>
                 </b-row>
             </div>
@@ -75,7 +75,7 @@
                 <div class="product-detail-list-title">Recently viewed</div>
                 <b-row v-if="listRelated">
                     <b-col class="mb-3" cols="3" v-for="index in 3" :key="index">
-                        <ProductItem :isMobile="isMobile" />
+                        <ProductItem :isMobile="isMobile"  height="440px" />
                     </b-col>
                 </b-row>
                 <div class="product-detail-list-btn">More items from collection</div>
@@ -212,6 +212,7 @@ export default {
                 font-family: 'Aeroport';
                 font-size: 20px;
                 line-height: 15px;
+                height: 18px;
             }
 
             .color-elip {

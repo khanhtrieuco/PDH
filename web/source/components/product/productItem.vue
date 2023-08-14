@@ -1,6 +1,6 @@
 <template>
   <div class="product-item">
-    <div class="product-img d-flex justify-content-center" @mouseover="showHover()" @mouseleave="hideHover()">
+    <div :style="`height: ${height};`" class="product-img d-flex justify-content-center" @mouseover="showHover()" @mouseleave="hideHover()">
       <div class="d-flex justify-content-center align-self-end">
         <NuxtLink :to="`/san-pham/123`">
           <img :src="product_image" fluid alt="image" />
@@ -42,6 +42,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    height: {
+      type: String,
+      default: '600px'
+    }
   },
   computed: {
     ...mapGetters({
@@ -153,7 +157,6 @@ export default {
   .product-img {
     position: relative;
     margin-bottom: 20px;
-    height: 600px;
     width: 100%;
     padding-bottom: 10px;
     background-color: #F5F5F5;

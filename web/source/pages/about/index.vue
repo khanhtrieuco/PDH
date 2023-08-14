@@ -40,7 +40,12 @@
         <div class="container about-list">
             <div class="about-item">
                 <div class="about-item-img">
-                    <img src="/images/about1.jpg"></img>
+                    <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade">
+                        <img v-if="tab === 1" src="/images/about1.jpg"></img>
+                        <img v-if="tab === 2" src="/images/about2.jpg"></img>
+                        <img v-if="tab === 3" src="/images/about3.jpg"></img>
+                    </transition>
+
                     <div class="about-item-dot about-item-dot1">
                         <div></div>
                     </div>
@@ -54,12 +59,48 @@
                         <div></div>
                     </div>
                 </div>
-                <div class="about-item-content">
-                    <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
-                    <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante collection
-                        here in 1996, and then came
-                        again with Eye in the autumn of 1999.</div>
-                </div>
+                <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade">
+                    <div v-if="tab === 1" class="about-item-content">
+                        <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
+                        <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
+                            collection here in 1996, and then came again with Eye in the autumn of 1999.</div>
+                        <div class="about-item-tab">
+                            <div @click="tab = 1"
+                                :class="`about-item-tab-choice ${tab === 1 ? 'about-item-tab-choice-active' : ''}`"></div>
+                            <div @click="tab = 2"
+                                :class="`about-item-tab-choice ${tab === 2 ? 'about-item-tab-choice-active' : ''}`"></div>
+                            <div @click="tab = 3"
+                                :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
+                        </div>
+                    </div>
+                    <div v-if="tab === 2" class="about-item-content">
+                        <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
+                        <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
+                            collection here in 1996, and then came again with Eye in the autumn of 1999.</div>
+                        <div class="about-item-tab">
+                            <div @click="tab = 1"
+                                :class="`about-item-tab-choice ${tab === 1 ? 'about-item-tab-choice-active' : ''}`"></div>
+                            <div @click="tab = 2"
+                                :class="`about-item-tab-choice ${tab === 2 ? 'about-item-tab-choice-active' : ''}`"></div>
+                            <div @click="tab = 3"
+                                :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
+                        </div>
+                    </div>
+                    <div v-if="tab === 3" class="about-item-content">
+                        <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
+                        <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
+                            collection here in 1996, and then came again with Eye in the autumn of 1999.</div>
+                        <div class="about-item-tab">
+                            <div @click="tab = 1"
+                                :class="`about-item-tab-choice ${tab === 1 ? 'about-item-tab-choice-active' : ''}`"></div>
+                            <div @click="tab = 2"
+                                :class="`about-item-tab-choice ${tab === 2 ? 'about-item-tab-choice-active' : ''}`"></div>
+                            <div @click="tab = 3"
+                                :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
+                        </div>
+                    </div>
+                </transition>
+
             </div>
         </div>
     </div>
@@ -76,7 +117,8 @@ export default {
     },
     data() {
         return {
-            isMobile: false
+            isMobile: false,
+            tab: 1
         }
     },
     // watch: {
@@ -214,12 +256,14 @@ export default {
         .about-item {
             display: flex;
             align-items: center;
+
             .about-item-img {
                 position: relative;
                 width: 50%;
                 border: 1px solid #000;
                 padding: 6px;
-                img{
+
+                img {
                     width: 100%;
                 }
 
@@ -264,6 +308,8 @@ export default {
                 text-align: center;
                 width: 400px;
                 margin: auto;
+                position: relative;
+
                 .about-item-content-title {
                     color: #000;
                     text-align: center;
@@ -278,8 +324,29 @@ export default {
                     font-family: 'Aeroport-light';
                     font-size: 16px;
                 }
+
+                .about-item-tab {
+                    display: flex;
+                    position: absolute;
+                    bottom: -325px;
+                    left: 50%;
+                    transform: translate(-50%);
+                    .about-item-tab-choice {
+                        width: 100px;
+                        height: 3px;
+                        border-top: 3px solid #E3DEDA;
+                        cursor: pointer;
+                    }
+
+                    .about-item-tab-choice-active {
+                        border-top: 3px solid #000;
+                    }
+                }
             }
+
+
         }
+
     }
 }
 
