@@ -11,10 +11,10 @@
           <span @click="choicetab(idx + 1)" class="menu-text" v-for="(_i, idx) in listCollection" :key="idx">
             {{ $i18n.locale === 'vn' ? _i.attributes.name : _i.attributes.name_en ?? _i.attributes.name }}
           </span>
-          <NuxtLink to="/">
+          <div @click="goPage('/')">
             <img v-if="!tab" class="menu-logo" src="/images/logo-head.png" />
             <img v-else class="menu-logo" src="/images/menu.png" />
-          </NuxtLink>
+          </div>
           <span class="menu-text" @click="choicetab(4)">{{ $t('About') }}</span>
           <span class="menu-text" @click="choicetab(5)">{{ $t('Friendship') }}</span>
           <div class="d-inline-flex" style="position: relative;">
@@ -135,6 +135,12 @@
         <div @click="goPage('/client-service')" class="header-tab-menu-title">Client service</div>
       </div>
     </div>
+    <div v-show="showListCart" class="backgroud-black">
+        <div id="list-cart-content" class="list-cart-content" v-click-outside="hideCart">
+          <ListCartItem :showListCart.sync="showListCart" :isMobile="isMobile" :listCart="listUserCart"
+            @hideListCart="() => { showListCart = false; isOpen = false }" />
+        </div>
+      </div>
   </div>
 </template>
 
@@ -142,6 +148,7 @@
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
 import MenuItem from "~/components/home/menuItem.vue"
+import ListCartItem from "~/components/user/cartList.vue"
 // import Select from "~/components/common/select.vue"
 export default {
   mixins: [general],
@@ -173,18 +180,22 @@ export default {
           }
         }
       ],
-      listShow: [1, 2]
+      listShow: [1, 2],
+      isOpen: false,
+      showListCart: false
     }
   },
   computed: {
     ...mapGetters({
       profile: "auth/getProfile",
       loggedIn: "auth/getloggedIn",
+      listUserCart: "cart/getListUserCart",
       // listCategory: "category/getListCategory",
     }),
   },
   components: {
     MenuItem,
+    ListCartItem
   },
   // watch: {
   //   searchText: function (val) {
@@ -211,17 +222,26 @@ export default {
     ...mapActions({
       setLoggedIn: "auth/setLoggedIn",
       userLogout: "auth/logout",
+      getListCartUser: "cart/getListCartUser",
       // getSiteInfo: "common/getSiteInfo",
       // getListCategory: "category/getListCategory"
     }),
-    // hideCart() {
-    //   if (this.isOpen) {
-    //     this.showListCart = false
-    //     this.isOpen = false
-    //   } else {
-    //     this.isOpen = true
-    //   }
-    // },
+    hideCart() {
+      if (this.isOpen) {
+        this.showListCart = false
+        this.isOpen = false
+      } else {
+        this.isOpen = true
+      }
+    },
+    async onShowCart() {
+      await this.getListCartUser()
+      if (this.listUserCart.length === 0) {
+        this.showEmpty = !this.showEmpty
+      } else {
+        this.showListCart = true
+      }
+    },
     changeLang() {
       if (this.lang === 'en') {
         this.lang = 'vn'

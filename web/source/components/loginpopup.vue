@@ -138,7 +138,7 @@ export default {
     position: fixed;
     left: 0px;
     top: 0px;
-    background-color: #000000b3;
+    background-color: #00000066;
     z-index: 15;
 }
 

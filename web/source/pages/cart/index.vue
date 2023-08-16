@@ -1,211 +1,90 @@
 <template>
     <div class="cart-content">
-        <b-container v-if="!isMobile">
-            <b-breadcrumb class="breadcrumb" :items="breadcrumb"></b-breadcrumb>
-        </b-container>
-        <div class="container" v-if="!isMobile">
-            <h1 class="cart-title">
-                {{ $t('Cart_your') }}
-            </h1>
-            <div class="cart-list">
-                <div v-for="(item, index) in listCart" :key="index" class="cart-item">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="cart-product-item">
-                            <img class="cart-product-item-image" :src="item.imagelink"></img>
+        <div class="cart-content-top">
+            <img class="cart-content-image" src="/images/top-account.jpg" />
+            <div class="cart-content-name">shopping bag ({{ listItem.length }})</div>
+        </div>
+        <div class="cart-content-main container d-flex justify-content-between align-items-start">
+            <div class="cart-main-list">
+                <div class="cart-item" v-for="(item, index) in listItem" :key="index">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="card-div-img">
+                            <img class="card-image" :src="item.imagelink" />
                         </div>
-                        <div class="cart-product-item-data">
+                        <div class="card-div-info">
                             <div class="cart-product-name">{{ item.name }}</div>
-                            <div class="cart-product-des">{{ item.description }}</div>
+                            <div class="cart-product-des">Color:
+                                <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                            </div>
+                            <div class="cart-product-des">Size:
+                                <span>
+                                    {{ item.variant.attributes.size.data.attributes.name }}
+                                </span>
+                            </div>
+                            <div class="cart-product-des">Quantity
+                                <CartButton :inumber="item.quantity"
+                                    @updateValue="(e) => updateCartValue(item.variant_id, e)" />
+                                <div class="cart-product-remove" @click="deleteItemCart(item.variant_id)">Remove</div>
+                            </div>
                         </div>
-                        <div class="cart-product-price-d">{{ item.price | numberWithCommas }}{{ ' ' }}đ</div>
-                        <div class="cart-product-div-control">
-                            <CartButton :inumber="item.quantity" @updateValue="(e) => updateCartValue(item.id, e)" />
-                            <img class="cart-product-item-remove" src="/images/remove.png"
-                                @click="removeProduct(item)"></img>
-                        </div>
-                        <div class="cart-product-price-d">{{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                        <div class="card-div-price">
+                            {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="cart-info">
-                <b-row>
-                    <b-col cols="8" class="">
-                        <div class="cart-info-content d-flex align-items-center justify-content-center" v-if="!loggedIn">
-                            <div class="cart-login-des">
-                                <div>{{ $t('Cart_login_des') }}</div>
-                                <div class="cart-login-btn" @click="openLoginPopup()"><b>{{ $t('Login') }}</b></div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-around py-4">
-                            <div @click="$router.go(-1)" style="cursor: pointer;"><span class="cart-product-back">
-                                    <</span>
-                                        {{ $t('Cart_view') }}
-                            </div>
-                            <!-- <div>
-                                <img class="cart-product-reload" src="/images/reload.png"></img>
-                                Cập nhật lại giỏ hàng</div> -->
-                        </div>
-                    </b-col>
-                    <b-col cols="4" class="">
-                        <!-- <div class="d-flex justify-content-between">
-                            <div>{{ $t('Cart_text_1') }}:</div>
-                            <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
-                        </div> -->
-                        <div class="d-flex justify-content-between">
-                            <div>{{ $t('Cart_text_2') }}:</div>
-                            <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div>{{ $t('Cart_text_3') }}:</div>
-                            <div>30.000đ</div>
-                        </div>
-                        <!-- <div class="cart-voucher"> Thêm mã giảm giá</div> -->
-                        <div class="cart-total d-flex justify-content-between">
-                            <div>{{ $t('Cart_text_4') }}:</div>
-                            <div><b>{{ total_price + 30000 | numberWithCommas }}{{ ' ' }}đ</b></div>
-                        </div>
-                        <div class="nas-btn" @click="goPayment()">{{ $t('Cart_text_5') }}</div>
-                    </b-col>
-                </b-row>
+            <div class="cart-total">
+                <div class="cart-total-des">Show Promotional code</div>
+                <div class="d-flex justify-content-between">
+                    <div class="cart-total-text">shipping cost</div>
+                    <div class="cart-total-text">0 đ</div>
+                </div>
+                <div class="cart-total-number d-flex justify-content-between">
+                    <div>{{ $t('Cart_text_4') }}</div>
+                    <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
+                </div>
+                <div class="cart-checkout-btn" @click="onGoPaymentPage">{{ $t('Cart_text_6') }}</div>
             </div>
         </div>
-        <div v-if="isMobile">
-            <h1 class="cart-title">
-                {{ $t('Cart_your') }}
-            </h1>
-            <b-container>
-                <div class="cart-mobile-choice-all">{{ $t('Cart_choice_all') }}</div>
-            </b-container>
-            <div class="cart-mobile-list">
-                <b-container>
-                    <div v-for="(item, index) in listCart" :key="index" class="cart-item">
-                        <img class="cart-mobile-item-delete" src="/images/delete.png" @click="removeProduct(item)" />
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="list-card-div-check align-items-center d-flex justify-content-center"
-                                @click="setCheckItem(item)">
-                                <img class="list-card-check" src="/images/checked.png" v-if="item.checked" />
-                                <img class="list-card-check" src="/images/uncheck.png" v-else />
-                            </div>
-                            <div class="cart-product-item">
-                                <img class="cart-product-item-image" :src="item.imagelink"></img>
-                            </div>
-                            <div class="cart-product-mobile-item">
-                                <div class="cart-product-name">{{ item.name }}</div>
-                                <div class="cart-product-price">{{ item.price * item.quantity | numberWithCommas }}{{ ' '
-                                }}đ</div>
-                                <div>
-                                    <CartButton :inumber="item.quantity"
-                                        @updateValue="(e) => updateCartValue(item.id, e)" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </b-container>
-            </div>
-            <div v-if="!loggedIn" class="cart-mobile-login-des">{{ $t('Cart_login_des') }}</div>
-            <div v-if="!loggedIn" class="cart-mobile-login-btn" @click="openLoginPopup()">{{ $t('Login') }}</div>
-            <b-container>
-                <div class="cart-mobile-price-total">
-                    <div class="d-flex justify-content-between">
-                        <div>{{ $t('Cart_text_2') }}:</div>
-                        <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <div>{{ $t('Cart_text_3') }}:</div>
-                        <div>30.000đ</div>
-                    </div>
-                </div>
-                <!-- <div class="cart-voucher"> Thêm mã giảm giá</div> -->
-                <div class="cart-total d-flex justify-content-between">
-                    <div>{{ $t('Cart_text_4') }}:</div>
-                    <div><b>{{ total_price + 30000 | numberWithCommas }}{{ ' ' }}đ</b></div>
-                </div>
-                <div class="nas-btn" @click="goPaymentMobile()">{{ $t('Cart_text_5') }}</div>
-                <div class="d-flex justify-content-around align-items-center cart-mobile-btn-view">
-                    <img class="cart-mobile-btn" src="/images/left.png" />
-                    <div @click="$router.go(-1)">{{ $t('Cart_view') }}</div>
-                </div>
-                <!-- <div class="d-flex justify-content-around align-items-center cart-mobile-btn-view">
-                    <img class="cart-mobile-btn" src="/images/reload.png" />
-                    <div>Cập nhật lại giỏ hàng</div>
-                </div> -->
-            </b-container>
-        </div>
-        <LoginPopup :isMobile="isMobile" :show="showLogin" @closeUpdate="closeUpdate" />
+
     </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
-import LoginPopup from "~/components/loginpopup.vue"
 import CartButton from "~/components/common/cartButton.vue"
 export default {
     name: 'IndexPage',
     mixins: [general],
     components: {
-        LoginPopup,
         CartButton
     },
     data() {
         return {
-            breadcrumb: [
-                {
-                    text: this.$t('Home'),
-                    href: '/'
-                },
-                {
-                    text: this.$t('Cart'),
-                    active: true
-                }
-            ],
-            showLogin: false,
             total_price: 0,
+            listItem: [],
             isMobile: false
         }
     },
     computed: {
         ...mapGetters({
-            loggedIn: "auth/getloggedIn",
-            profile: "auth/getProfile",
-            listCart: "cart/getListCart"
+            listCart: "cart/getListUserCart"
         }),
     },
-    watch: {
-        listCart: function (val) {
-            if (val) {
-                if (this.isMobile)
-                    this.total_price = val.filter(f => f.checked).reduce((_sum, o) => _sum + o.price * o.quantity, 0);
-                else
-                    this.total_price = val.reduce((_sum, o) => _sum + o.price * o.quantity, 0);
-            }
-        },
-        '$i18n.locale': function (val) {
-            if (val) {
-                this.breadcrumb = [
-                    {
-                        text: this.$t('Home'),
-                        href: '/'
-                    },
-                    {
-                        text: this.$t('Cart'),
-                        active: true
-                    }
-                ]
-            }
-        },
-    },
     async mounted() {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
-        // await this.loadData()
-        this.getListCart()
+        await this.getListCartUser()
+        if (this.listCart && this.listCart.length >= 0) {
+            this.listItem = this.listCart
+            this.total_price = this.listItem.reduce((_sum, o) => _sum + o.price * o.quantity, 0);
+        }
     },
     methods: {
         ...mapActions({
-            getListCart: "cart/getListCart",
-            setCartCheckoutItem: "cart/setCartCheckoutItem",
-            setListCart: "cart/setListCart"
+            getListCartUser: "cart/getListCartUser",
+            setCartCheckoutItem: "cart/setCartCheckoutItem"
         }),
         checkMobile() {
             if (!process.server) {
@@ -216,189 +95,161 @@ export default {
                 }
             }
         },
-        // async loadData() {
-        //     if (this.profile.id) {
-        //         let arrayFilter = [{ user: this.profile.id }]
-        //         let populate = [
-        //             'product',
-        //             'product.thub'
-        //         ]
-        //         await this.getListCart({ filters: { '$and': arrayFilter }, populate })
-        //     }
-        // },
-        updateCartValue(id, _v) {
-            if (_v === 0) {
-                let _list = this.listCart.filter(o => o.id !== id)
-                this.setListCart([..._list])
-            } else {
-                let _i = this.listCart.find(o => o.id === id)
-                if (_i) {
-                    _i.quantity = _v
-                }
+        updateCartValue(variant_id, _v) {
+            console.log(variant_id)
+            let _i = this.listCart.find(o => o.variant_id === variant_id)
+            if (_i) {
+                _i.quantity = _v
             }
-            this.total_price = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0);
+            this.total_price = this.listItem.reduce((_sum, o) => _sum + o.price * o.quantity, 0);
         },
-        removeProduct(_item) {
-            let _list = this.listCart.filter(o => o.id !== _item.id)
-            this.setListCart([..._list])
+        deleteItemCart(variant_id) {
+            this.listItem = this.listItem.filter(o => o.variant_id !== variant_id)
+            this.total_price = this.listItem.reduce((_sum, o) => _sum + o.price * o.quantity, 0);
+            this.setCartCheckoutItem({ listCheckout: this.listItem })
         },
-        setCheckItem(_item) {
-            for (let i = 0; i < this.listCart.length; i++) {
-                if (this.listCart[i].id === _item.id) {
-                    this.listCart[i].checked = this.listCart[i].checked ? !this.listCart[i].checked : true
-                }
-            }
-            this.total_price = this.listCart.filter(f => f.checked).reduce((_sum, o) => _sum + o.price * o.quantity, 0);
-        },
-        choiceAllCartItem() {
-            for (let i = 0; i < this.listCart.length; i++) {
-                this.listCart[i].checked = true
-            }
-            this.total_price = this.listCart.filter(f => f.checked).reduce((_sum, o) => _sum + o.price * o.quantity, 0);
-        },
-        openLoginPopup() {
-            this.showLogin = true
-        },
-        closeUpdate() {
-            this.showLogin = false
-            this.getListCart()
-        },
-        goPayment() {
-            // if (!this.loggedIn) {
-            //     this.showLogin = true
-            // } else {
-            let listCheckout = this.listCart
-            this.setCartCheckoutItem({ listCheckout })
+        onGoPaymentPage() {
+            this.setCartCheckoutItem({ listCheckout: this.listItem })
             this.$router.push({ path: '/thanh-toan' })
-            // }
         },
-        goPaymentMobile() {
-            this.setCartCheckoutItem({ listCheckout: this.listCart })
-            this.$router.push({ path: '/thanh-toan' })
-        }
     }
 }
 </script>
 <style lang="scss">
 .cart-content {
-    margin-top: 180px;
-    margin-bottom: 160px;
-}
+    .cart-content-top {
+        position: relative;
 
-.breadcrumb {
-    background-color: white;
-    padding-left: 0px;
-}
+        .cart-content-image {
+            width: 100%;
+        }
 
-.cart-title {
-    margin-top: 45px;
-    font-size: 36px;
-    line-height: 47px;
-    align-items: center;
-    text-align: center;
-    color: #515151;
-}
+        .cart-content-name {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            bottom: 90px;
+            color: #FFF;
+            text-align: center;
+            font-family: 'Aeroport-light';
+            font-size: 50px;
+            text-transform: uppercase;
+        }
+    }
 
-.cart-login-des {
-    font-family: 'inter';
-    font-size: 16px;
-    text-align: 'center';
-}
+    .cart-content-main {
+        padding: 250px 0px;
 
-.cart-list {
-    background: #FBFAFA;
-    margin-top: 40px;
-    margin-bottom: 30px;
-}
+        .cart-main-list {
+            width: calc(100% - 670px);
 
-.cart-item {
-    margin-bottom: 8px;
-    padding: 24px;
-}
+            .cart-item {
+                padding: 20px 0px;
+                border-top: 1px solid #D9D9D9;
 
-.cart-product-item {
-    width: 60px;
-    text-align: center;
-}
+                .card-div-img {
+                    .card-image {
+                        width: 120px;
+                        height: 180px;
+                        object-fit: cover;
+                    }
+                }
 
-.cart-product-item-image {
-    max-height: 180px;
-    max-width: 60px;
-}
+                .card-div-info {
+                    margin-left: 25px;
+                    width: calc(100% - 310px);
+                    margin-top: 30px;
 
-.cart-product-div-control {
-    width: 120px;
-    position: relative;
-}
+                    .cart-product-name {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 16px;
+                        text-transform: uppercase;
+                        line-height: 30px;
+                    }
 
-.cart-product-item-remove {
-    position: absolute;
-    right: 0px;
-    top: 4px;
-    width: 15px;
-    cursor: pointer;
-}
+                    .cart-product-des {
+                        color: #717171;
+                        font-family: 'Aeroport-light';
+                        font-size: 16px;
+                        line-height: 30px;
 
-.cart-product-item-data {
-    width: 420px;
-}
+                        span {
+                            color: #000;
+                        }
 
-.cart-product-name {
-    max-width: 420px;
-    font-size: 25px;
-    font-weight: 600;
-    color: #2F3036;
-}
+                        .cart-product-remove {
+                            display: inline-block;
+                            color: #000;
+                            margin-left: 25px;
+                            font-family: 'Aeroport-light';
+                            font-size: 16px;
+                            text-decoration-line: underline;
+                            cursor: pointer;
+                        }
+                    }
+                }
 
-.cart-product-price-d {
-    font-size: 24.5px;
-    width: 155px;
-}
+                .card-div-price {
+                    margin-top: 30px;
+                    width: 170px;
+                    color: #000;
+                    text-align: right;
+                    font-family: 'Aeroport-light';
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    line-height: initial;
+                }
+            }
+        }
 
-.cart-product-des {
-    font-family: 'inter-light';
-    font-size: 16px;
-}
+        .cart-total {
+            background-color: #F4F4F4;
+            padding: 40px 20px;
+            width: 520px;
 
-.cart-product-back {
-    margin-right: 20px;
-}
+            .cart-total-des {
+                color: #000;
+                font-size: 16px;
+                font-family: 'Aeroport-light';
+                text-decoration-line: underline;
+                margin-bottom: 15px;
+            }
 
-.cart-product-reload {
-    width: 15px;
-    margin-right: 20px;
-}
+            .cart-total-text {
+                color: #000;
+                font-size: 16px;
+                font-family: 'Aeroport-light';
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
 
-.cart-info-content {
-    background: #FBFAFA;
-    padding-top: 28px;
-    padding-bottom: 28px;
-    border-radius: 10px;
-}
+            .cart-total-number {
+                color: #000;
+                font-family: 'Aeroport';
+                font-size: 16px;
+                font-weight: 700;
+                text-transform: uppercase;
+                padding-top: 10px;
+                border-top: 1px solid #D9D9D9;
+            }
 
-.cart-login-btn {
-    cursor: pointer;
-    text-align: center;
-    text-decoration-line: underline;
-    color: #484848;
-}
+            .cart-checkout-btn{
+                background-color: #000;
+                color: #fff;
+                height: 45px;
+                font-size: 18px;
+                text-align: center;
+                line-height: 45px;
+                cursor: pointer;
+                font-family: 'Aeroport-light';
+                margin-top: 20px;
+                text-transform: uppercase;
+            }
 
-.cart-voucher {
-    border-top: 1px solid #B9B9B9;
-    border-bottom: 1px solid #B9B9B9;
-    font-family: 'inter';
-    font-size: 13px;
-    padding-left: 26px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    color: #2F3036;
-    margin-top: 32px;
-}
+        }
+    }
 
-.cart-total {
-    margin-top: 32px;
-    margin-bottom: 32px;
-    text-transform: uppercase;
 }
 
 @media (max-width: 520px) {

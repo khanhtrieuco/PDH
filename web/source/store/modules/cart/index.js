@@ -4,7 +4,6 @@ import mutations from './mutations';
 
 export const state = () => ({
     cart: {},
-    list_cart: [],
     list_user_cart: []
 });
 

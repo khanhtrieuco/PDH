@@ -56,6 +56,7 @@ module.exports =  {
   Cart_text_4: 'Tổng cộng',
   Cart_text_5: 'Tiếp tục đặt hàng',
   Cart_text_6: 'Tiến hành thanh toán',
+  Cart_text_66: 'view cart',
   Cart_text_7: 'Đặt hàng',
   Payment: 'Thanh toán',
   Payment_text_1: 'Thanh toán với tư cách Khách',

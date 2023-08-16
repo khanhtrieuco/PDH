@@ -4,7 +4,7 @@
             <div class="product-detail-info">
                 <div class="product-detail-color">
                     <span class="color-text">Color:</span>
-                    <div class="color-elip"></div>
+                    <Color></Color>
                     <div class="color-value">+{{ listColor.length - 1 }}</div>
                 </div>
                 <div class="product-detail-size">
@@ -17,7 +17,7 @@
                     <div class="product-detail-name-price">{{ product.attributes?.price | numberWithCommas }}{{ ' ' }}đ
                     </div>
                 </div>
-                <div class="product-detail-btn">
+                <div class="product-detail-btn" @click="scrollToAdd">
                     Add to cart
                 </div>
                 <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
@@ -49,16 +49,23 @@
                     </div>
                     <div class="product-detail-data-color">
                         <span class="product-detail-data-color-text">Color:</span>
-                        <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
-                            :style="`background-color: ${_color.attributes.value};`"></div>
+                        <div v-for="_color, index in listColor" @click="choiceColor(_color)" :key="index">
+                            <Color :color="_color.attributes.value" :selected="selectColor === _color.id"></Color>
+                        </div>
+                        <!-- <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
+                            :style="`background-color: ${_color.attributes.value};`"></div> -->
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="product-detail-data-size-text">Size:</div>
                         <div class="product-detail-data-size-des">Size guide</div>
                     </div>
-                    <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'"
-                        :listItem="listSizeChoice"></Select>
-                    <div class="product-detail-data-btn">
+                    <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
+                        @onChange="choiceSize"></Select>
+                    <div class="product-detail-data-inventory" v-if="variant">
+                        <div class="product-detail-data-inventory-text">Inventory:</div>
+                        <div class="product-detail-data-inventory-des">{{ variant.attributes?.inventory }}</div>
+                    </div>
+                    <div class="product-detail-data-btn" @click="addProductToCart">
                         Add to cart
                     </div>
                 </div>
@@ -75,7 +82,7 @@
                 <div class="product-detail-list-title">Recently viewed</div>
                 <b-row v-if="listRelated">
                     <b-col class="mb-3" cols="3" v-for="index in 3" :key="index">
-                        <ProductItem :isMobile="isMobile"  height="440px" />
+                        <ProductItem :isMobile="isMobile" height="440px" />
                     </b-col>
                 </b-row>
                 <div class="product-detail-list-btn">More items from collection</div>
@@ -87,6 +94,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import Select from "~/components/common/select.vue"
+import Color from "~/components/common/color.vue"
 import ProductItem from "~/components/product/productItem.vue"
 // import ListMedia from "~/components/product/mediaList.vue"
 import general from "~/mixins/general"
@@ -96,6 +104,7 @@ export default {
     components: {
         ProductItem,
         Select,
+        Color
     },
     mixins: [general],
     data() {
@@ -107,7 +116,10 @@ export default {
             listRelated: [],
             listSize: [],
             listColor: [],
-            listSizeChoice: []
+            listSizeChoice: [],
+            selectColor: null,
+            selectSize: null,
+            variant: null
         }
     },
     computed: {
@@ -139,8 +151,6 @@ export default {
                 name: o.attributes.name
             }
         })
-        console.log(this.listSize)
-        console.log(this.listColor)
         // this.listRelated = this.product.attributes?.related.data
         // if (this.isMobile) {
         //     this.menuTab = ''
@@ -162,6 +172,9 @@ export default {
                 }
             }
         },
+        scrollToAdd() {
+            window.scrollTo({ top: 1000, behavior: 'smooth' })
+        },
         async loadData() {
             if (this.$route.params.id) {
                 await this.getProductBySlug('spotless-filter')
@@ -173,14 +186,60 @@ export default {
                 this.quantity = _t
             }
         },
+        choiceColor(_color) {
+            this.selectColor = _color.id
+            let listFilter = this.product.attributes.variants.data.filter(f => f.attributes.color.data.id === _color.id)
+            this.listSize = []
+            listFilter.forEach(v => {
+                let size = v.attributes.size.data
+                let _cs = this.listSize.find(o => o.id === size.id)
+                if (!_cs) {
+                    this.listSize.push(size)
+                }
+            });
+            this.listSizeChoice = this.listSize.map(o => {
+                return {
+                    item: o.id,
+                    name: o.attributes.name
+                }
+            })
+            if(this.selectSize) {
+                this.variant = listFilter.find(o=> o.attributes.size.data.id === this.selectSize)
+            }
+        },
+        choiceSize(_size) {
+            this.selectSize = _size
+            let listFilter = this.product.attributes.variants.data.filter(f => f.attributes.size.data.id === _size)
+            this.listColor = []
+            listFilter.forEach(v => {
+                let color = v.attributes.color.data
+                let _cc = this.listColor.find(o => o.id === color.id)
+                if (!_cc) {
+                    this.listColor.push(color)
+                }
+            });
+            if(this.selectColor) {
+                this.variant = listFilter.find(o=> o.attributes.color.data.id === this.selectColor)
+            }
+        },
         addProductToCart() {
+            if (!this.selectSize) {
+                this.$message.warning('Vui lòng chọn size');
+                return
+            }
+            if (!this.selectColor) {
+                this.$message.warning('Vui lòng chọn màu');
+                return
+            }
             let _t = {
                 id: this.product.id,
+                variant_id: this.variant.id,
+                variant: this.variant,
                 imagelink: this.product.attributes?.thub.data?.attributes.url,
                 name: this.product.attributes.name,
                 description: this.product.attributes.description,
                 price: this.product.attributes.price,
-                quantity: this.quantity
+                quantity: 1
             }
             this.addCartItem(_t)
             this.showNotification('success', `Đã thêm sản phẩm vào giỏ hàng`)
@@ -206,6 +265,7 @@ export default {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            height: 40px;
 
             .color-text {
                 color: #000;
@@ -345,6 +405,7 @@ export default {
         .product-detail-data-color {
             margin-top: 20px;
             margin-bottom: 10px;
+            height: 40px;
             display: flex;
             gap: 8px;
 
@@ -353,14 +414,6 @@ export default {
                 font-family: 'Aeroport';
                 font-size: 20px;
                 line-height: 15px;
-            }
-
-            .product-detail-data-color-elip {
-                width: 30px;
-                height: 20px;
-                border-radius: 60px;
-                border: 1px solid #000;
-                cursor: pointer;
             }
         }
 
@@ -377,11 +430,30 @@ export default {
             text-decoration-line: underline;
         }
 
+        .product-detail-data-inventory {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            .product-detail-data-inventory-text {
+                color: #000;
+                font-family: 'Aeroport';
+                font-size: 20px;
+                line-height: 15px;
+            }
+            .product-detail-data-inventory-des {
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 20px;
+                line-height: 15px;
+                margin-left: 10px;
+            }
+        }
+
         .product-detail-data-btn {
             margin-top: 30px;
             width: 100%;
             height: 55px;
-            line-height: 55px;
+            line-height: 50px;
             text-align: center;
             cursor: pointer;
             color: #000;
@@ -422,4 +494,5 @@ export default {
 }
 
 
-@media (max-width: 520px) {}</style>
+@media (max-width: 520px) {}
+</style>

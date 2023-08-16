@@ -1,8 +1,10 @@
 <template>
-    <div class="volumn-btn d-flex justify-content-around">
-        <div class="volumn-btn-sub volumn-left-btn" @click="() => updateValue(-1)">-</div>
-        <div class="volumn-number">{{ inumber }}</div>
-        <div class="volumn-btn-sub volumn-left-btn" @click=" updateValue(1)">+</div>
+    <div style="display: inline-block;">
+        <div class="volumn-btn d-flex justify-content-around">
+            <div class="volumn-btn-sub volumn-left-btn" @click="() => updateValue(-1)">-</div>
+            <div class="volumn-number">{{ inumber }}</div>
+            <div class="volumn-btn-sub volumn-left-btn" @click=" updateValue(1)">+</div>
+        </div>
     </div>
 </template>
 
@@ -31,21 +33,22 @@ export default {
 .volumn-btn {
     width: 95px;
     height: 24px;
-    border: 1px solid #515151;
-    border-radius: 16px;
-    font-family: 'inter-light';
+    font-family: 'Aeroport-light';
     font-size: 16px;
     cursor: pointer;
 
     .volumn-btn-sub {
-        width: 20px;
+        width: 22px;
+        height: 22px;
         text-align: center;
-        line-height: 22px;
+        line-height: 20px;
+        border: 1px solid #515151;
+
     }
 
     .volumn-number {
         line-height: 22px;
-        font-family: 'inter-light';
+        font-family: 'Aeroport-light';
 
     }
 }

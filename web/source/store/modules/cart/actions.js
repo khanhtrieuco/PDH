@@ -17,21 +17,9 @@ export default {
     //     })
     // },
 
-    getListCart: async ({ commit, rootState }, data = {}) => {
-        if (window.localStorage) {
-            let listCart = window.localStorage.getItem('listCartCheckout');
-            if (listCart) {
-                listCart = JSON.parse(listCart)
-                commit('set_list_cart', {
-                    list_cart: listCart
-                })
-            }
-        }
-    },
-
     getListCartUser: async ({ commit, rootState }, data = {}) => {
         if (window.localStorage) {
-            let listCart = window.localStorage.getItem('listCart');
+            let listCart = window.localStorage.getItem('listCartCheckout');
             if (listCart) {
                 listCart = JSON.parse(listCart)
                 commit('set_list_user_cart', {
@@ -43,8 +31,8 @@ export default {
 
     setListCart: async ({ commit, rootState }, data = {}) => {
         if (window.localStorage) {
-            window.localStorage.setItem('listCart',JSON.stringify(data));
-            window.localStorage.setItem('listCartCheckout',JSON.stringify(data));
+            window.localStorage.setItem('listCart', JSON.stringify(data));
+            window.localStorage.setItem('listCartCheckout', JSON.stringify(data));
             commit('set_list_cart', {
                 list_cart: data
             })
@@ -62,52 +50,9 @@ export default {
 
     resetUserCart: async function ({ commit }, data) {
         window.localStorage.setItem('listCartCheckout', []);
-        window.localStorage.setItem('listCart',[]);
+        window.localStorage.setItem('listCart', []);
         commit('set_list_user_cart', { list_user_cart: [] })
         commit('set_list_cart', { list_cart: [] })
-    },
-
-    addCartItem: ({ commit, rootState }, data = {}) => {
-        if (window.localStorage) {
-            let listCart = window.localStorage.getItem('listCart');
-            if (listCart) {
-                listCart = JSON.parse(listCart)
-                let checkProduct = listCart.find(o => o.id === data.id)
-                if (checkProduct) {
-                    for (let i = 0; i < listCart.length; i++) {
-                        if (listCart[i].id === checkProduct.id) {
-                            listCart[i].quantity += data.quantity ? data.quantity : 1
-                        }
-                    }
-                } else {
-                    listCart.push({
-                        id: data.id,
-                        imagelink: data.imagelink,
-                        name: data.name,
-                        description: data.description,
-                        price: data.price,
-                        quantity: data.quantity ? data.quantity : 1
-                    })
-                }
-                window.localStorage.setItem('listCart', JSON.stringify(listCart));
-                commit('set_list_cart', {
-                    list_cart: listCart
-                })
-            } else {
-                listCart = [{
-                    id: data.id,
-                    imagelink: data.imagelink,
-                    name: data.name,
-                    description: data.description,
-                    price: data.price,
-                    quantity: data.quantity ? data.quantity : 1
-                }]
-                window.localStorage.setItem('listCart', JSON.stringify(listCart));
-                commit('set_list_cart', {
-                    list_cart: listCart
-                })
-            }
-        }
     },
 
     addCartItemDirect: ({ commit, rootState }, data = {}) => {
@@ -115,16 +60,18 @@ export default {
             let listCart = window.localStorage.getItem('listCartCheckout');
             if (listCart) {
                 listCart = JSON.parse(listCart)
-                let checkProduct = listCart.find(o => o.id === data.id)
+                let checkProduct = listCart.find(o => o.variant.id === data.variant.id)
                 if (checkProduct) {
                     for (let i = 0; i < listCart.length; i++) {
-                        if (listCart[i].id === checkProduct.id) {
+                        if (listCart[i].variant.id === checkProduct.variant.id) {
                             listCart[i].quantity += data.quantity ? data.quantity : 1
                         }
                     }
                 } else {
                     listCart.push({
                         id: data.id,
+                        variant_id: data.variant.id,
+                        variant: data.variant,
                         imagelink: data.imagelink,
                         name: data.name,
                         description: data.description,
@@ -139,6 +86,8 @@ export default {
             } else {
                 listCart = [{
                     id: data.id,
+                    variant_id: data.variant.id,
+                    variant: data.variant,
                     imagelink: data.imagelink,
                     name: data.name,
                     description: data.description,
@@ -148,71 +97,17 @@ export default {
                 window.localStorage.setItem('listCartCheckout', JSON.stringify(listCart));
                 commit('set_list_user_cart', {
                     list_user_cart: listCart
-                })
-            }
-        }
-        if (window.localStorage) {
-            let listCart = window.localStorage.getItem('listCart');
-            if (listCart) {
-                listCart = JSON.parse(listCart)
-                let checkProduct = listCart.find(o => o.id === data.id)
-                if (checkProduct) {
-                    for (let i = 0; i < listCart.length; i++) {
-                        if (listCart[i].id === checkProduct.id) {
-                            listCart[i].quantity += data.quantity ? data.quantity : 1
-                        }
-                    }
-                } else {
-                    listCart.push({
-                        id: data.id,
-                        imagelink: data.imagelink,
-                        name: data.name,
-                        description: data.description,
-                        price: data.price,
-                        quantity: data.quantity ? data.quantity : 1
-                    })
-                }
-                window.localStorage.setItem('listCart', JSON.stringify(listCart));
-                commit('set_list_cart', {
-                    list_cart: listCart
-                })
-            } else {
-                listCart = [{
-                    id: data.id,
-                    imagelink: data.imagelink,
-                    name: data.name,
-                    description: data.description,
-                    price: data.price,
-                    quantity: data.quantity ? data.quantity : 1
-                }]
-                window.localStorage.setItem('listCart', JSON.stringify(listCart));
-                commit('set_list_cart', {
-                    list_cart: listCart
                 })
             }
         }
     },
 
     setCartCheckoutItem: ({ commit, rootState }, data = {}) => {
-        commit('set_list_cart', {
+        commit('set_list_user_cart', {
             list_cart: data.listCheckout
         })
         if (window.localStorage) {
             window.localStorage.setItem('listCartCheckout', JSON.stringify(data.listCheckout));
-            let listCart = window.localStorage.getItem('listCart');
-            if(listCart){
-                // listCart = JSON.parse(listCart)
-                // let _temp = listCart.filter(f=> !data.listCheckout.find(o=>o.id === f.id))
-                // window.localStorage.setItem('listCart', JSON.stringify(_temp));
-                // commit('set_list_user_cart', {
-                //     list_user_cart: _temp
-                // })
-
-                window.localStorage.setItem('listCart', JSON.stringify(data.listCheckout));
-                commit('set_list_user_cart', {
-                    list_user_cart: data.listCheckout
-                })
-            }
         }
     }
 

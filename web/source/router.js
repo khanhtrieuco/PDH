@@ -22,7 +22,7 @@ const Show = () => interopDefault(import(/* webpackChunkName: "InnovationDetail"
 const ShowDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/show/detail.vue'))
 const Customer = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/customer/index.vue'))
 const Faq = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/faq/index.vue'))
-const NasUser = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/nas-user/index.vue'))
+const AccountUser = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/account/index.vue'))
 const Place = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/place/index.vue'))
 const BlogDetail = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/blog/index.vue'))
 const Login = () => interopDefault(import(/* webpackChunkName: "InnovationDetail" */ './pages/login/index.vue'))
@@ -48,7 +48,7 @@ export function createRouter() {
                 component: HomePage
             },
             {
-                path: '/dang-ky',
+                path: '/dang-nhap',
                 component: Login
             },
             {
@@ -112,8 +112,8 @@ export function createRouter() {
                 component: Faq
             },
             {
-                path: '/thanh-vien-nas',
-                component: NasUser
+                path: '/account',
+                component: AccountUser
             },
             {
                 path: '/thong-tin-mua-sam',
