@@ -1,6 +1,7 @@
 <template>
   <div class="product-item">
-    <div :style="`height: ${height};`" class="product-img d-flex justify-content-center" @mouseover="showHover()" @mouseleave="hideHover()">
+    <div :style="`height: ${height};`" class="product-img d-flex justify-content-center" @mouseover="showHover()"
+      @mouseleave="hideHover()">
       <div class="d-flex justify-content-center align-self-end">
         <NuxtLink :to="`/san-pham/123`">
           <img :src="product_image" fluid alt="image" />
@@ -178,6 +179,7 @@ export default {
     font-family: 'Aeroport';
     font-size: 22px;
   }
+
   .product-price {
     color: #000;
     font-family: 'Aeroport-light';
@@ -194,63 +196,46 @@ export default {
 }
 
 @media (max-width: 520px) {
-  .cproduct-title {
-    font-size: 12px;
-    line-height: 15px;
-    color: #B9B9B9;
-  }
+  .product-item {
+    padding: 0px;
 
-  .cproduct-name {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 14px;
-    color: #2F3036;
-    height: 30px;
-    max-width: 100%;
-    min-width: 150px;
-  }
+    .product-img {
+      position: relative;
+      margin-bottom: 10px;
+      width: 100%;
+      padding-bottom: 10px;
+      background-color: #F5F5F5;
 
-  .cproduct-des {
-    font-weight: 300;
-    font-size: 10px;
-    line-height: 12px;
-    height: 25px;
-  }
+      img {
+        cursor: pointer;
+        transition: all .6s ease-in-out;
+        max-width: 100%;
+        max-height: 100%;
+      }
 
-  .cproduct-price {
-    font-size: 14px;
-    line-height: 36px;
-    margin-top: 16px;
-  }
+      &:hover {
+        background-color: #fff;
+      }
+    }
 
-  .cproduct-btn {
-    margin-top: 16px;
-    width: 100%;
-    height: 23px;
-    font-size: 10px;
-    line-height: 22px;
-    border-radius: 20px;
-  }
+    .product-name {
+      color: #000;
+      font-family: 'Aeroport';
+      font-size: 12px;
+    }
 
-  .img-heart {
-    top: 10px;
-  }
-
-  .cproduct-img {
-    height: 170px;
-
-    img {
-      max-height: 150px;
-      max-width: 120px;
+    .product-price {
+      color: #000;
+      font-family: 'Aeroport-light';
+      font-size: 10px;
     }
 
     .img-heart {
+      position: absolute;
+      top: 15px;
+      right: 7px;
+      cursor: pointer;
       width: 16px;
     }
-  }
-
-  .category-empty {
-    margin-top: 240px;
-    font-size: 20px;
   }
 }</style>

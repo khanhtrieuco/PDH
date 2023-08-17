@@ -164,6 +164,8 @@ export default {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+  margin-left: 50%;
+  transform: translate(-50%);
 
   .shop-now-link-text {
     color: #FFF;
@@ -240,6 +242,8 @@ export default {
     align-items: center;
     cursor: pointer;
     border-bottom: 1px solid #000;
+    margin-left: auto;
+    transform: inherit;
 
     .shop-now-link-text {
       color: #000;

@@ -4,7 +4,8 @@
             <div class="product-detail-info">
                 <div class="product-detail-color">
                     <span class="color-text">Color:</span>
-                    <Color></Color>
+                    <Color v-if="!isMobile"></Color>
+                    <ColorMobile v-else></ColorMobile>
                     <div class="color-value">+{{ listColor.length - 1 }}</div>
                 </div>
                 <div class="product-detail-size">
@@ -12,6 +13,7 @@
                     <span class="size-value" v-for="_size, index in listSize" :key="index">{{ _size.attributes.name
                     }}</span>
                 </div>
+                <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
                 <div class="product-detail-name">
                     <div class="product-detail-name-title">{{ product.attributes?.name }}</div>
                     <div class="product-detail-name-price">{{ product.attributes?.price | numberWithCommas }}{{ ' ' }}đ
@@ -20,9 +22,8 @@
                 <div class="product-detail-btn" @click="scrollToAdd">
                     Add to cart
                 </div>
-                <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
             </div>
-            <div class="d-flex">
+            <div class="d-flex" v-if="!isMobile">
                 <div class="product-detail-media" v-if="product.attributes?.media.data">
                     <img class="product-detail-media-img" v-for="imgData, index in product.attributes?.media.data"
                         :key="index" :src="imgData.attributes.url" />
@@ -50,7 +51,10 @@
                     <div class="product-detail-data-color">
                         <span class="product-detail-data-color-text">Color:</span>
                         <div v-for="_color, index in listColor" @click="choiceColor(_color)" :key="index">
-                            <Color :color="_color.attributes.value" :selected="selectColor === _color.id"></Color>
+                            <Color :color="_color.attributes.value" :selected="selectColor === _color.id" v-if="!isMobile">
+                            </Color>
+                            <ColorMobile :color="_color.attributes.value" :selected="selectColor === _color.id" v-else>
+                            </ColorMobile>
                         </div>
                         <!-- <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
                             :style="`background-color: ${_color.attributes.value};`"></div> -->
@@ -70,19 +74,69 @@
                     </div>
                 </div>
             </div>
+            <VueSlickCarousel v-bind="settings" class="product-detail-media" v-if="isMobile && product.attributes?.media.data">
+                <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
+                    <img class="product-detail-media-img" :src="imgData.attributes?.url" />
+                </div>
+            </VueSlickCarousel>
+            <div class="product-detail-data" v-if="isMobile">
+                <div class="product-detail-data-title">Product details</div>
+                <div class="product-detail-data-text"
+                    v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.description : product.attributes?.description_en)">
+                </div>
+                <div class="product-detail-data-title">Product code: <span class="product-detail-data-text">{{
+                    product.attributes?.sku_code }}</span></div>
+                <div class="product-detail-data-title">Material:</div>
+                <div class="product-detail-data-text"
+                    v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.material : product.attributes?.material_en)">
+                </div>
+                <div class="product-detail-data-title">Care your item:</div>
+                <div class="product-detail-data-text"
+                    v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
+                </div>
+                <div class="product-detail-help-box">
+                    <div class="product-detail-help-item">Shipping and packaging</div>
+                    <div class="product-detail-help-item">Exchange and return</div>
+                    <div class="product-detail-help-item">Need help</div>
+                </div>
+                <div class="product-detail-data-color">
+                    <span class="product-detail-data-color-text">Color:</span>
+                    <div v-for="_color, index in listColor" @click="choiceColor(_color)" :key="index">
+                        <Color :color="_color.attributes.value" :selected="selectColor === _color.id" v-if="!isMobile">
+                        </Color>
+                        <ColorMobile :color="_color.attributes.value" :selected="selectColor === _color.id" v-else>
+                        </ColorMobile>
+                    </div>
+                    <!-- <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
+                            :style="`background-color: ${_color.attributes.value};`"></div> -->
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="product-detail-data-size-text">Size:</div>
+                    <div class="product-detail-data-size-des">Size guide</div>
+                </div>
+                <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
+                    @onChange="choiceSize"></Select>
+                <div class="product-detail-data-inventory" v-if="variant">
+                    <div class="product-detail-data-inventory-text">Inventory:</div>
+                    <div class="product-detail-data-inventory-des">{{ variant.attributes?.inventory }}</div>
+                </div>
+                <div class="product-detail-data-btn" @click="addProductToCart">
+                    Add to cart
+                </div>
+            </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recommend</div>
                 <b-row v-if="listRelated">
-                    <b-col class="mb-3" cols="3" v-for="index in 4" :key="index">
-                        <ProductItem :isMobile="isMobile" height="440px" />
+                    <b-col class="mb-4" cols="6" lg="3" v-for="index in 4" :key="index">
+                        <ProductItem :isMobile="isMobile" height="200px" />
                     </b-col>
                 </b-row>
             </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recently viewed</div>
                 <b-row v-if="listRelated">
-                    <b-col class="mb-3" cols="3" v-for="index in 3" :key="index">
-                        <ProductItem :isMobile="isMobile" height="440px" />
+                    <b-col class="mb-4" cols="6" lg="3" v-for="index in 3" :key="index">
+                        <ProductItem :isMobile="isMobile" height="200px" />
                     </b-col>
                 </b-row>
                 <div class="product-detail-list-btn">More items from collection</div>
@@ -98,21 +152,30 @@ import Color from "~/components/common/color.vue"
 import ProductItem from "~/components/product/productItem.vue"
 // import ListMedia from "~/components/product/mediaList.vue"
 import general from "~/mixins/general"
+import ColorMobile from "~/components/common/colorMobile.vue"
 
 export default {
     name: 'IndexPage',
     components: {
         ProductItem,
         Select,
-        Color
+        Color,
+        ColorMobile
     },
     mixins: [general],
     data() {
         return {
             showImage: false,
             isMobile: false,
-            // quantity: 1,
-            // menuTab: 'tab1',
+            settings: {
+                "dots": true,
+                "arrows": false,
+                "edgeFriction": 0.35,
+                "infinite": true,
+                "speed": 500,
+                "slidesToShow": 1,
+                "slidesToScroll": 1
+            },
             listRelated: [],
             listSize: [],
             listColor: [],
@@ -203,8 +266,8 @@ export default {
                     name: o.attributes.name
                 }
             })
-            if(this.selectSize) {
-                this.variant = listFilter.find(o=> o.attributes.size.data.id === this.selectSize)
+            if (this.selectSize) {
+                this.variant = listFilter.find(o => o.attributes.size.data.id === this.selectSize)
             }
         },
         choiceSize(_size) {
@@ -218,8 +281,8 @@ export default {
                     this.listColor.push(color)
                 }
             });
-            if(this.selectColor) {
-                this.variant = listFilter.find(o=> o.attributes.color.data.id === this.selectColor)
+            if (this.selectColor) {
+                this.variant = listFilter.find(o => o.attributes.color.data.id === this.selectColor)
             }
         },
         addProductToCart() {
@@ -434,12 +497,14 @@ export default {
             margin-top: 20px;
             margin-bottom: 10px;
             display: flex;
+
             .product-detail-data-inventory-text {
                 color: #000;
                 font-family: 'Aeroport';
                 font-size: 20px;
                 line-height: 15px;
             }
+
             .product-detail-data-inventory-des {
                 color: #000;
                 font-family: 'Aeroport-light';
@@ -493,6 +558,248 @@ export default {
     }
 }
 
+@media (max-width: 520px) {
+    .product-detail-content {
+        padding-bottom: 30px;
 
-@media (max-width: 520px) {}
+        .product-detail-info {
+            margin: 20px 0px;
+            position: relative;
+            text-align: center;
+            display: block;
+
+            .product-detail-color {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                height: 30px;
+
+                .color-text {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 12px;
+                    line-height: 15px;
+                    height: 18px;
+                }
+
+                .color-value {
+                    color: #717171;
+                    font-family: 'Aeroport-light';
+                    font-size: 11px;
+                }
+            }
+
+            .product-detail-size {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+
+                .size-text {
+                    font-size: 12px;
+                    font-family: 'Aeroport';
+                }
+
+                .size-value {
+                    font-size: 12px;
+                    font-family: 'Aeroport-light';
+
+                    &:not(:last-child):after {
+                        content: '';
+                        height: 16px;
+                        padding-right: 6px;
+                        border-right: 1px solid #000;
+                    }
+                }
+            }
+
+            .product-detail-img {
+                width: 100%;
+            }
+
+            .product-detail-name {
+                position: relative;
+                bottom: unset;
+                text-align: left;
+
+                .product-detail-name-title {
+                    width: 240px;
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 20px;
+                }
+
+                .product-detail-name-price {
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 12px;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .product-detail-btn {
+                position: relative;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                cursor: pointer;
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 11px;
+                border: 1px solid;
+            }
+
+        }
+
+        .product-detail-media {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 50px;
+
+            .product-detail-media-img {
+                width: 100%;
+
+                &:nth-child(even) {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .product-detail-data {
+            width: 100%;
+            display: inline-block;
+            padding-left: 0px;
+
+            .product-detail-data-title {
+                color: #000;
+                font-family: 'Aeroport';
+                font-size: 12px;
+
+                &:not(:first-child) {
+                    margin-top: 20px;
+                }
+            }
+
+            .product-detail-data-text {
+                color: #717171;
+                font-family: 'Aeroport-light';
+                font-size: 10px;
+            }
+
+            .product-detail-help-box {
+                padding: 10px 25px;
+                border: 2px solid #717171;
+
+                .product-detail-help-item {
+                    color: #717171;
+                    font-family: 'Aeroport-light';
+                    font-size: 11px;
+                    margin: 6px 0px;
+                    text-decoration-line: underline;
+                    text-transform: uppercase;
+                }
+            }
+
+            .product-detail-data-color {
+                margin-top: 20px;
+                margin-bottom: 10px;
+                height: 30px;
+                display: flex;
+                gap: 4px;
+
+                .product-detail-data-color-text {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 11px;
+                    line-height: 15px;
+                }
+            }
+
+            .product-detail-data-size-text {
+                color: #000;
+                font-family: 'Aeroport';
+                font-size: 10px;
+                margin-bottom: 10px;
+            }
+
+            .product-detail-data-size-des {
+                color: #717171;
+                font-family: 'Aeroport-light';
+                font-size: 10px;
+                text-decoration-line: underline;
+                margin-bottom: 10px;
+            }
+
+            .product-detail-data-inventory {
+                margin-top: 20px;
+                margin-bottom: 10px;
+                display: flex;
+
+                .product-detail-data-inventory-text {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+
+                .product-detail-data-inventory-des {
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 10px;
+                    line-height: 15px;
+                    margin-left: 10px;
+                }
+            }
+
+            .product-detail-data-btn {
+                margin-top: 30px;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                cursor: pointer;
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 11px;
+                border: 1px solid;
+            }
+        }
+
+        .product-detail-list-related {
+            margin-top: 60px;
+            padding: 60px 0px 0px 0px;
+            border-top: 1px solid #717171;
+
+            .product-detail-list-title {
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 12px;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+            }
+
+            .product-detail-list-btn {
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 11px;
+                border: 1px solid #000;
+                cursor: pointer;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 60px;
+            }
+        }
+    }
+}
 </style>

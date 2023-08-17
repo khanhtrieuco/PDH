@@ -36,7 +36,7 @@ export default {
         }
     },
     mounted() {
-        if(this.default) {
+        if (this.default) {
             this.select = this.default
         }
     },
@@ -86,18 +86,22 @@ export default {
 @media (max-width: 520px) {
     .select-list-panel {
         width: 100%;
+
         .input-choice {
             font-size: 10px;
             font-family: 'Aeroport-light';
+            height: 30px;
+            line-height: 30px;
         }
+
         .input-choice-image {
             width: 10px;
             height: 5px;
         }
+
         .select-item {
             font-size: 10px;
             font-family: 'Aeroport-light';
         }
     }
-}
-</style>
+}</style>

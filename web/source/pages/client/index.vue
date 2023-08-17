@@ -8,7 +8,7 @@
 				enquiries. By contacting Client Service, you agree that your data will be transferred outside your country
 			</div>
 
-			<div class="client-service-item-content d-flex">
+			<div :class="isMobile ? 'client-service-item-content' : 'client-service-item-content d-flex'">
 				<div class="client-service-item">
 					<div class="client-service-item-title">LIVE CHAT</div>
 					<div class="client-service-item-des">Mon to Sat: 10am-8pm</div>
@@ -126,84 +126,72 @@ export default {
 }
 
 @media (max-width: 520px) {
-	.contact-container {
-		margin-top: 0px;
-	}
+	.client-service-content {
+		background-color: #F8F8F8;
+		padding-top: 80px;
+		padding-bottom: 120px;
 
-	.contact-title {
-		font-size: 20px;
-		line-height: 26px;
-	}
-
-	.contact-des {
-		font-size: 10px;
-		line-height: 12px;
-		width: 100%;
-	}
-
-	.content-tab {
-		border-bottom: 1px solid #B9B9B9;
-		margin-bottom: 12px;
-
-		.content-tab-text {
-			line-height: 45px;
-			font-size: 14px;
+		.client-service-title {
+			color: #000;
+			text-align: center;
+			font-family: 'Aeroport';
+			font-size: 20px;
+			margin-bottom: 30px;
 		}
 
-		img {
-			width: 25px;
-		}
-	}
-
-	.block-content {
-
-		background: #ffffff;
-		height: auto;
-		margin-top: 16px;
-
-		.image-block {
-			height: auto;
-			object-fit: cover;
-			width: 100%;
-			float: none;
+		.client-service-des {
+			color: #000;
+			text-align: center;
+			font-family: 'Aeroport-light';
+			font-size: 10px;
+			width: 330px;
+			margin: auto;
 		}
 
-		.block-data {
-			.block-title {
-				margin-top: 16px;
-				margin-bottom: 16px;
-				font-size: 18px;
+		.client-service-item-content {
+			margin-top: 60px;
+
+			.client-service-item {
+				width: 200px;
+				margin: auto;
+				position: relative;
+				margin-top: 30px;
+				padding-bottom: 20px;
+
+				.client-service-item-title {
+					color: #000;
+					text-align: center;
+					font-family: 'Aeroport';
+					font-size: 17px;
+					margin-bottom: 20px;
+					text-transform: uppercase;
+				}
+
+				.client-service-item-des {
+					color: #000;
+					text-align: center;
+					font-family: 'Aeroport-light';
+					font-size: 10px;
+				}
+
+				&:after {
+					content: "";
+					height: 100%;
+					width: 100px;
+					display: block;
+					border-bottom: 1px solid #000;
+					border-right: none;
+					position: absolute;
+					bottom: 0px;
+					left: 50%;
+					transform: translate(-50%);
+				}
+
+				&:last-child:after {
+					display: none;
+				}
 			}
-
-			li {
-				font-size: 10px;
-				line-height: 12px;
-			}
-
-			.block-sub {
-				font-size: 12px;
-				line-height: 15px;
-			}
-
-			.li {
-				font-size: 10px;
-			}
-		}
-
-		.t-title {
-			text-align: left;
-		}
-
-		.t-des {
-			text-align: left;
-			width: calc(100% - 85px)
 		}
 	}
-
-	.contact-btn {
-		height: 55px;
-		line-height: 55px;
-		font-size: 12px;
-		width: 100%;
-	}
-}</style>
+}
+</style>

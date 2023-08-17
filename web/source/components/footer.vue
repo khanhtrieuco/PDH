@@ -331,8 +331,8 @@ export default {
       border: 1px solid #FFF;
       background: #000;
       width: 100%;
-      height: 60px;
-      line-height: 60px;
+      height: 35px;
+      line-height: 35px;
       font-family: 'Aeroport-light';
       color: #fff;
       margin-top: 10px;

@@ -7,16 +7,16 @@
             <div class="news-cate-item">BLOGS, </div>
         </div>
         <b-container>
-            <VueSlickCarousel v-bind="settings" class="list-news" v-if="listNews && listNews.length">
+            <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news" v-if="listNews && listNews.length">
                 <div v-for="(item, index) in listNews" :key="index">
                     <NewItem :isMobile="isMobile" />
                 </div>
-                <template slot="prevArrow">
+                <template slot="prevArrow" v-if="!isMobile">
                     <div class="pre-arrow">
                         <img src="/images/left-b.png" />
                     </div>
                 </template>
-                <template slot="nextArrow">
+                <template slot="nextArrow" v-if="!isMobile">
                     <div class="next-arrow">
                         <img src="/images/right-b.png" />
                     </div>
@@ -24,7 +24,7 @@
             </VueSlickCarousel>
             <div class="list-main-news">
                 <b-row v-if="listMainNews">
-                    <b-col class="mb-3" cols="4" v-for="index in 6" :key="index">
+                    <b-col class="mb-3" cols="6" lg="4" v-for="index in 6" :key="index">
                         <newsItemNoBox :isMobile="isMobile" />
                     </b-col>
                 </b-row>
@@ -59,7 +59,6 @@ export default {
                 "edgeFriction": 0.35,
                 "infinite": true,
                 "speed": 1000,
-                "slidesToShow": 3,
                 "slidesToScroll": 1
             },
             listNews: [1, 2, 3, 4],
@@ -187,35 +186,18 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .club-content {
-        margin-top: 50px;
-    }
-
-    .club-title {
-        font-size: 20px;
-        margin-bottom: 20px;
-
-    }
-
-    .club-aura-filter {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-    }
-
-    .club-aura-filter-item {
-        color: #AFAFAF;
-        font-size: 10px;
-        margin-right: 5px;
-        font-family: 'inter-light';
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-
-    .club-active {
-        color: #000;
-        font-family: 'inter';
+    .news-content {
+        padding-bottom: 60px;
+        .news-title-image{
+            width: 110px;
+            margin: auto;
+        }
+        .news-category{
+            margin-top: 15px;
+        }
+        .list-main-news {
+            margin-top: 30px;
+        }
     }
 }
 </style>

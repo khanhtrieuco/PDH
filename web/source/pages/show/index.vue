@@ -3,7 +3,7 @@
         <img class="show-title-image" src="/images/show.png" />
         <div class="list-main-show">
             <b-row v-if="listShow">
-                <b-col class="mb-3" cols="3" v-for="index in 4" :key="index">
+                <b-col class="mb-3" cols="6" lg="3" v-for="index in 4" :key="index">
                     <NuxtLink :to="`/show/123`">
                         <ShowItem :isMobile="isMobile" />
                     </NuxtLink>
@@ -161,35 +161,19 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .club-content {
-        margin-top: 50px;
-    }
+    .show-content {
+        padding-top: 60px;
+        padding-bottom: 60px;
+        text-align: center;
 
-    .club-title {
-        font-size: 20px;
-        margin-bottom: 20px;
+        .show-title-image {
+            margin: auto;
+            width: 140px;
+        }
 
-    }
-
-    .club-aura-filter {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-    }
-
-    .club-aura-filter-item {
-        color: #AFAFAF;
-        font-size: 10px;
-        margin-right: 5px;
-        font-family: 'inter-light';
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-
-    .club-active {
-        color: #000;
-        font-family: 'inter';
+        .list-main-show {
+            margin-top: 40px;
+        }
     }
 }
 </style>

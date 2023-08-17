@@ -54,6 +54,7 @@ export default {
     width: 100%;
     text-align: left;
     margin-bottom: 20px;
+
     .show-img {
         position: relative;
     }
@@ -74,12 +75,28 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .aura-title {
-        font-weight: 700;
-        font-size: 13px;
-        line-height: 15px;
-        color: #2F3036;
+    .show-item {
+        width: 100%;
         text-align: left;
+        margin-bottom: 20px;
+
+        .show-img {
+            position: relative;
+        }
+
+        .show-title {
+            color: #000;
+            font-family: 'Aeroport';
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .show-des {
+            color: #717171;
+            font-family: 'Aeroport-light';
+            font-size: 9px;
+        }
     }
 }
 </style>

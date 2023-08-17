@@ -132,7 +132,7 @@ export default {
 
         .news-img {
             border: 1px solid #000;
-            padding: 6px;
+            padding: 2px;
             margin: 4px;
             position: relative;
         }
@@ -146,39 +146,39 @@ export default {
         }
 
         .news-des {
-            color: #000;
+            color: #717171;
             font-family: 'Aeroport-light';
             font-size: 10px;
         }
 
         .news-dot {
-            width: 12px;
-            height: 12px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
             position: absolute;
             background-color: #fff;
-            padding: 4px;
+            padding: 3px;
 
             div {
-                width: 6px;
-                height: 6px;
+                width: 3px;
+                height: 3px;
                 border-radius: 50%;
                 background-color: #000;
             }
         }
 
         .news-dot1 {
-            left: -7px;
-            top: -7px;
+            left: -5px;
+            top: -6px;
         }
 
         .news-dot2 {
             right: -5px;
-            top: -7px;
+            top: -6px;
         }
 
         .news-dot3 {
-            left: -7px;
+            left: -5px;
             bottom: -4px;
         }
 

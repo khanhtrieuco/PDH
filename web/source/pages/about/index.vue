@@ -1,20 +1,21 @@
 <template>
     <div class="about-content">
         <div class="about-banner">
-            <img class="w-100" src="/images/about.jpg"></img>
+            <img class="w-100" src="/images/about.jpg" v-if="!isMobile" />
+            <img class="about-banner-image" src="/images/about.jpg" v-if="isMobile" />
             <div class="about-banner-content">
                 <div class="about-title">ABOUT P.D.H</div>
-                <img class="about-name-img" src="/images/about-name.png"></img>
+                <img class="about-name-img" src="/images/about-name.png" />
                 <div class="about-des">A VIETNAMESE CHILD ARTIST HAS DECIDED PASS INTO THE WORLD OF FASHION AND CREATE THE
-                    NAME
-                    BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE TRADITIONAL
-                    VALUES OF THE COUNTRY OF THE COUNTRIES BRING CONtemporaries. HE LOVES EXPERIENCE WITH USE OF TECHNOLOGY
-                    IN
-                    THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW GENERATION IN THIS INDUSTRY.
+                    NAME BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE
+                    TRADITIONAL VALUES OF THE COUNTRY OF THE COUNTRIES BRING CONtemporaries. HE LOVES EXPERIENCE WITH USE OF
+                    TECHNOLOGY IN THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW GENERATION IN
+                    THIS INDUSTRY.
                 </div>
             </div>
         </div>
-        <img class="w-100" src="/images/about-top.jpg"></img>
+        <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
+        <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
         <div class="about-info">
             <div class="about-achievement">achievement</div>
             <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
@@ -28,7 +29,8 @@
                 Week</div>
         </div>
         <div class="about-mid">
-            <img class="w-100" src="/images/about-mid.jpg"></img>
+            <img class="w-100" src="/images/about-mid.jpg" v-if="!isMobile" />
+            <img class="w-100" src="/images/about-mid-mobile.jpg" v-if="isMobile" />
             <div class="about-mid-content">
                 <div class="about-mid-des">
                     From one-off pieces created by independent designers using Gucci materials, to the House's archived
@@ -41,9 +43,9 @@
             <div class="about-item">
                 <div class="about-item-img">
                     <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade">
-                        <img v-if="tab === 1" src="/images/about1.jpg"></img>
-                        <img v-if="tab === 2" src="/images/about2.jpg"></img>
-                        <img v-if="tab === 3" src="/images/about3.jpg"></img>
+                        <img v-if="tab === 1" src="/images/about1.jpg" />
+                        <img v-if="tab === 2" src="/images/about2.jpg" />
+                        <img v-if="tab === 3" src="/images/about3.jpg" />
                     </transition>
 
                     <div class="about-item-dot about-item-dot1">
@@ -331,6 +333,7 @@ export default {
                     bottom: -325px;
                     left: 50%;
                     transform: translate(-50%);
+
                     .about-item-tab-choice {
                         width: 100px;
                         height: 3px;
@@ -352,21 +355,196 @@ export default {
 
 @media (max-width: 520px) {
     .about-content {
-        margin-top: 0px;
-    }
+        .about-banner {
+            position: relative;
+            .about-banner-image{
+                height: 100vh;
+                width: 100%;
+            } 
+            .about-banner-content {
+                position: absolute;
+                top: 40%;
+                text-align: center;
+                left: 50%;
+                transform: translate(-50%);
 
-    .about-title {
-        font-size: 13px;
-        line-height: 15px;
-    }
+                .about-title {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    font-size: 10px;
+                }
 
-    .about-text {
-        font-size: 10px;
-        line-height: 13px;
-    }
+                .about-name-img {
+                    width: 100%;
+                    margin: 40px 0px;
+                }
 
-    .des-img {
-        margin-top: 40px;
+                .about-des {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: 'Aeroport-light';
+                    font-size: 10px;
+                    text-transform: uppercase;
+                    width: 280px;
+                    margin: auto;
+                }
+            }
+        }
+
+        .about-info {
+            text-align: center;
+            padding: 60px 0px;
+
+            .about-achievement {
+                margin-bottom: 30px;
+                color: #000;
+                text-align: center;
+                font-family: 'Aeroport';
+                font-size: 16px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .about-text {
+                color: #000;
+                text-align: center;
+                font-family: 'Aeroport-light';
+                font-size: 10px;
+                line-height: 30px;
+                font-weight: 200;
+                width: 280px;
+                margin: auto;
+            }
+        }
+
+        .about-mid {
+            position: relative;
+
+            .about-mid-content {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0px;
+                left: 0px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+
+                .about-mid-des {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    text-transform: uppercase;
+                    font-size: 12px;
+                    width: 280px;
+                    margin: auto;
+                }
+            }
+        }
+
+        .about-list {
+            padding: 60px 0px;
+
+            .about-item {
+                display: block;
+
+                .about-item-img {
+                    position: relative;
+                    width: 310px;
+                    margin: auto;
+                    border: 1px solid #000;
+                    padding: 6px;
+
+                    img {
+                        width: 100%;
+                    }
+
+                    .about-item-dot {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        position: absolute;
+                        background-color: #fff;
+                        padding: 4px;
+
+                        div {
+                            width: 6px;
+                            height: 6px;
+                            border-radius: 50%;
+                            background-color: #000;
+                        }
+                    }
+
+                    .about-item-dot1 {
+                        left: -7px;
+                        top: -7px;
+                    }
+
+                    .about-item-dot2 {
+                        right: -5px;
+                        top: -7px;
+                    }
+
+                    .about-item-dot3 {
+                        left: -7px;
+                        bottom: -4px;
+                    }
+
+                    .about-item-dot4 {
+                        right: -5px;
+                        bottom: -4px;
+                    }
+                }
+
+                .about-item-content {
+                    text-align: center;
+                    width: 310px;
+                    margin: auto;
+                    position: relative;
+
+                    .about-item-content-title {
+                        color: #000;
+                        text-align: center;
+                        font-family: 'Aeroport';
+                        font-size: 17px;
+                        margin-bottom: 30px;
+                        margin-top: 40px;
+                    }
+
+                    .about-item-content-des {
+                        color: #5A5552;
+                        text-align: center;
+                        font-family: 'Aeroport-light';
+                        font-size: 10px;
+                        width: 280px;
+                        margin: auto;
+                    }
+
+                    .about-item-tab {
+                        display: flex;
+                        position: absolute;
+                        bottom: -25px;
+                        left: 50%;
+                        transform: translate(-50%);
+
+                        .about-item-tab-choice {
+                            width: 60px;
+                            height: 3px;
+                            border-top: 3px solid #E3DEDA;
+                            cursor: pointer;
+                        }
+
+                        .about-item-tab-choice-active {
+                            border-top: 3px solid #000;
+                        }
+                    }
+                }
+
+
+            }
+
+        }
     }
 }
 </style>

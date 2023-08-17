@@ -1,18 +1,31 @@
 <template>
     <div class="collection-content">
         <div class="collection-banner">
-            <ThumbImage class="customer-image" ratio="21-9" :src="collection.attributes?.detail_thub?.data?.attributes.url">
-            </ThumbImage>
+            <ThumbImage class="customer-image" ratio="21-9" v-if="!isMobile"
+                :src="collection.attributes?.detail_thub?.data?.attributes.url"></ThumbImage>
+            <ThumbImage class="customer-image" ratio="9-21" v-if="isMobile"
+                :src="collection.attributes?.detail_thub?.data?.attributes.url"></ThumbImage>
+            <div class="container customer-des" v-if="isMobile">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+                dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+                suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
+                vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+                accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+                nulla facilisi. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                ullamcor
+            </div>
         </div>
         <div class="container">
             <div class="photo-wrap">
                 <div class="photo" v-for="imgData, index in imgDataArray" :key="index"
                     :style="{ 'width': imgData.size.width * 800 / imgData.size.height + 'px', 'flex-grow': imgData.size.width * 800 / imgData.size.height }">
                     <i :style="{ 'padding-bottom': imgData.size.height / imgData.size.width * 100 + '%' }"></i>
-                    <img class="collection-detail-image" :src="imgData.src" :alt="imgData.title" @load="loaded(index)" crossorigin="Anonymous" />
+                    <img class="collection-detail-image" :src="imgData.src" :alt="imgData.title" @load="loaded(index)"
+                        crossorigin="Anonymous" />
                 </div>
             </div>
-            <div class="btn-collection-top">SHOP NOW</div>
+            <div class="btn-collection-top" @click="$router.go(-1)">SHOP NOW</div>
         </div>
     </div>
 </template>
@@ -144,54 +157,10 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .collection-content {
-        margin-top: 0px;
+    .customer-des{
+        font-size: 12px;
+        padding: 20px 25px;
+        font-family: 'Aeroport-light';
+        text-align: center;
     }
-
-    .collection-title {
-        font-size: 24px;
-        line-height: 31px;
-    }
-
-    .collection-des {
-        width: 328px;
-        font-size: 10px;
-        line-height: 14px;
-    }
-
-    .collection-filter {
-        margin-top: 32px;
-
-        .filter-item {
-            width: 140px;
-
-            .filter-title {
-                font-weight: 600;
-                font-size: 12px;
-                line-height: 17px;
-            }
-
-            .filter-select {
-                font-weight: 300;
-                font-size: 10px;
-                line-height: 10px;
-            }
-        }
-    }
-
-    .user-cart-empty {
-        width: calc(100% - 20px);
-        padding: 50px 20px;
-        margin-left: 10px;
-        margin-right: 10px;
-        background: #FFF;
-        border: 1px solid #F4F4F4;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-    }
-
-    .user-list-cart-panel {
-        width: 100%;
-    }
-}
-</style>
+}</style>

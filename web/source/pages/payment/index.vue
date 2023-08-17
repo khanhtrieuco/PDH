@@ -1,10 +1,11 @@
 <template>
     <div class="payment-content">
-        <div class="payment-content-top">
+        <div class="payment-content-top" v-if="!isMobile">
             <img class="payment-content-image" src="/images/top-account.jpg" />
             <div class="payment-content-name">checkout</div>
         </div>
-        <div class="payment-main-info" v-if="!paymentDone">
+        <div class="payment-content-name" v-if="isMobile && !paymentDone">checkout</div>
+        <div class="payment-main-info" v-if="!paymentDone && !isMobile">
             <b-container class="d-flex">
                 <div class="payment-left-info">
                     <div class="payment-step-card">
@@ -37,6 +38,35 @@
                 </div>
             </b-container>
         </div>
+        <div class="payment-main-info" v-if="!paymentDone && isMobile">
+            <b-container>
+                <div class="payment-step-card">
+                    <div class="payment-step-title">1. {{ $t('Payment_title_1') }}</div>
+                    <div class="payment-step-content">
+                        <div class="payment-step-content-title">Email Address</div>
+                        <div class="payment-step-content-text">lmydu99@gmail.com</div>
+                    </div>
+                </div>
+                <div class="payment-step-card">
+                    <div class="payment-step-title">2. {{ $t('Payment_title_2') }}</div>
+                    <div class="payment-step-content">
+                        <div class="d-flex">
+                            <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
+                                @click="shiping_type = 1">Ship to home</div>
+                            <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
+                                @click="shiping_type = 2">Pick up Store</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-step-card">
+                    <div class="payment-step-title">3. {{ $t('Payment') }}</div>
+                    <div class="payment-step-content">
+                        <div class="payment-step-btn-perchase" @click="onPushOrder">Purchase</div>
+                    </div>
+                </div>
+                <UserCart :listItem="listCart" :isMobile="isMobile" :priceShip="priceShip" />
+            </b-container>
+        </div>
         <div class="payment-success-info" v-if="paymentDone === 'success'">
             <div class="payment-order-top">
                 <div class="payment-order-top-title">ORDERED SUCCESSFULLY</div>
@@ -44,7 +74,11 @@
                 <div class="payment-order-top-des">Your order is placed successfully, to track the order status, please
                     click
                     “My order” or add more products in the shopping cart </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between" v-if="!isMobile">
+                    <div class="payment-order-btn" @click="goPage('/account')">my order</div>
+                    <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>
+                </div>
+                <div v-if="isMobile">
                     <div class="payment-order-btn" @click="goPage('/account')">my order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>
                 </div>
@@ -131,7 +165,7 @@
                 </div>
             </div>
         </div>
-        <HelpPayment />
+        <HelpPayment :isMobile="isMobile" />
     </div>
 </template>
   
@@ -321,6 +355,7 @@ export default {
             text-transform: uppercase;
         }
     }
+
     .payment-main-info {
         margin: 100px 0px;
 
@@ -329,6 +364,7 @@ export default {
             margin-right: 30px;
         }
     }
+
     .payment-success-info {
         width: 1000px;
         margin: 100px auto;
@@ -437,6 +473,7 @@ export default {
             }
         }
     }
+
     .payment-step-card {
         border: 1px solid #D9D9D9;
         margin-bottom: 30px;
@@ -545,5 +582,240 @@ export default {
 }
 
 @media (max-width: 520px) {
+    .payment-content {
+        .payment-content-name {
+            position: relative;
+            color: #000;
+            text-align: center;
+            font-family: 'Aeroport';
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        .payment-main-info {
+            margin: 60px 0px;
+
+        }
+
+        .payment-success-info {
+            width: 100%;
+            margin: 60px auto;
+            padding: 0px 15px;
+
+            .payment-order-top {
+                margin-bottom: 10px;
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+
+                .payment-order-top-title {
+                    text-align: center;
+                    color: #000;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    font-size: 20px;
+                    text-transform: uppercase;
+                }
+
+                .payment-order-top-code {
+                    margin-top: 20px;
+                    color: #000;
+                    text-align: center;
+                    font-family: 'Aeroport-light';
+                    font-size: 17px;
+                    text-transform: uppercase;
+                }
+
+                .payment-order-top-des {
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                    color: #000;
+                    text-align: center;
+                    font-family: 'Aeroport-light';
+                    font-size: 10px;
+                }
+
+                .payment-order-btn {
+                    width: 100%;
+                    height: 30px;
+                    line-height: 30px;
+                    border: 1px solid #000;
+                    cursor: pointer;
+                    font-family: 'Aeroport-light';
+                    color: #000;
+                    text-align: center;
+                    text-transform: uppercase;
+                    font-size: 11px;
+                    margin-bottom: 20px;
+                }
+
+                .payment-order-btn-shop {
+                    width: 100%;
+                    height: 30px;
+                    line-height: 30px;
+                    background-color: #000;
+                    cursor: pointer;
+                    font-family: 'Aeroport-light';
+                    color: #fff;
+                    text-align: center;
+                    text-transform: uppercase;
+                    font-size: 11px;
+                }
+            }
+
+            .payment-product-item {
+                margin: 20px 0px;
+
+                .payment-product-img {
+                    .payment-product-image {
+                        width: 70px;
+                        height: 90px;
+                        object-fit: cover;
+                    }
+                }
+
+                .payment-product-info {
+                    width: calc(100% - 85px);
+                    margin-left: 15px;
+                    padding-top: 10px;
+                    position: relative;
+
+                    .payment-product-name {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 10px;
+                        text-transform: uppercase;
+                    }
+
+                    .payment-product-des {
+                        color: #717171;
+                        font-family: 'Aeroport-light';
+                        font-size: 9px;
+                        margin-top: 8px;
+                        margin-bottom: 8px;
+
+                        span {
+                            color: #000;
+                        }
+                    }
+
+                    .payment-product-price {
+                        position: absolute;
+                        bottom: 0px;
+                        right: 0px;
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+
+        .payment-step-card {
+            border: 1px solid #D9D9D9;
+            margin-bottom: 30px;
+
+            .payment-step-title {
+                border-bottom: 1px solid #D9D9D9;
+                height: 30px;
+                line-height: 30px;
+                padding: 0px 15px;
+                color: #717171;
+                font-family: 'Aeroport-light';
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+
+            .payment-step-content {
+                padding: 15px;
+
+                .payment-step-content-title {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 10px;
+                    text-transform: uppercase;
+                }
+
+                .payment-step-content-text {
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 10px;
+                }
+
+                .payment-step-shipping-choice {
+                    background-color: #D9D9D9;
+                    height: 40px;
+                    width: 50%;
+                    line-height: 40px;
+                    text-align: center;
+                    cursor: pointer;
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 11px;
+                    text-transform: uppercase;
+                }
+
+                .shiping-active {
+                    font-family: 'Aeroport';
+                    background-color: #fff;
+
+                }
+
+                .payment-step-btn-perchase {
+                    width: 100%;
+                    height: 30px;
+                    line-height: 30px;
+                    background-color: #000;
+                    color: #FFF;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                }
+
+                .payment-step-success-title {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 11px;
+                    margin-bottom: 10px;
+                }
+
+                .payment-step-success-text {
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 11px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .payment-step-extra {
+                border-top: 1px solid #D9D9D9;
+                padding: 15px;
+                display: flex;
+                justify-content: flex-end;
+
+                .payment-step-extra-content {
+                    width: 100%;
+
+                    .payment-info-text {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 11px;
+                        margin-bottom: 10px;
+                    }
+
+                    .payment-info-total {
+                        border-top: 1px solid #D9D9D9;
+                        padding-top: 10px;
+                        color: #000;
+                        font-family: 'Aeroport';
+                        font-size: 11px;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
 }
 </style>

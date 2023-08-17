@@ -1,8 +1,10 @@
 <template>
     <div class="collection-content">
         <div class="collection-banner">
-            <ThumbImage class="customer-image" ratio="21-9" :src="collection.attributes?.main_thub?.data?.attributes.url">
-            </ThumbImage>
+            <ThumbImage class="customer-image" ratio="21-9" v-if="!isMobile"
+                :src="collection.attributes?.main_thub?.data?.attributes.url"></ThumbImage>
+            <ThumbImage class="customer-image" ratio="9-21" v-if="isMobile"
+                :src="collection.attributes?.main_thub?.data?.attributes.url"></ThumbImage>
         </div>
         <div class="container">
             <h1 class="collection-title">
@@ -21,8 +23,8 @@
             </NuxtLink>
             <div class="collection-products">
                 <b-row v-if="listProduct">
-                    <b-col class="mb-3" cols="4" v-for="index in 6" :key="index">
-                        <ProductItem :isMobile="isMobile" />
+                    <b-col class="mb-3" cols="6" lg="4" v-for="index in 6" :key="index">
+                        <ProductItem :isMobile="isMobile" :height="isMobile ? '215px' : '600px'" />
                     </b-col>
                 </b-row>
                 <!-- <div v-else>
@@ -164,53 +166,63 @@ export default {
 
 @media (max-width: 520px) {
     .collection-content {
-        margin-top: 0px;
-    }
+        padding-bottom: 100px;
 
-    .collection-title {
-        font-size: 24px;
-        line-height: 31px;
-    }
+        .collection-title {
+            color: #000;
+            text-align: center;
+            font-family: 'Aeroport';
+            font-size: 20px;
+            font-weight: 500;
+            margin-top: 45px;
+        }
 
-    .collection-des {
-        width: 328px;
-        font-size: 10px;
-        line-height: 14px;
-    }
+        .collection-des {
+            color: #000;
+            text-align: center;
+            font-family: 'Aeroport-light';
+            font-size: 12px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
 
-    .collection-filter {
-        margin-top: 32px;
+        .collection-products {
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
 
-        .filter-item {
-            width: 140px;
-
-            .filter-title {
-                font-weight: 600;
-                font-size: 12px;
-                line-height: 17px;
-            }
-
-            .filter-select {
-                font-weight: 300;
-                font-size: 10px;
-                line-height: 10px;
-            }
+        .btn-collection-top {
+            width: 240px;
+            height: 30px;
+            line-height: 28px;
+            text-align: center;
+            border: 1px solid #000;
+            color: #000;
+            font-family: 'Aeroport-light';
+            cursor: pointer;
+            margin: auto;
+            font-size: 11px;
         }
     }
 
-    .user-cart-empty {
-        width: calc(100% - 20px);
-        padding: 50px 20px;
-        margin-left: 10px;
-        margin-right: 10px;
-        background: #FFF;
-        border: 1px solid #F4F4F4;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-    }
+    .shop-now-link-black {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        margin-left: 50%;
+        transform: translate(-50%);
 
-    .user-list-cart-panel {
-        width: 100%;
+        .shop-now-link-black-text {
+            color: #000;
+            font-family: 'Aeroport-light';
+            font-size: 15px;
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
+
+        .shop-now-link-black-img {
+            width: 12px;
+        }
     }
 }
 </style>

@@ -156,12 +156,26 @@ blockquote::after {
   display: none;
 }
 
-.slick-dots li button:before {
-  font-size: 10px !important;
+.slick-dots{
+  bottom: -10px !important;
 }
-
+.slick-dots li{
+  width: 8px !important;
+  height: 8px !important;
+}
+.slick-dots li button {
+  width: 8px !important;
+  height: 8px !important;
+}
+.slick-dots li button:before {
+  font-size: 6px !important;
+}
+.slick-dots li button:before {
+  width: 8px !important;
+  line-height: 8px !important;
+}
 .slick-dots li.slick-active button:before {
-  color: #F593A5 !important;
+  color: #717171 !important;
 }
 
 .breadcrumb-h1 {

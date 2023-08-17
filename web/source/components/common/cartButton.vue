@@ -52,4 +52,29 @@ export default {
 
     }
 }
+
+@media (max-width: 520px) {
+    .volumn-btn {
+        width: 60px;
+        height: 17px;
+        font-family: 'Aeroport-light';
+        font-size: 10px;
+        cursor: pointer;
+
+        .volumn-btn-sub {
+            width: 17px;
+            height: 17px;
+            text-align: center;
+            line-height: 16px;
+            border: 1px solid #515151;
+
+        }
+
+        .volumn-number {
+            line-height: 16px;
+            font-family: 'Aeroport-light';
+
+        }
+    }
+}
 </style>

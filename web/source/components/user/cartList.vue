@@ -1,37 +1,40 @@
 <template>
     <div class="list-cart-panel">
-        <div class="list-cart-user-top">
-            <div class="list-cart-title">{{ $t('Cart_your') }}{{ `(${listItem.length})` }}</div>
-            <img class="list-cart-close" src="/images/close-outline.png" @click="$emit('hideListCart')"></img>
-        </div>
-        <div class="list-cart-main-list">
-            <div class="list-cart-item" v-for="(item, index) in listItem" :key="index">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div class="list-card-div-img">
-                        <img class="list-card-image" :src="item.imagelink" />
-                    </div>
-                    <div class="list-card-div-info">
-                        <div class="list-cart-product-name">{{ item.name }}</div>
-                        <div class="list-cart-product-des">Color:
-                            <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+        <div class="container">
+            <div class="list-cart-user-top">
+                <div class="list-cart-title">{{ $t('Cart_your') }}{{ `(${listItem.length})` }}</div>
+                <img class="list-cart-close" src="/images/close-outline.png" @click="$emit('hideListCart')"></img>
+            </div>
+            <div class="list-cart-main-list">
+                <div class="list-cart-item" v-for="(item, index) in listItem" :key="index">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="list-card-div-img">
+                            <img class="list-card-image" :src="item.imagelink" />
                         </div>
-                        <div class="list-cart-product-des">Size:
-                            <span>
-                                {{ item.variant.attributes.size.data.attributes.name }}
-                            </span>
+                        <div class="list-card-div-info">
+                            <div class="list-cart-product-name">{{ item.name }}</div>
+                            <div class="list-cart-product-des">Color:
+                                <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                            </div>
+                            <div class="list-cart-product-des">Size:
+                                <span>
+                                    {{ item.variant.attributes.size.data.attributes.name }}
+                                </span>
+                            </div>
+                            <div class="list-cart-product-des">Quantity
+                                <CartButton :inumber="item.quantity"
+                                    @updateValue="(e) => updateCartValue(item.variant_id, e)" />
+                                <div class="list-cart-product-remove" @click="deleteItemCart(item.variant_id)">Remove</div>
+                            </div>
                         </div>
-                        <div class="list-cart-product-des">Quantity
-                            <CartButton :inumber="item.quantity"
-                                @updateValue="(e) => updateCartValue(item.variant_id, e)" />
-                            <div class="list-cart-product-remove" @click="deleteItemCart(item.variant_id)">Remove</div>
+                        <div class="list-card-div-price">
+                            {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
                         </div>
-                    </div>
-                    <div class="list-card-div-price">
-                        {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="list-cart-footer">
             <div class="d-flex justify-content-between">
                 <div class="list-cart-total">{{ $t('Cart_text_4') }}</div>
@@ -40,7 +43,6 @@
             <div class="list-cart-checkout-btn" @click="onGoPaymentPage">{{ $t('Cart_text_6') }}</div>
             <div class="list-cart-btn" @click="onGoCheckoutPage">{{ $t('Cart_text_66') }}</div>
         </div>
-
     </div>
 </template>
   
@@ -84,6 +86,11 @@ export default {
         listCart: function (val) {
             if (val) {
                 this.listItem = val
+            }
+        },
+        showListCart: function (val) {
+            if (val) {
+                this.listItem = this.listCart
             }
         },
     },
@@ -279,11 +286,151 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .aura-title {
-        font-weight: 700;
-        font-size: 13px;
-        line-height: 15px;
-        color: #2F3036;
-        text-align: left;
+    .list-cart-panel {
+        position: fixed;
+        right: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100vh;
+        background-color: #fff;
+        box-shadow: -8px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+        .list-cart-user-top {
+            position: relative;
+            border-bottom: 1px solid #717171;
+
+            .list-cart-title {
+                color: #000;
+                text-align: center;
+                font-family: 'Aeroport';
+                font-size: 15px;
+                text-transform: uppercase;
+                margin-top: 40px;
+                margin-bottom: 35px;
+            }
+
+            .list-cart-close {
+                position: absolute;
+                right: 20px;
+                top: 10px;
+            }
+        }
+
+        .list-cart-main-list {
+            padding-top: 5px;
+            padding-left: 0px;
+            padding-right: 0px;
+            height: calc(100vh - 350px);
+            overflow-y: scroll;
+
+            .list-cart-item {
+                padding: 20px 0px;
+                border-bottom: 1px solid #D9D9D9;
+
+                .list-card-div-img {
+                    .list-card-image {
+                        width: 70px;
+                        height: 95px;
+                        object-fit: cover;
+                    }
+                }
+
+                .list-card-div-info {
+                    margin-left: 15px;
+                    width: calc(100% - 150px);
+                    margin-top: 10px;
+
+                    .list-cart-product-name {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 10px;
+                        text-transform: uppercase;
+                        line-height: 15px;
+                    }
+
+                    .list-cart-product-des {
+                        color: #717171;
+                        font-family: 'Aeroport-light';
+                        font-size: 9px;
+                        line-height: 15px;
+
+                        span {
+                            color: #000;
+                        }
+
+                        .list-cart-product-remove {
+                            display: inline-block;
+                            color: #000;
+                            margin-left: 10px;
+                            font-family: 'Aeroport-light';
+                            font-size: 9px;
+                            text-decoration-line: underline;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .list-card-div-price {
+                    margin-top: 10px;
+                    width: 70px;
+                    color: #000;
+                    text-align: right;
+                    font-family: 'Aeroport-light';
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    line-height: initial;
+                }
+            }
+        }
+
+        .list-cart-footer {
+            position: relative;
+            width: 100%;
+            bottom: 0px;
+            background-color: #F5F5F5;
+            padding: 50px;
+
+            .list-cart-total {
+                text-transform: uppercase;
+                font-family: 'Aeroport';
+                color: #000;
+                font-size: 16px;
+            }
+
+            .list-cart-number {
+                text-transform: uppercase;
+                font-family: 'Aeroport';
+                color: #000;
+                font-size: 16px;
+            }
+
+            .list-cart-checkout-btn {
+                background-color: #000;
+                color: #fff;
+                height: 30px;
+                font-size: 13px;
+                text-align: center;
+                line-height: 30px;
+                cursor: pointer;
+                font-family: 'Aeroport-light';
+                margin-top: 10px;
+                text-transform: uppercase;
+            }
+
+            .list-cart-btn {
+                background-color: #fff;
+                color: #000;
+                height: 30px;
+                font-size: 13px;
+                text-align: center;
+                line-height: 30px;
+                cursor: pointer;
+                font-family: 'Aeroport-light';
+                border: 1px solid #000;
+                margin-top: 10px;
+                text-transform: uppercase;
+            }
+        }
     }
-}</style>
+}
+</style>

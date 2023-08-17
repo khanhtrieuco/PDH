@@ -1,14 +1,15 @@
 <template>
     <div class="detail-show">
         <div class="detail-show-image">
-            <ThumbImage ratio="16-9" :src="'/images/show-banner.jpg'"></ThumbImage>
+            <ThumbImage ratio="16-9" :src="'/images/show-banner.jpg'" v-if="!isMobile"></ThumbImage>
+            <ThumbImage ratio="9-21" :src="'/images/show-banner.jpg'" v-if="isMobile"></ThumbImage>
             <div class="detail-show-info">
                 <h1 class="detail-show-title">MILAN</br> FASHION WEEK 2023</h1>
                 <div class="detail-show-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla urna,
                     rutrum ut est quis, imperdiet auctor ipsum.</div>
             </div>
         </div>
-        <div class="detail-show-content">
+        <div class="detail-show-content" v-if="!isMobile">
             <div class="d-flex align-items-center">
                 <img class="detail-show-content-img" src="/images/show1.jpg" />
                 <div class="detail-show-data">
@@ -25,6 +26,18 @@
                 </div>
                 <img class="detail-show-content-img" src="/images/show3.jpg" />
             </div>
+        </div>
+        <div class="container detail-show-content" v-if="isMobile">
+            <div class="detail-show-data">
+                <div class="detail-show-data-title">MILAN</br> FASHION WEEK 2023</div>
+                <div class="detail-show-data-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <img class="detail-show-content-img-data" src="/images/show2.jpg" />
+                <div class="detail-show-data-sub">I am so happy to be back in New York. We showed the Dante collection
+                    here in 1996, and then came again with Eye in the autumn of 1999.</div>
+            </div>
+            <img class="detail-show-content-img" src="/images/show1.jpg" />
+            <img class="detail-show-content-img" src="/images/show3.jpg" />
+            <img class="detail-show-content-img" src="/images/show4.jpg" />
         </div>
         <div class="detail-show-video">
             <img class="detail-show-img-video" src="/images/video.jpg" />
@@ -161,113 +174,87 @@ export default {
         }
     }
 
-    .detail-show-img-video{
+    .detail-show-img-video {
         width: 100%;
         margin: 100px 0px;
     }
 }
 
-.breadcrumb {
-    background-color: white;
-    padding-left: 0px;
-}
-
-.detail-club-img {
-    max-height: 600px;
-    object-fit: cover;
-}
-
-.detail-left-info {
-    width: 660px;
-}
-
-.detail-right-info {
-    width: 660px;
-    padding-left: 10px;
-}
-
-.detail-club-title {
-    color: #2F3036;
-    font-size: 36px;
-    margin-top: 40px;
-}
-
-.club-social-panel {
-    margin-top: 20px;
-
-    .club-social-icon {
-        margin-right: 10px;
-    }
-}
-
-.detail-club-des {
-    color: #9C9C9C;
-    font-size: 16px;
-    font-family: 'inter-light';
-    margin-top: 20px;
-    text-transform: uppercase;
-    padding-right: 10px;
-}
-
-.detail-club-text {
-    color: #2F3036;
-    font-size: 13px;
-    font-family: 'inter-light';
-    margin-top: 40px;
-
-    img {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
 @media (max-width: 520px) {
-    .detail-club-content {
-        margin-top: 50px;
-    }
+    .detail-show {
+        .detail-show-image {
+            position: relative;
 
-    .detail-club-category {
-        color: #777;
-        font-size: 10px;
-        font-family: 'inter';
-        text-transform: uppercase;
-        margin-top: 20px;
-    }
+            .detail-show-info {
+                position: absolute;
+                bottom: 150px;
+                left: 15px;
 
-    .detail-club-title {
-        color: #2F3036;
-        font-size: 20px;
-        margin-top: 16px;
-    }
+                .detail-show-title {
+                    color: #FFF;
+                    font-family: 'Aeroport';
+                    font-size: 25px;
+                    text-transform: uppercase;
+                }
 
-    .detail-club-des {
-        text-transform: uppercase;
-        font-family: 'inter-light';
-        margin-top: 16px;
-        color: #2F3036;
-        font-size: 10px;
-    }
-
-    .detail-club-text {
-        color: #2F3036;
-        font-size: 10px;
-        font-family: 'inter-light';
-        margin-top: 20px;
-
-        img {
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
+                .detail-show-des {
+                    color: #FFF;
+                    font-family: 'Aeroport-light';
+                    font-size: 12px;
+                    width: 250px;
+                }
+            }
         }
-    }
 
-    .club-social-panel {
-        margin-top: 10px;
+        .detail-show-content {
+            .detail-show-content-img {
+                width: 100%;
+                margin-top: 15px;
+            }
 
-        .club-social-icon {
-            margin-right: 10px;
-            width: 20px;
+            .detail-show-data {
+                margin-top: 30px;
+                margin-bottom: 10px;
+                width: 100%;
+                text-align: center;
+
+                .detail-show-data-title {
+                    color: #000;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    font-size: 20px;
+                    margin-bottom: 10px;
+                }
+
+                .detail-show-data-des {
+                    color: #000;
+                    text-align: center;
+                    font-family: 'Aeroport-light';
+                    margin-bottom: 10px;
+                    font-size: 10px;
+                }
+
+                .detail-show-content-img-data {
+                    width: 250px;
+                    margin-bottom: 10px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .detail-show-data-sub {
+                    color: #000;
+                    text-align: center;
+                    font-family: 'Aeroport-light';
+                    font-size: 10px;
+                    width: 100%;
+                    margin: auto;
+                }
+            }
+        }
+
+        .detail-show-img-video {
+            width: 100%;
+            margin: 100px 0px;
         }
     }
 }

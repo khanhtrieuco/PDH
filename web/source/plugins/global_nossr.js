@@ -18,9 +18,11 @@ import quillHtml from "~/components/common/quill-editor";
 import uploadImage from "~/components/common/uploadImage";
 import uploadButton from "~/components/common/uploadButton";
 import Color from "~/components/common/color";
+import ColorMobile from "~/components/common/colorMobile";
 Vue.component('quill-html', quillHtml)
 Vue.component('upload-button', uploadButton)
 Vue.component('upload-image', uploadImage)
 Vue.component('Color', Color)
+Vue.component('ColorMobile', ColorMobile)
 
 

@@ -55,6 +55,7 @@ export default {
     width: 100%;
     text-align: left;
     margin-bottom: 20px;
+
     .news-img-no-box {
         position: relative;
     }
@@ -111,12 +112,28 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .aura-title {
-        font-weight: 700;
-        font-size: 13px;
-        line-height: 15px;
-        color: #2F3036;
+    .news-item {
+        width: 100%;
         text-align: left;
+        margin-bottom: 10px;
+
+        .news-img-no-box {
+            position: relative;
+        }
+
+        .news-title {
+            color: #000;
+            font-family: 'Aeroport';
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .news-des {
+            color: #717171;
+            font-family: 'Aeroport-light';
+            font-size: 9px;
+        }
     }
 }
 </style>

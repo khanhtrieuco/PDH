@@ -1,10 +1,14 @@
 <template>
     <div class="account-content">
-        <div class="account-content-top">
+        <div class="account-content-top" v-if="!isMobile">
             <img class="account-content-image" src="/images/top-account.jpg" />
             <div class="account-content-name">welcome, {{ profile.username }}</div>
         </div>
-        <div class="account-content-data">
+        <div class="account-content-top" v-if="isMobile">
+            <img class="account-content-image" src="/images/top-mobile.jpg" />
+            <div class="account-content-name">welcome, <span>{{ profile.username }}</span></div>
+        </div>
+        <div class="account-content-data" v-if="!isMobile">
             <div class="container d-flex justify-content-between">
                 <div class="account-content-left">
                     <div class="account-content-card">
@@ -60,6 +64,62 @@
                         <div class="account-content-footer">
                             show all
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="account-content-data" v-if="isMobile">
+            <div class="container">
+                <div class="account-content-card">
+                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                        <div class="account-content-card-head-title">Profile</div>
+                        <div class="account-content-card-head-edit">Edit</div>
+                    </div>
+                    <div class="account-content-body">
+                        <div class="account-content-body-text">Full Name: {{ profile.username }}</div>
+                        <div class="account-content-body-text">Email Address: {{ profile.email }}</div>
+                        <div class="account-content-body-text">Phone: {{ profile.phone }}</div>
+                    </div>
+                </div>
+                <div class="account-content-card">
+                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                        <div class="account-content-card-head-title">Edit password</div>
+                        <div class="account-content-card-head-edit">Edit</div>
+                    </div>
+                    <div class="account-content-body">
+                        <div class="account-content-body-text">Password: *******</div>
+                    </div>
+                </div>
+                <div class="account-content-card">
+                    <div class=" account-content-card-head d-flex justify-content-between align-items-center">
+                        <div class="account-content-card-head-title">Address book</div>
+                        <div class="account-content-card-head-edit">Edit</div>
+                    </div>
+                    <div class="account-content-body">
+                        <div class="account-content-body-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city
+                        </div>
+                    </div>
+                </div>
+                <div class="account-content-card">
+                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                        <div class="account-content-card-head-title">Saved items</div>
+                    </div>
+                    <div class="account-content-body">
+                        <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
+                    </div>
+                    <div class="account-content-footer">
+                        show all
+                    </div>
+                </div>
+                <div class="account-content-card">
+                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                        <div class="account-content-card-head-title">My orders</div>
+                    </div>
+                    <div class="account-content-body">
+                        <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
+                    </div>
+                    <div class="account-content-footer">
+                        show all
                     </div>
                 </div>
             </div>
@@ -245,6 +305,7 @@ export default {
     .account-content-data {
         background-color: #EEEEEE;
         padding: 65px 0px;
+
         .account-content-left {
             width: calc(50% - 10px);
             display: inline-block;
@@ -310,59 +371,96 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .nas-user-content {
-        margin-top: 0px;
-    }
+    .account-content {
+        .account-content-top {
+            position: relative;
 
-    .nas-user-title {
-        color: #2F3036;
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
+            .account-content-image {
+                width: 100%;
+            }
 
-    .nas-user-log-out {
-        color: #2F3036;
-        font-size: 11px;
-        font-family: 'inter-light';
-        text-decoration-line: underline;
-        text-transform: uppercase;
-        margin-top: 27px;
-        cursor: pointer;
-    }
+            .account-content-name {
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%);
+                bottom: 300px;
+                color: #FFF;
+                text-align: center;
+                font-family: 'Aeroport';
+                font-size: 30px;
+                text-transform: uppercase;
 
-    .nas-user-des {
-        color: #2F3036;
-        font-size: 10px;
-        font-family: 'inter-light';
-        border-top: 1px solid #2F3036;
-        border-bottom: 1px solid #2F3036;
-        padding-top: 24px;
-        padding-bottom: 24px;
-    }
+                span {
+                    white-space: nowrap;
+                }
+            }
+        }
 
-    .nas-user-text {
-        color: #2F3036;
-        font-size: 13px;
-    }
+        .account-content-data {
+            background-color: #EEEEEE;
+            padding: 65px 0px;
 
-    .user-icon-arrow {
-        width: 12px;
-    }
+            .account-content-left {
+                width: calc(50% - 10px);
+                display: inline-block;
+            }
 
-    .nas-user-tab-content {
-        color: #2F3036;
-        font-family: 'inter-light';
-        font-size: 13px;
-    }
+            .account-content-right {
+                width: calc(50% - 10px);
+                display: inline-block;
+            }
 
-    .nas-user-buy-again {
-        font-size: 12px;
-    }
+            .account-content-card {
+                background-color: #fff;
+                margin-bottom: 20px;
 
-    .nas-user-item-block {
-        &:last-child {
-            margin-bottom: 60px;
+                .account-content-card-head {
+                    height: 35px;
+                    line-height: 35px;
+                    padding: 0px 20px;
+                    border-bottom: 2px solid #F4F4F4;
+
+                    .account-content-card-head-title {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 16px;
+                        text-transform: uppercase;
+                    }
+
+                    .account-content-card-head-edit {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 13px;
+                        text-decoration-line: underline;
+                        cursor: pointer;
+                    }
+                }
+
+                .account-content-body {
+                    padding: 10px 24px;
+                    background-color: #fafafa;
+
+                    .account-content-body-text {
+                        margin-bottom: 10px;
+                        color: #717171;
+                        font-family: 'Aeroport-light';
+                        font-size: 16px;
+                    }
+                }
+
+                .account-content-footer {
+                    height: 35px;
+                    line-height: 35px;
+                    padding: 0px 20px;
+                    background-color: #fff;
+                    text-align: right;
+                    cursor: pointer;
+                    text-decoration-line: underline;
+                    color: #717171;
+                    text-transform: uppercase;
+                    font-size: 13px;
+                }
+            }
         }
     }
 }
