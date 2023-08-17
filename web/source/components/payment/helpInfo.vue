@@ -1,76 +1,88 @@
 <template>
-    <div class="help-panel">
-      <div class="help-panel-1">
-        <div class="help-panel-title">{{ $t('Payment_help_1') }}</div>
-        <NuxtLink to="/cham-soc-khach-hang">
-          <div class="help-panel-des">{{ $t('Payment_help_2') }}</div>
-        </NuxtLink>
-        <div class="help-panel-des">1800 5454 63</div>
-        <div class="help-panel-des">Email Nas</div>
+  <div class="help-panel">
+    <div class="container d-flex">
+      <div class="help-card">
+        <div class="help-card-title">EASY RETURNS</div>
+        <div class="help-card-des">We provide free pick up for your returns: you have 30 days from delivery to follow our
+          quick and easy return procedure*. Alternatively, orders can be returned in one of our stores.
+          *Exceptions apply.</div>
       </div>
-      <div class="help-panel-2">
-        <div class="help-panel-des">{{ $t('Payment_help_3') }}</div>
-        <div class="help-panel-des">{{ $t('Payment_help_4') }}</div>
-        <div class="help-panel-des">{{ $t('Payment_help_5') }}</div>
+      <div class="help-card">
+        <div class="help-card-title">MAY WE HELP?</div>
+        <div class="help-card-des">By contacting Client Service, you agree that your data will be transferred outside your
+          country.</div>
+        <div class="help-card-des">Call us: +84 764 976 754</div>
+      </div>
+      <div class="help-card">
+        <div class="help-card-title">EASY RETURNS</div>
+        <div class="help-card-des">We provide free pick up for your returns: you have 30 days from delivery to follow our
+          quick and easy return procedure*. Alternatively, orders can be returned in one of our stores.
+          *Exceptions apply.</div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
-  import general from "~/mixins/general"
-  export default {
-    mixins: [general],
-    props: {
-      isMobile: {
-        type: Boolean,
-        default: false,
-      },
-    }
+<script>
+import general from "~/mixins/general"
+export default {
+  mixins: [general],
+  props: {
+    isMobile: {
+      type: Boolean,
+      default: false,
+    },
   }
-  </script>
-  <style lang="scss">
-  .help-panel-1{
-    background: #F5F5F5;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    .help-panel-title{
-        color: #2F3036;
-        font-size: 20px;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 28px;
+}
+</script>
+<style lang="scss">
+.help-panel {
+  background: #F5F5F5;
+  padding: 100px 0px;
+
+  .help-card {
+    width: calc((100% / 3) - 6px);
+    padding: 0px 15px;
+    position: relative;
+    .help-card-title {
+      color: #717171;
+      text-align: center;
+      font-family: 'Aeroport';
+      font-size: 20px;
+      margin-bottom: 24px;
     }
-    .help-panel-des{
-        font-family: 'inter';
-        color: #2F3036;
-        font-size: 13px;
-        text-align: center;
-        text-decoration-line: underline;
-        line-height: 20px;
-        cursor: pointer;
-    }
-  }
-  .help-panel-2{
-    background: #FFF;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    .help-panel-des{
-        font-family: 'inter';
-        color: #2F3036;
-        font-size: 13px;
-        text-align: center;
-        text-decoration-line: underline;
-        line-height: 20px;
-        cursor: pointer;
-    }
-  }
-  @media (max-width: 520px) {
-    .aura-title{
-      font-weight: 700;
+
+    .help-card-des {
+      color: #717171;
+      text-align: center;
+      font-family: 'Aeroport-light';
       font-size: 13px;
-      line-height: 15px;
-      color: #2F3036;
-      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    &:after {
+      content: "";
+      height: 80%;
+      width: 2px;
+      display: block;
+      border-right: 1px solid #000;
+      position: absolute;
+      right: 0px;
+      top: 15%;
+    }
+    &:last-child:after{
+      display: none;
     }
   }
-  </style>
+}
+
+@media (max-width: 520px) {
+  .aura-title {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 15px;
+    color: #2F3036;
+    text-align: left;
+  }
+}
+</style>

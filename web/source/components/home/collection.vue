@@ -1,7 +1,7 @@
 <template>
   <div class="collection-container">
     <img class="collection-title-image" src="/images/collection-lable.png" />
-    <carousel-3d class="collection-slide" :width="1000" :height="800" :autoplay="false" :autoplay-timeout="5000"
+    <carousel-3d class="collection-slide" :width="1000" :height="800" :animation-speed="1000" :autoplay="true" :autoplay-timeout="5000"
       :display="3" :space="2000" :inverse-scaling="700" :controls-visible="true"
       :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
       :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'"
@@ -14,9 +14,7 @@
               <NuxtLink :to="`/collection/123`">
                 <div class="collection-item-title">LA PEINTURE</div>
                 <div class="collection-item-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla
-                  urna,
-                  rutrum ut est quis, imperdiet
-                  auctor ipsum. </div>
+                  urna, rutrum ut est quis, imperdiet auctor ipsum. </div>
                 <div class="shop-now-link">
                   <span class="shop-now-link-text">Shop now</span>
                   <img class="shop-now-link-img" src="/images/more.png" />

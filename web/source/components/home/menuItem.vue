@@ -45,7 +45,7 @@ export default {
         // if (lang === 'vn') {
         // this.description = this.get_excerpt(this.item.description_vn, 150)
         // } else {
-        this.description = this.get_excerpt(this.item.description, 100)
+        this.description = this.get_excerpt(this.item?.description, 100)
         // }
     }
 }

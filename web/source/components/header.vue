@@ -119,9 +119,9 @@
             <div class="header-tab-menu-text" @click="goPage('/house-of-pdh')">vision - mission - value</div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 1">
-            <div @click="goPage('/show/121')" class="header-tab-menu-sub-item"
-               v-for="_item, index in listShow" :key="index">
-              <MenuItem >
+            <div @click="goPage('/show/121')" class="header-tab-menu-sub-item" v-for="_item, index in listShow"
+              :key="index">
+              <MenuItem>
               </MenuItem>
             </div>
           </div>
@@ -136,11 +136,11 @@
       </div>
     </div>
     <div v-show="showListCart" class="backgroud-black">
-        <div id="list-cart-content" class="list-cart-content" v-click-outside="hideCart">
-          <ListCartItem :showListCart.sync="showListCart" :isMobile="isMobile" :listCart="listUserCart"
-            @hideListCart="() => { showListCart = false; isOpen = false }" />
-        </div>
+      <div id="list-cart-content" class="list-cart-content" v-click-outside="hideCart">
+        <ListCartItem :showListCart.sync="showListCart" :isMobile="isMobile" :listCart="listUserCart"
+          @hideListCart="() => { showListCart = false; isOpen = false }" />
       </div>
+    </div>
   </div>
 </template>
 
@@ -271,9 +271,11 @@ export default {
     //   this.lastScrollTop = scrollTop
     // },
     goPage(url) {
-      this.tab = null
-      this.showMenu = false;
-      this.$router.push({ path: this.localePath(url) })
+      if (this.$router.history.current.path !== url) {
+        this.tab = null
+        this.showMenu = false;
+        this.$router.push({ path: this.localePath(url) })
+      }
     },
     openMenu() {
       this.showMenu = true

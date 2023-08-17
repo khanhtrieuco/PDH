@@ -263,7 +263,7 @@ export default {
                 height: 35px;
                 line-height: 35px;
                 padding: 0px 20px;
-                border-bottom: 1px solid #F4F4F4;
+                border-bottom: 2px solid #F4F4F4;
 
                 .account-content-card-head-title {
                     color: #000;
@@ -283,6 +283,7 @@ export default {
 
             .account-content-body {
                 padding: 10px 24px;
+                background-color: #fafafa;
 
                 .account-content-body-text {
                     margin-bottom: 10px;

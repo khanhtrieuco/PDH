@@ -9,7 +9,7 @@ function interopDefault(promise) {
 const HomePage = () => interopDefault(import(/* webpackChunkName: "HomePage" */ './pages/home/index.vue'))
 const AboutPage = () => interopDefault(import(/* webpackChunkName: "WorkPage" */ './pages/about/index.vue'))
 // const InnovationPage = () => interopDefault(import(/* webpackChunkName: "InnovationPage" */ './pages/innovation/index.vue'))
-const ContactPage = () => interopDefault(import(/* webpackChunkName: "ContactPage" */ './pages/contact/index.vue'))
+const ClientPage = () => interopDefault(import(/* webpackChunkName: "ContactPage" */ './pages/client/index.vue'))
 const Collection = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/collection/index.vue'))
 const CollectionDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/collection/detail.vue'))
 const ProductDetail = () => interopDefault(import(/* webpackChunkName: "WorkDetail" */ './pages/product/index.vue'))
@@ -64,8 +64,8 @@ export function createRouter() {
                 component: AboutPage
             },
             {
-                path: '/lien-he',
-                component: ContactPage
+                path: '/client-service',
+                component: ClientPage
             },
             {
                 path: '/collection/:id',

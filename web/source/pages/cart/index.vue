@@ -46,7 +46,7 @@
                 <div class="cart-checkout-btn" @click="onGoPaymentPage">{{ $t('Cart_text_6') }}</div>
             </div>
         </div>
-
+        <HelpInfo></HelpInfo>
     </div>
 </template>
   
@@ -54,11 +54,13 @@
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
 import CartButton from "~/components/common/cartButton.vue"
+import HelpInfo from "~/components/payment/helpInfo.vue"
 export default {
     name: 'IndexPage',
     mixins: [general],
     components: {
-        CartButton
+        CartButton,
+        HelpInfo
     },
     data() {
         return {
