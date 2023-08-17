@@ -23,43 +23,95 @@
           </div>
         </div>
       </div>
-      <!-- <div class="container-header-mobile" v-if="isMobile">
-        <NuxtLink to="/">
-          <img class="menu-logo" src="/images/logo.png" />
-        </NuxtLink>
-        <div class="float-right d-flex d-flex justify-content-between align-items-center">
-          <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
-          <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
-          <img class="menu-icon-lang" src="/images/lang.png" />
-          <div v-if="$i18n.locale === 'vn'" :class="`lang-btn ${$i18n.locale === 'en' ? 'lang-btn-active' : ''}`"
-            @click="changeLang()">EN</div>
-          <div v-if="$i18n.locale === 'en'" :class="`lang-btn ${$i18n.locale === 'vn' ? 'lang-btn-active' : ''}`"
-            @click="changeLang()">VI</div>
-          <img class="menu-icon-show" @click="openMenu()" src="/images/show.png" />
-        </div>
-        <div class="menu-mobile" v-if="showMenu">
-          <div class="menu-text" @click="goPage('/ve-nas')">{{ $t('About') }}</div>
-          <div class="menu-text" @click="goPage(`/chuyen-muc/${_cate.attributes.slug}`)"
-            v-for="(_cate, idx) in listCategory" :key="idx">
-            {{ $i18n.locale === 'vn' ? _cate.attributes.name : _cate.attributes.name_en ?? _cate.attributes.name }}
-          </div>
-          <div class="menu-text" @click="goPage('/aura-club')">Aura Club</div>
-          <div class="menu-text" @click="menu_hide = !menu_hide">{{ $t('Contact') }}</div>
-          <div class="menu-sub-hide" v-show="menu_hide">
-            <div class="menu-text-sub-mobile" @click="goPage('/thong-tin-mua-sam')">{{ $t('Place') }}</div>
-            <div class="menu-text-sub-mobile" @click="goPage('/kinh-doanh-cung-nas')">{{ $t('Header_about_des_1') }}</div>
-            <div class="menu-text-sub-mobile" @click="goPage('/lien-he')">{{ $t('Menu_sub_3') }}</div>
-            <div class="menu-text-sub-mobile" @click="goPage('/cham-soc-khach-hang')">{{ $t('Menu_sub_4') }}</div>
-            <div class="menu-text-sub-mobile-last" @click="goPage('/faq')">{{ $t('Menu_sub_5') }}</div>
-            <div class="menu-text-sub-mobile-last" @click="goPage('/don-hang')">{{ $t('Header_about_des_3') }}</div>
-          </div>
-          <div class="menu-text" @click="goPage('/thanh-vien-nas')">{{ $t('Members') }}</div>
-          <div class="menu-text">
-            <img class="icon-hide" @click="closeMenu()" src="/images/arrow-top.png" />
+      <div class="container-header" v-if="isMobile">
+        <div class="d-flex justify-content-between">
+          <img class="menu-logo" @click="goPage('/')" src="/images/logo.png" />
+          <div class="d-inline-flex" style="position: relative;">
+            <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
+            <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
+            <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
+            <span class="lang-btn" v-if="$i18n.locale === 'vi'" @click="changeLang()">VI</span>
           </div>
         </div>
-      </div> -->
+        <img class="menu-mobile-icon" :src="showMenuMobile ? '/images/menu-close.png' : '/images/menu-mobile.png'"
+          @click="onShowMenuMobile()" />
+      </div>
     </header>
+    <div v-if="showMenuMobile" class="menu-mobile">
+      <div class="container">
+        <div class="menu-mobile-top d-flex justify-content-between">
+          <img class="menu-logo" @click="goPage('/')" src="/images/logo.png" />
+          <div class="d-inline-flex" style="position: relative;">
+            <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
+            <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
+            <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
+            <span class="lang-btn" v-if="$i18n.locale === 'vi'" @click="changeLang()">VI</span>
+          </div>
+        </div>
+        <div class="menu-mobile-list">
+          <div class="menu-mobile-item d-flex justify-content-between">
+            <div class="menu-mobile-title">Women</div>
+            <img class="menu-open" :src="openMobile === 1 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              @click="openMobile = openMobile === 1 ? null : 1" />
+          </div>
+          <div v-if="openMobile === 1" class="menu-mobile-list-sub">
+            <div class="menu-mobile-sub-item d-flex justify-content-between">
+              <div class="menu-mobile-title">Evening gown</div>
+              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-down.png'"
+                @click="openSubMobile = openSubMobile === 1 ? null : 1" />
+            </div>
+            <div class="menu-mobile-sub-item d-flex justify-content-between">
+              <div class="menu-mobile-title">Ready-to-wear</div>
+              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'"
+                @click="openSubMobile = openSubMobile === 2 ? null : 2" />
+            </div>
+            <div class="menu-mobile-sub-item d-flex justify-content-between">
+              <div class="menu-mobile-title">Hand Bags</div>
+              <img class="menu-open" :src="openSubMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'"
+                @click="openSubMobile = openSubMobile === 3 ? null : 3" />
+            </div>
+            <div class="menu-mobile-sub-item d-flex justify-content-between">
+              <div class="menu-mobile-title">Shoes</div>
+              <img class="menu-open" :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-down.png'"
+                @click="openSubMobile = openSubMobile === 4 ? null : 4" />
+            </div>
+          </div>
+
+          <div class="menu-mobile-item d-flex justify-content-between">
+            <div class="menu-mobile-title">Men</div>
+            <img class="menu-open" :src="openMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              @click="openMobile = openMobile === 2 ? null : 2" />
+          </div>
+          <div class="menu-mobile-item d-flex justify-content-between">
+            <div class="menu-mobile-title">Gifts</div>
+            <img class="menu-open" :src="openMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              @click="openMobile = openMobile === 3 ? null : 3" />
+          </div>
+          <div class="menu-mobile-item d-flex justify-content-between">
+            <div class="menu-mobile-title">House of P.D.H</div>
+            <img class="menu-open" :src="openMobile === 4 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              @click="openMobile = openMobile === 4 ? null : 4" />
+          </div>
+          <div class="menu-mobile-item d-flex justify-content-between">
+            <div class="menu-mobile-title">Friendship</div>
+            <img class="menu-open" :src="openMobile === 5 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              @click="openMobile = openMobile === 5 ? null : 5" />
+          </div>
+          <div v-if="openMobile === 5" class="menu-mobile-list-sub">
+            <div class="menu-mobile-sub-item d-flex justify-content-between">
+              <div class="menu-mobile-title">My account</div>
+              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-down.png'"
+                @click="goPage('/account')" />
+            </div>
+            <div class="menu-mobile-sub-item d-flex justify-content-between">
+              <div class="menu-mobile-title">Client service</div>
+              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'"
+                @click="goPage('/client-service')" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div v-if="tab === 1" class="header-tab-menu">
       <div class="container header-tab-menu-container d-flex justify-content-start">
         <div class="header-tab-menu-col-1">
@@ -181,6 +233,9 @@ export default {
         }
       ],
       listShow: [1, 2],
+      showMenuMobile: false,
+      openMobile: null,
+      openSubMobile: null,
       isOpen: false,
       showListCart: false
     }
@@ -253,27 +308,12 @@ export default {
         window.localStorage.setItem('lang', 'en')
       }
     },
-    // mouseOver(_value) {
-    //   this.hoverShow = _value
-    // },
-    // handleScroll(e) {
-    //   let scrollTop = window.scrollY
-
-    //   // if (scrollTop > this.lastScrollTop) {
-    //   //   this.className = 'header'
-    //   // } else {
-    //   if (scrollTop > 5 && !this.isMobile) {
-    //     this.className = 'header header-fix'
-    //   } else {
-    //     this.className = 'header'
-    //   }
-    //   // }
-    //   this.lastScrollTop = scrollTop
-    // },
     goPage(url) {
       if (this.$router.history.current.path !== url) {
         this.tab = null
-        this.showMenu = false;
+        this.showMenuMobile = false;
+        this.openMobile = null;
+        this.openSubMobile = null;
         this.$router.push({ path: this.localePath(url) })
       }
     },
@@ -305,51 +345,14 @@ export default {
         this.subTab = 1
       }
     },
-    // closeUpdate() {
-    //   this.showLogin = false
-    // },
-    // async onShowCart() {
-    //   await this.getListCartUser()
-    //   if (this.listUserCart.length === 0) {
-    //     this.showEmpty = !this.showEmpty
-    //   } else {
-    //     this.showListCart = true
-    //   }
-    // },
     logoutAction() {
       this.userLogout()
       this.showNotification('success', `Đăng xuất thành công`)
       this.$router.push({ path: '/' })
     },
-    // onShowSearch() {
-    //   this.showSearchProduct = true
-    //   this.getListProduct()
-    // },
-    // hideSearch() {
-    //   this.showSearchProduct = false
-    //   this.searchText = null
-    // },
-    // async loadProducts(_data) {
-    //   let arrayFilter = []
-    //   if (this.searchText) {
-    //     arrayFilter.push({
-    //       name: { $containsi: this.searchText }
-    //     })
-    //     arrayFilter.push({
-    //       title: { $containsi: this.searchText }
-    //     })
-    //   }
-    //   let sort = 'order:desc,id:desc'
-    //   if (_data && _data.sort) {
-    //     sort = _data.sort + ',order:desc'
-    //   } else {
-    //     sort = 'order:desc'
-    //   }
-    //   if (_data && _data.filterSub) {
-    //     arrayFilter.push({ subcategories: _data.filterSub })
-    //   }
-    //   await this.getListProduct({ filters: { '$or': arrayFilter }, sort })
-    // }
+    onShowMenuMobile() {
+      this.showMenuMobile = !this.showMenuMobile
+    }
   },
   directives: {
     'click-outside': {
@@ -496,224 +499,156 @@ export default {
   }
 }
 
-@media (min-width: 1200px) and (max-width: 1400px) {
-  .menu-text {
-    font-size: 15px;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  .menu-text {
-    font-size: 12px;
-    margin-right: 20px;
-  }
-}
-
 @media (max-width: 520px) {
   .header {
-    height: 50px;
-    padding-top: 0px;
-    left: 0px;
+    position: relative;
     top: 0px;
-    background: rgba(255, 255, 255, 0.9);
-    position: fixed;
-  }
+    width: 100%;
+    height: 47px;
+    line-height: 47px;
 
-  .container-header {
-    display: none;
-  }
+    .lang-btn {
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Aeroport-light';
+      color: #777;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-left: 10px;
+    }
 
-  .container-header-mobile {
-    border-bottom: none;
+    .menu-text {
+      font-size: 18px;
+      cursor: pointer;
+      font-family: 'Aeroport';
+
+      &:hover {
+        font-weight: bolder;
+      }
+    }
 
     .menu-logo {
-      width: 55px;
+      width: 45px;
+      height: fit-content;
       margin-top: 16px;
     }
-  }
 
-  .menu-icon {
-    display: inline;
-    margin-left: 15px;
-    width: 10px;
-    height: 10px;
-    margin-top: 16px;
-  }
+    .menu-icon {
+      cursor: pointer;
+      margin-left: 20px;
+      width: 17px;
+      height: 17px;
+      margin-top: 17px;
+    }
 
-  .menu-icon-bag {
-    display: inline;
-    margin-left: 15px;
-    width: 12px;
-    height: 12px;
-    margin-top: 16px;
-  }
+    .menu-icon-bag {
+      cursor: pointer;
+      margin-left: 10px;
+      width: 17px;
+      height: 17px;
+      margin-top: 16px;
+    }
 
-  .menu-icon-user {
-    display: inline;
-    margin-left: 15px;
-    width: 14px;
-    height: 14px;
-    margin-top: 16px;
-  }
-
-  .menu-icon-show {
-    display: inline;
-    margin-left: 15px;
-    width: 16px;
-    margin-top: 16px;
-    cursor: pointer;
-  }
-
-  .menu-icon-lang {
-    display: inline;
-    margin-left: 15px;
-    width: 10px;
-    margin-top: 16px;
+    .menu-mobile-icon {
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%);
+      bottom: 45px;
+      width: 70px;
+      height: 45px;
+      z-index: 2;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      border-radius: 24px;
+    }
   }
 
   .menu-mobile {
     width: 100%;
     height: 100vh;
-    position: fixed;
-    background: rgba(255, 255, 255, 0.9);
-    left: 0px;
-    top: 0px;
-    z-index: 1;
-    padding-top: 70px;
-    margin-top: 50px;
-  }
-
-  .menu-text {
-    width: 100%;
-    text-align: center;
-    font-size: 23px;
-    line-height: 30px;
-    text-transform: uppercase;
-    color: #000000;
-    margin-bottom: 30px;
-  }
-
-  .menu-text-sub-mobile {
-    margin-left: 50%;
-    transform: translate(-50%);
-    display: inline-block;
-    white-space: nowrap;
-    text-align: center;
-    font-size: 16px;
-    line-height: 30px;
-    text-transform: uppercase;
-    color: #515151;
-    margin-bottom: 10px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid;
-  }
-
-  .menu-text-sub-mobile-last {
-    margin-left: 50%;
-    transform: translate(-50%);
-    display: inline-block;
-    white-space: nowrap;
-    text-align: center;
-    font-size: 16px;
-    line-height: 30px;
-    text-transform: uppercase;
-    color: #515151;
-    margin-bottom: 10px;
-  }
-
-  .lang-btn {
-    font-size: 12px;
-    margin-top: 17px;
-    line-height: 12px;
-  }
-
-  .list-cart-content {
-    width: 100%;
-    padding: 20px 10px;
-  }
-
-  .list-cart-main-list {
-    .list-cart-product-name {
-      font-size: 13px !important;
-    }
-
-    .list-cart-product-des {
-      font-size: 10px !important;
-    }
-
-    .list-card-div-check {
-      width: 40px !important;
-    }
-
-    .list-card-div-price {
-      font-size: 16px;
-    }
-
-    .volumn-btn {
-      width: 65px;
-      height: 20px;
-
-      .volumn-btn-sub {
-        width: 15px;
-        line-height: 18px;
-      }
-
-      .volumn-number {
-        line-height: 18px;
-      }
-    }
-  }
-
-  .user-cart-empty {
-    text-align: center;
-    width: calc(100%);
-    padding: 20px 20px;
-    background: #FFF;
-    border: 1px solid #F4F4F4;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    margin-top: 18px;
-
-    .user-cart-empty-title {
-      color: #100F0F;
-      font-family: 'inter';
-      font-weight: 700;
-    }
-  }
-
-  .list-search-product {
     background-color: #fff;
-    max-width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    padding: 50px 20px;
-    border-radius: 20px;
-    position: relative;
+    position: fixed;
+    top: 0px;
+    left: 0px;
 
-    .input-search {
-      height: 40px;
-      line-height: 40px;
-      border-radius: 20px;
-    }
+    .menu-mobile-top {
+      height: 47px;
+      line-height: 47px;
+      position: relative;
 
-    .search-filter {
-      width: 100%;
-      margin-top: 30px;
-      margin-bottom: 40px;
-      text-align: right;
+      .menu-logo {
+        width: 45px;
+        height: fit-content;
+        margin-top: 16px;
+      }
 
-      .search-item {
-        display: inline-block;
-        margin-right: 5px;
-        text-align: left;
+      .menu-icon {
+        cursor: pointer;
+        margin-left: 20px;
+        width: 17px;
+        height: 17px;
+        margin-top: 17px;
+      }
+
+      .menu-icon-bag {
+        cursor: pointer;
+        margin-left: 10px;
+        width: 17px;
+        height: 17px;
+        margin-top: 16px;
+      }
+
+      .menu-mobile-icon {
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 45px;
+        width: 70px;
+        height: 45px;
+        z-index: 2;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 24px;
       }
     }
 
-    .search-products {
-      max-height: calc(100vh - 380px);
-      overflow-y: scroll;
-      width: 100%;
+    .menu-mobile-list {
+      margin-top: 100px;
+
+      .menu-mobile-item {
+        border-bottom: 1px solid #8D8D8D;
+
+        .menu-mobile-title {
+          color: #000;
+          font-family: 'Aeroport';
+          font-size: 20px;
+          text-transform: uppercase;
+        }
+
+        .menu-open {
+          width: 13px;
+          height: fit-content;
+          margin-top: 25px;
+        }
+      }
+
+      .menu-mobile-list-sub {
+        padding-left: 40px;
+
+        .menu-mobile-sub-item {
+          border-bottom: 1px solid #8D8D8D;
+
+          .menu-mobile-title {
+            color: #000;
+            font-family: 'Aeroport-light';
+            font-size: 16px;
+          }
+
+          .menu-open {
+            width: 13px;
+            height: fit-content;
+            margin-top: 25px;
+          }
+        }
+      }
     }
   }
 }

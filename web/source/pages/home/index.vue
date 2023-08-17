@@ -6,12 +6,25 @@
       <div class="home-top-content">
         <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
         <div class="home-top-name-des">{{ banner.attributes?.description }}</div>
-        <div class="shop-now-link">
+        <div class="shop-now-link-home">
           <span class="shop-now-link-text">Shop now</span>
           <img class="shop-now-link-img" src="/images/more.png" />
         </div>
       </div>
     </div>
+    <div v-if="isMobile" class="home-top-video">
+      <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink.data?.attributes.url"
+        :nameClass="'image-banner'" :contain="false" :video="true" ratio="9-21" />
+      <div class="home-top-content container">
+        <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
+        <div class="home-top-name-des">{{ banner.attributes?.description }}</div>
+        <div class="shop-now-link-home">
+          <span class="shop-now-link-text">Shop now</span>
+          <img class="shop-now-link-img" src="/images/more.png" />
+        </div>
+      </div>
+    </div>
+
     <Collections :isMobile="isMobile" />
     <BannerAbout :isMobile="isMobile" />
     <News :isMobile="isMobile" />
@@ -98,10 +111,11 @@ export default {
   }
 }
 
-.shop-now-link {
+.shop-now-link-home {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+
   .shop-now-link-text {
     color: #FFF;
     font-family: 'Aeroport-light';
@@ -109,8 +123,52 @@ export default {
     text-transform: uppercase;
     margin-right: 10px;
   }
-  .shop-now-link-img{
+
+  .shop-now-link-img {
     width: 12px;
   }
 }
-</style>
+
+@media (max-width: 520px) {
+  .home-top-video {
+    position: relative;
+
+    .home-top-content {
+      position: absolute;
+      bottom: 120px;
+      left: 15px;
+      width: 300px;
+
+      .home-top-name-img {
+        width: 190px;
+      }
+
+      .home-top-name-des {
+        color: #FFF;
+        font-family: 'Aeroport-light';
+        font-size: 12px;
+        font-style: normal;
+        margin: 20px 0px;
+        width: 240px;
+      }
+    }
+  }
+
+  .shop-now-link-home {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+
+    .shop-now-link-text {
+      color: #FFF;
+      font-family: 'Aeroport-light';
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-right: 10px;
+    }
+
+    .shop-now-link-img {
+      width: 12px;
+    }
+  }
+}</style>

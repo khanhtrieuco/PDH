@@ -59,6 +59,7 @@ export default {
         height: 40px;
         line-height: 40px;
         padding: 10px;
+        font-family: 'Aeroport-light';
     }
 
     .input-choice-image {
@@ -77,15 +78,17 @@ export default {
 
         .select-item {
             margin-top: 8px;
+            font-family: 'Aeroport-light';
         }
     }
 }
 
 @media (max-width: 520px) {
     .select-list-panel {
-        width: 140px;
+        width: 100%;
         .input-choice {
             font-size: 10px;
+            font-family: 'Aeroport-light';
         }
         .input-choice-image {
             width: 10px;
@@ -93,6 +96,7 @@ export default {
         }
         .select-item {
             font-size: 10px;
+            font-family: 'Aeroport-light';
         }
     }
 }

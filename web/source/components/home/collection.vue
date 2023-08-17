@@ -1,8 +1,9 @@
 <template>
   <div class="collection-container">
     <img class="collection-title-image" src="/images/collection-lable.png" />
-    <carousel-3d class="collection-slide" :width="1000" :height="800" :animation-speed="1000" :autoplay="true" :autoplay-timeout="5000"
-      :display="3" :space="2000" :inverse-scaling="700" :controls-visible="true"
+    <carousel-3d class="collection-slide" v-if="!isMobile" :width="1000" :height="800" :animation-speed="1000"
+      :autoplay="false" :autoplay-timeout="5000" :display="3" :space="2000" :inverse-scaling="700"
+      :controls-visible="true"
       :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
       :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'"
       :controls-width="45">
@@ -25,6 +26,32 @@
         </template>
       </slide>
     </carousel-3d>
+    <carousel-3d class="collection-slide" v-if="isMobile" :width="250" :height="350" :animation-speed="1000"
+      :autoplay="false" :autoplay-timeout="5000" :display="3" :space="340" :inverse-scaling="300" :controls-visible="true"
+      :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
+      :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'"
+      :controls-width="45">
+      <slide v-for="(collection, i) in listcollection" :index="i" :key="i">
+        <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
+          <div class="collection-item d-flex justify-content-center align-items-center"
+            style="background-image: url(/images/coll.jpg)">
+          </div>
+        </template>
+      </slide>
+    </carousel-3d>
+
+    <div class="collection-item-content" v-if="isMobile">
+      <NuxtLink :to="`/collection/123`">
+        <div class="collection-item-title">LA PEINTURE</div>
+        <div class="collection-item-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla
+          urna, rutrum ut est quis, imperdiet auctor ipsum. </div>
+        <div class="shop-now-link">
+          <span class="shop-now-link-text">Shop now</span>
+          <img class="shop-now-link-img" src="/images/moreb.png" />
+        </div>
+      </NuxtLink>
+    </div>
+
   </div>
 </template>
 <script>
@@ -133,12 +160,11 @@ export default {
 }
 
 .shop-now-link {
-  
+
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 50%;
-  transform: translate(-50%);
+
   .shop-now-link-text {
     color: #FFF;
     font-family: 'Aeroport-light';
@@ -153,31 +179,80 @@ export default {
 }
 
 @media (max-width: 520px) {
-  .solution-title {
+  .collection-container {
     text-align: center;
-    white-space: nowrap;
-    font-size: 24px;
+    padding: 60px 0px;
+
+    .collection-title-image {
+      margin-bottom: 40px;
+      width: 245px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .collection-slide {
+      .collection-item {
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+      }
+
+      .col-img-left {
+        width: 45px;
+        position: absolute;
+        bottom: -300px;
+        left: 200px;
+      }
+
+      .col-img-right {
+        width: 45px;
+        position: absolute;
+        bottom: -300px;
+        right: 200px;
+      }
+    }
+
+    .collection-item-content {
+      .collection-item-title {
+        color: #000;
+        text-align: center;
+        font-family: 'Aeroport';
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .collection-item-des {
+        color: #000;
+        text-align: center;
+        font-family: 'Aeroport-light';
+        font-size: 10px;
+        font-weight: 300;
+        width: 190px;
+        margin: 10px auto;
+      }
+    }
   }
 
-  .s-content {
-    position: relative;
-    margin-top: 35px;
-    margin-bottom: 42px;
-    width: 100%;
-  }
+  .shop-now-link {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #000;
 
-  .s-title {
-    font-size: 20px;
-    line-height: 20px;
-    color: #2F3036;
-    margin-bottom: 8px;
-  }
+    .shop-now-link-text {
+      color: #000;
+      font-family: 'Aeroport-light';
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-right: 10px;
 
-  .s-desc {
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 16px;
-    text-transform: capitalize;
-    color: #2F3036;
+    }
+
+    .shop-now-link-img {
+      width: 10px;
+    }
   }
-}</style>
+}
+</style>

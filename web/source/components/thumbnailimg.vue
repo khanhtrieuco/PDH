@@ -172,6 +172,11 @@ img:not([src]) {
     /* 4:3 Aspect Ratio */
   }
 
+  &.ratio_9-21 {
+    padding-top: 180%;
+    /* 4:3 Aspect Ratio */
+  }
+
   .thumbnail-inner {
     position: absolute !important;
     width: 100%;
@@ -270,7 +275,7 @@ img:not([src]) {
 
 @media (max-width: 575px) {
   .thumbnail-video-inner {
-    height: auto;
-    top: calc(50% - 115px);
+    height: 100%;
+    // top: calc(50% - 285px);
   }
 }</style>

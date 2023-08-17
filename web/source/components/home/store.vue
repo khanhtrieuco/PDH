@@ -14,6 +14,8 @@
             :listItem="$i18n.locale === 'vn' ? select_data_2 : select_data_2" />
         </div>
         <div class="store-btn">{{ $t('Store_select_3') }}</div>
+        <img class="store-image" src="/images/ple.jpg" v-if="isMobile" />
+
         <div class="store-item">
           <img class="store-item-maker" src="/images/place-maker.png" />
           <div class="store-item-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city</div>
@@ -29,7 +31,7 @@
           <div class="store-btn">{{ $t('Store_select_4') }}</div>
         </div>
       </div>
-      <img class="store-image" src="/images/ple.jpg" />
+      <img class="store-image" src="/images/ple.jpg" v-if="!isMobile"/>
     </div>
   </div>
 </template>
@@ -100,6 +102,7 @@ export default {
 
     .store-filter-item {
       margin-bottom: 10px;
+
       .filter-title {
         margin-bottom: 10px;
       }
@@ -109,6 +112,7 @@ export default {
       background-color: #D9D9D980;
       padding: 20px;
       margin-top: 30px;
+
       .store-item-maker {
         width: 30px;
         margin-bottom: 20px;
@@ -146,32 +150,68 @@ export default {
 }
 
 @media (max-width: 520px) {
-  .solution-title {
+  .store-container {
     text-align: center;
-    white-space: nowrap;
-    font-size: 24px;
-  }
+    padding: 60px 0px;
 
-  .s-content {
-    position: relative;
-    margin-top: 35px;
-    margin-bottom: 42px;
-    width: 100%;
-  }
+    .store-title-image {
+      width: 283px;
+      margin: auto;
+    }
 
-  .s-title {
-    font-size: 20px;
-    line-height: 20px;
-    color: #2F3036;
-    margin-bottom: 8px;
-  }
+    .store-content {
+      margin-top: 30px;
+      width: 100%;
+      margin-right: auto;
+      text-align: left;
 
-  .s-desc {
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 16px;
-    text-transform: capitalize;
-    color: #2F3036;
+      .store-filter-item {
+        margin-bottom: 8px;
+
+        .filter-title {
+          margin-bottom: 8px;
+          font-size: 10px;
+        }
+      }
+
+      .store-item {
+        background-color: #D9D9D980;
+        padding: 20px;
+        margin-top: 30px;
+
+        .store-item-maker {
+          width: 30px;
+          margin-bottom: 20px;
+        }
+
+        .store-item-text {
+          color: #000;
+          font-family: 'Aeroport-light';
+          font-size: 10px;
+          font-weight: 300;
+        }
+      }
+
+      .store-btn {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-family: 'Aeroport-light';
+        font-size: 10px;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-top: 20px;
+      }
+    }
+
+    .store-image {
+      margin-top: 40px;
+      width: 100%;
+      object-fit: cover;
+    }
   }
-}
-</style>
+}</style>

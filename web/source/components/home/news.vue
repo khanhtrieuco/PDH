@@ -7,16 +7,16 @@
       <!-- <div class="news-cate-item">KOLS, </div>
       <div class="news-cate-item">BLOGS, </div> -->
     </div>
-    <VueSlickCarousel v-bind="settings" class="list-news" v-if=" listNews && listNews.length ">
+    <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news" v-if=" listNews && listNews.length ">
       <div v-for="( item, index ) in  listNews " :key=" index ">
         <NewItem :isMobile=" isMobile " />
       </div>
-      <template slot="prevArrow">
+      <template slot="prevArrow" v-if="!isMobile">
         <div class="pre-arrow">
           <img src="/images/left-b.png" />
         </div>
       </template>
-      <template slot="nextArrow">
+      <template slot="nextArrow" v-if="!isMobile">
         <div class="next-arrow">
           <img src="/images/right-b.png" />
         </div>
@@ -47,7 +47,6 @@ export default {
         "edgeFriction": 0.35,
         "infinite": false,
         "speed": 1000,
-        "slidesToShow": 3,
         "slidesToScroll": 1
       },
       active: 1
@@ -150,32 +149,65 @@ export default {
 }
 
 @media (max-width: 520px) {
-  .solution-title {
-    text-align: center;
-    white-space: nowrap;
-    font-size: 24px;
+  .news-container {
+  text-align: center;
+  padding: 60px 0px;
+
+  .news-title-image {
+    width: 110px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .s-content {
-    position: relative;
-    margin-top: 35px;
-    margin-bottom: 42px;
-    width: 100%;
+  .news-category {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: left;
+
+    .news-cate-item {
+      color: #717171;
+      font-family: 'Aeroport';
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+
+    .news-cate-active {
+      color: #000;
+    }
   }
 
-  .s-title {
-    font-size: 20px;
-    line-height: 20px;
-    color: #2F3036;
-    margin-bottom: 8px;
-  }
+  .list-news {
+    padding-top: 0px;
 
-  .s-desc {
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 16px;
-    text-transform: capitalize;
-    color: #2F3036;
+    .slick-prev {
+      width: 45px;
+      z-index: 1;
+      left: 0;
+      top: 5%;
+      width: 45px;
+
+      img {
+        width: 45px;
+      }
+    }
+
+    .slick-next {
+      width: 45px;
+      z-index: 1;
+      right: 0;
+      top: 5%;
+      width: 45px;
+
+      img {
+        width: 45px;
+      }
+    }
   }
+}
 }
 </style>

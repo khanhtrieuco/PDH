@@ -1,11 +1,8 @@
 <template>
   <div class="banner-about">
-    <VueSlickCarousel v-bind="settings" class="list-banner-about" v-if="listBanner && listBanner.length">
+    <VueSlickCarousel v-bind="settings" class="list-banner-about" v-if="!isMobile && listBanner && listBanner.length">
       <div v-for="(item, index) in listBanner" :key="index">
-        <div v-if="isMobile" class="banner-about-item">
-          <img class="banner-about-img" :src="item.attributes?.imagelink_mobile.data?.attributes.url" />
-        </div>
-        <div v-else class="banner-about-item">
+        <div class="banner-about-item">
           <img class="banner-about-img" :src="item.attributes?.imagelink.data?.attributes.url" />
         </div>
       </div>
@@ -19,6 +16,13 @@
           <img src="/images/right-w.png" />
         </div>
       </template>
+    </VueSlickCarousel>
+    <VueSlickCarousel v-bind="settings" class="list-banner-about" v-if="isMobile && listBanner && listBanner.length">
+      <div v-for="(item, index) in listBanner" :key="index">
+        <div class="banner-about-item">
+          <img class="banner-about-img" :src="item.attributes?.imagelink.data?.attributes.url" />
+        </div>
+      </div>
     </VueSlickCarousel>
   </div>
 </template>
@@ -64,6 +68,7 @@ export default {
 .banner-about {
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 
   .banner-about-img {
     width: 100%;
@@ -94,4 +99,5 @@ export default {
       }
     }
   }
-}</style>
+}
+</style>

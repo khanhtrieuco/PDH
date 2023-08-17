@@ -126,12 +126,66 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .aura-title {
-        font-weight: 700;
-        font-size: 13px;
-        line-height: 15px;
-        color: #2F3036;
+    .news-item {
+        width: 100%;
         text-align: left;
+
+        .news-img {
+            border: 1px solid #000;
+            padding: 6px;
+            margin: 4px;
+            position: relative;
+        }
+
+        .news-title {
+            color: #000;
+            font-family: 'Aeroport';
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .news-des {
+            color: #000;
+            font-family: 'Aeroport-light';
+            font-size: 10px;
+        }
+
+        .news-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: #fff;
+            padding: 4px;
+
+            div {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: #000;
+            }
+        }
+
+        .news-dot1 {
+            left: -7px;
+            top: -7px;
+        }
+
+        .news-dot2 {
+            right: -5px;
+            top: -7px;
+        }
+
+        .news-dot3 {
+            left: -7px;
+            bottom: -4px;
+        }
+
+        .news-dot4 {
+            right: -5px;
+            bottom: -4px;
+        }
     }
 }
 </style>
