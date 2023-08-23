@@ -4,29 +4,36 @@ const moment = require('moment');
 module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 	async create(ctx) {
 		const { user } = ctx.state
-		let { shipping_id, listProductItem, code, address_name, address_email, address_phone, address_full, provinces, districts, wards, payment_type } = ctx.request.body;
+		let { shippingType, listProductItem, code, payment_type } = ctx.request.body;
 		if (!code) {
 			return { message: 'Không tìm thấy mã đơn' };
 		}
 		if (!payment_type) {
 			return { message: 'Không tìm thấy thông tin thanh toán' };
 		}
-		if (!address_name || !address_phone || !address_full || !provinces || !districts || !wards) {
-			return { message: 'Không tìm thấy thông tin nhận đơn' };
-		}
-		if (!shipping_id) {
+		if (!shippingType) {
 			return { message: 'Không tìm thấy thông tin vận chuyển' };
 		}
-		let ship = await strapi.db.query('api::shipping.shipping').findOne({
-			select: ['id', 'price'],
-			where: { id: shipping_id }
+		// let ship = await strapi.db.query('api::shipping.shipping').findOne({
+		// 	select: ['id', 'price'],
+		// 	where: { id: shipping_id }
+		// });
+		let address = await strapi.db.query('api::address.address').findOne({
+			select: ['name', 'phone', 'email', 'full_address'],
+			where: { users_permissions_user: user.id }
 		});
+		console.log(address)
+
+		if(!address.name) {
+			return { message: 'Không tìm thấy thông tin địa chỉ người nhận' };
+		}
 		if (listProductItem && listProductItem.length > 0) {
 			let listCartId = []
 			let listProductId = []
+			let listVariantId = []
 			let listCartAdd = []
 			let total_price = 0
-			let priceShip = ship.price
+			let priceShip =  0 //ship.price
 			let checkCart = true
 			let productName = ''
 			for (let i = 0; i < listProductItem.length; i++) {
@@ -34,6 +41,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 					select: ['id', 'price', 'name'],
 					where: { id: listProductItem[i].id }
 				});
+				listVariantId.push(listProductItem[i].variant_id)
 				listProductId.push(product.id)
 				if (i === listProductItem.length - 1) {
 					productName += product.name
@@ -47,6 +55,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 				}
 				listCartAdd.push({
 					id: listProductItem[i].id,
+					variant: listProductItem[i].variant_id,
 					quantity: listProductItem[i].quantity,
 					price: product.price
 				})
@@ -60,6 +69,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 					total_price: listCartAdd[i].quantity * listCartAdd[i].price,
 					product: listCartAdd[i].id,
 					quantity: listCartAdd[i].quantity,
+					variant: listCartAdd[i].variant,
 					user: user?.id
 				}
 				let resCart = await strapi.entityService.create('api::cart.cart', { data: cart });
@@ -69,25 +79,26 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			}
 			let pick_date = moment().add(1, 'days').format('YYYY-MM-DD')
 			let end_date = moment().add(4, 'days').format('YYYY-MM-DD')
+			listProductId = listProductId.filter(function(item, pos) {
+				return listProductId.indexOf(item) == pos;
+			})
 			let _order = {
 				code,
 				state: 'new',
 				price: total_price,
 				price_ship: priceShip,
-				address_name,
-				address_email,
-				address_phone,
-				address_full,
+				address_name: address.name,
+				address_email: address.email,
+				address_phone: address.phone,
+				address_full: address.full_address,
 				payment_type,
-				provinces,
-				districts,
-				wards,
 				pick_date,
 				end_date,
 				discount_price: 0,
 				cod: payment_type === 'cod' ? total_price + priceShip : 0,
 				cartitems: listCartId,
 				products: listProductId,
+				variants: listVariantId,
 				user: user?.id
 			}
 			let res = await strapi.entityService.create('api::order.order', { data: _order });

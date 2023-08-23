@@ -419,8 +419,8 @@ export default {
             let _order = {
                 code: `#${this.makeString(8)}`,
                 state: 'new',
-                payment_type: 'code',
-                shippingPrice: 0,
+                payment_type: this.paymentType,
+                shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
                 totalPrice: priceTotal,
                 listProductItem: this.listCart.map(o => {
                     return {

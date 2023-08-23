@@ -105,6 +105,15 @@
     },
     "note": {
       "type": "text"
+    },
+    "shippingType": {
+      "type": "string"
+    },
+    "variants": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::variant.variant",
+      "inversedBy": "orders"
     }
   }
 }

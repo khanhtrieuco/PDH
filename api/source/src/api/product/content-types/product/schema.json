@@ -65,12 +65,6 @@
     "sold": {
       "type": "integer"
     },
-    "carts": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::cart.cart",
-      "mappedBy": "product"
-    },
     "description_en": {
       "type": "text"
     },
@@ -129,6 +123,12 @@
       "relation": "manyToOne",
       "target": "api::collection.collection",
       "inversedBy": "products"
+    },
+    "cartitems": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cart.cart",
+      "mappedBy": "product"
     }
   }
 }

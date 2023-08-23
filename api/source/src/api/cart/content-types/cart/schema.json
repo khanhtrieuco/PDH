@@ -24,12 +24,6 @@
     "total_price": {
       "type": "integer"
     },
-    "product": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::product.product",
-      "inversedBy": "carts"
-    },
     "quantity": {
       "type": "integer"
     },
@@ -37,6 +31,18 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::order.order",
+      "inversedBy": "cartitems"
+    },
+    "variant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::variant.variant",
+      "inversedBy": "cartitems"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
       "inversedBy": "cartitems"
     }
   }
