@@ -389,6 +389,7 @@ export default {
                 color: #000;
                 font-family: 'Aeroport';
                 font-size: 40px;
+                line-height: 40px;
             }
 
             .product-detail-name-price {

@@ -80,12 +80,14 @@ export default {
         font-size: 15px;
         font-weight: 600;
         margin-top: 20px;
+        padding: 0px 15px;
     }
 
     .news-des {
         color: #000;
         font-family: 'Aeroport-light';
         font-size: 15px;
+        padding: 0px 15px;
     }
 
     .news-dot {

@@ -64,8 +64,8 @@ export default {
         if (this.$route.params.id) {
             await this.getCollectionBySlug('women-aw') //(this.$route.params.id)
         }
-        // await this.loadProducts()
-        this.listProduct = [1, 2, 3, 4, 5, 6]
+        await this.loadProducts()
+        // this.listProduct = [1, 2, 3, 4, 5, 6]
     },
     methods: {
         ...mapActions({
@@ -83,22 +83,22 @@ export default {
         },
         goTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' })
+        },
+        async loadProducts(_data) {
+            if (this.collection && this.collection.id) {
+                let arrayFilter = [{ categories: this.collection.id }]
+                let sort = 'order:desc,id:desc'
+                if (_data && _data.sort) {
+                    sort = _data.sort + ',order:desc'
+                } else {
+                    sort = 'order:desc'
+                }
+                if (_data && _data.filterSub) {
+                    arrayFilter.push({ subcategories: _data.filterSub })
+                }
+                await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
+            }
         }
-        // async loadProducts(_data) {
-        //     if (this.collection && this.collection.id) {
-        //         let arrayFilter = [{ categories: this.collection.id }]
-        //         let sort = 'order:desc,id:desc'
-        //         if (_data && _data.sort) {
-        //             sort = _data.sort + ',order:desc'
-        //         } else {
-        //             sort = 'order:desc'
-        //         }
-        //         if (_data && _data.filterSub) {
-        //             arrayFilter.push({ subcategories: _data.filterSub })
-        //         }
-        //         await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
-        //     }
-        // }
     }
 }
 </script>

@@ -119,6 +119,12 @@
       "relation": "manyToOne",
       "target": "api::collection-cate.collection-cate",
       "inversedBy": "collections"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product",
+      "mappedBy": "collection"
     }
   }
 }
