@@ -53,6 +53,9 @@
     },
     "time": {
       "type": "string"
+    },
+    "phone": {
+      "type": "string"
     }
   }
 }

@@ -10,9 +10,22 @@
                 <div class="payment-left-info">
                     <div class="payment-step-card">
                         <div class="payment-step-title">1. {{ $t('Payment_title_1') }}</div>
-                        <div class="payment-step-content">
+                        <div class="payment-step-content" v-if="loggedIn">
                             <div class="payment-step-content-title">Email Address</div>
                             <div class="payment-step-content-text">lmydu99@gmail.com</div>
+                        </div>
+                        <div class="payment-step-content" v-if="!loggedIn">
+                            <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
+                            <b-form-input class="payment-step-input-login" v-model="username"
+                                placeholder="Email*"></b-form-input>
+                            <div class="payment-step-login-des">* Passwork</div>
+                            <b-form-input class="payment-step-input-login" v-model="password" type="password"
+                                placeholder="Password*"></b-form-input>
+                            <div class="payment-step-input-btn" @click="onLogin()">continue</div>
+                            <div class="page-login-google-btn d-flex justify-content-around align-items-center">
+                                <img class="page-login-google-image" src="/images/google.png" />
+                                <div class="page-login-google-text">CONTINUE WITH GOOGLE</div>
+                            </div>
                         </div>
                     </div>
                     <div class="payment-step-card">
@@ -239,28 +252,6 @@ export default {
             this.stepShow = 'address'
             this.paymentDone = false
         },
-        async onLogin() {
-            if (!this.username || !this.password) {
-                this.showNotification('warning', `Vui lòng nhập đử thông tin đăng nhập`)
-                return
-            }
-            let rs = await this.loginEmail({
-                identifier: this.username,
-                password: this.password
-            })
-            if (rs) {
-                this.$emit('closeUpdate')
-                this.showNotification('success', `Đăng nhập thành công`)
-            } else {
-                this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
-            }
-        },
-        async onGoogleLogin() {
-            window.location = '/api/connect/google'
-        },
-        async onFacebookLogin() {
-            window.location = '/api/connect/facebook'
-        },
         goRegister() {
             this.$emit('closeUpdate')
             this.$router.push({ path: '/dang-ky' })
@@ -330,6 +321,24 @@ export default {
                 this.showNotification('danger', `Đặt đơn hàng thất bại`)
                 this.paymentDone = 'fail'
             }
+        },
+        async onLogin() {
+            if (!this.username || !this.password) {
+                this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
+                return
+            }
+            let rs = await this.loginEmail({
+                identifier: this.username,
+                password: this.password
+            })
+            if (rs) {
+                this.showNotification('success', `Đăng nhập thành công`)
+            } else {
+                this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
+            }
+        },
+        async onGoogleLogin() {
+            window.location = '/api/connect/google'
         }
     }
 }
@@ -576,6 +585,75 @@ export default {
                     font-size: 18px;
                     margin-bottom: 10px;
                 }
+            }
+        }
+
+        .payment-step-login-des {
+            color: #717171;
+            font-family: 'Aeroport-light';
+            font-size: 16px;
+        }
+
+        .payment-step-input-login {
+            width: 100%;
+            height: 55px;
+            padding: 11px 16px;
+            border: 1px solid #000;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 0px;
+            font-family: 'Aeroport-light';
+            color: #000;
+        }
+
+        .payment-step-input-btn {
+            width: 100%;
+            height: 55px;
+            line-height: 53px;
+            text-align: center;
+            color: #FFF;
+            border: 1px solid #000;
+            background-color: #000;
+            font-family: 'Aeroport';
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 30px;
+            position: relative;
+            &::after{
+                content: '';
+                position: absolute;
+                bottom: -40px;
+                left: 0px;
+                width: 100%;
+                height: 1px;
+                border-top: 1px solid #D9D9D9;
+            }
+        }
+
+        .page-login-google-btn {
+            width: 100%;
+            height: 75px;
+            line-height: 75px;
+            margin-top: 80px;
+            border: 1px solid #000;
+            cursor: pointer;
+
+            .page-login-google-image {
+                width: 40px;
+                margin-left: 100px;
+            }
+
+            .page-login-google-text {
+                color: #000;
+                text-align: center;
+                font-family: 'Aeroport';
+                font-size: 21px;
+                font-weight: 700;
+                margin-right: 100px;
+                
             }
         }
     }

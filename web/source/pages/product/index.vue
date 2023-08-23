@@ -2,13 +2,13 @@
     <div class="product-detail-content">
         <div class="container">
             <div class="product-detail-info">
-                <div class="product-detail-color">
+                <div class="product-detail-color" @click="scrollToAdd">
                     <span class="color-text">Color:</span>
                     <Color v-if="!isMobile"></Color>
                     <ColorMobile v-else></ColorMobile>
                     <div class="color-value">+{{ listColor.length - 1 }}</div>
                 </div>
-                <div class="product-detail-size">
+                <div class="product-detail-size" @click="scrollToAdd">
                     <span class="size-text">Size:</span>
                     <div class="size-value" v-for="_size, index in listSize" :key="index">{{ _size.attributes.name
                     }}</div>
@@ -329,7 +329,7 @@ export default {
             align-items: center;
             gap: 8px;
             height: 40px;
-
+            cursor: pointer;
             .color-text {
                 color: #000;
                 font-family: 'Aeroport';
@@ -360,7 +360,7 @@ export default {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
+            cursor: pointer;
             .size-text {
                 font-size: 20px;
                 font-family: 'Aeroport';
