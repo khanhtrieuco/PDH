@@ -1,37 +1,46 @@
 <template>
     <div class="backgroud-black">
         <div class="address-content">
-            <img class="close-btn" src="/images/Dell_light.png" @click="$emit('closeUpdate')" />
-            <div class="address-title">Thêm địa chỉ</div>
-            <b-row v-if="!isMobile">
+            <img class="address-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" />
+            <div class="address-title">Add new address</div>
+            <div class="input-form-des-text">*required field</div>
+            <b-row v-if="!isMobile" class="mt-3">
                 <b-col cols="12">
+                    <div class="input-form-des">*Full name</div>
                     <b-form-input class="input-form-address" v-model="form.name" placeholder="Họ và tên*"></b-form-input>
                 </b-col>
                 <b-col cols="6">
+                    <div class="input-form-des">*Phone</div>
                     <b-form-input class="input-form-address" v-model="form.phone"
                         placeholder="Số điện thoại*"></b-form-input>
                 </b-col>
                 <b-col cols="6">
+                    <div class="input-form-des">*Email</div>
                     <b-form-input class="input-form-address" v-model="form.email"
                         placeholder="Địa chỉ Email*"></b-form-input>
                 </b-col>
-                <b-col cols="12">
-                    <b-form-input class="input-form-address" v-model="form.full_address"
-                        placeholder="Địa chỉ nhận"></b-form-input>
-                </b-col>
                 <b-col cols="6">
+                    <div class="input-form-des">*Country/ Region</div>
                     <b-form-select class="input-form-address" v-model="country"
                         :options="[{ text: 'Việt Nam', value: null }]">
                     </b-form-select>
                 </b-col>
                 <b-col cols="6">
+                    <div class="input-form-des">*Province</div>
                     <b-form-select class="input-form-address" v-model="province" :options="provinces"></b-form-select>
                 </b-col>
                 <b-col cols="6">
+                    <div class="input-form-des">*District</div>
                     <b-form-select class="input-form-address" v-model="district" :options="districts"></b-form-select>
                 </b-col>
                 <b-col cols="6">
+                    <div class="input-form-des">*Ward</div>
                     <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
+                </b-col>
+                <b-col cols="12">
+                    <div class="input-form-des">Address</div>
+                    <b-form-input class="input-form-address" v-model="form.full_address"
+                        placeholder="Địa chỉ nhận"></b-form-input>
                 </b-col>
             </b-row>
             <b-row v-else>
@@ -65,7 +74,7 @@
                     <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
                 </b-col>
             </b-row>
-            <div class="nas-btn up-add-btn" @click="type === 'create' ? onAddNew() : onUpdate()">Cập nhật
+            <div class="up-add-btn" @click="type === 'create' ? onAddNew() : onUpdate()">Cập nhật
             </div>
         </div>
     </div>
@@ -77,13 +86,12 @@ import general from "~/mixins/general"
 export default {
     mixins: [general],
     props: {
-        type: {
-            type: String,
-            default: 'create'
-        },
         item: {
             type: Object,
-            default: {}
+            default: {
+                attributes: null,
+                id: null
+            }
         },
         isMobile: {
             type: Boolean,
@@ -113,12 +121,19 @@ export default {
             ward: null,
             country: null,
             province: 1,
+            type: 'create'
         }
     },
     async mounted() {
+        if(this.item?.id) {
+            this.type = 'update'
+        } else {
+            this.type = 'create'
+        }
         this.setValueForm()
-        this.provinces = this.listProvince.map(o => { return { text: o.attributes.name, value: o.id } })
-        if (this.item.attributes?.provinces?.data?.length > 0) {
+        await this.getListProvince({ pagination: { page: 1, pageSize: 70 } })
+        this.provinces = this.listProvince.map(o => {  return { text: o?.attributes?.name, value: o?.id } })
+        if (this.item?.attributes?.provinces?.data?.length > 0) {
             this.province = this.item.attributes?.provinces?.data[0].id
             await this.getListDistrict({ filters: { province: { id: { $eq: this.province } } } })
             this.districts = this.listDistrict.map(o => { return { text: `${o.attributes.prefix} ${o.attributes.name}`, value: o.id } })
@@ -126,12 +141,12 @@ export default {
             await this.getListDistrict({ filters: { province: { id: { $eq: this.province } } } })
             this.districts = this.listDistrict.map(o => { return { text: `${o.attributes.prefix} ${o.attributes.name}`, value: o.id } })
         }
-        if (this.item.attributes?.districts?.data?.length > 0) {
+        if (this.item?.attributes?.districts?.data?.length > 0) {
             this.district = this.item.attributes?.districts?.data[0].id
             // await this.getListWard({ filters: { district: { id: { $eq: this.district } } } })
             // this.wards = this.listWard.map(o => { return { text: `${o.attributes.prefix} ${o.attributes.name}`, value: o.id } })
         }
-        if (this.item.attributes?.wards?.data?.length > 0) {
+        if (this.item?.attributes?.wards?.data?.length > 0) {
             this.ward = this.item.attributes?.wards?.data[0].id
         }
     },
@@ -141,11 +156,14 @@ export default {
                 this.setValueForm()
             }
         },
-        listProvince: async function (val) {
-            if (val) {
-                this.provinces = val.map(o => { return { text: o.attributes.name, value: o.id } })
-            }
-        },
+        // listProvince: async function (val) {
+        //     if (val) {
+        //         this.provinces = val.map(o => { 
+        //             if(o?.attributes)
+        //                 return { text: o?.attributes?.name, value: o?.id } 
+        //         })
+        //     }
+        // },
         province: async function (val) {
             if (val) {
                 await this.getListDistrict({ filters: { province: { id: { $eq: val } } } })
@@ -163,10 +181,12 @@ export default {
         ...mapActions({
             addNewAddress: "auth/addNewAddress",
             updateAddress: "auth/updateAddress",
+            getListProvince: 'user/getListProvince',
             getListDistrict: 'user/getListDistrict',
             getListWard: 'user/getListWard'
         }),
         setValueForm() {
+            console.log(this.item?.attributes)
             if (this.type === 'create') {
                 this.form = {
                     name: null,
@@ -180,7 +200,7 @@ export default {
         },
         async onAddNew() {
             if (!this.form.name || !this.form.phone || !this.form.email || !this.form.full_address) {
-                this.showNotification('warning', `Vui lòng nhập đử thông tin địa chỉ`)
+                this.showNotification('warning', `Vui lòng nhập đủ thông tin địa chỉ`)
                 return
             }
             let _data = {
@@ -244,44 +264,68 @@ export default {
 
 .address-content {
     position: relative;
-    top: calc(50% - 700px/2);
+    top: calc(50% - 630px/2);
     margin: auto;
-    width: 900px;
-    height: 700px;
+    width: 550px;
+    height: 630px;
     background-color: #ffffff;
-    border-radius: 20px;
-    padding: 74px;
-}
+    padding: 30px;
 
-.address-title {
-    font-weight: 600;
-    font-size: 36px;
-    margin-bottom: 24px;
-    text-align: center;
-}
+    .address-close {
+        position: absolute;
+        right: 30px;
+        top: 30px;
+        cursor: pointer;
+    }
 
-.close-btn {
-    position: absolute;
-    right: 30px;
-    top: 30px;
-    width: 52px;
-    z-index: 1;
-    cursor: pointer;
-}
+    .address-title {
+        color: #000;
+        font-family: 'Aeroport';
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
 
-.input-form-address {
-    height: 40px !important;
-    border: 1px solid #E8E8E8 !important;
-    border-radius: 20px !important;
-    font-size: 13px !important;
-    line-height: 26px !important;
-    margin-bottom: 10px;
-    font-family: 'inter-light';
+    .input-form-des {
+        color: #717171;
+        font-family: 'Aeroport-light';
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-top: 20px;
+    }
 
-}
+    .input-form-des-text {
+        color: #717171;
+        font-family: 'Aeroport-light';
+        font-size: 13px;
+    }
 
-.up-add-btn {
-    margin-top: 30px;
+    .input-form-address {
+        color: #717171;
+        font-family: 'Aeroport-light';
+        font-size: 13px;
+        border: 1px solid #000;
+        border-radius: 0px;
+    }
+
+    .up-add-btn {
+        width: 100%;
+        height: 55px;
+        line-height: 53px;
+        text-align: center;
+        color: #FFF;
+        border: 1px solid #000;
+        background-color: #000;
+        font-family: 'Aeroport';
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 30px;
+        position: relative;
+    }
+
 }
 
 @media (max-width: 520px) {

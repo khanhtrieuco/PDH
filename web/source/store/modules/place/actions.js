@@ -4,17 +4,36 @@ export default {
     getListPlace: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             sort: 'order:desc,id:desc',
-            populate:'*'
-          }, {
+            populate: '*'
+        }, {
             encodeValuesOnly: true, // prettify URL
-          });
-          let res = await ApiService.request({
-              method: 'get',
-              url: `/api/places?${query}`
-          })
+        });
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/places?${query}`
+        })
         commit('set_list_place', {
             list_place: res.data.filter(i => i.attributes.state === 'active')
         })
+    },
+
+    getPlace: async ({ commit, rootState }, data = {}) => {
+        const query = qs.stringify({
+            sort: 'order:desc,id:desc',
+            populate: '*'
+        }, {
+            encodeValuesOnly: true, // prettify URL
+        });
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/places?${query}`
+        })
+        if (res && res.data && res.data.length > 0) {
+            commit('set_data', {
+                name: 'place',
+                data: res.data[0]
+            })
+        }
     },
 
     getListAdmin: async ({ commit, rootState }, data = {}) => {
@@ -45,7 +64,7 @@ export default {
         let res = await ApiService.request({
             method: "post",
             url: `/api/places`,
-            data: { data : data.data }
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data
@@ -59,7 +78,7 @@ export default {
         let res = await ApiService.request({
             method: "put",
             url: `/api/places/${data.id}`,
-            data: { data : data.data }
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data

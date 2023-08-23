@@ -11,6 +11,7 @@ export const state = () => ({
             pageSize: 10
         }
     },
+    place: {}
 });
 
 export default {
