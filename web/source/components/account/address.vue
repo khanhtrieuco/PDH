@@ -186,7 +186,6 @@ export default {
             getListWard: 'user/getListWard'
         }),
         setValueForm() {
-            console.log(this.item?.attributes)
             if (this.type === 'create') {
                 this.form = {
                     name: null,
@@ -211,7 +210,7 @@ export default {
                 users_permissions_user: this.profile.id,
                 provinces: this.province,
                 districts: this.district,
-                wards: this.ward,
+                wards: this.ward
             }
             let rs = await this.addNewAddress({ data: _data })
             if (rs) {
