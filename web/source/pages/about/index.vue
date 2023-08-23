@@ -42,11 +42,11 @@
         <div class="container about-list">
             <div class="about-item">
                 <div class="about-item-img">
-                    <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade">
+                    <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                         <img v-if="tab === 1" src="/images/about1.jpg" />
                         <img v-if="tab === 2" src="/images/about2.jpg" />
                         <img v-if="tab === 3" src="/images/about3.jpg" />
-                    </transition>
+                    <!-- </transition> -->
 
                     <div class="about-item-dot about-item-dot1">
                         <div></div>
@@ -61,7 +61,7 @@
                         <div></div>
                     </div>
                 </div>
-                <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade">
+                <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                     <div v-if="tab === 1" class="about-item-content">
                         <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
                         <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
@@ -75,6 +75,8 @@
                                 :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
                         </div>
                     </div>
+                <!-- </transition> -->
+                <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                     <div v-if="tab === 2" class="about-item-content">
                         <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
                         <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
@@ -88,6 +90,8 @@
                                 :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
                         </div>
                     </div>
+                <!-- </transition> -->
+                <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                     <div v-if="tab === 3" class="about-item-content">
                         <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
                         <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
@@ -101,7 +105,7 @@
                                 :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
                         </div>
                     </div>
-                </transition>
+                <!-- </transition> -->
 
             </div>
         </div>
@@ -144,6 +148,12 @@ export default {
             window.scrollTo({ top: 0, behavior: 'smooth' })
         }
         this.isMobile = this.checkMobile()
+        setInterval(()=>{
+            this.tab = this.tab + 1
+            if(this.tab >= 4) {
+                this.tab = 1
+            }
+        },5000)
     },
     methods: {
         checkMobile() {
@@ -254,7 +264,8 @@ export default {
 
     .about-list {
         padding: 100px 0px;
-
+        min-height: 1000px;
+        background-color: #FFF;
         .about-item {
             display: flex;
             align-items: center;
@@ -270,7 +281,7 @@ export default {
                 }
 
                 .about-item-dot {
-                    width: 12px;
+                    width: 16px;
                     height: 12px;
                     border-radius: 50%;
                     position: absolute;
@@ -278,7 +289,7 @@ export default {
                     padding: 4px;
 
                     div {
-                        width: 6px;
+                        width: 8px;
                         height: 6px;
                         border-radius: 50%;
                         background-color: #000;
@@ -286,22 +297,22 @@ export default {
                 }
 
                 .about-item-dot1 {
-                    left: -7px;
+                    left: -8px;
                     top: -7px;
                 }
 
                 .about-item-dot2 {
-                    right: -5px;
+                    right: -8px;
                     top: -7px;
                 }
 
                 .about-item-dot3 {
-                    left: -7px;
+                    left: -8px;
                     bottom: -4px;
                 }
 
                 .about-item-dot4 {
-                    right: -5px;
+                    right: -8px;
                     bottom: -4px;
                 }
             }

@@ -2,7 +2,7 @@
   <div class="product-item">
     <div :style="`height: ${height};`" class="product-img d-flex justify-content-center" @mouseover="showHover()"
       @mouseleave="hideHover()">
-      <div class="d-flex justify-content-center align-self-end">
+      <div class="d-flex justify-content-center align-self-end" style="width: 100%;height: 100%;">
         <NuxtLink :to="`/san-pham/123`">
           <img :src="product_image" fluid alt="image" />
         </NuxtLink>
@@ -16,15 +16,25 @@
       </NuxtLink>
       <div class="product-price">{{ item.price | numberWithCommas }}{{ ' ' }}đ</div>
     </div>
+    <div class="product-item-color">
+      <Color v-if="!isMobile"></Color>
+      <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ?  listColor.length - 1 : 1 }}</div>
+    </div>
   </div>
 </template>
 
 <script>
 import general from "~/mixins/general"
 import { mapGetters, mapActions } from "vuex"
+import Color from "~/components/common/color.vue"
+import ColorMobile from "~/components/common/colorMobile.vue"
 
 export default {
   mixins: [general],
+  components: {
+    Color,
+    ColorMobile
+  },
   props: {
     item: {
       type: Object,
@@ -59,7 +69,8 @@ export default {
       description: '',
       isLike: false,
       likeImage: '/images/heart.png',
-      product_image: ''
+      product_image: '',
+      listColor: [],
     }
   },
   mounted() {
@@ -68,6 +79,20 @@ export default {
       this.likeImage = '/images/liked.png'
     }
     this.product_image = '/images/sp1.jpg'
+    if (this.item.attributes && this.item.attributes.variants.data) {
+      this.item.attributes.variants.data.forEach(v => {
+        let color = v.attributes.color.data
+        let size = v.attributes.size.data
+        let _cc = this.listColor.find(o => o.id === color.id)
+        if (!_cc) {
+          this.listColor.push(color)
+        }
+        let _cs = this.listSize.find(o => o.id === size.id)
+        if (!_cs) {
+          this.listSize.push(size)
+        }
+      });
+    }
   },
   methods: {
     ...mapActions({
@@ -178,6 +203,7 @@ export default {
     color: #000;
     font-family: 'Aeroport';
     font-size: 22px;
+    margin-bottom: 5px;
   }
 
   .product-price {
@@ -238,4 +264,5 @@ export default {
       width: 16px;
     }
   }
-}</style>
+}
+</style>

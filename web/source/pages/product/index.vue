@@ -128,7 +128,7 @@
                 <div class="product-detail-list-title">Recommend</div>
                 <b-row v-if="listRelated">
                     <b-col class="mb-4" cols="6" lg="3" v-for="index in 4" :key="index">
-                        <ProductItem :isMobile="isMobile" height="200px" />
+                        <ProductItem :isMobile="isMobile" height="290px" />
                     </b-col>
                 </b-row>
             </div>
@@ -136,7 +136,7 @@
                 <div class="product-detail-list-title">Recently viewed</div>
                 <b-row v-if="listRelated">
                     <b-col class="mb-4" cols="6" lg="3" v-for="index in 3" :key="index">
-                        <ProductItem :isMobile="isMobile" height="200px" />
+                        <ProductItem :isMobile="isMobile" height="290px" />
                     </b-col>
                 </b-row>
                 <div class="product-detail-list-btn">More items from collection</div>

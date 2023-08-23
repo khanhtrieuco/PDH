@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 30px;transform: scale(0.7);" v-if="selected">
+    <div style="width: 30px;transform: scale(0.7);display: inline-block;" v-if="selected">
         <svg xmlns="http://www.w3.org/2000/svg" width="39" height="22" viewBox="0 0 39 22" fill="none">
             <path
                 d="M19.5265 1C9.29986 1 1 5.64784 1 11.3841C1 17.1204 9.28828 21.7682 19.5265 21.7682C29.7647 21.7682 38.0391 17.118 38.0391 11.3841C38.0391 5.65015 29.7415 1 19.5265 1Z"
@@ -12,7 +12,7 @@
                 :fill="color" />
         </svg>
     </div>
-    <div style="width: 30px;transform: scale(0.7);" v-else>
+    <div style="width: 30px;transform: scale(0.7);display: inline-block;" v-else>
         <svg v-if="!hover" xmlns="http://www.w3.org/2000/svg" @mouseover="showHover()" width="33" height="20"
             viewBox="0 0 33 20" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd"

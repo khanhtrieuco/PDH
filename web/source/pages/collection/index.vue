@@ -86,7 +86,7 @@ export default {
         },
         async loadProducts(_data) {
             if (this.collection && this.collection.id) {
-                let arrayFilter = [{ categories: this.collection.id }]
+                let arrayFilter = [{ collection: this.collection.id }]
                 let sort = 'order:desc,id:desc'
                 if (_data && _data.sort) {
                     sort = _data.sort + ',order:desc'
