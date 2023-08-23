@@ -424,7 +424,7 @@ export default {
                 font-size: 10px;
                 line-height: 30px;
                 font-weight: 200;
-                width: 280px;
+                width: 275px;
                 margin: auto;
             }
         }
@@ -472,7 +472,7 @@ export default {
                     }
 
                     .about-item-dot {
-                        width: 12px;
+                        width: 16px;
                         height: 12px;
                         border-radius: 50%;
                         position: absolute;
@@ -480,7 +480,7 @@ export default {
                         padding: 4px;
 
                         div {
-                            width: 6px;
+                            width: 8px;
                             height: 6px;
                             border-radius: 50%;
                             background-color: #000;
@@ -488,22 +488,22 @@ export default {
                     }
 
                     .about-item-dot1 {
-                        left: -7px;
+                        left: -8px;
                         top: -7px;
                     }
 
                     .about-item-dot2 {
-                        right: -5px;
+                        right: -8px;
                         top: -7px;
                     }
 
                     .about-item-dot3 {
-                        left: -7px;
+                        left: -8px;
                         bottom: -4px;
                     }
 
                     .about-item-dot4 {
-                        right: -5px;
+                        right: -8px;
                         bottom: -4px;
                     }
                 }

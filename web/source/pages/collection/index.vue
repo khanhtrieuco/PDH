@@ -23,8 +23,8 @@
             </NuxtLink>
             <div class="collection-products">
                 <b-row v-if="listProduct">
-                    <b-col class="mb-3" cols="6" lg="4" v-for="index in 6" :key="index">
-                        <ProductItem :isMobile="isMobile" :height="isMobile ? '215px' : '600px'" />
+                    <b-col class="mb-3" cols="6" lg="4" v-for="_pro,index in listProduct" :key="index">
+                        <ProductItem :item="_pro" :isMobile="isMobile" :height="isMobile ? '215px' : '600px'" />
                     </b-col>
                 </b-row>
                 <!-- <div v-else>

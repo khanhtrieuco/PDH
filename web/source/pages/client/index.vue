@@ -98,6 +98,7 @@ export default {
 				font-size: 20px;
 				margin-bottom: 35px;
 				text-transform: uppercase;
+				font-weight: 800;
 			}
 
 			.client-service-item-des {
@@ -176,7 +177,7 @@ export default {
 
 				&:after {
 					content: "";
-					height: 100%;
+					height: 90%;
 					width: 100px;
 					display: block;
 					border-bottom: 1px solid #000;

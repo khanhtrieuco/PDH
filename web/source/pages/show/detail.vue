@@ -214,7 +214,7 @@ export default {
 
             .detail-show-data {
                 margin-top: 30px;
-                margin-bottom: 10px;
+                margin-bottom: 0px;
                 width: 100%;
                 text-align: center;
 

@@ -68,12 +68,12 @@ export default {
 
     .select-list-list {
         position: absolute;
-        top: 40px;
+        top: 29px;
         left: 0px;
         width: 100%;
         background-color: white;
         z-index: 1;
-        padding: 10px;
+        padding: 0px 10px 10px 10px;
         border: 1px solid #000 !important;
 
         .select-item {

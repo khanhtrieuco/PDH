@@ -95,7 +95,7 @@
           <div class="footer-text mb-2">{{ $t('Footer_text_8') }}</div>
         </div>
         <div class="col-12">
-          <div class="footer-title mb-3">{{ $t('Footer_title_3') }}</div>
+          <div class="footer-title mb-3 mt-5">{{ $t('Footer_title_3') }}</div>
           <div class="footer-text mb-2">{{ $t('Footer_text_9') }}</div>
           <div class="footer-text mb-2">{{ $t('Footer_text_10') }}</div>
           <div class="footer-text mb-2">{{ $t('Footer_text_11') }}</div>
@@ -155,7 +155,7 @@ export default {
 .container-footer {
   background-color: #000;
   padding-top: 150px;
-  padding-bottom: 220px;
+  padding-bottom: 150px;
   color: #fff;
 
   .footer-title {

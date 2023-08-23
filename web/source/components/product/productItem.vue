@@ -1,20 +1,20 @@
 <template>
-  <div class="product-item">
+  <div class="product-item" v-show="item.id">
     <div :style="`height: ${height};`" class="product-img d-flex justify-content-center" @mouseover="showHover()"
       @mouseleave="hideHover()">
       <div class="d-flex justify-content-center align-self-end" style="width: 100%;height: 100%;">
-        <NuxtLink :to="`/san-pham/123`">
-          <img :src="product_image" fluid alt="image" />
+        <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
+          <img class="product-img-main" :src="product_image" fluid alt="image" />
         </NuxtLink>
       </div>
       <img class="img-heart" :src="likeImage" @click="onLike(item)" @mouseover="showLike()" @mouseleave="hideLike()"
         alt="Like" />
     </div>
     <div class="product-item-content text-left">
-      <NuxtLink :to="`/san-pham/123`">
-        <div class="product-name">{{ item.name }}</div>
+      <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
+        <div class="product-name">{{ $i18n.locale === 'vn' ? item.attributes.name : item.attributes.name_en }}</div>
       </NuxtLink>
-      <div class="product-price">{{ item.price | numberWithCommas }}{{ ' ' }}đ</div>
+      <div class="product-price">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
     </div>
     <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
@@ -40,12 +40,8 @@ export default {
       type: Object,
       default: () => {
         return {
-          image: '/images/product1.png',
-          image_hover: '/images/hover.png',
-          name: 'Spot Eraser Gel',
-          title: 'Rạng ngời dung nhan',
-          description: 'Kem hỗ trợ giảm mụn & vết thâm',
-          price: 280000
+          attributes: {},
+          id: null
         }
       }
     },
@@ -69,8 +65,8 @@ export default {
       description: '',
       isLike: false,
       likeImage: '/images/heart.png',
-      product_image: '',
       listColor: [],
+      product_image: null
     }
   },
   mounted() {
@@ -78,21 +74,24 @@ export default {
     if (this.isLike) {
       this.likeImage = '/images/liked.png'
     }
-    this.product_image = '/images/sp1.jpg'
-    if (this.item.attributes && this.item.attributes.variants.data) {
+    this.product_image = this.item.attributes.thub_main?.data.attributes.url
+    if (this.item.attributes && this.item.attributes.variants?.data) {
       this.item.attributes.variants.data.forEach(v => {
-        let color = v.attributes.color.data
-        let size = v.attributes.size.data
-        let _cc = this.listColor.find(o => o.id === color.id)
-        if (!_cc) {
-          this.listColor.push(color)
-        }
-        let _cs = this.listSize.find(o => o.id === size.id)
-        if (!_cs) {
-          this.listSize.push(size)
+        if(v.attributes.color?.data && v.attributes.size?.data) {
+          let color = v.attributes.color?.data
+          let size = v.attributes.size?.data
+          let _cc = this.listColor.find(o => o.id === color.id)
+          if (!_cc) {
+            this.listColor.push(color)
+          }
+          let _cs = this.listSize.find(o => o.id === size.id)
+          if (!_cs) {
+            this.listSize.push(size)
+          }
         }
       });
     }
+    console.log(this.item)
   },
   methods: {
     ...mapActions({
@@ -108,10 +107,10 @@ export default {
         this.likeImage = '/images/heart.png'
     },
     showHover() {
-      this.product_image = '/images/hover.png'
+      this.product_image = this.item.attributes.thub_main.data.attributes.url
     },
     hideHover() {
-      this.product_image = '/images/sp1.jpg'
+      this.product_image = this.item.attributes.thub.data.attributes.url
     },
     async onLike(_product) {
       if (!this.loggedIn) {
@@ -185,13 +184,13 @@ export default {
     margin-bottom: 20px;
     width: 100%;
     padding-bottom: 10px;
-    background-color: #F5F5F5;
+    // background-color: #F5F5F5;
 
-    img {
+    .product-img-main {
       cursor: pointer;
       transition: all .6s ease-in-out;
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
     }
 
     &:hover {
@@ -230,7 +229,7 @@ export default {
       margin-bottom: 10px;
       width: 100%;
       padding-bottom: 10px;
-      background-color: #F5F5F5;
+      // background-color: #F5F5F5;
 
       img {
         cursor: pointer;

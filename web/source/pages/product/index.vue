@@ -10,8 +10,8 @@
                 </div>
                 <div class="product-detail-size">
                     <span class="size-text">Size:</span>
-                    <span class="size-value" v-for="_size, index in listSize" :key="index">{{ _size.attributes.name
-                    }}</span>
+                    <div class="size-value" v-for="_size, index in listSize" :key="index">{{ _size.attributes.name
+                    }}</div>
                 </div>
                 <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
                 <div class="product-detail-name">
@@ -240,7 +240,7 @@ export default {
         },
         async loadData() {
             if (this.$route.params.id) {
-                await this.getProductBySlug('spotless-filter')
+                await this.getProductBySlug(this.$route.params.id)
             }
         },
         updateValue(_v) {
@@ -369,6 +369,7 @@ export default {
             .size-value {
                 font-size: 20px;
                 font-family: 'Aeroport-light';
+                display: inline-block;
 
                 &:not(:last-child):after {
                     content: '';
@@ -609,10 +610,11 @@ export default {
                 .size-value {
                     font-size: 12px;
                     font-family: 'Aeroport-light';
-
+                    height: 16px;
                     &:not(:last-child):after {
                         content: '';
-                        height: 16px;
+                        display: inline-block;
+                        height: 10px;
                         padding-right: 6px;
                         border-right: 1px solid #000;
                     }
