@@ -1,6 +1,6 @@
 <template>
   <div class="product-item" v-show="item.id">
-    <div :style="`height: ${height};`" class="product-img d-flex justify-content-center" @mouseover="showHover()"
+    <div :style="`height: ${height};`" class="product-img-like d-flex justify-content-center" @mouseover="showHover()"
       @mouseleave="hideHover()">
       <div class="d-flex justify-content-center align-self-end" style="width: 100%;height: 100%;">
         <NuxtLink style="width: 100%;" :to="`/san-pham/${item.attributes.slug}`">
@@ -18,8 +18,12 @@
     </div>
     <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
-      <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ?  listColor.length - 1 : 1 }}</div>
+      <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ? listColor.length - 1 : 1 }}</div>
     </div>
+    <NuxtLink style="width: 100%;" :to="`/san-pham/${item.attributes.slug}`">
+      <div class="product-item-add">ADD TO CART</div>
+    </NuxtLink>
+
   </div>
 </template>
 
@@ -77,7 +81,7 @@ export default {
     this.product_image = this.item.attributes.thub_main?.data.attributes.url
     if (this.item.attributes && this.item.attributes.variants?.data) {
       this.item.attributes.variants.data.forEach(v => {
-        if(v.attributes.color?.data && v.attributes.size?.data) {
+        if (v.attributes.color?.data && v.attributes.size?.data) {
           let color = v.attributes.color?.data
           let size = v.attributes.size?.data
           let _cc = this.listColor.find(o => o.id === color.id)
@@ -143,7 +147,7 @@ export default {
       }
     },
     checkIsLiked(listLike) {
-      if(listLike) {
+      if (listLike) {
         let rs = null
         let _c = listLike.find(o => o.attributes.user_id === this.profile.id)
         if (_c) rs = _c
@@ -180,9 +184,9 @@ export default {
 .product-item {
   padding: 5px;
 
-  .product-img {
+  .product-img-like {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     width: 100%;
     padding-bottom: 10px;
     // background-color: #F5F5F5;
@@ -203,14 +207,14 @@ export default {
   .product-name {
     color: #000;
     font-family: 'Aeroport';
-    font-size: 22px;
+    font-size: 20px;
     margin-bottom: 5px;
   }
 
   .product-price {
     color: #000;
     font-family: 'Aeroport-light';
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .img-heart {
@@ -220,13 +224,27 @@ export default {
     cursor: pointer;
     width: 32px;
   }
+
+  .product-item-add {
+    width: 190px;
+    margin-top: 30px;
+    height: 55px;
+    line-height: 55px;
+    border: 1px solid #000;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    font-family: 'Aeroport-light';
+    font-size: 16px;
+    text-transform: uppercase;
+  }
 }
 
 @media (max-width: 520px) {
   .product-item {
     padding: 0px;
 
-    .product-img {
+    .product-img-like {
       position: relative;
       margin-bottom: 10px;
       width: 100%;

@@ -45,32 +45,40 @@
             </b-row>
             <b-row v-else>
                 <b-col cols="12">
+                    <div class="input-form-des">*Full name</div>
                     <b-form-input class="input-form-address" v-model="form.name" placeholder="Họ và tên*"></b-form-input>
                 </b-col>
                 <b-col cols="12">
+                    <div class="input-form-des">*Phone</div>
                     <b-form-input class="input-form-address" v-model="form.phone"
                         placeholder="Số điện thoại*"></b-form-input>
                 </b-col>
                 <b-col cols="12">
+                    <div class="input-form-des">*Email</div>
                     <b-form-input class="input-form-address" v-model="form.email"
                         placeholder="Địa chỉ Email*"></b-form-input>
                 </b-col>
                 <b-col cols="12">
+                    <div class="input-form-des">Address</div>
                     <b-form-input class="input-form-address" v-model="form.full_address"
                         placeholder="Địa chỉ nhận"></b-form-input>
                 </b-col>
                 <b-col cols="12">
+                    <div class="input-form-des">*Country/ Region</div>
                     <b-form-select class="input-form-address" v-model="country"
                         :options="[{ text: 'Việt Nam', value: null }]">
                     </b-form-select>
                 </b-col>
                 <b-col cols="12">
+                    <div class="input-form-des">*Province</div>
                     <b-form-select class="input-form-address" v-model="province" :options="provinces"></b-form-select>
                 </b-col>
                 <b-col cols="12">
+                    <div class="input-form-des">*District</div>
                     <b-form-select class="input-form-address" v-model="district" :options="districts"></b-form-select>
                 </b-col>
                 <b-col cols="12">
+                    <div class="input-form-des">*Ward</div>
                     <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
                 </b-col>
             </b-row>
@@ -125,14 +133,14 @@ export default {
         }
     },
     async mounted() {
-        if(this.item?.id) {
+        if (this.item?.id) {
             this.type = 'update'
         } else {
             this.type = 'create'
         }
         this.setValueForm()
         await this.getListProvince({ pagination: { page: 1, pageSize: 70 } })
-        this.provinces = this.listProvince.map(o => {  return { text: o?.attributes?.name, value: o?.id } })
+        this.provinces = this.listProvince.map(o => { return { text: o?.attributes?.name, value: o?.id } })
         if (this.item?.attributes?.provinces?.data?.length > 0) {
             this.province = this.item.attributes?.provinces?.data[0].id
             await this.getListDistrict({ filters: { province: { id: { $eq: this.province } } } })
@@ -226,7 +234,7 @@ export default {
             if (!this.form.name || !this.form.phone || !this.form.email || !this.form.full_address
                 || !this.province || !this.district || !this.ward
             ) {
-                this.showNotification('warning', `Vui lòng nhập đử thông tin địa chỉ`)
+                this.showNotification('warning', `Vui lòng nhập đủ thông tin địa chỉ`)
                 return
             }
             let _data = {
@@ -330,25 +338,71 @@ export default {
 
 @media (max-width: 520px) {
     .address-content {
+        position: relative;
+        top: calc(50% - 730px/2);
+        margin: auto;
         width: 90%;
-        padding: 16px;
-    }
+        height: 730px;
+        background-color: #ffffff;
+        padding: 20px;
 
-    .address-title {
-        text-align: center;
-        font-size: 20px;
-    }
+        .address-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
 
-    .close-btn {
-        top: 16px;
-        right: 16px;
-        width: 32px;
-    }
+        .address-title {
+            color: #000;
+            font-family: 'Aeroport';
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
 
-    .up-add-btn {
-        position: absolute;
-        bottom: 30px;
-        width: calc(100% - 32px);
+        .input-form-des {
+            color: #717171;
+            font-family: 'Aeroport-light';
+            font-size: 13px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .input-form-des-text {
+            color: #717171;
+            font-family: 'Aeroport-light';
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .input-form-address {
+            color: #717171;
+            font-family: 'Aeroport-light';
+            font-size: 13px;
+            border: 1px solid #000;
+            border-radius: 0px;
+            margin-bottom: 5px;
+        }
+
+        .up-add-btn {
+            width: 100%;
+            height: 35px;
+            line-height: 33px;
+            text-align: center;
+            color: #FFF;
+            border: 1px solid #000;
+            background-color: #000;
+            font-family: 'Aeroport';
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 30px;
+            position: relative;
+        }
+
     }
 }
 </style>

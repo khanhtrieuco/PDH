@@ -1,7 +1,6 @@
 const path = require('path');
 let configEnv = require('./config/__init__');
 const env = configEnv.environment;
-console.log(env)
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

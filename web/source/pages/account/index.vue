@@ -2,11 +2,11 @@
     <div class="account-content">
         <div class="account-content-top" v-if="!isMobile">
             <img class="account-content-image" src="/images/top-account.jpg" />
-            <div class="account-content-name">welcome, {{ profile.username }}</div>
+            <div class="account-content-name">welcome, {{ profile?.username }}</div>
         </div>
         <div class="account-content-top" v-if="isMobile">
             <img class="account-content-image" src="/images/top-mobile.jpg" />
-            <div class="account-content-name">welcome, <span>{{ profile.username }}</span></div>
+            <div class="account-content-name">welcome, <span>{{ profile?.username }}</span></div>
         </div>
         <div class="account-content-data" v-if="!isMobile">
             <div class="container d-flex justify-content-between">
@@ -14,32 +14,45 @@
                     <div class="account-content-card">
                         <div class="account-content-card-head d-flex justify-content-between align-items-center">
                             <div class="account-content-card-head-title">Profile</div>
-                            <div class="account-content-card-head-edit">Edit</div>
+                            <div class="account-content-card-head-edit" @click="showUpdateProfile = true">Edit</div>
                         </div>
                         <div class="account-content-body">
                             <div class="account-content-body-text">Full Name: {{ profile.username }}</div>
                             <div class="account-content-body-text">Email Address: {{ profile.email }}</div>
                             <div class="account-content-body-text">Phone: {{ profile.phone }}</div>
                         </div>
+
                     </div>
                     <div class="account-content-card">
                         <div class="account-content-card-head d-flex justify-content-between align-items-center">
                             <div class="account-content-card-head-title">Edit password</div>
-                            <div class="account-content-card-head-edit">Edit</div>
+                            <div class="account-content-card-head-edit" @click="showUpdatePassword = true">Edit</div>
                         </div>
                         <div class="account-content-body">
                             <div class="account-content-body-text">Password: *******</div>
                         </div>
+
                     </div>
                     <div class="account-content-card">
                         <div class=" account-content-card-head d-flex justify-content-between align-items-center">
                             <div class="account-content-card-head-title">Address book</div>
-                            <div class="account-content-card-head-edit">Edit</div>
+                            <div class="account-content-card-head-edit" @click="showUpdateAddress = true">Edit</div>
                         </div>
                         <div class="account-content-body">
-                            <div class="account-content-body-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.name }}
+                            </div>
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.email }}
+                            </div>
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.phone }}
+                            </div>
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.full_address }}
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="account-content-right">
@@ -48,11 +61,14 @@
                             <div class="account-content-card-head-title">Saved items</div>
                         </div>
                         <div class="account-content-body">
-                            <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
+                            <div class="account-content-body-text">
+                                All your favorite pieces in one beautiful place.</div>
                         </div>
-                        <div class="account-content-footer">
-                            show all
-                        </div>
+                        <NuxtLink to="/save-item">
+                            <div class="account-content-footer">
+                                show all
+                            </div>
+                        </NuxtLink>
                     </div>
                     <div class="account-content-card">
                         <div class="account-content-card-head d-flex justify-content-between align-items-center">
@@ -73,7 +89,7 @@
                 <div class="account-content-card">
                     <div class="account-content-card-head d-flex justify-content-between align-items-center">
                         <div class="account-content-card-head-title">Profile</div>
-                        <div class="account-content-card-head-edit">Edit</div>
+                        <div class="account-content-card-head-edit" @click="showUpdateProfile = true">Edit</div>
                     </div>
                     <div class="account-content-body">
                         <div class="account-content-body-text">Full Name: {{ profile.username }}</div>
@@ -84,7 +100,7 @@
                 <div class="account-content-card">
                     <div class="account-content-card-head d-flex justify-content-between align-items-center">
                         <div class="account-content-card-head-title">Edit password</div>
-                        <div class="account-content-card-head-edit">Edit</div>
+                        <div class="account-content-card-head-edit" @click="showUpdatePassword = true">Edit</div>
                     </div>
                     <div class="account-content-body">
                         <div class="account-content-body-text">Password: *******</div>
@@ -93,10 +109,20 @@
                 <div class="account-content-card">
                     <div class=" account-content-card-head d-flex justify-content-between align-items-center">
                         <div class="account-content-card-head-title">Address book</div>
-                        <div class="account-content-card-head-edit">Edit</div>
+                        <div class="account-content-card-head-edit" @click="showUpdateAddress = true">Edit</div>
                     </div>
                     <div class="account-content-body">
-                        <div class="account-content-body-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city
+                        <div class="account-content-body-text">
+                            {{ address.attributes?.name }}
+                        </div>
+                        <div class="account-content-body-text">
+                            {{ address.attributes?.email }}
+                        </div>
+                        <div class="account-content-body-text">
+                            {{ address.attributes?.phone }}
+                        </div>
+                        <div class="account-content-body-text">
+                            {{ address.attributes?.full_address }}
                         </div>
                     </div>
                 </div>
@@ -107,9 +133,11 @@
                     <div class="account-content-body">
                         <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
                     </div>
-                    <div class="account-content-footer">
-                        show all
-                    </div>
+                    <NuxtLink to="/save-item">
+                        <div class="account-content-footer">
+                            show all
+                        </div>
+                    </NuxtLink>
                 </div>
                 <div class="account-content-card">
                     <div class="account-content-card-head d-flex justify-content-between align-items-center">
@@ -124,41 +152,44 @@
                 </div>
             </div>
         </div>
+        <UserProfile v-if="showUpdateProfile" :isMobile="isMobile" @closeUpdate="showUpdateProfile = false">
+        </UserProfile>
+        <Password v-if="showUpdatePassword" :isMobile="isMobile" @closeUpdate="showUpdatePassword = false">
+        </Password>
+        <Address v-if="showUpdateAddress" :item="address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
-// import AddressPopup from "~/components/address"
-// import ListOrderPopup from "~/components/user/listOrder.vue"
-// import ListProductPopup from "~/components/user/listProduct.vue"
-// import ListLike from "~/components/user/listProductLike.vue"
+import Address from "~/components/account/address.vue"
+import Password from "~/components/account/password.vue"
+import UserProfile from "~/components/account/profile.vue"
 export default {
     name: 'IndexPage',
-    // components: {
-    //     AddressPopup,
-    //     ListOrderPopup,
-    //     ListProductPopup,
-    //     ListLike
-    // },
+    components: {
+        Address,
+        Password,
+        UserProfile,
+        // ListProductPopup,
+    },
     computed: {
         ...mapGetters({
             profile: "auth/getProfile",
             loggedIn: "auth/getloggedIn",
-            // bannerInfo: "common/getBannerinfo",
-            // address: "auth/getAddress",
+            address: "auth/getAddress",
             // listOrder: "order/getListOrder",
             // listProduct: "product/getListProductView",
-            // listLike: "product/getListProductLike",
         }),
     },
     mixins: [general],
     data() {
         return {
             isMobile: false,
-            show_address: false,
-            type_address: 'create',
+            showUpdateAddress: false,
+            showUpdatePassword: false,
+            showUpdateProfile: false,
             isShowOrders: false,
             isShowProducts: false,
             isShowLike: false
@@ -166,10 +197,10 @@ export default {
     },
     async mounted() {
         if (!this.loggedIn) {
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: '/dang-nhap' })
         }
         this.isMobile = this.checkMobile()
-        // await this.getAddressByUser(this.profile.id)
+        await this.getAddressByUser(this.profile.id)
         // await this.getListOrder({
         //     filters: {
         //         user: { id: { $eq: this.profile.id } }
@@ -179,16 +210,14 @@ export default {
         //     this.setShow(parseInt(this.$route.hash.replace('#', '').replace('tab', '')))
         // }
         // this.getListProvince({ pagination: { pageSize: 100 } })
-        // this.getListProductLike({ user_id: this.profile.id })
     },
     methods: {
         ...mapActions({
             setLoggedIn: "auth/setLoggedIn",
             logout: 'auth/logout',
-            // getAddressByUser: "auth/getAddressByUser",
+            getAddressByUser: "auth/getAddressByUser",
             // getListOrder: "order/getListOrder",
             // getListProvince: 'user/getListProvince',
-            // getListProductLike: 'product/getListProductLike'
         }),
         async onRefresh() {
             await this.getListOrder({
@@ -214,13 +243,9 @@ export default {
             await this.getAddressByUser(this.profile.id)
             this.show_address = false
         },
-        onAddAddress() {
-            this.show_address = true
-            this.type_address = 'create'
-        },
-        onUpdateAddress() {
-            this.show_address = true
-            this.type_address = 'edit'
+        async closeUpdateAddress() {
+            await this.getAddressByUser(this.profile.id)
+            this.showUpdateAddress = false
         },
         setShow(_num) {
             switch (_num) {

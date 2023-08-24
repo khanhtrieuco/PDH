@@ -21,7 +21,7 @@ export default {
                 cookie: this.$cookies,
                 recache: true
             });
-            commit('set_login_in' );
+            commit('set_login_in');
             return true
         }
         return false
@@ -31,6 +31,49 @@ export default {
         commit
     }, data) {
         await commit('clearSession');
+    },
+
+    changePassword: async function ({
+        commit
+    }, data) {
+        let res = await ApiService.request({
+            method: "post",
+            url: "api/auth/change-password",
+            data: data
+        });
+        if (res && res.user) {
+            await commit('set_token', {
+                jwt: res.jwt,
+                cookie: this.$cookies,
+                recache: true
+            });
+            await commit('set_profile', {
+                user: res.user,
+                cookie: this.$cookies,
+                recache: true
+            });
+            commit('set_login_in');
+        }
+        return res
+    },
+
+    updateProfile: async function ({
+        commit
+    }, data) {
+        let res = await ApiService.request({
+            method: "put",
+            url: `/api/users/${data.id}`,
+            data: data.data
+        });
+        if (res) {
+            await commit('set_profile', {
+                user: res,
+                cookie: this.$cookies,
+                recache: true
+            });
+            return res
+        }
+        return {}
     },
 
     callBackGoogle: async function ({
@@ -51,7 +94,7 @@ export default {
                 cookie: this.$cookies,
                 recache: true
             });
-            commit('set_login_in' );
+            commit('set_login_in');
             return true
         }
         return false
@@ -75,7 +118,7 @@ export default {
                 cookie: this.$cookies,
                 recache: true
             });
-            commit('set_login_in' );
+            commit('set_login_in');
             return true
         }
         return false
@@ -100,36 +143,36 @@ export default {
                 cookie: this.$cookies,
                 recache: true
             });
-            commit('set_login_in' );
+            commit('set_login_in');
             return true
         }
         return false
     },
 
     setLoggedIn: async function ({ commit }, data) {
-        commit('set_login_in' );
+        commit('set_login_in');
     },
 
     showAuth: async function ({
         commit
     }, data) {
-        commit('set_show_auth' , {
-            showAuth : Math.floor(Math.random() * 1000)
+        commit('set_show_auth', {
+            showAuth: Math.floor(Math.random() * 1000)
         })
     },
 
     hideAuth: async function ({
         commit
     }, data) {
-        commit('set_show_auth' , {
-            showAuth : Math.floor(Math.random() * 1000) * -1
+        commit('set_show_auth', {
+            showAuth: Math.floor(Math.random() * 1000) * -1
         })
     },
 
     getAddressByUser: async ({ commit, rootState }, data) => {
         const query = qs.stringify({
             filters: {
-                user_id : { $eq: data }
+                user_id: { $eq: data }
             },
             populate: '*'
         }, {
@@ -174,8 +217,8 @@ export default {
     updateAddress: async ({ commit, rootState }, data) => {
         let res = await ApiService.request({
             method: "put",
-            url: "/api/addresses/"+ data.id,
-            data: { data : data.data }
+            url: "/api/addresses/" + data.id,
+            data: { data: data.data }
         });
         if (res && res.data && res.data.length > 0) {
             commit('set_address', {

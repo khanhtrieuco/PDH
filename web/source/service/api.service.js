@@ -66,6 +66,11 @@ class ApiService {
         }
         if (error) {
             if (error.response) {
+                // this.$bvToast.toast(error.response.data.error.message, {
+                //     title: 'Lỗi',
+                //     autoHideDelay: 5000,
+                //     appendToast: append
+                //   })
                 response = error.response.data
             }
 
