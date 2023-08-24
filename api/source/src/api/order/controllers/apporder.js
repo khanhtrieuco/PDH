@@ -20,7 +20,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 		// });
 		let address = await strapi.db.query('api::address.address').findOne({
 			select: ['name', 'phone', 'email', 'full_address'],
-			where: { users_permissions_user: user.id }
+			where: { user_id: user.id }
 		});
 		console.log(address)
 

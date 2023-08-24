@@ -129,7 +129,7 @@ export default {
     getAddressByUser: async ({ commit, rootState }, data) => {
         const query = qs.stringify({
             filters: {
-                user : { id : { $eq: 1 } }
+                user_id : { $eq: data }
             },
             populate: '*'
         }, {
