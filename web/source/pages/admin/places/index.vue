@@ -73,9 +73,9 @@ export default {
         return {
             columns: [
                 {
-                    dataIndex: 'attributes.map',
+                    dataIndex: 'attributes.thub',
                     width: 150,
-                    key: 'map',
+                    key: 'thub',
                     title: 'Hình ảnh',
                     scopedSlots: { customRender: 'images' },
                 },{
@@ -86,9 +86,23 @@ export default {
                 },{
                     title: 'Địa chỉ',
                     dataIndex: 'attributes.address',
-                    width: 150,
+                    width: 250,
                     align: 'center',
                     key: 'address',
+                    sorter: true
+                },{
+                    title: 'Số điện thoại',
+                    dataIndex: 'attributes.phone',
+                    width: 150,
+                    align: 'center',
+                    key: 'phone',
+                    sorter: true
+                },{
+                    title: 'Giờ hoạt động',
+                    dataIndex: 'attributes.time',
+                    width: 190,
+                    align: 'center',
+                    key: 'time',
                     sorter: true
                 },{
                     title: 'Sắp xếp',

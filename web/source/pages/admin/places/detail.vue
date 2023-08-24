@@ -32,10 +32,20 @@
                     <a-input v-model="form.link" />
                 </a-form-model-item>
             </a-col>
+            <a-col :span="12">
+                <a-form-model-item label="Số điện thoại" prop="order">
+                    <a-input v-model="form.phone" type="number" />
+                </a-form-model-item>
+            </a-col>
+            <a-col :span="12" style="padding-left: 10px;">
+                <a-form-model-item label="Giờ hoạt động" prop="order">
+                    <a-input v-model="form.time" type="number" />
+                </a-form-model-item>
+            </a-col>
             <a-col :span="24">
                 <a-col :span="12">
-                    <a-form-model-item label="Hình bản đồ">
-                        <upload-image :thub.sync="form.map" :thubLink="item?.attributes?.map.data?.attributes.url" />
+                    <a-form-model-item label="Hình ảnh">
+                        <upload-image :thub.sync="form.thub" :thubLink="item?.attributes?.thub.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
             </a-col>
@@ -76,7 +86,9 @@ export default {
                 name_en: undefined,
                 address: undefined,
                 address_en: undefined,
-                map: undefined,
+                thub: undefined,
+                phone: undefined,
+                time: undefined,
                 link: undefined,
                 order: 0
             },
@@ -99,6 +111,8 @@ export default {
                 address_en: this.item.attributes.address_en,
                 map: this.item.attributes.map?.data?.id,
                 order: this.item.attributes.order,
+                time: this.item.attributes.time,
+                phone: this.item.attributes.phone,
                 link: this.item.attributes.link
             }
         }
@@ -120,6 +134,8 @@ export default {
                     address_en: val.attributes.address_en,
                     map: val.attributes.map?.data?.id,
                     order: val.attributes.order,
+                    time: val.attributes.time,
+                    phone: val.attributes.phone,
                     link: val.attributes.link
                 }
             }

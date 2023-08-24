@@ -108,6 +108,10 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 		return { message: 'Không tìm thấy thông tin giỏ hàng' };
 	},
 
+	async upload(ctx) {
+		return true
+	},
+
 	async deletelike(ctx) {
 		const { user } = ctx.state
 		let { like_id, product_id } = ctx.request.body;

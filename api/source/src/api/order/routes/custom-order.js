@@ -11,6 +11,11 @@ module.exports = {
       handler: 'apporder.deletelike'
     },
     {
+      method: 'POST',
+      path: '/app/upload', 
+      handler: 'apporder.upload'
+    },
+    {
       method: 'GET',
       path: '/app/statistic', 
       handler: 'apporder.statistic'
