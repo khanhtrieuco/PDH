@@ -7,6 +7,8 @@ export default {
             url: "/api/collection-cates",
             data: data
         });
+        if(res && res.data)
+            return res.data
         return res
     },
     getListItem: async ({ commit, rootState }, data = {}) => {
@@ -29,6 +31,21 @@ export default {
                 pagination: res.meta?.pagination
             }
         })
+    },
+    getListItemSub: async ({ commit, rootState }, data = {}) => {
+        const query = qs.stringify({
+            filters: data.filters,
+            sort: data.sort,
+            pagination: data.pagination,
+            populate: '*'
+        }, {
+            encodeValuesOnly: true, // prettify URL
+        });
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/collection-cates?${query}`
+        })
+        return res.data
     },
     updateItem: async function ({
         commit

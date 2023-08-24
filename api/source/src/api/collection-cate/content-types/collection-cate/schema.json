@@ -42,17 +42,17 @@
       "target": "api::collection.collection",
       "mappedBy": "collection_cate"
     },
-    "collection_child": {
+    "parent": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::collection-cate.collection-cate",
-      "inversedBy": "collection_parent"
+      "inversedBy": "child"
     },
-    "collection_parent": {
+    "child": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::collection-cate.collection-cate",
-      "mappedBy": "collection_child"
+      "mappedBy": "parent"
     },
     "thub_mobile": {
       "type": "media",
