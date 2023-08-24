@@ -3,7 +3,7 @@
     <a-layout-sider v-model="collapsed" :trigger="null" collapsible width="250">
       <div class="logo">
         <NuxtLink to="/">
-          <img src="/images/logo.png" v-if="!collapsed" />
+          <img class="admin-crm-logo" src="/images/logo.png" v-if="!collapsed" />
         </NuxtLink>
       </div>
       <a-menu theme="dark" mode="inline">
@@ -124,7 +124,10 @@ export default {
 
 #layout .logo {
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  /* background: rgba(255, 255, 255, 0.2); */
   margin: 16px;
+}
+.admin-crm-logo{
+  max-height: 32px;
 }
 </style>
