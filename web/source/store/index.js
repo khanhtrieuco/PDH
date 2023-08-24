@@ -12,6 +12,7 @@ import authModule from './modules/auth'
 import newCategoryModule from './modules/new_category'
 import newsModule from './modules/news'
 import supportModule from './modules/support'
+import CollectionCateModule from './modules/collection_cate'
 import faqModule from './modules/faq'
 import userModule from './modules/user'
 import likeModule from './modules/like'
@@ -41,6 +42,7 @@ const createStore = () => {
             place: placeModule,
             payment: paymentModule,
             shipping: shippingModule,
+            collectionCate: CollectionCateModule
         }
     })
 }

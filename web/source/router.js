@@ -35,7 +35,7 @@ const OrderCrm = () => interopDefault(import('./pages/admin/orders/index.vue'))
 const ClubsCrm = () => interopDefault(import('./pages/admin/clubs/index.vue'))
 const SupportsCrm = () => interopDefault(import('./pages/admin/cares/index.vue'))
 const PlaceCrm = () => interopDefault(import('./pages/admin/places/index.vue'))
-const DistributorCrm = () => interopDefault(import('./pages/admin/distributor/index.vue'))
+const MenuCrm = () => interopDefault(import('./pages/admin/menu/index.vue'))
 
 Vue.use(Router)
 
@@ -153,8 +153,8 @@ export function createRouter() {
                 component: PlaceCrm
             },
             {
-                path: '/crm-admin/distributor',
-                component: DistributorCrm
+                path: '/crm-admin/menu',
+                component: MenuCrm
             }
         ]
     })

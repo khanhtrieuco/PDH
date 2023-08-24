@@ -3,7 +3,7 @@ import getters from './getters';
 import mutations from './mutations';
 
 export const state = () => ({
-    list_distributor: {
+    list_item: {
         data: [],
         pagination: {
             page: 1,

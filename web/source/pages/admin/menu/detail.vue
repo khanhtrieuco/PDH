@@ -12,44 +12,11 @@
                     <a-input v-model="form.name_en" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12">
-                <a-form-model-item ref="address" label="Địa chỉ" prop="address">
-                    <a-input v-model="form.address" />
-                </a-form-model-item>
-            </a-col>
             <a-col :span="12" style="padding-left: 10px;">
-                <a-form-model-item ref="address_en" label="Địa chỉ tiếng anh" prop="address_en">
-                    <a-input v-model="form.address_en" />
-                </a-form-model-item>
-            </a-col>
-            <a-col :span="12">
                 <a-form-model-item label="Vị trí hiển thị" prop="order">
                     <a-input v-model="form.order" type="number" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
-                <a-form-model-item ref="link" label="Link google map" prop="link">
-                    <a-input v-model="form.link" />
-                </a-form-model-item>
-            </a-col>
-            <a-col :span="12">
-                <a-form-model-item label="Số điện thoại" prop="order">
-                    <a-input v-model="form.phone" />
-                </a-form-model-item>
-            </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
-                <a-form-model-item label="Giờ hoạt động" prop="order">
-                    <a-input v-model="form.time" />
-                </a-form-model-item>
-            </a-col>
-            <a-col :span="24">
-                <a-col :span="12">
-                    <a-form-model-item label="Hình ảnh">
-                        <upload-image :thub.sync="form.thub" :thubLink="item?.attributes?.thub.data?.attributes.url" />
-                    </a-form-model-item>
-                </a-col>
-            </a-col>
-            
         </a-row>
         <a-form-model-item :wrapper-col="{ span: 4, offset: 20 }">
             <a-button v-if="modalType === 'create'" type="primary" @click="onSubmitAdd">
@@ -84,19 +51,11 @@ export default {
             form: {
                 name: undefined,
                 name_en: undefined,
-                address: undefined,
-                address_en: undefined,
-                thub: undefined,
-                phone: undefined,
-                time: undefined,
-                link: undefined,
                 order: 0
             },
             rules: {
                 name: [{ required: true, message: 'Tên không thể để trống', trigger: 'blur' }],
-                address: [{ required: true, message: 'Địa chỉ không thể để trống', trigger: 'blur' }],
                 name_en: [{ required: true, message: 'Tên không thể để trống', trigger: 'blur' }],
-                address_en: [{ required: true, message: 'Địa chỉ không thể để trống', trigger: 'blur' }]
             },
             loading: false,
         }
@@ -107,13 +66,7 @@ export default {
             this.form = {
                 name: this.item.attributes.name,
                 name_en: this.item.attributes.name_en,
-                address: this.item.attributes.address,
-                address_en: this.item.attributes.address_en,
-                map: this.item.attributes.map?.data?.id,
                 order: this.item.attributes.order,
-                time: this.item.attributes.time,
-                phone: this.item.attributes.phone,
-                link: this.item.attributes.link
             }
         }
     },
@@ -121,7 +74,6 @@ export default {
         modalType: function (val) {
             if (val && val === 'create') {
                 this.$refs.ruleForm.resetFields();
-                this.imageUrl = undefined
             }
         },
         item: function (val) {
@@ -130,13 +82,7 @@ export default {
                 this.form = {
                     name: val.attributes.name,
                     name_en: val.attributes.name_en,
-                    address: val.attributes.address,
-                    address_en: val.attributes.address_en,
-                    map: val.attributes.map?.data?.id,
                     order: val.attributes.order,
-                    time: val.attributes.time,
-                    phone: val.attributes.phone,
-                    link: val.attributes.link
                 }
             }
         },
@@ -148,10 +94,6 @@ export default {
             postbyUrl: 'common/postbyUrl'
         }),
         async onSubmitAdd() {
-            // if (!this.form.map) {
-            //     this.$message.warning('Vui lòng chọn map cho địa điểm!');
-            //     return
-            // }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
                     let rs = await this.createPlace({
@@ -174,10 +116,6 @@ export default {
             });
         },
         async onSubmitUpdate() {
-            // if (!this.form.map || !this.item.id) {
-            //     this.$message.warning('Vui lòng chọn map cho địa điểm!');
-            //     return
-            // }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
                     let rs = await this.updatePlace({

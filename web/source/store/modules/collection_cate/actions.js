@@ -4,12 +4,12 @@ export default {
     createItem: async function ({ commit }, data) {
         let res = await ApiService.request({
             method: "post",
-            url: "/api/distributors",
+            url: "/api/collection-cates",
             data: data
         });
         return res
     },
-    getListDistributor: async ({ commit, rootState }, data = {}) => {
+    getListItem: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             filters: data.filters,
             sort: data.sort,
@@ -20,22 +20,22 @@ export default {
         });
         let res = await ApiService.request({
             method: 'get',
-            url: `/api/distributors?${query}`
+            url: `/api/collection-cates?${query}`
         })
         commit('set_data', {
-            name: 'list_distributor',
+            name: 'list_item',
             data: {
                 data: res.data,
                 pagination: res.meta?.pagination
             }
         })
     },
-    updateDistributor: async function ({
+    updateItem: async function ({
         commit
     }, data) {
         let res = await ApiService.request({
             method: "put",
-            url: `/api/distributors/${data.id}`,
+            url: `/api/collection-cates/${data.id}`,
             data: { data : data.data }
         });
         if (res && res.data) {

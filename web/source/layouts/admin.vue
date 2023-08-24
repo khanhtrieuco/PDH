@@ -37,10 +37,10 @@
           <a-icon type="alert" />
           <span>Chăm sóc khách hàng</span>
         </a-menu-item>
-        <a-menu-item key="6" @click="goPage('/crm-admin/distributor')"
-          :class="$route.path === '/crm-admin/distributor' ? 'ant-menu-item-selected' : ''">
+        <a-menu-item key="6" @click="goPage('/crm-admin/menu')"
+          :class="$route.path === '/crm-admin/menu' ? 'ant-menu-item-selected' : ''">
           <a-icon type="solution" />
-          <span>Đối tác đăng ký</span>
+          <span>Quản lý menu</span>
         </a-menu-item>
         <a-menu-item key="7" @click="goPage('/crm-admin/places')"
           :class="$route.path === '/crm-admin/places' ? 'ant-menu-item-selected' : ''">
