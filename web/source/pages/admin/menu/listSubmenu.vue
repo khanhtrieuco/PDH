@@ -13,7 +13,8 @@
         </a-table>
         <a-modal title="Thông tin sub menu" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <DetailItem :item="current" :parent_id="id" :modalType="modalType" @onCancel="() => this.modalOpen = false"/>
+            <DetailItem :item="current" :parent_id="id" :modalType="modalType" 
+            @onCancel="() => this.modalOpen = false" @onReload="() => this.$emit('onReload')"/>
         </a-modal>
     </div>
 </template>

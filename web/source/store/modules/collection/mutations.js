@@ -4,5 +4,8 @@ export default {
     },
     set_collection(state, payload) {
         state.collection = payload.collection;
-    }
+    },
+    set_data(state, payload) {
+        state[payload.name] = payload.data;
+    },
 };

@@ -36,6 +36,7 @@ const ClubsCrm = () => interopDefault(import('./pages/admin/clubs/index.vue'))
 const SupportsCrm = () => interopDefault(import('./pages/admin/cares/index.vue'))
 const PlaceCrm = () => interopDefault(import('./pages/admin/places/index.vue'))
 const MenuCrm = () => interopDefault(import('./pages/admin/menu/index.vue'))
+const CollectionCrm = () => interopDefault(import('./pages/admin/collection/index.vue'))
 
 Vue.use(Router)
 
@@ -151,6 +152,9 @@ export function createRouter() {
             },{
                 path: '/crm-admin/places',
                 component: PlaceCrm
+            },{
+                path: '/crm-admin/collections',
+                component: CollectionCrm
             },
             {
                 path: '/crm-admin/menu',

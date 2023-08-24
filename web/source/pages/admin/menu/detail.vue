@@ -21,7 +21,7 @@
             </a-col>
             <a-col :span="14" style="padding-left: 20px;">
                 <b-card>
-                    <ListMenu :id="item?.id" :listItem="listItemSub" />
+                    <ListMenu :id="item?.id" :listItem="listItemSub" @onReload="onReloadSub" />
                 </b-card>
             </a-col>
         </a-row>
@@ -80,7 +80,7 @@ export default {
                 name_en: this.item.attributes.name_en,
                 order: this.item.attributes.order,
             }
-            let filters = { type : 'sub' , collection_parent: this.item.id }
+            let filters = { type : 'sub' , parent: this.item.id }
             this.listItemSub = await this.getListItemSub({ filters })
         }
     },
@@ -151,6 +151,10 @@ export default {
                 }
             });
         },
+        async onReloadSub() {
+            let filters = { type : 'sub' , parent: this.item.id }
+            this.listItemSub = await this.getListItemSub({ filters })
+        }
     }
 }
 </script>

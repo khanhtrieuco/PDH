@@ -105,7 +105,7 @@ export default {
                             data: {
                                 ...this.form,
                                 type: 'sub',
-                                collection_parent: this.parent_id
+                                parent: this.parent_id
                             }
                         })
                         if (rs && rs.id) {

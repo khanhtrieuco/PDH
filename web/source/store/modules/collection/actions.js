@@ -56,6 +56,55 @@ export default {
         }
     },
 
+    getListItem: async ({ commit, rootState }, data = {}) => {
+        const query = qs.stringify({
+            filters: data.filters,
+            sort: data.sort,
+            pagination: data.pagination,
+            populate: '*'
+        }, {
+            encodeValuesOnly: true, // prettify URL
+        });
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/collections?${query}`
+        })
+        commit('set_data', {
+            name: 'list_item',
+            data: {
+                data: res.data,
+                pagination: res.meta?.pagination
+            }
+        })
+    },
+
+    createItem: async function ({
+        commit
+    }, data) {
+        let res = await ApiService.request({
+            method: "post",
+            url: `/api/collections`,
+            data: { data : data.data }
+        });
+        if (res && res.data) {
+            return res.data
+        }
+        return false
+    },
+
+    updateItem: async function ({
+        commit
+    }, data) {
+        let res = await ApiService.request({
+            method: "put",
+            url: `/api/collections/${data.id}`,
+            data: { data : data.data }
+        });
+        if (res && res.data) {
+            return res.data
+        }
+        return false
+    },
     // getListSubCollection: async ({ commit, rootState }, data = {}) => {
     //     let res = await ApiService.request({
     //         method: 'get',

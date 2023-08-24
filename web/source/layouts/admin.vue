@@ -42,7 +42,12 @@
           <a-icon type="solution" />
           <span>Quản lý menu</span>
         </a-menu-item>
-        <a-menu-item key="7" @click="goPage('/crm-admin/places')"
+        <a-menu-item key="7" @click="goPage('/crm-admin/collections')"
+          :class="$route.path === '/crm-admin/collections' ? 'ant-menu-item-selected' : ''">
+          <a-icon type="solution" />
+          <span>Quản lý bộ sưu tập</span>
+        </a-menu-item>
+        <a-menu-item key="8" @click="goPage('/crm-admin/places')"
           :class="$route.path === '/crm-admin/places' ? 'ant-menu-item-selected' : ''">
           <a-icon type="bank" />
           <span>Quản lý chi nhánh</span>
