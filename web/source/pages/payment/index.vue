@@ -38,12 +38,12 @@
                                     @click="shiping_type = 2">Pick up Store</div>
                             </div>
                             <div class="payment-step-address-info" v-if="shiping_type === 1">
-                                <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address">
+                                <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
                                     Bạn chưa có địa chỉ. Bấm vào đây để cập nhật địa chỉ.</div>
                                 <div v-else>
-                                    <div class="payment-step-address-name">{{ user_address?.attributes.name }}</div>
-                                    <div class="payment-step-address-des">{{ user_address?.attributes.full_address }}</div>
-                                    <div class="payment-step-address-des">{{ `${user_address?.attributes.phone}` }}
+                                    <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
+                                    <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
+                                    <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                     </div>
                                     <div class="payment-step-address-update mt-1" @click="openAddressPopup">Cập nhật</div>
                                 </div>
@@ -126,12 +126,12 @@
                         </div>
                     </div>
                     <div class="payment-step-address-info" v-if="shiping_type === 1">
-                        <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address">
+                        <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
                             Bạn chưa có địa chỉ. Bấm vào đây để cập nhật địa chỉ.</div>
                         <div v-else>
-                            <div class="payment-step-address-name">{{ user_address?.attributes.name }}</div>
-                            <div class="payment-step-address-des">{{ user_address?.attributes.full_address }}</div>
-                            <div class="payment-step-address-des">{{ `${user_address?.attributes.phone}` }}
+                            <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
+                            <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
+                            <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                             </div>
                             <div class="payment-step-address-update mt-1" @click="openAddressPopup">Cập nhật</div>
                         </div>

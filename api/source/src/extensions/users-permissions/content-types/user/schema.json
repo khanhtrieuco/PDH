@@ -71,12 +71,6 @@
       "target": "api::cart.cart",
       "mappedBy": "user"
     },
-    "address": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::address.address",
-      "mappedBy": "users_permissions_user"
-    },
     "orders": {
       "type": "relation",
       "relation": "oneToMany",
@@ -88,6 +82,12 @@
     },
     "phone": {
       "type": "string"
+    },
+    "address": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::address.address",
+      "mappedBy": "user"
     }
   }
 }

@@ -207,7 +207,7 @@ export default {
                 email: this.form.email,
                 phone: this.form.phone,
                 full_address: this.form.full_address,
-                users_permissions_user: this.profile.id,
+                users: this.profile.id,
                 provinces: this.province,
                 districts: this.district,
                 wards: this.ward
