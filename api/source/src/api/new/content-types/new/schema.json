@@ -54,6 +54,9 @@
         "lookbook",
         "campaigns"
       ]
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }
