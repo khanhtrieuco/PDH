@@ -117,13 +117,13 @@ export default {
                 content_en: undefined,
                 thub: undefined,
                 order: 0,
-                category: undefined
+                type: undefined,
+                new_category: undefined
             },
             rules: {
                 title: [{ required: true, message: 'Tiêu đề không thể để trống', trigger: 'blur' }],
                 short_content: [{ required: true, message: 'Nội dung rút gọn không thể để trống', trigger: 'blur' }],
                 content: [{ required: true, message: 'Nội dung không thể để trống', trigger: 'blur' }],
-                category: [{ required: true, message: 'Chuyên mục không thể để trống', trigger: 'change' }]
             },
             loading: false,
         }
@@ -140,8 +140,8 @@ export default {
                 content_en: this.item.attributes.content_en,
                 thub: this.item.attributes.thub?.data?.id,
                 order: this.item.attributes.order,
-                category: this.item.attributes.category,
-                state: this.item.attributes.state
+                new_category: this.item.attributes.new_category.data?.id,
+                type: this.item.attributes.type
             }
         }
     },
@@ -164,39 +164,40 @@ export default {
                     content_en: val.attributes.content_en,
                     thub: val.attributes.thub?.data?.id,
                     order: val.attributes.order,
-                    category: val.attributes.category,
-                    state: val.attributes.state
+                    new_category: val.attributes.new_category.data?.id,
+                    type: val.attributes.state
                 }
             }
         },
     },
     methods: {
         ...mapActions({
-            updateClub: "club/updateClub",
-            createClub: "club/createClub",
-            postbyUrl: 'common/postbyUrl'
+            updateItem: "news/updateItem",
+            createItem: "news/createItem"
         }),
         async onSubmitAdd() {
             if (!this.form.thub) {
-                this.$message.warning('Vui lòng chọn ảnh cho club aura!');
+                this.$message.warning('Vui lòng chọn ảnh!');
+                return
+            }
+            if (!this.form.new_category || !this.type) {
+                this.$message.warning('Vui lòng nhập đủ thông tin');
                 return
             }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
-                    let rs = await this.createClub({
+                    let rs = await this.createItem({
                         data: {
                             ...this.form,
-                            state: 'active',
-                            showhome: true,
                             slug: this.getSlug(this.form.title)
                         }
                     })
                     if (rs && rs.id) {
-                        this.$message.success('Tạo mới club aura thành công');
+                        this.$message.success('Tạo mới thành công');
                         this.$emit('onReload')
                         this.$emit('onCancel')
                     } else {
-                        this.$message.error('Tạo mới club aura không thành công! Xin thử lại sau!');
+                        this.$message.error('Tạo mới không thành công! Xin thử lại sau!');
                     }
                 } else {
                     console.log('error submit!!');
@@ -205,26 +206,29 @@ export default {
             });
         },
         async onSubmitUpdate() {
-            if (!this.form.thub || !this.item.id) {
-                this.$message.warning('Vui lòng chọn ảnh cho club aura!');
+            if (!this.form.thub) {
+                this.$message.warning('Vui lòng chọn ảnh!');
+                return
+            }
+            if (!this.form.new_category || !this.type) {
+                this.$message.warning('Vui lòng nhập đủ thông tin');
                 return
             }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
-                    let rs = await this.updateClub({
+                    let rs = await this.updateItem({
                         id: this.item.id,
                         data: {
                             ...this.form,
-                            showhome: true,
                             slug: this.getSlug(this.form.title)
                         }
                     })
                     if (rs && rs.id) {
-                        this.$message.success('Cập nhật club aura thành công');
+                        this.$message.success('Cập nhật thành công');
                         this.$emit('onReload')
                         this.$emit('onCancel')
                     } else {
-                        this.$message.error('Cập nhật club aura không thành công! Xin thử lại sau!');
+                        this.$message.error('Cập nhật không thành công! Xin thử lại sau!');
                     }
                 } else {
                     console.log('error submit!!');
