@@ -6,12 +6,23 @@
                 <a-row>
                     <a-col :span="12">
                         <a-form-model-item ref="name" label="Tên sản phẩm" prop="name">
-                            <a-input v-model="form.name" @blur="() => { $refs.title.onFieldBlur(); }" />
+                            <a-input v-model="form.name" @blur="() => { $refs.name.onFieldBlur(); }" />
                         </a-form-model-item>
                     </a-col>
                     <a-col :span="12" style="padding-left: 10px;">
                         <a-form-model-item ref="name_en" label="Tên tiếng anh" prop="name_en">
                             <a-input v-model="form.name_en" />
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="12">
+                        <a-form-model-item label="Sku code" prop="sku_code">
+                            <a-input v-model="form.sku_code" />
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="12" style="padding-left: 10px;">
+                        <a-form-model-item label="Bộ sưu tập" prop="collection">
+                            <Select :default="form.collection" placeholder="Chọn bộ sưu tập" :listItem="listCollection"
+                                @onSelect="(e) => form.collection = e" />
                         </a-form-model-item>
                     </a-col>
                     <a-col :span="12">
@@ -98,11 +109,13 @@
 import general from "~/mixins/general";
 import { mapActions, mapGetters } from 'vuex'
 import ListMedia from "./listMedia.vue"
+import Select from "~/components/admin/select.vue"
 // import ListRelated from "./listRelated.vue"
 export default {
     mixins: [general],
     components: {
         ListMedia,
+        Select
         // ListRelated
     },
     computed: {
@@ -120,6 +133,12 @@ export default {
         modalType: {
             type: String,
             default: 'create'
+        },
+        listCollection: {
+            type: Array,
+            default() {
+                return []
+            }
         },
         // listRelated: {
         //     type: Object,
@@ -146,6 +165,8 @@ export default {
                 order: 0,
                 price: 0,
                 price_primary: 0,
+                sku_code: undefined,
+                collection: undefined
             },
             rules: {
                 name: [{ required: true, message: 'Tên không thể để trống', trigger: 'blur' }],
@@ -172,9 +193,11 @@ export default {
                 care_en: this.item.attributes.care_en,
                 price: this.item.attributes.price,
                 price_primary: this.item.attributes.price_primary,
+                sku_code: this.item.attributes.sku_code,
                 order: this.item.attributes.order,
                 thub: this.item.attributes.thub.data?.id,
                 thub_main: this.item.attributes.thub_main.data?.id,
+                collection: this.item.attributes.collection.data?.id,
             }
             this.list_media = this.item?.attributes.media?.data ?? []
             // this.list_related = this.item?.attributes.related?.data ?? []
@@ -203,9 +226,11 @@ export default {
                     care_en: val.attributes.care_en,
                     price: val.attributes.price,
                     price_primary: val.attributes.price_primary,
+                    sku_code: val.attributes.sku_code,
                     order: val.attributes.order,
                     thub: val.attributes.thub.data?.id,
                     thub_main: val.attributes.thub_main.data?.id,
+                    collection: val.attributes.collection.data?.id,
                 }
                 this.list_media = val.attributes.media?.data ?? []
             } else {

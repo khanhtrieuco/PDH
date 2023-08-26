@@ -76,6 +76,7 @@ export default {
                 pagination: res.meta?.pagination
             }
         })
+        return res.data
     },
 
     createItem: async function ({

@@ -93,7 +93,7 @@
         </a-table>
         <a-modal title="Thông tin sản phẩm" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :modalType="modalType" 
+            <Detail :item="current" :modalType="modalType" :listCollection="listCollection"
             @onReloadRelated="onReloadRelated" @onCancel="() => this.modalOpen = false" @onReload="() => this.onRefresh()" />
         </a-modal>
         <!-- :listRelated="listRelated"  -->
@@ -137,6 +137,13 @@ export default {
                     width: 250,
                     fixed: 'left',
                     title: 'Tên sản phẩm'
+                },{
+                    dataIndex: 'attributes.sku_code',
+                    sorter: true,
+                    key: 'sku_code',
+                    width: 150,
+                    fixed: 'left',
+                    title: 'SKU'
                 },
                 {
                     title: 'Bộ sưu tập',
@@ -193,36 +200,42 @@ export default {
             modalOpen: false,
             modalType: 'create',
             current: {},
-            loading: false
+            loading: false,
+            listCollection: []
         };
     },
     computed: {
         ...mapGetters({
             listItem: "product/getListProductAdmin",
-            listCategory: "category/getListCategory",
-            // listRelated: "product/getListProductRelated"
+            listRelated: "product/getListProductRelated"
         })
     },
-    mounted() {
+    async mounted() {
         this.loadData();
-        this.getListCategory({
+        let temp = await this.getListCollection({
             pagination: {
                 page: 1,
                 pageSize: 100
             }
         });
-        // this.getListProductRelated({
-        //     pagination: {
-        //         page: 1,
-        //         pageSize: 100
-        //     }
-        // })
+        this.listCollection = temp.map(o => {
+            return {
+                value: o.id,
+                text: o.attributes.name
+            }
+        })
+        this.getListProductRelated({
+            pagination: {
+                page: 1,
+                pageSize: 100
+            }
+        })
     },
     methods: {
         ...mapActions({
-            getListCategory: "category/getListCategory",
+            getListCollection: "collection/getListItem",
             getListProductAdmin: "product/getListProductAdmin",
-            // getListProductRelated: "product/getListProductRelated",
+            getListProductRelated: "product/getListProductRelated",
             updateProduct: "product/updateProduct"
         }),
         loadData: async function () {
@@ -299,12 +312,12 @@ export default {
             this.loading = false
         },
         onReloadRelated() {
-            // this.getListProductRelated({
-            //     pagination: {
-            //         page: 1,
-            //         pageSize: 100
-            //     }
-            // })
+            this.getListProductRelated({
+                pagination: {
+                    page: 1,
+                    pageSize: 100
+                }
+            })
         },
         onAddNew: function () {
             this.current = {}
