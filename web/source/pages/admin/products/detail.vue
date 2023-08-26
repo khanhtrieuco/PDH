@@ -98,7 +98,10 @@
             <ListMedia :list_media="list_media" @onAddMedia="(items) => onAddMedia(items)"
                 @onDeleteMedia="(id) => onDeleteMedia(id)" />
         </a-tab-pane>
-        <!-- <a-tab-pane key="3" tab="Sản phẩm liên quan" force-render v-if="modalType === 'edit'">
+        <a-tab-pane key="3" tab="Danh sách biến thể" force-render v-if="modalType === 'edit'">
+            <ListVariant :product_id="item?.id"/>
+        </a-tab-pane>
+        <!-- <a-tab-pane key="4" tab="Sản phẩm liên quan" force-render v-if="modalType === 'edit'">
             <ListRelated :listRelated="listRelated" :product_id="item?.id" @onReloadRelated="onReloadRelated" />
         </a-tab-pane> -->
 
@@ -110,19 +113,21 @@ import general from "~/mixins/general";
 import { mapActions, mapGetters } from 'vuex'
 import ListMedia from "./listMedia.vue"
 import Select from "~/components/admin/select.vue"
-// import ListRelated from "./listRelated.vue"
+import ListVariant from "./listVariant.vue"
+import ListRelated from "./listRelated.vue"
 export default {
     mixins: [general],
     components: {
         ListMedia,
-        Select
-        // ListRelated
+        Select,
+        ListVariant,
+        ListRelated
     },
     computed: {
         ...mapGetters({
-            listCategory: "category/getListCategory",
-            listSubcategory: "category/getListSubCategory",
-            listTip: "product/getListTip",
+            // listVariant: "variant/getListItem",
+            // listSubcategory: "category/getListSubCategory",
+            // listTip: "product/getListTip",
         })
     },
     props: {
@@ -241,7 +246,7 @@ export default {
     methods: {
         ...mapActions({
             updateProduct: "product/updateProduct",
-            createProduct: "product/createProduct"
+            createProduct: "product/createProduct",
         }),
         async onSubmitAdd() {
             this.$refs.ruleForm.validate(async valid => {

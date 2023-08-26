@@ -20,6 +20,7 @@ import placeModule from './modules/place'
 import sizeModule from './modules/size'
 import colorModule from './modules/color'
 import paymentModule from './modules/payment'
+import variantModule from './modules/variant'
 import shippingModule from './modules/shipping'
 
 const createStore = () => {
@@ -45,6 +46,7 @@ const createStore = () => {
             color: colorModule,
             size: sizeModule,
             payment: paymentModule,
+            variant: variantModule,
             shipping: shippingModule,
             collectionCate: CollectionCateModule
         }
