@@ -4,5 +4,8 @@ export default {
     },
     set_item(state, payload) {
         state.item = payload.item;
-    }
+    },
+    set_data(state, payload) {
+        state[payload.name] = payload.data;
+    },
 };

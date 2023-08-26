@@ -4,7 +4,14 @@ import mutations from './mutations';
 
 export const state = () => ({
     item: {},
-    list_item : []
+    list_news: [],
+    list_item: {
+        data: [],
+        pagination: {
+            page: 1,
+            pageSize: 10
+        }
+    }
 });
 
 export default {

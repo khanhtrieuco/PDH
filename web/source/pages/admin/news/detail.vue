@@ -18,27 +18,32 @@
                         <upload-image :thub.sync="form.thub" :thubLink="item?.attributes?.thub.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
+                <a-col :span="12">
+                    <a-form-model-item label="Vị trí hiển thị" prop="order">
+                        <a-input v-model="form.order" type="number" />
+                    </a-form-model-item>
+                </a-col>
             </a-col>
             <a-col :span="12">
-                <a-form-model-item label="Vị trí hiển thị" prop="order">
-                    <a-input v-model="form.order" type="number" />
+                <a-form-model-item label="Chuyên mục" prop="new_category">
+                    <Select :default="form.new_category" placeholder="Chọn chuyên mục" :listItem="listCategory"
+                        @onSelect="(e) => form.new_category = e" />
                 </a-form-model-item>
             </a-col>
             <a-col :span="12" style="padding-left: 10px;">
-                <a-form-model-item label="Chuyên mục" prop="category">
-                    <a-select v-model="form.category" placeholder="chọn chuyên mục">
-                        <a-select-option value="skincare">
-                            Chăm sóc da
-                        </a-select-option>
+                <a-form-model-item label="Loại" prop="type">
+                    <a-select v-model="form.type" placeholder="chọn loại">
                         <a-select-option value="news">
-                            Tin tức
+                            News
                         </a-select-option>
-                        <a-select-option value="knowledge">
-                            Kiến thức
+                        <a-select-option value="lookbook">
+                            Lookbook
+                        </a-select-option>
+                        <a-select-option value="campaigns">
+                            Campaigns
                         </a-select-option>
                     </a-select>
                 </a-form-model-item>
-
             </a-col>
             <a-col :span="12">
                 <a-form-model-item ref="short_content" label="Nội dung rút gọn" prop="short_content">
@@ -78,8 +83,13 @@
 <script>
 import general from "~/mixins/general";
 import { mapActions, mapMutations } from 'vuex'
+import Select from "~/components/admin/select.vue"
+
 export default {
     mixins: [general],
+    components: {
+        Select
+    },
     props: {
         item: {
             type: Object,
@@ -88,7 +98,13 @@ export default {
         modalType: {
             type: String,
             default: 'create'
-        }
+        },
+        listCategory: {
+            type: Array,
+            default() {
+                return []
+            }
+        },
     },
     data() {
         return {

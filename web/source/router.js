@@ -37,6 +37,8 @@ const SupportsCrm = () => interopDefault(import('./pages/admin/cares/index.vue')
 const PlaceCrm = () => interopDefault(import('./pages/admin/places/index.vue'))
 const MenuCrm = () => interopDefault(import('./pages/admin/menu/index.vue'))
 const CollectionCrm = () => interopDefault(import('./pages/admin/collection/index.vue'))
+const NewCollectionCrm = () => interopDefault(import('./pages/admin/newcategory/index.vue'))
+const NewsCrm = () => interopDefault(import('./pages/admin/news/index.vue'))
 
 Vue.use(Router)
 
@@ -155,8 +157,13 @@ export function createRouter() {
             },{
                 path: '/crm-admin/collections',
                 component: CollectionCrm
-            },
-            {
+            },{
+                path: '/crm-admin/new-collections',
+                component: NewCollectionCrm
+            },{
+                path: '/crm-admin/news',
+                component: NewsCrm
+            },{
                 path: '/crm-admin/menu',
                 component: MenuCrm
             }

@@ -30,14 +30,17 @@
                     </a-col>
                     <a-col :span="8" style="margin-bottom: 10px;">
                         <a-row>
-                            <a-col :span="6">Trạng thái</a-col>
+                            <a-col :span="6">Loại</a-col>
                             <a-col :span="17">
-                                <a-select style="width: 100%" @change="(e) => this.filter['state'] = e" allowClear>
-                                    <a-select-option value="active">
-                                        Active
+                                <a-select style="width: 100%" @change="(e) => this.filter['type'] = e" allowClear>
+                                    <a-select-option value="news">
+                                        News
                                     </a-select-option>
-                                    <a-select-option value="deleted">
-                                        Deleted
+                                    <a-select-option value="lookbook">
+                                        Lookbook
+                                    </a-select-option>
+                                    <a-select-option value="campaigns">
+                                        Campaigns
                                     </a-select-option>
                                 </a-select>
                             </a-col>
@@ -58,28 +61,18 @@
             <span slot="images" slot-scope="images">
                 <ThumbImage ratio="16-9" :src="images?.data?.attributes?.url"></ThumbImage>
             </span>
-            <span slot="category" slot-scope="categories">
-                <div v-for="cate in categories" :key="cate.id">{{ cate.attributes.name }}</div>
-            </span>
-            <span slot="subcategory" slot-scope="subcategory">
-                <div v-for="cate in subcategory" :key="cate.id">{{ cate.attributes.name }}</div>
-            </span>
-            <span slot="price" slot-scope="price">
-                {{ price | numberWithCommas }}{{ ' ' }}đ
-            </span>
-            <span slot="state" slot-scope="state">
-                <a-tag color="green" v-if="state === 'active'">Active</a-tag>
-                <a-tag color="red" v-else>Deleted</a-tag>
+            <span slot="new_category" slot-scope="new_category">
+                <div>{{ new_category.data?.attributes.name }}</div>
             </span>
             <span slot="action" slot-scope="text, record">
                 <a-button class="admin-btn" type="primary" @click="onEdit(record)">Cập nhật</a-button>
-                <a-button @click="deletedItem(record.id)" class="admin-btn" type="danger"
-                    v-if="record?.attributes?.state === 'active'">Xoá</a-button>
-                <a-button @click="activeItem(record.id)" class="admin-btn" ghost type="danger" v-else>Khôi phục</a-button>
+                <a-button @click="deletedItem(record.id)" class="admin-btn" type="danger">Xoá</a-button>
             </span>
         </a-table>
-        <a-modal title="Thông tin chuyên mục tin tức" :visible="modalOpen" :footer="null" width="1400px" @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :modalType="modalType" @onCancel="() => this.modalOpen = false" @onReload="()=> this.onRefresh()"/>
+        <a-modal title="Thông tin tin tức" :visible="modalOpen" :footer="null" width="1400px"
+            @cancel="() => this.modalOpen = false">
+            <Detail :item="current" :modalType="modalType" :listCategory="listCategory.data" @onCancel="() => this.modalOpen = false"
+                @onReload="() => this.onRefresh()" />
         </a-modal>
     </div>
 </template>
@@ -100,44 +93,43 @@ export default {
         return {
             columns: [
                 {
+                    dataIndex: 'attributes.thub',
+                    key: 'thub',
+                    title: 'Hình ảnh',
+                    width: 150,
+                    fixed: 'left',
+                    scopedSlots: { customRender: 'images' },
+                }, {
                     dataIndex: 'attributes.title',
                     key: 'title',
                     title: 'Tiêu đề',
                     sorter: true
-                },{
+                }, {
                     title: 'Chuyên mục',
-                    dataIndex: 'attributes.new_category.data.attributes.name',
+                    dataIndex: 'attributes.new_category',
                     width: 150,
                     align: 'center',
                     key: 'new_category',
-                    sorter: true
-                },{
+                    scopedSlots: { customRender: 'new_category' },
+                }, {
                     title: 'Loại',
                     dataIndex: 'attributes.type',
                     width: 150,
                     align: 'center',
                     key: 'type',
                     sorter: true
-                },{
+                }, {
                     title: 'Nội dung',
                     dataIndex: 'attributes.short_content',
                     key: 'short_content',
-                },{
+                }, {
                     title: 'Sắp xếp',
                     width: 120,
                     align: 'center',
                     dataIndex: 'attributes.order',
                     sorter: true,
                     key: 'order',
-                },{
-                    title: 'Trạng thái',
-                    dataIndex: 'attributes.state',
-                    width: 130,
-                    align: 'center',
-                    scopedSlots: { customRender: 'state' },
-                    key: 'state',
-                    sorter: true
-                },{
+                }, {
                     title: 'Action',
                     width: 230,
                     key: 'action',
@@ -149,73 +141,80 @@ export default {
             modalOpen: false,
             modalType: 'create',
             current: {},
-            loading: false
+            loading: false,
+            listCategory: []
         };
     },
     computed: {
         ...mapGetters({
-            listItem: "newCategory/getListItem"
+            listItem: "news/getListItem"
         })
     },
-    mounted() {
+    async mounted() {
         this.loadData();
+        let temp = await this.getListCategory();
+        this.listCategory = temp.map(o=> {return {
+            value: o.id,
+            text: o.attributes.name
+        }})
     },
     methods: {
         ...mapActions({
-            getListItem: "newCategory/getListItem",
-            createItem: "newCategory/createItem",
-            updateItem: "newCategory/updateItem",
+            getListCategory: "newCategory/getListItem",
+            getListItem: "news/getListItem",
+            deleteItem: "news/deleteItem",
+
         }),
         loadData: async function () {
             this.loading = true
-            await this.getListClubAdmin({
+            await this.getListItem({
                 pagination: {
                     page: this.listItem.pagination ? this.listItem.pagination.page : 1,
-                    pageSize: this.listItem.pagination? this.listItem.pagination.pageSize : 10
+                    pageSize: this.listItem.pagination ? this.listItem.pagination.pageSize : 10
                 }
             })
             this.loading = false
         },
         deletedItem: async function (id) {
-            let _data = {
-                state: 'deleted'
-            }
-            let rs = await this.updateItem({
-                id,
-                data: _data
-            })
-            this.loadData()
-            if (rs) {
-                this.$message.success('Xoá club thành công');
-            } else {
-                this.$message.error('Xoá club thất bại');
-            }
+            this.$bvModal.msgBoxConfirm('Bạn có chắc muốn xóa?')
+                .then(async (value) => {
+                    if (value) {
+                        let rs = await this.deleteItem({ id })
+                        this.loadData()
+                        if (rs) {
+                            this.$message.success('Xoá thành công');
+                        } else {
+                            this.$message.error('Xoá thất bại');
+                        }
+                    }
+                })
+                .catch(err => { })
         },
         onRefresh: async function () {
             this.filter = {}
             this.sort = []
-            this.onFilter()
+            this.handleRefesh()
         },
         handleRefesh: async function (_p, _f, _s) {
             this.loading = true
             let filters = {}
             let sort = []
-            if (this.filter.search) {
-                filters['title'] = { $containsi: this.filter.search }
+            if (this.filter.name) {
+                filters['title'] = { $containsi: this.filter.name }
             }
-            if (this.filter.category) {
-                filters['category'] = { $eq: this.filter.category }
+            if (this.filter.type) {
+                filters['type'] = { $eq: this.filter.type }
             }
             if (this.filter.state) {
                 filters['state'] = { $eq: this.filter.state }
             }
-            if(_s.order) {
+            if (_s && _s.order) {
                 sort.push(`${_s.columnKey}:${_s.order === "ascend" ? 'asc' : 'desc'}`)
                 this.sort = sort
             }
-            await this.getListClubAdmin({
+            await this.getListItem({
                 pagination: {
-                    page: _p.current,
+                    page: _p ? _p.current : 1,
                     pageSize: 10
                 },
                 filters,
@@ -233,12 +232,6 @@ export default {
             this.modalOpen = true
             this.modalType = 'edit'
         }
-        //   goProfile(alias_link) {
-        //     let href = new URL(`${window.location.href}/${alias_link}`);
-        //     // href.searchParams.set("profile", uuid);
-        //     window.location.href = href.toString();
-        //     // this.$router.push(`/profile/${uuid}`);
-        //   }
     }
 };
 </script>

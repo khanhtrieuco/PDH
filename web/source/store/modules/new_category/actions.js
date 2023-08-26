@@ -37,6 +37,7 @@ export default {
                 pagination: res.meta?.pagination
             }
         })
+        return res.data
     },
 
     createItem: async function ({
@@ -58,6 +59,20 @@ export default {
     }, data) {
         let res = await ApiService.request({
             method: "put",
+            url: `/api/new-categories/${data.id}`,
+            data: { data : data.data }
+        });
+        if (res && res.data) {
+            return res.data
+        }
+        return false
+    },
+
+    deleteItem: async function ({
+        commit
+    }, data) {
+        let res = await ApiService.request({
+            method: "delete",
             url: `/api/new-categories/${data.id}`,
             data: { data : data.data }
         });
