@@ -3,12 +3,9 @@ import getters from './getters';
 import mutations from './mutations';
 
 export const state = () => ({
-    club: {},
-    list_club : {
-        items: [],
-        pagination: {}
-    },
-    list_club_admin : {
+    show: {},
+    list_show : [],
+    list_item : {
         data: [],
         pagination: {
             page: 1,

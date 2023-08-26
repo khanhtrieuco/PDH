@@ -176,7 +176,6 @@ export default {
             createItem: "news/createItem"
         }),
         async onSubmitAdd() {
-            console.log(this.form)
             if (!this.form.thub) {
                 this.$message.warning('Vui lòng chọn ảnh!');
                 return

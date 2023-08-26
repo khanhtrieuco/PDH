@@ -1,19 +1,22 @@
 import qs from 'qs';
 import ApiService from '@/service/api.service'
 export default {
-    getListPayment: async ({ commit, rootState }, data = {}) => {
+    getListShow: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
-            sort: 'order:desc,id:desc',
-            populate:'*'
-          }, {
+            filters: data.filters,
+            pagination: data.pagination,
+            sort: 'order:desc,id:asc',
+            populate: '*'
+        }, {
             encodeValuesOnly: true, // prettify URL
-          });
-          let res = await ApiService.request({
-              method: 'get',
-              url: `/api/payments?${query}`
-          })
-        commit('set_list_payment', {
-            list_payment: res.data.filter(i => i.attributes.state === 'active')
+        });
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/shows/?${query}`
+        })
+        commit('set_data', {
+            name: 'list_show',
+            data: res.data
         })
     },
 
@@ -28,7 +31,7 @@ export default {
         });
         let res = await ApiService.request({
             method: 'get',
-            url: `/api/payments?${query}`
+            url: `/api/shows?${query}`
         })
         commit('set_data', {
             name: 'list_item',
@@ -44,8 +47,8 @@ export default {
     }, data) {
         let res = await ApiService.request({
             method: "post",
-            url: `/api/payments`,
-            data: { data : data.data }
+            url: `/api/shows`,
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data
@@ -58,8 +61,8 @@ export default {
     }, data) {
         let res = await ApiService.request({
             method: "put",
-            url: `/api/payments/${data.id}`,
-            data: { data : data.data }
+            url: `/api/shows/${data.id}`,
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data
@@ -72,8 +75,8 @@ export default {
     }, data) {
         let res = await ApiService.request({
             method: "delete",
-            url: `/api/news/${data.id}`,
-            data: { data : data.data }
+            url: `/api/shows/${data.id}`,
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data

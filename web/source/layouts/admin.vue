@@ -27,15 +27,10 @@
           <a-icon type="carry-out" />
           <span>Quản lý đơn hàng</span>
         </a-menu-item>
-        <a-menu-item key="4" @click="goPage('/crm-admin/clubs')"
-          :class="$route.path === '/crm-admin/clubs' ? 'ant-menu-item-selected' : ''">
+        <a-menu-item key="4" @click="goPage('/crm-admin/shows')"
+          :class="$route.path === '/crm-admin/shows' ? 'ant-menu-item-selected' : ''">
           <a-icon type="crown" />
-          <span>Danh sách club aura</span>
-        </a-menu-item>
-        <a-menu-item key="5" @click="goPage('/crm-admin/supports')"
-          :class="$route.path === '/crm-admin/supports' ? 'ant-menu-item-selected' : ''">
-          <a-icon type="alert" />
-          <span>Chăm sóc khách hàng</span>
+          <span>Danh sách show</span>
         </a-menu-item>
         <a-menu-item key="6" @click="goPage('/crm-admin/menu')"
           :class="$route.path === '/crm-admin/menu' ? 'ant-menu-item-selected' : ''">
@@ -61,6 +56,11 @@
           :class="$route.path === '/crm-admin/news' ? 'ant-menu-item-selected' : ''">
           <a-icon type="bank" />
           <span>Quản lý tin tức</span>
+        </a-menu-item>
+        <a-menu-item key="11" @click="goPage('/crm-admin/payment')"
+          :class="$route.path === '/crm-admin/payment' ? 'ant-menu-item-selected' : ''">
+          <a-icon type="bank" />
+          <span>Quản lý thanh toán</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>

@@ -3,7 +3,14 @@ import getters from './getters';
 import mutations from './mutations';
 
 export const state = () => ({
-    list_payment : []
+    list_payment : [],
+    list_item: {
+        data: [],
+        pagination: {
+            page: 1,
+            pageSize: 10
+        }
+    }
 });
 
 export default {

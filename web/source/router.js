@@ -32,13 +32,14 @@ const DashboardCrm = () => interopDefault(import('./pages/admin/index.vue'))
 const UserCrm = () => interopDefault(import('./pages/admin/users/index.vue'))
 const ProductCrm = () => interopDefault(import('./pages/admin/products/index.vue'))
 const OrderCrm = () => interopDefault(import('./pages/admin/orders/index.vue'))
-const ClubsCrm = () => interopDefault(import('./pages/admin/clubs/index.vue'))
+const ShowCrm = () => interopDefault(import('./pages/admin/show/index.vue'))
 const SupportsCrm = () => interopDefault(import('./pages/admin/cares/index.vue'))
 const PlaceCrm = () => interopDefault(import('./pages/admin/places/index.vue'))
 const MenuCrm = () => interopDefault(import('./pages/admin/menu/index.vue'))
 const CollectionCrm = () => interopDefault(import('./pages/admin/collection/index.vue'))
 const NewCollectionCrm = () => interopDefault(import('./pages/admin/newcategory/index.vue'))
 const NewsCrm = () => interopDefault(import('./pages/admin/news/index.vue'))
+const PaymentCrm = () => interopDefault(import('./pages/admin/payment/index.vue'))
 
 Vue.use(Router)
 
@@ -146,8 +147,8 @@ export function createRouter() {
                 path: '/crm-admin/orders',
                 component: OrderCrm
             },{
-                path: '/crm-admin/clubs',
-                component: ClubsCrm
+                path: '/crm-admin/shows',
+                component: ShowCrm
             },{
                 path: '/crm-admin/supports',
                 component: SupportsCrm
@@ -163,6 +164,9 @@ export function createRouter() {
             },{
                 path: '/crm-admin/news',
                 component: NewsCrm
+            },{
+                path: '/crm-admin/payment',
+                component: PaymentCrm
             },{
                 path: '/crm-admin/menu',
                 component: MenuCrm

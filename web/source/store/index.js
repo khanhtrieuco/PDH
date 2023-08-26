@@ -4,7 +4,7 @@ import commonModule from './modules/common'
 import bannerModule from './modules/banner'
 import orderModule from './modules/order'
 import productModule from './modules/product'
-import clubModule from './modules/club'
+import showModule from './modules/show'
 import categoryModule from './modules/category'
 import collectionModule from './modules/collection'
 import cartModule from './modules/cart'
@@ -28,7 +28,7 @@ const createStore = () => {
             banner: bannerModule,
             order: orderModule,
             product: productModule,
-            club: clubModule,
+            show: showModule,
             category: categoryModule,
             collection: collectionModule,
             cart: cartModule,
