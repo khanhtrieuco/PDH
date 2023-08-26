@@ -6,25 +6,15 @@
                     <a-col :span="8" style="margin-bottom: 10px;">
                         <a-row>
                             <a-col :span="6">Tiêu đề</a-col>
-                            <a-col :span="17"><a-input placeholder="Nhập tiêu đề bài viết"
-                                    v-model="filter.search" /></a-col>
+                            <a-col :span="17"><a-input placeholder="Nhập tiêu đề bài viết" v-model="filter.name" /></a-col>
                         </a-row>
                     </a-col>
                     <a-col :span="8" style="margin-bottom: 10px;">
                         <a-row>
                             <a-col :span="6">Chuyên mục</a-col>
                             <a-col :span="17">
-                                <a-select style="width: 100%" @change="(e) => this.filter['category'] = e" allowClear>
-                                    <a-select-option value="skincare">
-                                        Chăm sóc da
-                                    </a-select-option>
-                                    <a-select-option value="news">
-                                        Tin tức
-                                    </a-select-option>
-                                    <a-select-option value="knowledge">
-                                        Kiến thức
-                                    </a-select-option>
-                                </a-select>
+                                <Select placeholder="Chọn chuyên mục" :listItem="listCategory"
+                                    @onSelect="(e) => filter.new_category = e" />
                             </a-col>
                         </a-row>
                     </a-col>
@@ -71,8 +61,8 @@
         </a-table>
         <a-modal title="Thông tin tin tức" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :modalType="modalType" :listCategory="listCategory.data" @onCancel="() => this.modalOpen = false"
-                @onReload="() => this.onRefresh()" />
+            <Detail :item="current" :modalType="modalType" :listCategory="listCategory"
+                @onCancel="() => this.modalOpen = false" @onReload="() => this.onRefresh()" />
         </a-modal>
     </div>
 </template>
@@ -80,14 +70,14 @@
 import { mapGetters, mapActions } from "vuex";
 import general from "~/mixins/general";
 import Detail from "./detail.vue"
-
-//   import moment from "moment";
+import Select from "~/components/admin/select.vue"
 
 export default {
     layout: "admin",
     mixins: [general],
     components: {
-        Detail
+        Detail,
+        Select
     },
     data() {
         return {
@@ -153,10 +143,12 @@ export default {
     async mounted() {
         this.loadData();
         let temp = await this.getListCategory();
-        this.listCategory = temp.map(o=> {return {
-            value: o.id,
-            text: o.attributes.name
-        }})
+        this.listCategory = temp.map(o => {
+            return {
+                value: o.id,
+                text: o.attributes.name
+            }
+        })
     },
     methods: {
         ...mapActions({
@@ -205,8 +197,10 @@ export default {
             if (this.filter.type) {
                 filters['type'] = { $eq: this.filter.type }
             }
-            if (this.filter.state) {
-                filters['state'] = { $eq: this.filter.state }
+            if (this.filter.new_category) {
+                filters['new_category'] = { id : {
+                    $eq: this.filter.new_category 
+                } }
             }
             if (_s && _s.order) {
                 sort.push(`${_s.columnKey}:${_s.order === "ascend" ? 'asc' : 'desc'}`)

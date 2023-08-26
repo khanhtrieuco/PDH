@@ -165,7 +165,7 @@ export default {
                     thub: val.attributes.thub?.data?.id,
                     order: val.attributes.order,
                     new_category: val.attributes.new_category.data?.id,
-                    type: val.attributes.state
+                    type: val.attributes.type
                 }
             }
         },
@@ -176,11 +176,12 @@ export default {
             createItem: "news/createItem"
         }),
         async onSubmitAdd() {
+            console.log(this.form)
             if (!this.form.thub) {
                 this.$message.warning('Vui lòng chọn ảnh!');
                 return
             }
-            if (!this.form.new_category || !this.type) {
+            if (!this.form.new_category || !this.form.type) {
                 this.$message.warning('Vui lòng nhập đủ thông tin');
                 return
             }
@@ -210,7 +211,7 @@ export default {
                 this.$message.warning('Vui lòng chọn ảnh!');
                 return
             }
-            if (!this.form.new_category || !this.type) {
+            if (!this.form.new_category || !this.form.type) {
                 this.$message.warning('Vui lòng nhập đủ thông tin');
                 return
             }
