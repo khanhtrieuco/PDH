@@ -13,7 +13,7 @@
                     <a-col :span="24" style="float: right;">
                         <a-button style="float: right;" class="admin-btn" type="danger" @click="onRefresh">Huỷ</a-button>
                         <a-button style="float: right;margin-right: 10px;" class="admin-btn" type="primary"
-                            @click="onFilter">Lọc</a-button>
+                            @click="handleRefesh">Lọc</a-button>
                     </a-col>
                 </a-row>
                 <a-button slot="extra" class="admin-btn" type="primary" style="margin-top: -5px;" @click="onAddNew">Tạo
@@ -96,8 +96,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            getListItem: "news/getListItem",
-            deleteItem: "news/deleteItem",
+            getListItem: "show/getListItem",
+            deleteItem: "show/deleteItem",
         }),
         loadData: async function () {
             this.loading = true

@@ -189,8 +189,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            updateItem: "news/updateItem",
-            createItem: "news/createItem"
+            updateItem: "show/updateItem",
+            createItem: "show/createItem"
         }),
         async onSubmitAdd() {
             if (!this.form.thub || !this.form.thub_mobile) {
@@ -202,7 +202,7 @@ export default {
                     let rs = await this.createItem({
                         data: {
                             ...this.form,
-                            slug: this.getSlug(this.form.title)
+                            slug: this.getSlug(this.form.name)
                         }
                     })
                     if (rs && rs.id) {
@@ -229,7 +229,7 @@ export default {
                         id: this.item.id,
                         data: {
                             ...this.form,
-                            slug: this.getSlug(this.form.title)
+                            slug: this.getSlug(this.form.name)
                         }
                     })
                     if (rs && rs.id) {
