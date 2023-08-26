@@ -46,6 +46,14 @@
       "relation": "manyToOne",
       "target": "api::new-category.new-category",
       "inversedBy": "news"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "news",
+        "lookbook",
+        "campaigns"
+      ]
     }
   }
 }
