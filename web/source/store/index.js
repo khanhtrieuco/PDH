@@ -17,6 +17,8 @@ import faqModule from './modules/faq'
 import userModule from './modules/user'
 import likeModule from './modules/like'
 import placeModule from './modules/place'
+import sizeModule from './modules/size'
+import colorModule from './modules/color'
 import paymentModule from './modules/payment'
 import shippingModule from './modules/shipping'
 
@@ -40,6 +42,8 @@ const createStore = () => {
             user: userModule,
             like: likeModule,
             place: placeModule,
+            color: colorModule,
+            size: sizeModule,
             payment: paymentModule,
             shipping: shippingModule,
             collectionCate: CollectionCateModule

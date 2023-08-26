@@ -9,7 +9,7 @@
                             <a-col :span="17"><a-input placeholder="Nhập tên sản phẩm" v-model="filter.search" /></a-col>
                         </a-row>
                     </a-col>
-                    <a-col :span="8" style="margin-bottom: 10px;">
+                    <!-- <a-col :span="8" style="margin-bottom: 10px;">
                         <a-row>
                             <a-col :span="6">Chuyên mục</a-col>
                             <a-col :span="17">
@@ -32,7 +32,7 @@
                                 </a-select>
                             </a-col>
                         </a-row>
-                    </a-col>
+                    </a-col> -->
                     <a-col :span="8" style="margin-bottom: 10px;">
                         <a-row>
                             <a-col :span="6">Trạng thái</a-col>
@@ -51,7 +51,7 @@
                     <a-col :span="24" style="float: right;">
                         <a-button style="float: right;" class="admin-btn" type="danger" @click="onRefresh">Huỷ</a-button>
                         <a-button style="float: right;margin-right: 10px;" class="admin-btn" type="primary"
-                            @click="onFilter">Lọc</a-button>
+                            @click="handleRefesh">Lọc</a-button>
                     </a-col>
                 </a-row>
                 <a-button slot="extra" class="admin-btn" type="primary" style="margin-top: -5px;" @click="onAddNew">Tạo
@@ -63,14 +63,21 @@
             <span slot="images" slot-scope="images">
                 <ThumbImage ratio="16-9" :src="images?.data?.attributes?.url"></ThumbImage>
             </span>
-            <span slot="category" slot-scope="categories">
-                <div v-for="cate in categories" :key="cate.id">{{ cate.attributes.name }}</div>
+            <span slot="collection" slot-scope="collection">
+                <div>{{ collection?.attributes.name }}</div>
             </span>
-            <span slot="subcategory" slot-scope="subcategory">
+            <!-- <span slot="subcategory" slot-scope="subcategory">
                 <div v-for="cate in subcategory" :key="cate.id">{{ cate.attributes.name }}</div>
-            </span>
+            </span> -->
             <span slot="price" slot-scope="price">
                 {{ price | numberWithCommas }}{{ ' ' }}đ
+            </span>
+            <span slot="sold" slot-scope="sold">
+                {{ sold ?? 0 }}
+            </span>
+            <span slot="variants" slot-scope="variants">
+                {{ variants.reduce((a, c) => { return a + c.attributes.inventory }, 0) }}
+                <!-- {{ variants }} -->
             </span>
             <span slot="state" slot-scope="state">
                 <a-tag color="green" v-if="state === 'active'">Active</a-tag>
@@ -86,9 +93,10 @@
         </a-table>
         <a-modal title="Thông tin sản phẩm" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :modalType="modalType" :listRelated="listRelated" @onReloadRelated="onReloadRelated"
-                @onCancel="() => this.modalOpen = false" @onReload="() => this.onRefresh()" />
+            <Detail :item="current" :modalType="modalType" 
+            @onReloadRelated="onReloadRelated" @onCancel="() => this.modalOpen = false" @onReload="() => this.onRefresh()" />
         </a-modal>
+        <!-- :listRelated="listRelated"  -->
     </div>
 </template>
 <script>
@@ -106,14 +114,14 @@ export default {
     data() {
         return {
             columns: [
-                {
-                    dataIndex: 'id',
-                    key: 'id',
-                    title: 'Id',
-                    sorter: true,
-                    width: 70,
-                    fixed: 'left',
-                },
+                // {
+                //     dataIndex: 'id',
+                //     key: 'id',
+                //     title: 'Id',
+                //     sorter: true,
+                //     width: 70,
+                //     fixed: 'left',
+                // },
                 {
                     dataIndex: 'attributes.thub',
                     key: 'thub',
@@ -131,26 +139,12 @@ export default {
                     title: 'Tên sản phẩm'
                 },
                 {
-                    dataIndex: 'attributes.description',
-                    key: 'description',
-                    width: 250,
-                    title: 'Mô tả'
-                },
-                {
-                    title: 'Chuyên mục',
-                    dataIndex: 'attributes.categories.data',
-                    scopedSlots: { customRender: 'category' },
+                    title: 'Bộ sưu tập',
+                    dataIndex: 'attributes.collection.data',
+                    scopedSlots: { customRender: 'collection' },
                     width: 150,
-                    key: 'categories',
-                },
-                {
-                    title: 'Chuyên mục con',
-                    dataIndex: 'attributes.subcategories.data',
-                    scopedSlots: { customRender: 'subcategory' },
-                    width: 150,
-                    key: 'subcategories',
-                },
-                {
+                    key: 'collection',
+                }, {
                     title: 'Giá',
                     sorter: true,
                     dataIndex: 'attributes.price',
@@ -159,10 +153,18 @@ export default {
                     key: 'price',
                 }, {
                     dataIndex: 'attributes.sold',
+                    scopedSlots: { customRender: 'sold' },
                     sorter: true,
                     key: 'sold',
                     width: 140,
                     title: 'Đã bán'
+                }, {
+                    dataIndex: 'attributes.variants.data',
+                    sorter: true,
+                    key: 'variants',
+                    scopedSlots: { customRender: 'variants' },
+                    width: 140,
+                    title: 'Tồn kho'
                 }, {
                     dataIndex: 'attributes.order',
                     sorter: true,
@@ -198,29 +200,29 @@ export default {
         ...mapGetters({
             listItem: "product/getListProductAdmin",
             listCategory: "category/getListCategory",
-            listSubcategory: "category/getListSubCategory",
-            listRelated: "product/getListProductRelated"
+            // listRelated: "product/getListProductRelated"
         })
     },
     mounted() {
         this.loadData();
-        this.getListCategory();
-        this.getListSubCategory();
-        this.getListTip();
-        this.getListProductRelated({
+        this.getListCategory({
             pagination: {
                 page: 1,
                 pageSize: 100
             }
-        })
+        });
+        // this.getListProductRelated({
+        //     pagination: {
+        //         page: 1,
+        //         pageSize: 100
+        //     }
+        // })
     },
     methods: {
         ...mapActions({
             getListCategory: "category/getListCategory",
-            getListSubCategory: "category/getListSubCategory",
-            getListTip: "product/getListTip",
             getListProductAdmin: "product/getListProductAdmin",
-            getListProductRelated: "product/getListProductRelated",
+            // getListProductRelated: "product/getListProductRelated",
             updateProduct: "product/updateProduct"
         }),
         loadData: async function () {
@@ -267,32 +269,7 @@ export default {
         onRefresh: async function () {
             this.filter = {}
             this.sort = []
-            this.onFilter()
-        },
-        onFilter: async function () {
-            this.loading = true
-            let filters = {}
-            if (this.filter.search) {
-                filters['name'] = { $containsi: this.filter.search }
-            }
-            if (this.filter.categories) {
-                filters['categories'] = { id: { $eq: this.filter.categories } }
-            }
-            if (this.filter.subcategories) {
-                filters['subcategories'] = { id: { $eq: this.filter.subcategories } }
-            }
-            if (this.filter.state) {
-                filters['state'] = { $eq: this.filter.state }
-            }
-            await this.getListProductAdmin({
-                pagination: {
-                    page: this.listItem.pagination ? this.listItem.pagination.page : 1,
-                    pageSize: this.listItem.pagination ? this.listItem.pagination.pageSize : 10
-                },
-                filters,
-                sort: this.sort
-            })
-            this.loading = false
+            this.handleRefesh()
         },
         handleRefesh: async function (_p, _f, _s) {
             this.loading = true
@@ -301,22 +278,19 @@ export default {
             if (this.filter.search) {
                 filters['name'] = { $containsi: this.filter.search }
             }
-            if (this.filter.categories) {
-                filters['categories'] = { $eq: this.filter.categories }
-            }
-            if (this.filter.subcategories) {
-                filters['subcategories'] = { $eq: this.filter.subcategories }
-            }
+            // if (this.filter.categories) {
+            //     filters['categories'] = { $eq: this.filter.categories }
+            // }
             if (this.filter.state) {
                 filters['state'] = { $eq: this.filter.state }
             }
-            if (_s.order) {
+            if (_s && _s.order) {
                 sort.push(`${_s.columnKey}:${_s.order === "ascend" ? 'asc' : 'desc'}`)
                 this.sort = sort
             }
             await this.getListProductAdmin({
                 pagination: {
-                    page: _p.current,
+                    page: _p ? _p.current : 1,
                     pageSize: 10
                 },
                 filters,
@@ -325,12 +299,12 @@ export default {
             this.loading = false
         },
         onReloadRelated() {
-            this.getListProductRelated({
-                pagination: {
-                    page: 1,
-                    pageSize: 100
-                }
-            })
+            // this.getListProductRelated({
+            //     pagination: {
+            //         page: 1,
+            //         pageSize: 100
+            //     }
+            // })
         },
         onAddNew: function () {
             this.current = {}

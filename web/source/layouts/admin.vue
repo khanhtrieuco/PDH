@@ -62,6 +62,16 @@
           <a-icon type="bank" />
           <span>Quản lý thanh toán</span>
         </a-menu-item>
+        <a-menu-item key="12" @click="goPage('/crm-admin/color')"
+          :class="$route.path === '/crm-admin/color' ? 'ant-menu-item-selected' : ''">
+          <a-icon type="bank" />
+          <span>Quản lý màu</span>
+        </a-menu-item>
+        <a-menu-item key="13" @click="goPage('/crm-admin/size')"
+          :class="$route.path === '/crm-admin/size' ? 'ant-menu-item-selected' : ''">
+          <a-icon type="bank" />
+          <span>Quản lý kích thước</span>
+        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>

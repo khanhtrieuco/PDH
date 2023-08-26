@@ -39,6 +39,8 @@ const MenuCrm = () => interopDefault(import('./pages/admin/menu/index.vue'))
 const CollectionCrm = () => interopDefault(import('./pages/admin/collection/index.vue'))
 const NewCollectionCrm = () => interopDefault(import('./pages/admin/newcategory/index.vue'))
 const NewsCrm = () => interopDefault(import('./pages/admin/news/index.vue'))
+const SizeCrm = () => interopDefault(import('./pages/admin/size/index.vue'))
+const ColorCrm = () => interopDefault(import('./pages/admin/color/index.vue'))
 const PaymentCrm = () => interopDefault(import('./pages/admin/payment/index.vue'))
 
 Vue.use(Router)
@@ -164,6 +166,12 @@ export function createRouter() {
             },{
                 path: '/crm-admin/news',
                 component: NewsCrm
+            },{
+                path: '/crm-admin/color',
+                component: ColorCrm
+            },{
+                path: '/crm-admin/size',
+                component: SizeCrm
             },{
                 path: '/crm-admin/payment',
                 component: PaymentCrm
