@@ -40,7 +40,10 @@
             <img class="detail-show-content-img" src="/images/show4.jpg" />
         </div>
         <div class="detail-show-video">
-            <img class="detail-show-img-video" src="/images/video.jpg" />
+            <img class="detail-show-img-video" src="/images/PDH.png" />
+            <video ref="videoRef" :muted="true" playsinline preload="auto" class="detail-show-video-inner" loop autoplay>
+                <source :src="'/uploads/Untitled_5f724864c9.webm'" type="video/mp4" />
+            </video>
         </div>
     </div>
 </template>
@@ -174,10 +177,26 @@ export default {
         }
     }
 
-    .detail-show-img-video {
-        width: 100%;
-        margin: 100px 0px;
+    .detail-show-video {
+        position: relative;
+
+        .detail-show-img-video {
+            width: 100%;
+            margin: 100px 0px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .detail-show-video-inner {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            z-index: 1;
+            width: 80%;
+            transform: translate(-50%);
+        }
     }
+
 }
 
 @media (max-width: 520px) {
@@ -252,9 +271,24 @@ export default {
             }
         }
 
-        .detail-show-img-video {
-            width: 100%;
-            margin: 100px 0px;
+        .detail-show-video {
+            position: relative;
+
+            .detail-show-img-video {
+                width: 100%;
+                margin: 100px 0px;
+                position: relative;
+                z-index: 2;
+            }
+
+            .detail-show-video-inner {
+                position: absolute;
+                top: 27%;
+                left: 50%;
+                z-index: 1;
+                width: 80%;
+                transform: translate(-50%);
+            }
         }
     }
 }

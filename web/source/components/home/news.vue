@@ -54,13 +54,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      listItem: "newCategory/getListItem",
-      listNews: "news/getListItem",
+      listItem: "newCategory/getListCategory",
+      listNews: "news/getListNews",
     }),
   },
   async mounted() {
-    await this.getListItem()
-    if (this.listItem.length >= 3) {
+    await this.getListNewsCategory()
+    console.log(this.listItem)
+    if (this.listItem.length >= 1) {
       this.active = this.listItem[0].id
       this.getListNews({
         filters: {
@@ -75,8 +76,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      getListItem: "newCategory/getListItem",
-      getListNews: "news/getListItem"
+      getListNewsCategory: "newCategory/getListNewsCategory",
+      getListNews: "news/getListNews"
     }),
     choiceCate(_cate) {
       this.active = _cate.id

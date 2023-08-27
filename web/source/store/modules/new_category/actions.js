@@ -4,16 +4,17 @@ export default {
     getListNewsCategory: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             sort: 'order:desc,id:asc',
-            populate:'*'
-          }, {
+            populate: '*'
+        }, {
             encodeValuesOnly: true, // prettify URL
-          });
-          let res = await ApiService.request({
-              method: 'get',
-              url: `/api/new-categories/?${query}`
-          })
-        commit('set_list_item', {
-            list_item: res.data
+        });
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/new-categories/?${query}`
+        })
+        commit('set_data', {
+            name: 'list_category',
+            data: res.data
         })
     },
 
@@ -46,7 +47,7 @@ export default {
         let res = await ApiService.request({
             method: "post",
             url: `/api/new-categories`,
-            data: { data : data.data }
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data
@@ -60,7 +61,7 @@ export default {
         let res = await ApiService.request({
             method: "put",
             url: `/api/new-categories/${data.id}`,
-            data: { data : data.data }
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data
@@ -74,7 +75,7 @@ export default {
         let res = await ApiService.request({
             method: "delete",
             url: `/api/new-categories/${data.id}`,
-            data: { data : data.data }
+            data: { data: data.data }
         });
         if (res && res.data) {
             return res.data

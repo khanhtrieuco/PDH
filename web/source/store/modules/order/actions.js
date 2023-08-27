@@ -7,7 +7,10 @@ export default {
             sort: 'id:desc',
             populate: {
                 cartitems : {
-                    populate : { product : { populate: 'thub'} }
+                    populate : { 
+                        product : { populate: 'thub'} , 
+                        variant : { populate: '*'} 
+                    }
                 }
             }
         }, {

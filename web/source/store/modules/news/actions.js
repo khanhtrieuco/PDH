@@ -14,8 +14,9 @@ export default {
               method: 'get',
               url: `/api/news/?${query}`
           })
-        commit('set_list_item', {
-            list_news: res.data
+        commit('set_data', {
+            name: 'list_news',
+            data: res.data
         })
     },
 

@@ -75,6 +75,7 @@ export default {
                 {
                     dataIndex: 'attributes.name',
                     sorter: true,
+                    width: 300,
                     key: 'name',
                     fixed: 'left',
                     title: 'Tên sản phẩm'

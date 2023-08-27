@@ -149,6 +149,7 @@ export default {
                         data: {
                             ...this.form,
                             state: 'active',
+                            sold: 0,
                             product: this.product_id
                         }
                     })

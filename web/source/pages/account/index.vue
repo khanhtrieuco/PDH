@@ -75,11 +75,39 @@
                             <div class="account-content-card-head-title">My orders</div>
                         </div>
                         <div class="account-content-body">
-                            <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
+                            <div class="account-content-order-item" v-for="_order, index in listUserOrder" :key="index">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <img class="account-content-order-item-img"
+                                            :src="_order.cart.product.data.attributes.thub.data.attributes.url" />
+                                        <div class="account-content-order-item-state">{{ $i18n.locale === 'vn' ?
+                                            getStateOrderUser(_order.attributes.state)
+                                            : getStateOrderUserEn(_order.attributes.state) }}</div>
+                                    </div>
+                                    <div class="account-content-order-item-info">
+                                        <div class="account-content-order-item-info-name">
+                                            {{ _order.cart.product.data.attributes.name }}
+                                        </div>
+                                        <div class="account-content-order-item-info-des">Color: <span>{{
+                                            _order.cart.variant.data.attributes.color.data.attributes.name }}</span>
+                                        </div>
+                                        <div class="account-content-order-item-info-des">Size: <span>{{
+                                            _order.cart.variant.data.attributes.size.data.attributes.name }}</span>
+                                        </div>
+                                        <div class="account-content-order-item-info-des">Quantity: <span>{{
+                                            _order.cart.quantity }}</span></div>
+                                        <div class="account-content-order-item-info-price">
+                                            {{ _order.attributes.price | numberWithCommas }}{{ ' ' }}đ
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="account-content-footer">
-                            show all
-                        </div>
+                        <NuxtLink to="/my-order">
+                            <div class="account-content-footer">
+                                show all
+                            </div>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
@@ -144,11 +172,39 @@
                         <div class="account-content-card-head-title">My orders</div>
                     </div>
                     <div class="account-content-body">
-                        <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
+                        <div class="account-content-order-item" v-for="_order, index in listUserOrder" :key="index">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <img class="account-content-order-item-img"
+                                        :src="_order.cart.product.data.attributes.thub.data.attributes.url" />
+                                    <div class="account-content-order-item-state">{{ $i18n.locale === 'vn' ?
+                                        getStateOrderUser(_order.attributes.state)
+                                        : getStateOrderUserEn(_order.attributes.state) }}</div>
+                                </div>
+                                <div class="account-content-order-item-info">
+                                    <div class="account-content-order-item-info-name">
+                                        {{ _order.cart.product.data.attributes.name }}
+                                    </div>
+                                    <div class="account-content-order-item-info-des">Color: <span>{{
+                                        _order.cart.variant.data.attributes.color.data.attributes.name }}</span>
+                                    </div>
+                                    <div class="account-content-order-item-info-des">Size: <span>{{
+                                        _order.cart.variant.data.attributes.size.data.attributes.name }}</span>
+                                    </div>
+                                    <div class="account-content-order-item-info-des">Quantity: <span>{{
+                                        _order.cart.quantity }}</span></div>
+                                    <div class="account-content-order-item-info-price">
+                                        {{ _order.attributes.price | numberWithCommas }}{{ ' ' }}đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="account-content-footer">
-                        show all
-                    </div>
+                    <NuxtLink to="/my-order">
+                        <div class="account-content-footer">
+                            show all
+                        </div>
+                    </NuxtLink>
                 </div>
             </div>
         </div>
@@ -179,7 +235,7 @@ export default {
             profile: "auth/getProfile",
             loggedIn: "auth/getloggedIn",
             address: "auth/getAddress",
-            // listOrder: "order/getListOrder",
+            listOrder: "order/getListOrder",
             // listProduct: "product/getListProductView",
         }),
     },
@@ -192,7 +248,8 @@ export default {
             showUpdateProfile: false,
             isShowOrders: false,
             isShowProducts: false,
-            isShowLike: false
+            isShowLike: false,
+            listUserOrder: []
         }
     },
     async mounted() {
@@ -201,11 +258,17 @@ export default {
         }
         this.isMobile = this.checkMobile()
         await this.getAddressByUser(this.profile.id)
-        // await this.getListOrder({
-        //     filters: {
-        //         user: { id: { $eq: this.profile.id } }
-        //     }
-        // })
+        await this.getListOrder({
+            filters: {
+                user: { id: { $eq: this.profile.id } }
+            }
+        })
+        this.listUserOrder = this.listOrder.map(o => {
+            return {
+                ...o,
+                cart: o.attributes.cartitems.data[0].attributes
+            }
+        })
         // if (this.$route.hash) {
         //     this.setShow(parseInt(this.$route.hash.replace('#', '').replace('tab', '')))
         // }
@@ -216,7 +279,7 @@ export default {
             setLoggedIn: "auth/setLoggedIn",
             logout: 'auth/logout',
             getAddressByUser: "auth/getAddressByUser",
-            // getListOrder: "order/getListOrder",
+            getListOrder: "order/getListOrder",
             // getListProvince: 'user/getListProvince',
         }),
         async onRefresh() {
@@ -391,6 +454,60 @@ export default {
                 text-transform: uppercase;
                 font-size: 13px;
             }
+
+            .account-content-order-item {
+                background-color: #FAFAFA;
+                padding: 15px 5px;
+                margin-bottom: 10px;
+
+                .account-content-order-item-img {
+                    width: 95px;
+                    height: 105px;
+                }
+
+                .account-content-order-item-state {
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 13px;
+                    margin-top: 8px;
+                    white-space: nowrap;
+                }
+
+                .account-content-order-item-info {
+                    width: calc(100% - 105px);
+                    position: relative;
+
+                    .account-content-order-item-info-name {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 16px;
+                        text-transform: uppercase;
+                        margin-bottom: 10px;
+                    }
+
+                    .account-content-order-item-info-des {
+                        color: #717171;
+                        font-family: 'Aeroport-light';
+                        font-size: 13px;
+                        line-height: 20px;
+
+                        span {
+                            color: #000;
+                        }
+                    }
+
+                    .account-content-order-item-info-price {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 13px;
+                        text-transform: uppercase;
+                        position: absolute;
+                        bottom: 0px;
+                        right: 0px;
+                    }
+                }
+
+            }
         }
     }
 }
@@ -484,6 +601,60 @@ export default {
                     color: #717171;
                     text-transform: uppercase;
                     font-size: 13px;
+                }
+
+                .account-content-order-item {
+                    background-color: #FAFAFA;
+                    padding: 5px 0px;
+                    margin-bottom: 5px;
+
+                    .account-content-order-item-img {
+                        width: 70px;
+                        height: 95px;
+                    }
+
+                    .account-content-order-item-state {
+                        color: #000;
+                        font-family: 'Aeroport-light';
+                        font-size: 10px;
+                        margin-top: 8px;
+                        white-space: nowrap;
+                    }
+
+                    .account-content-order-item-info {
+                        width: calc(100% - 80px);
+                        position: relative;
+
+                        .account-content-order-item-info-name {
+                            color: #000;
+                            font-family: 'Aeroport-light';
+                            font-size: 12px;
+                            text-transform: uppercase;
+                            margin-bottom: 5px;
+                        }
+
+                        .account-content-order-item-info-des {
+                            color: #717171;
+                            font-family: 'Aeroport-light';
+                            font-size: 10px;
+                            line-height: 16px;
+
+                            span {
+                                color: #000;
+                            }
+                        }
+
+                        .account-content-order-item-info-price {
+                            color: #000;
+                            font-family: 'Aeroport-light';
+                            font-size: 13px;
+                            text-transform: uppercase;
+                            position: absolute;
+                            bottom: 0px;
+                            right: 0px;
+                        }
+                    }
+
                 }
             }
         }

@@ -213,28 +213,28 @@ export default {
             let stringState = state
             switch (state) {
                 case 'new':
-                    stringState = 'Đơn hàng đang chờ xác nhận'
+                    stringState = 'Đang chờ xác nhận'
                     break
                 case 'confirm':
-                    stringState = 'Đơn hàng chờ thanh toán'
+                    stringState = 'Chờ thanh toán'
                     break
                 case 'payment':
-                    stringState = 'Đơn hàng đã thanh toán'
+                    stringState = 'Đã thanh toán'
                     break
                 case 'pickitem':
-                    stringState = 'Đơn hàng đang đóng gói'
+                    stringState = 'Đang đóng gói'
                     break
                 case 'delivery':
-                    stringState = 'Đơn hàng đang vận chuyển'
+                    stringState = 'Đang vận chuyển'
                     break
                 case 'complete':
-                    stringState = 'Đơn đã giao hàng thành công'
+                    stringState = 'Giao hàng thành công'
                     break
                 case 'rate':
                     stringState = 'Đã đánh giá'
                     break
                 case 'cancel':
-                    stringState = 'Đơn hủy bở hệ thống'
+                    stringState = 'Hủy bở hệ thống'
                     break
                 case 'usercancel':
                     stringState = 'Người dùng hủy đơn'

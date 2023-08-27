@@ -24,6 +24,7 @@ const Faq = () => interopDefault(import('./pages/faq/index.vue'))
 const AccountUser = () => interopDefault(import('./pages/account/index.vue'))
 const Place = () => interopDefault(import('./pages/place/index.vue'))
 const SaveItem = () => interopDefault(import('./pages/saveItem/index.vue'))
+const MyOrder = () => interopDefault(import('./pages/myorder/index.vue'))
 const BlogDetail = () => interopDefault(import('./pages/blog/index.vue'))
 const Login = () => interopDefault(import('./pages/login/index.vue'))
 const CallBackGoogle = () => interopDefault(import('./pages/login/google.vue'))
@@ -100,6 +101,9 @@ export function createRouter() {
             {
                 path: '/save-item',
                 component: SaveItem
+            },{
+                path: '/my-order',
+                component: MyOrder
             },
             {
                 path: '/news',

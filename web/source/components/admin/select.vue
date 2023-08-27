@@ -24,10 +24,8 @@ export default {
             default: 'Select a value'
         },
         default: {
-            type: Object,
-            default() {
-                return null
-            }
+            type: Number,
+            default: null
         },
     },
     data() {
