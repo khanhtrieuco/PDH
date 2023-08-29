@@ -62,6 +62,7 @@
                     </a-step>
                 </a-steps>
             </a-card>
+            <a-button v-if="order?.attributes.state === 'new'" slot="extra" class="admin-btn" type="primary" @click="onApproveOrder">Xác nhận đơn</a-button>
         </a-card>
         <div style="width: calc(30% - 10px); margin-left: 10px;">
             <a-card title="Ghi chú đơn hàng" style="margin-bottom: 10px;">
@@ -167,6 +168,7 @@ export default {
     methods: {
         ...mapActions({
             updateOrder: "order/updateOrder",
+            approveOrder: "order/approveOrder",
         }),
         checkState(state) {
             switch (state) {
@@ -393,6 +395,7 @@ export default {
             })
             if (rs && rs.id) {
                 this.checkState(_state)
+                this.order.attributes.state = _state
                 this.$message.success('Cập nhật trạng thái thành công');
                 this.$emit('onReload')
                 this.showUpdate = !this.showUpdate
@@ -400,6 +403,18 @@ export default {
                 this.$message.error('Cập nhật trạng thái không thành công! Xin thử lại sau!');
             }
 
+        },
+        async onApproveOrder() {
+            let rs = await this.approveOrder(this.item.id)
+            if (rs && rs.id) {
+                this.order.attributes.state = 'pickitem'
+                this.checkState('pickitem')
+                this.$message.success('Xác nhận đơn thành công');
+                this.$emit('onReload')
+                this.showUpdate = !this.showUpdate
+            } else {
+                this.$message.error('Xác nhận đơn không thành công! Xin thử lại sau!');
+            }
         }
     }
 }

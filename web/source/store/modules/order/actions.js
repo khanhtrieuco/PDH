@@ -48,6 +48,20 @@ export default {
         return false
     },
 
+    approveOrder: async function ({
+        commit
+    }, id) {
+        let res = await ApiService.request({
+            method: "post",
+            url: `/api/app/approveOrder`,
+            data: { order_id : id }
+        });
+        if (res) {
+            return res
+        }
+        return false
+    },
+
     // createOrder: async function ({ commit }, data) {
     //     let res = await ApiService.request({
     //         method: "post",
