@@ -2,7 +2,7 @@
     <div class="qrcode-panel">
         <div class="d-flex justify-content-between w-100" v-if="!isMobile">
             <div class="qrcode-img">
-                <div>{{ payment.attributes?.description }}</div>
+                <!-- <div>{{ payment.attributes?.description }}</div> -->
                 <div class="qrcode-img-title">Số tiền đơn hàng của bạn là: {{ qrcode.totalPrice | numberWithCommas }}{{ ' '
                 }}đ</div>
                 <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
@@ -14,7 +14,6 @@
                 <div class="qrcode-info-des">Mã đơn hàng: <span>{{ qrcode.code }}</span></div>
                 <div class="qrcode-info-des">Ngày đặt: <span>{{ toDateAdd(0) }}</span></div>
                 <div class="qrcode-info-des">Người đặt: <span>{{ qrcode.address_name }}</span></div>
-                <div class="qrcode-info-des">Email: <span>{{ qrcode.address_email }}</span></div>
                 <div class="qrcode-info-des">Số điện thoại: <span>{{ qrcode.address_phone }}</span></div>
                 <div class="qrcode-info-des">Địa chỉ: <span>{{ qrcode.address_full }}</span></div>
                 <div class="qrcode-info-des">Tổng cộng: <span>{{ qrcode.totalPrice | numberWithCommas }}{{ ' ' }}đ</span>
@@ -24,7 +23,7 @@
         </div>
         <div class="w-100" v-if="isMobile">
             <div class="qrcode-img">
-                <div style="font-size: 13px;">{{ payment.attributes?.description }}</div>
+                <!-- <div style="font-size: 13px;">{{ payment.attributes?.description }}</div> -->
                 <div class="qrcode-img-title">Số tiền đơn hàng của bạn là: {{ qrcode.totalPrice | numberWithCommas }}{{ ' '
                 }}đ</div>
                 <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
@@ -36,7 +35,6 @@
                 <div class="qrcode-info-des">Mã đơn hàng: <span>{{ qrcode.code }}</span></div>
                 <div class="qrcode-info-des">Ngày đặt: <span>{{ toDateAdd(0) }}</span></div>
                 <div class="qrcode-info-des">Người đặt: <span>{{ qrcode.address_name }}</span></div>
-                <div class="qrcode-info-des">Email: <span>{{ qrcode.address_email }}</span></div>
                 <div class="qrcode-info-des">Số điện thoại: <span>{{ qrcode.address_phone }}</span></div>
                 <div class="qrcode-info-des">Địa chỉ: <span>{{ qrcode.address_full }}</span></div>
                 <div class="qrcode-info-des">Tổng cộng: <span>{{ qrcode.totalPrice | numberWithCommas }}{{ ' ' }}đ</span>
@@ -94,6 +92,7 @@ export default {
         }
     },
     mounted() {
+        console.log(this.payment)
         let _t = setInterval(() => {
             this.time--
             if (this.time <= 0) {
@@ -137,7 +136,7 @@ export default {
 
     .qrcode-info-des {
         font-size: 14px;
-        font-family: 'inter-light';
+        font-family: 'Aeroport-light';
         margin-top: 5px;
 
         span {
@@ -171,7 +170,7 @@ export default {
         font-size: 14px;
         margin-top: 5px;
         margin-bottom: 5px;
-        font-family: 'inter-light';
+        font-family: 'Aeroport-light';
     }
 
     .qrcode-sub-last {
@@ -188,6 +187,14 @@ export default {
     margin-right: auto;
     margin-top: 40px;
     margin-bottom: 30px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    height: 50px;
+    line-height: 48px;
+    font-family: 'Aeroport-light';
+    font-size: 18px;
 }
 
 @media (max-width: 520px) {
@@ -219,7 +226,7 @@ export default {
 
         .qrcode-info-des {
             font-size: 9px;
-            font-family: 'inter-light';
+            font-family: 'Aeroport-light';
             margin-top: 5px;
 
             span {
@@ -253,7 +260,7 @@ export default {
             font-size: 9px;
             margin-top: 5px;
             margin-bottom: 5px;
-            font-family: 'inter-light';
+            font-family: 'Aeroport-light';
         }
 
         .qrcode-sub-last {
@@ -270,6 +277,14 @@ export default {
         margin-right: auto;
         margin-top: 20px;
         margin-bottom: 20px;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        height: 30px;
+        line-height: 28px;
+        font-family: 'Aeroport-light';
+        font-size: 12px;
     }
 }
 </style>

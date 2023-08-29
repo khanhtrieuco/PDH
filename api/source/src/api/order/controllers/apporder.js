@@ -22,9 +22,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			select: ['name', 'phone', 'email', 'full_address'],
 			where: { user_id: user.id }
 		});
-		console.log(address)
 
-		if(!address.name) {
+		if (!address.name) {
 			return { message: 'Không tìm thấy thông tin địa chỉ người nhận' };
 		}
 		if (listProductItem && listProductItem.length > 0) {
@@ -33,7 +32,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			let listVariantId = []
 			let listCartAdd = []
 			let total_price = 0
-			let priceShip =  0 //ship.price
+			let priceShip = 0 //ship.price
 			let checkCart = true
 			let productName = ''
 			for (let i = 0; i < listProductItem.length; i++) {
@@ -79,7 +78,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			}
 			let pick_date = moment().add(1, 'days').format('YYYY-MM-DD')
 			let end_date = moment().add(4, 'days').format('YYYY-MM-DD')
-			listProductId = listProductId.filter(function(item, pos) {
+			listProductId = listProductId.filter(function (item, pos) {
 				return listProductId.indexOf(item) == pos;
 			})
 			let _order = {
@@ -108,6 +107,64 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 		return { message: 'Không tìm thấy thông tin giỏ hàng' };
 	},
 
+	async approveOrder(ctx) {
+		const { user } = ctx.state
+		let { order_id} = ctx.request.body;
+		// let { order_id } = ctx.query;
+
+
+		let order = await strapi.db.query('api::order.order').findOne({
+			select: ['*'],
+			populate: {
+				cartitems: {
+					populate: { 'product': true, 'variant': true }
+				},
+			},
+			where: { id: order_id }
+		});
+		if (order.state === 'new') {
+			await strapi.db.query('api::order.order').update({
+				where: { id: order_id },
+				data: {
+					state: 'pickitem',
+				},
+			});
+			if (order.cartitems && order.cartitems.length > 0) {
+				for (let i = 0; i < order.cartitems.length; i++) {
+					if (order.cartitems[i].product?.id && order.cartitems[i].variant?.id) {
+						let product = await strapi.db.query('api::product.product').findOne({
+							select: ['id', 'sold'],
+							where: { id: order.cartitems[i].product.id }
+						});
+						let variant = await strapi.db.query('api::variant.variant').findOne({
+							select: ['id', 'sold', 'inventory'],
+							where: { id: order.cartitems[i].variant.id }
+						});
+						let new_inventory = variant.inventory - order.cartitems[i].quantity
+						await strapi.db.query('api::variant.variant').update({
+							where: { id: order.cartitems[i].variant.id },
+							data: {
+								sold: variant.sold ? variant.sold + order.cartitems[i].quantity : order.cartitems[i].quantity,
+								inventory: new_inventory < 0 ? 0 : new_inventory
+							},
+						});
+						await strapi.db.query('api::product.product').update({
+							where: { id: order.cartitems[i].product.id },
+							data: {
+								sold: product.sold ? product.sold + order.cartitems[i].quantity : order.cartitems[i].quantity,
+							},
+						});
+					}
+
+				}
+			}
+			return order
+
+		}
+		return order
+
+	},
+
 	async upload(ctx) {
 		return true
 	},
@@ -126,23 +183,23 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			where: { id: 1 },
 		});
 		let product = strapi.db.query('api::product.product').findOne({
-			select: ['id','likes'],
+			select: ['id', 'likes'],
 			where: { id: product_id }
 		});
 		console.log(product)
-		if(product) {
-			let listId = product.likes.filter(o=>o.id !== like_id)
+		if (product) {
+			let listId = product.likes.filter(o => o.id !== like_id)
 			let _data = {
 				code,
 				likes: listId
 			}
-			let res = await strapi.entityService.create('api::product.product',{
+			let res = await strapi.entityService.create('api::product.product', {
 				where: { id: product_id },
 				data: {
 					likes: listId
 				},
-			  });
-			return {product}
+			});
+			return { product }
 		} else {
 			return {}
 		}

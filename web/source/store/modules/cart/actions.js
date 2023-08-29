@@ -52,7 +52,6 @@ export default {
         window.localStorage.setItem('listCartCheckout', []);
         window.localStorage.setItem('listCart', []);
         commit('set_list_user_cart', { list_user_cart: [] })
-        commit('set_list_cart', { list_cart: [] })
     },
 
     addCartItemDirect: ({ commit, rootState }, data = {}) => {

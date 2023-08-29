@@ -12,6 +12,11 @@ module.exports = {
     },
     {
       method: 'POST',
+      path: '/app/approveOrder', 
+      handler: 'apporder.approveOrder'
+    },
+    {
+      method: 'POST',
       path: '/app/upload', 
       handler: 'apporder.upload'
     },

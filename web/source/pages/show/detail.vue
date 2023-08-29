@@ -192,7 +192,7 @@ export default {
             top: 10%;
             left: 50%;
             z-index: 1;
-            width: 80%;
+            width: 100%;
             transform: translate(-50%);
         }
     }
@@ -286,7 +286,7 @@ export default {
                 top: 27%;
                 left: 50%;
                 z-index: 1;
-                width: 80%;
+                width: 100%;
                 transform: translate(-50%);
             }
         }

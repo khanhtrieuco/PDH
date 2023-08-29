@@ -73,7 +73,8 @@
                             <div class="payment-step-type-check">
                                 <Check :checked="paymentType && paymentType !== 'cod'" @choice="onChoicePayment('online')">
                                 </Check>
-                                <div class="payment-step-type-text">Payment Online</div>
+                                <div class="payment-step-type-text">Payment Online {{ current_payment.id ? ` -
+                                    ${current_payment.attributes.name}` : `` }}</div>
                             </div>
                             <div class="user-payment-menthod-list" v-if="paymentType && paymentType !== 'cod'">
                                 <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
@@ -274,6 +275,106 @@
                 </div>
             </div>
         </div>
+        <div class="payment-success-info" v-if="paymentDone === 'fail'">
+            <div class="payment-order-top">
+                <div class="payment-order-top-title">ORDERED UUSUCCESSFULLY</div>
+                <div class="payment-order-top-code">#CH0220</div>
+                <div class="payment-order-top-des">Your order is unsuccessful in payment. Please re-order and check again your payment method to continue the shopping experiences</div>
+                <div class="d-flex justify-content-between" v-if="!isMobile">
+                    <div class="payment-order-btn" @click="goPage('/gio-hang')">Re-Order</div>
+                    <div class="payment-order-btn-shop" @click="goPage('/')">HomePage</div>
+                </div>
+                <div v-if="isMobile">
+                    <div class="payment-order-btn" @click="goPage('/gio-hang')">Re-Order</div>
+                    <div class="payment-order-btn-shop" @click="goPage('/')">HomePage</div>
+                </div>
+            </div>
+            <div class="payment-step-card">
+                <div class="payment-step-title">1. Customer Detail</div>
+                <div class="payment-step-content">
+                    <div class="d-flex justify-content-between">
+                        <div class="w-50">
+                            <div class="payment-step-success-title">Contact</div>
+                            <div class="payment-step-success-text">Email: lmydu99@gmail.com</div>
+                            <div class="payment-step-success-text">Phone: +66 785 5533</div>
+                        </div>
+                        <div class="w-50">
+                            <div class="payment-step-success-title">Billing Address</div>
+                            <div class="payment-step-success-text">Thuy Ninh Solngam Dulphi Lalalal</div>
+                            <div class="payment-step-success-text">Salthom bangkok TH-36</div>
+                            <div class="payment-step-success-text">+66 785 5533</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-step-card">
+                <div class="payment-step-title">2. Products</div>
+                <div class="payment-step-content">
+                    <div class="payment-product-item" v-for="(item, index) in listCart" :key="index">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="payment-product-img">
+                                <img class="payment-product-image" :src="item.imagelink" />
+                            </div>
+                            <div class="payment-product-info">
+                                <div class="payment-product-name">{{ item.name }}</div>
+                                <div class="payment-product-des">Color:
+                                    <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                                </div>
+                                <div class="payment-product-des">Size:
+                                    <span>
+                                        {{ item.variant.attributes.size.data.attributes.name }}
+                                    </span>
+                                </div>
+                                <div class="payment-product-des">Quantity
+                                    <CartButton :inumber="item.quantity"
+                                        @updateValue="(e) => updateCartValue(item.variant_id, e)" />
+                                </div>
+                                <div class="payment-product-price">
+                                    {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-step-card">
+                <div class="payment-step-title">3. Order Detail</div>
+                <div class="payment-step-content">
+                    <div class="payment-step-success-text d-flex justify-content-between">
+                        <div>Order number</div>
+                        <div>#62936</div>
+                    </div>
+                    <div class="payment-step-success-text d-flex justify-content-between">
+                        <div>Date</div>
+                        <div>July 27, 2023</div>
+                    </div>
+                    <div class="payment-step-success-text d-flex justify-content-between">
+                        <div>Payment method</div>
+                        <div>Credit card</div>
+                    </div>
+                </div>
+                <div class="payment-step-extra">
+                    <div class="payment-step-extra-content">
+                        <div class="payment-info-text d-flex justify-content-between">
+                            <div>Subtotal</div>
+                            <div>{{ 500000 | numberWithCommas }}{{ ' ' }}đ</div>
+                        </div>
+                        <div class="payment-info-text d-flex justify-content-between">
+                            <div>Shipping</div>
+                            <div>{{ 0 | numberWithCommas }}{{ ' ' }}đ</div>
+                        </div>
+                        <div class="payment-info-total d-flex justify-content-between">
+                            <div class="">Total</div>
+                            <div><b>{{ 500000 + 0 | numberWithCommas }}{{ ' ' }}đ</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a-modal title="Thông tin thanh toán" :visible="modalQrOpen" :destroyOnClose="true" :closable="false"
+            :maskClosable="false" :footer="null" width="800px" @cancel="() => this.modalQrOpen = false">
+            <Qrcode :isMobile="isMobile" :payment="current_payment" :qrcode="qrcode_info" @onDonePayment="onDonePayment" />
+        </a-modal>
         <HelpPayment :isMobile="isMobile" />
     </div>
 </template>
@@ -284,6 +385,7 @@ import general from "~/mixins/general"
 import HelpPayment from "~/components/payment/helpInfo.vue"
 import UserCart from "~/components/payment/myCart.vue"
 import Address from "~/components/account/address.vue"
+import Qrcode from "~/components/payment/paymentQrcode.vue"
 
 export default {
     name: 'IndexPage',
@@ -291,7 +393,8 @@ export default {
     components: {
         UserCart,
         HelpPayment,
-        Address
+        Address,
+        Qrcode
     },
     data() {
         return {
@@ -309,8 +412,10 @@ export default {
             showUpdateAddress: false,
             user_address: null,
             paymentType: null,
-            current_payment: null,
-            isPaymentAccept: false
+            current_payment: {},
+            isPaymentAccept: false,
+            modalQrOpen: false,
+            qrcode_info: {}
         }
     },
     computed: {
@@ -406,6 +511,7 @@ export default {
                 this.isPaymentAccept = true
                 this.paymentType = _qr.attributes.name
             }
+            // this.modalQrOpen = true
         },
         onDonePayment() {
             this.modalQrOpen = false
@@ -435,9 +541,21 @@ export default {
             let rs = await this.createOrder(_order)
             if (rs && rs.data) {
                 this.order = rs.data
-                this.showNotification('success', `Đã đặt đơn hàng thành công`)
-                this.resetUserCart()
-                this.paymentDone = 'success'
+                if (this.payment_type !== 'cod') {
+                    this.showNotification('success', `Đã đặt đơn hàng thành công. Vui lòng thanh toán.`)
+                    this.resetUserCart()
+                    this.qrcode_info = {
+                        ..._order,
+                        address_name: this.user_address.attributes?.name,
+                        address_phone: this.user_address.attributes?.phone,
+                        address_full: this.user_address.attributes?.full_address
+                    }
+                    this.modalQrOpen = true
+                } else {
+                    this.showNotification('success', `Đã đặt đơn hàng thành công`)
+                    this.resetUserCart()
+                    this.paymentDone = 'success'
+                }
             } else {
                 this.showNotification('danger', `Đặt đơn hàng thất bại`)
                 this.paymentDone = 'fail'
