@@ -150,7 +150,7 @@ export default {
 <style lang="scss">
 .my-cart-panel {
     background-color: #F4F4F4;
-    width: 650px;
+    width: 490px;
 
     .my-cart-head {
         height: 50px;
@@ -185,6 +185,7 @@ export default {
                     width: 150px;
                     height: 170px;
                     object-fit: cover;
+                    border: 1px solid #D9D9D9;
                 }
             }
 

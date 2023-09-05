@@ -185,7 +185,7 @@ export default {
     }
 
     .cart-content-main {
-        padding: 250px 0px;
+        padding: 150px 0px;
 
         .cart-main-list {
             width: calc(100% - 670px);

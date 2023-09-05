@@ -48,6 +48,10 @@ export default {
         modalType: {
             type: String,
             default: 'create'
+        },
+        modalOpen: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -77,6 +81,11 @@ export default {
     watch: {
         modalType: function (val) {
             if (val && val === 'create') {
+                this.$refs.ruleForm.resetFields();
+            }
+        },
+        modalOpen: function (val) {
+            if (this.modalType && this.modalType === 'create') {
                 this.$refs.ruleForm.resetFields();
             }
         },

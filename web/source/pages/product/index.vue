@@ -414,6 +414,7 @@ export default {
             font-family: 'Aeroport-light';
             font-size: 20px;
             border: 1px solid;
+            text-transform: uppercase;
         }
 
     }
@@ -527,6 +528,7 @@ export default {
             font-family: 'Aeroport-light';
             font-size: 20px;
             border: 1px solid;
+            text-transform: uppercase;
         }
     }
 

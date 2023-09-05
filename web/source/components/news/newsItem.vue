@@ -91,7 +91,7 @@ export default {
     }
 
     .news-dot {
-        width: 12px;
+        width: 16px;
         height: 12px;
         border-radius: 50%;
         position: absolute;
@@ -99,7 +99,7 @@ export default {
         padding: 4px;
 
         div {
-            width: 6px;
+            width: 8px;
             height: 6px;
             border-radius: 50%;
             background-color: #000;
@@ -107,22 +107,22 @@ export default {
     }
 
     .news-dot1 {
-        left: -7px;
+        left: -8px;
         top: -7px;
     }
 
     .news-dot2 {
-        right: -5px;
+        right: -8px;
         top: -7px;
     }
 
     .news-dot3 {
-        left: -7px;
+        left: -8px;
         bottom: -4px;
     }
 
     .news-dot4 {
-        right: -5px;
+        right: -8px;
         bottom: -4px;
     }
 }
@@ -154,7 +154,7 @@ export default {
         }
 
         .news-dot {
-            width: 9px;
+            width: 13px;
             height: 9px;
             border-radius: 50%;
             position: absolute;
@@ -162,7 +162,7 @@ export default {
             padding: 3px;
 
             div {
-                width: 3px;
+                width: 5px;
                 height: 3px;
                 border-radius: 50%;
                 background-color: #000;
@@ -170,22 +170,22 @@ export default {
         }
 
         .news-dot1 {
-            left: -5px;
+            left: -5.5px;
             top: -6px;
         }
 
         .news-dot2 {
-            right: -5px;
+            right: -7px;
             top: -6px;
         }
 
         .news-dot3 {
-            left: -5px;
+            left: -5.5px;
             bottom: -4px;
         }
 
         .news-dot4 {
-            right: -5px;
+            right: -7px;
             bottom: -4px;
         }
     }

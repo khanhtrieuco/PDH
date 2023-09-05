@@ -13,7 +13,7 @@
         </a-table>
         <a-modal title="Thông tin sub menu" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <DetailItem :item="current" :parent_id="id" :modalType="modalType" 
+            <DetailItem :item="current" :parent_id="id" :modalType="modalType" :modalOpen="modalOpen"
             @onCancel="() => this.modalOpen = false" @onReload="() => this.$emit('onReload')"/>
         </a-modal>
     </div>
@@ -47,12 +47,13 @@ export default {
                 {
                     dataIndex: 'attributes.name',
                     key: 'title',
+                    width: 250,
                     title: 'Tên',
                     sorter: true
                 }, {
                     title: 'Loại',
                     dataIndex: 'attributes.type',
-                    width: 250,
+                    width: 100,
                     align: 'center',
                     key: 'type',
                     sorter: true

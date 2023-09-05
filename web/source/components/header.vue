@@ -58,22 +58,22 @@
           <div v-if="openMobile === 1 && !openSubChild" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Evening gown</div>
-              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="openSubChild = openSubChild === 1 ? null : 1" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Ready-to-wear</div>
-              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="openSubMobile = openSubMobile === 2 ? null : 2" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Hand Bags</div>
-              <img class="menu-open" :src="openSubMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              <img class="menu-open" :src="openSubMobile === 3 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="openSubMobile = openSubMobile === 3 ? null : 3" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Shoes</div>
-              <img class="menu-open" :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              <img class="menu-open" :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="openSubMobile = openSubMobile === 4 ? null : 4" />
             </div>
           </div>
@@ -107,30 +107,30 @@
           <div v-if="openMobile === 4 && !openSubChild" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/show')">Shows</div>
-              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="goPage('/show')" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Lookbook</div>
-              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'" />
+              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Campaigns</div>
-              <img class="menu-open" :src="openSubMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'" />
+              <img class="menu-open" :src="openSubMobile === 3 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/news')">News</div>
               <img class="menu-open" @click="goPage('/news')"
-                :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-down.png'" />
+                :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/house-of-pdh')">About P.D.H</div>
               <img class="menu-open" @click="goPage('/house-of-pdh')"
-                :src="openSubMobile === 5 ? '/images/menu-up.png' : '/images/menu-down.png'" />
+                :src="openSubMobile === 5 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Achievement of P.D.H</div>
-              <img class="menu-open" :src="openSubMobile === 6 ? '/images/menu-up.png' : '/images/menu-down.png'" />
+              <img class="menu-open" :src="openSubMobile === 6 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
@@ -141,12 +141,12 @@
           <div v-if="openMobile === 5 && !openSubChild" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/account')">My account</div>
-              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="goPage('/account')" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/client-service')">Client service</div>
-              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="goPage('/client-service')" />
             </div>
           </div>
@@ -433,7 +433,7 @@ export default {
 <style lang="scss">
 .header {
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   bottom: 0px;
   width: 100%;
   height: 67px;
@@ -667,6 +667,8 @@ export default {
 
       .menu-mobile-item {
         border-bottom: 1px solid #8D8D8D;
+        height: 50px;
+        line-height: 50px;
 
         .menu-mobile-title {
           color: #000;
@@ -690,9 +692,12 @@ export default {
 
       .menu-mobile-list-sub {
         padding-left: 40px;
-
+        margin-bottom: 20px;
+        
         .menu-mobile-sub-item {
           border-bottom: 1px solid #8D8D8D;
+          height: 50px;
+          line-height: 50px;
 
           .menu-mobile-title {
             color: #000;
@@ -701,9 +706,10 @@ export default {
           }
 
           .menu-open {
-            width: 13px;
-            height: fit-content;
-            margin-top: 25px;
+            // width: 13px;
+            // height: fit-content;
+            height: 13px;
+            margin-top: 20px;
           }
         }
       }

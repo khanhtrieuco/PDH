@@ -1,8 +1,8 @@
 <template>
   <div class="collection-container">
     <img class="collection-title-image" src="/images/collection-lable.png" />
-    <carousel-3d class="collection-slide" v-if="!isMobile" :width="1000" :height="800" :animation-speed="1000"
-      :autoplay="true" :autoplay-timeout="5000" :display="3" :space="2000" :inverse-scaling="700"
+    <carousel-3d class="collection-slide" v-if="!isMobile" :width="1000" :height="800" :animation-speed="1400"
+      :autoplay="true" :autoplay-timeout="5000" :display="3" :space="1500" :inverse-scaling="300"
       :controls-visible="true"
       :controls-width="45">
       <!-- :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"

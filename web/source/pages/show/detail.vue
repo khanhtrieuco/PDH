@@ -41,9 +41,10 @@
         </div>
         <div class="detail-show-video">
             <img class="detail-show-img-video" src="/images/PDH.png" />
-            <video ref="videoRef" :muted="true" playsinline preload="auto" class="detail-show-video-inner" loop autoplay>
+            <video id="videoRef-id" ref="videoRef" preload="auto" class="detail-show-video-inner" @click="onStopVideo">
                 <source :src="'/uploads/Untitled_5f724864c9.webm'" type="video/mp4" />
             </video>
+            <img class="detail-show-img-play" src="/images/play.png" @click="onPlayVideo" />
         </div>
     </div>
 </template>
@@ -103,6 +104,30 @@ export default {
                 }
             }
         },
+        onPlayVideo() {
+            console.log(this.$refs.videoRef)
+            var elem = document.getElementById("videoRef-id");
+            if (this.$refs && this.$refs.videoRef) {
+                this.$refs.videoRef.play()
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            }
+        },
+        onStopVideo() {
+            if (this.$refs && this.$refs.videoRef) {
+                this.$refs.videoRef.play()
+                document.exitFullscreen();
+                setTimeout(() => {
+                    var elem = document.getElementById("videoRef-id");
+                    elem.scrollIntoView();
+                },50)
+            }
+        }
         // async loadData() {
         //     if (this.$route.params.id) {
         //         await this.getClubBySlug(this.$route.params.id)
@@ -152,6 +177,8 @@ export default {
                 text-align: center;
                 font-family: 'Aeroport';
                 font-size: 35px;
+                line-height: 36px;
+                margin-bottom: 16px;
             }
 
             .detail-show-data-des {
@@ -194,6 +221,16 @@ export default {
             z-index: 1;
             width: 100%;
             transform: translate(-50%);
+        }
+
+        .detail-show-img-play {
+            position: absolute;
+            width: 115px;
+            transform: translate(calc(-50% + 30px), calc(-50% - 20px));
+            left: 50%;
+            top: 50%;
+            z-index: 2;
+            cursor: pointer;
         }
     }
 

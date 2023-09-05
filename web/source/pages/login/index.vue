@@ -5,12 +5,12 @@
             <img class="page-login-google-image" src="/images/google.png" />
             <div class="page-login-google-text">CONTINUE WITH GOOGLE</div>
         </div>
-        <div class="page-login-des">or  </br> CONTINUE WITH YOUR EMAIL  </br> ADDRESS</div>
+        <div class="page-login-des">or </br> CONTINUE WITH YOUR EMAIL </br> ADDRESS</div>
         <div class="page-login-sub">Sign in with your PHANDANGHOANG email and password or create a profile if you are new.
         </div>
         <b-form-input class="page-input-login" v-model="username" placeholder="Email*"></b-form-input>
         <b-form-input class="page-input-login" v-model="password" type="password" placeholder="Password*"></b-form-input>
-        <div class="page-input-btn" @click="onLogin()" >continue</div>
+        <div class="page-input-btn" @click="onLogin()">continue</div>
     </div>
 </template>
   
@@ -177,8 +177,51 @@ export default {
 @media (max-width: 520px) {
     .page-login-content {
         margin-top: 50px;
-        margin-bottom: 0px;
+        margin-bottom: 50px;
+
+        .page-login-google-btn {
+            width: 100%;
+            height: 65px;
+            line-height: 65px;
+            margin-top: 60px;
+            border: 1px solid #000;
+            cursor: pointer;
+
+            .page-login-google-image {
+                width: 40px;
+                margin-left: 20px;
+            }
+
+            .page-login-google-text {
+                color: #000;
+                text-align: center;
+                font-family: 'Aeroport';
+                font-size: 14px;
+                font-weight: 700;
+                margin-right: 30px;
+            }
+        }
+
+        .page-login-des {
+            color: #000;
+            text-align: center;
+            font-family: 'Aeroport-light';
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 30px;
+        }
+
+        .page-login-sub {
+            color: #000;
+            text-align: center;
+            font-family: 'Aeroport-light';
+            font-size: 16px;
+            margin-top: 30px;
+        }
     }
+
 
     .page-login-image-content {
         padding: 50px 0px;

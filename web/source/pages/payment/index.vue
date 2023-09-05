@@ -608,7 +608,7 @@ export default {
         margin: 100px 0px;
 
         .payment-left-info {
-            width: calc(100% - 680px);
+            width: calc(100% - 520px);
             margin-right: 30px;
         }
     }
@@ -618,7 +618,7 @@ export default {
         margin: 100px auto;
 
         .payment-order-top {
-            margin-bottom: 30px;
+            margin-bottom: 80px;
             width: 500px;
             margin-left: auto;
             margin-right: auto;

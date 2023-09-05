@@ -20,6 +20,7 @@
                 </a-col>
             </a-col>
             <a-col :span="14" style="padding-left: 20px;">
+                <h5>Danh sách sub menu</h5>
                 <b-card>
                     <ListMenu :id="item?.id" :listItem="listItemSub" @onReload="onReloadSub" />
                 </b-card>
@@ -55,6 +56,10 @@ export default {
         modalType: {
             type: String,
             default: 'create'
+        },
+        modalOpen: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -80,8 +85,7 @@ export default {
                 name_en: this.item.attributes.name_en,
                 order: this.item.attributes.order,
             }
-            let filters = { type : 'sub' , parent: this.item.id }
-            this.listItemSub = await this.getListItemSub({ filters })
+            this.loadSubItem()
         }
     },
     watch: {
@@ -89,6 +93,9 @@ export default {
             if (val && val === 'create') {
                 this.$refs.ruleForm.resetFields();
             }
+        },
+        modalOpen: function (val) {
+            this.loadSubItem()
         },
         item: function (val) {
             if (val && val.id && val.attributes) {
@@ -107,6 +114,12 @@ export default {
             createPlace: "place/createPlace",
             getListItemSub: "collectionCate/getListItemSub",
         }),
+        async loadSubItem() {
+            if (this.item && this.item.id) {
+                let filters = { type: 'sub', parent: this.item.id }
+                this.listItemSub = await this.getListItemSub({ filters })
+            }
+        },
         async onSubmitAdd() {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
@@ -152,7 +165,7 @@ export default {
             });
         },
         async onReloadSub() {
-            let filters = { type : 'sub' , parent: this.item.id }
+            let filters = { type: 'sub', parent: this.item.id }
             this.listItemSub = await this.getListItemSub({ filters })
         }
     }

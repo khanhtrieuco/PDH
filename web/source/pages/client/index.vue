@@ -64,8 +64,11 @@ export default {
 <style lang="scss">
 .client-service-content {
 	background-color: #F8F8F8;
-	padding-top: 110px;
-	padding-bottom: 200px;
+	height: 100vh;
+    display: flex;
+    align-items: center;
+	// padding-top: 110px;
+	// padding-bottom: 200px;
 
 	.client-service-title {
 		color: #000;

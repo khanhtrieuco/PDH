@@ -73,42 +73,6 @@ export default {
         font-family: 'Aeroport-light';
         font-size: 15px;
     }
-
-    .news-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        position: absolute;
-        background-color: #fff;
-        padding: 4px;
-
-        div {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #000;
-        }
-    }
-
-    .news-dot1 {
-        left: -7px;
-        top: -7px;
-    }
-
-    .news-dot2 {
-        right: -5px;
-        top: -7px;
-    }
-
-    .news-dot3 {
-        left: -7px;
-        bottom: -4px;
-    }
-
-    .news-dot4 {
-        right: -5px;
-        bottom: -4px;
-    }
 }
 
 @media (max-width: 520px) {

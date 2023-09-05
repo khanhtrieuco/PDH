@@ -31,7 +31,7 @@
         </a-table>
         <a-modal title="Thông tin menu" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :modalType="modalType" @onCancel="() => this.modalOpen = false"
+            <Detail :item="current" :modalType="modalType" :modalOpen="modalOpen" @onCancel="() => this.modalOpen = false"
                 @onReload="() => this.onRefresh()" />
         </a-modal>
     </div>

@@ -3,30 +3,30 @@
     <div class="container" v-if="!isMobile">
       <div class="row">
         <div class="col-3">
-          <div class="footer-title mb-3">{{ $t('Footer_title_1') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_1') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_2') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_3') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_4') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_5') }}</div>
-          <div class="footer-title mb-3 mt-5">{{ $t('Footer_title_2') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_6') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_7') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_8') }}</div>
+          <div class="footer-title mb-4">{{ $t('Footer_title_1') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_1') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_2') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_3') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_4') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_5') }}</div>
+          <div class="footer-title mb-4 mt-5">{{ $t('Footer_title_2') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_6') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_7') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_8') }}</div>
         </div>
         <div class="col-3">
-          <div class="footer-title mb-3">{{ $t('Footer_title_3') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_9') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_10') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_11') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_12') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_13') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_14') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_15') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_16') }}</div>
+          <div class="footer-title mb-4">{{ $t('Footer_title_3') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_9') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_10') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_11') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_12') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_13') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_14') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_15') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_16') }}</div>
         </div>
         <div class="col-6">
-          <div class="footer-title mb-3">{{ $t('Footer_title_4') }}</div>
+          <div class="footer-title mb-4">{{ $t('Footer_title_4') }}</div>
           <div class="footer-des mb-4 mt-1">{{ $t('Footer_text_17') }}</div>
           <div class="d-flex justify-content-between w-100">
             <span class="footer-text-span">{{ $t('Footer_text_18') }}</span>
@@ -60,7 +60,7 @@
     <div class="container" v-if="isMobile">
       <div class="row">
         <div class="col-12">
-          <div class="footer-title mb-3">{{ $t('Footer_title_4') }}</div>
+          <div class="footer-title mb-4">{{ $t('Footer_title_4') }}</div>
           <div class="footer-des mb-4 mt-1">{{ $t('Footer_text_17') }}</div>
           <div class="d-flex justify-content-between w-100">
             <span class="footer-text-span">{{ $t('Footer_text_18') }}</span>
@@ -83,27 +83,27 @@
           <div class="footer-btn-login">{{ $t('Footer_text_23') }}</div>
         </div>
         <div class="col-12">
-          <div class="footer-title mb-3">{{ $t('Footer_title_1') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_1') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_2') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_3') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_4') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_5') }}</div>
-          <div class="footer-title mb-3 mt-5">{{ $t('Footer_title_2') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_6') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_7') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_8') }}</div>
+          <div class="footer-title mb-4">{{ $t('Footer_title_1') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_1') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_2') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_3') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_4') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_5') }}</div>
+          <div class="footer-title mb-4 mt-5">{{ $t('Footer_title_2') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_6') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_7') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_8') }}</div>
         </div>
         <div class="col-12">
-          <div class="footer-title mb-3 mt-5">{{ $t('Footer_title_3') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_9') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_10') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_11') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_12') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_13') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_14') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_15') }}</div>
-          <div class="footer-text mb-2">{{ $t('Footer_text_16') }}</div>
+          <div class="footer-title mb-4 mt-5">{{ $t('Footer_title_3') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_9') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_10') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_11') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_12') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_13') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_14') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_15') }}</div>
+          <div class="footer-text mb-3">{{ $t('Footer_text_16') }}</div>
         </div>
         <div class="col-12">
           <div class="d-inline-flex justify-content-between">

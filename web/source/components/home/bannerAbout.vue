@@ -23,7 +23,7 @@
     <VueSlickCarousel v-bind="settings" class="list-banner-about" v-if="isMobile && listBanner && listBanner.length">
       <div v-for="(item, index) in listBanner" :key="index">
         <div class="banner-about-item">
-          <img class="banner-about-img" :src="item.attributes?.imagelink.data?.attributes.url" />
+          <img class="banner-about-img" :src="item.attributes?.imagelink_mobile.data?.attributes.url" />
         </div>
       </div>
     </VueSlickCarousel>
