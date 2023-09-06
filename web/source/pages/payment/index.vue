@@ -541,7 +541,7 @@ export default {
             let rs = await this.createOrder(_order)
             if (rs && rs.data) {
                 this.order = rs.data
-                if (this.payment_type !== 'cod') {
+                if (this.paymentType !== 'cod') {
                     this.showNotification('success', `Đã đặt đơn hàng thành công. Vui lòng thanh toán.`)
                     this.resetUserCart()
                     this.qrcode_info = {
