@@ -8,15 +8,15 @@
             <span>/</span>
             <span :class="`lang-btn ${$i18n.locale === 'vn' ? 'lang-btn-active' : ''}`" @click="changeLang()">VI</span>
           </div>
-          <span @click="choicetab(idx + 1)" class="menu-text" v-for="(_i, idx) in listCollection" :key="idx">
+          <span @click="choicetab(idx + 1)" :class="`menu-text ${tab == (idx + 1) ? 'menu-text-active' : ''}`" v-for="(_i, idx) in listCollection" :key="idx">
             {{ $i18n.locale === 'vn' ? _i.attributes.name : _i.attributes.name_en ?? _i.attributes.name }}
           </span>
           <div @click="goPage('/')">
             <img v-if="!tab" class="menu-logo" src="/images/logo-head.png" />
             <img v-else class="menu-logo" src="/images/menu.png" />
           </div>
-          <span class="menu-text" @click="choicetab(4)">{{ $t('About') }}</span>
-          <span class="menu-text" @click="choicetab(5)">{{ $t('Friendship') }}</span>
+          <span :class="`menu-text ${tab == 4 ? 'menu-text-active' : ''}`" @click="choicetab(4)">{{ $t('About') }}</span>
+          <span :class="`menu-text ${tab == 5 ? 'menu-text-active' : ''}`" @click="choicetab(5)">{{ $t('Friendship') }}</span>
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
@@ -153,7 +153,7 @@
         </div>
       </div>
     </div>
-    <div v-if="tab === 1" class="header-tab-menu">
+    <div v-if="tab === 1" class="header-tab-menu" v-click-outside="closeTab">
       <div class="container header-tab-menu-container d-flex justify-content-start">
         <div class="header-tab-menu-col-1">
           <div class="header-tab-menu-title">EVENING GOWN</div>
@@ -170,6 +170,7 @@
           <div class="header-tab-menu-text">Top and Shirts</div>
         </div>
         <div class="header-tab-menu-col-1">
+          <div class="header-tab-menu-text"> </div>
           <div class="header-tab-menu-text">T-Shirts and Sweatshirts</div>
           <div class="header-tab-menu-text">Skirts</div>
           <div class="header-tab-menu-text">Trousers</div>
@@ -197,7 +198,7 @@
         </div>
       </div>
     </div>
-    <div v-if="tab === 4" class="header-tab-menu">
+    <div v-if="tab === 4" class="header-tab-menu" v-click-outside="closeTab">
       <div class="container header-tab-menu-container d-flex justify-content-start">
         <div class="header-tab-menu-col-1">
           <div @click="subTab = 1" class="header-tab-menu-title">Shows</div>
@@ -221,7 +222,7 @@
         </div>
       </div>
     </div>
-    <div v-if="tab === 5" class="header-tab-menu">
+    <div v-if="tab === 5" class="header-tab-menu" v-click-outside="closeTab">
       <div class="container header-tab-menu-container">
         <div @click="goPage('/account')" class="header-tab-menu-title">My account
         </div>
@@ -251,6 +252,7 @@ export default {
       lang: 'en',
       isMobile: false,
       tab: null,
+      isOpenTab: false,
       subTab: null,
       listCollection: [
         {
@@ -323,6 +325,14 @@ export default {
       // getSiteInfo: "common/getSiteInfo",
       // getListCategory: "category/getListCategory"
     }),
+    closeTab() {
+      if (this.isOpenTab) {
+        this.tab = null
+        this.isOpenTab = false
+      } else {
+        this.isOpenTab = true
+      }
+    },
     hideCart() {
       if (this.isOpen) {
         this.showListCart = false
@@ -466,10 +476,14 @@ export default {
     font-size: 18px;
     cursor: pointer;
     font-family: 'Aeroport';
-
+    padding: 0px 10px;
     &:hover {
       font-weight: bolder;
     }
+  }
+
+  .menu-text-active {
+    border-top: 2px solid #000;
   }
 
   .menu-logo {
@@ -499,7 +513,7 @@ export default {
   width: 100vw;
   background-color: #fff;
   padding: 50px;
-  bottom: 50px;
+  bottom: 67px;
 
   .header-tab-menu-container {
     padding: 0px 135px;
@@ -528,6 +542,7 @@ export default {
       font-family: 'Aeroport-light';
       font-size: 13px;
       line-height: 40px;
+      min-height: 40px;
       text-transform: uppercase;
       cursor: pointer;
     }
@@ -693,7 +708,7 @@ export default {
       .menu-mobile-list-sub {
         padding-left: 40px;
         margin-bottom: 20px;
-        
+
         .menu-mobile-sub-item {
           border-bottom: 1px solid #8D8D8D;
           height: 50px;

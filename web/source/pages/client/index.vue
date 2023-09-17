@@ -64,10 +64,10 @@ export default {
 <style lang="scss">
 .client-service-content {
 	background-color: #F8F8F8;
-	height: 100vh;
+	height: calc(100vh - 60px);
     display: flex;
     align-items: center;
-	// padding-top: 110px;
+	padding-bottom: 100px;
 	// padding-bottom: 200px;
 
 	.client-service-title {

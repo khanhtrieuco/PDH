@@ -754,7 +754,7 @@ export default {
             }
 
             .payment-step-shipping-choice {
-                background-color: #D9D9D9;
+                background-color: #fff;
                 height: 80px;
                 width: 50%;
                 line-height: 80px;
@@ -764,11 +764,13 @@ export default {
                 font-family: 'Aeroport-light';
                 font-size: 16px;
                 text-transform: uppercase;
+                border: 1px solid #D9D9D9;
             }
 
             .shiping-active {
                 font-family: 'Aeroport';
-                background-color: #fff;
+                background-color: #D9D9D9;
+                font-weight: bolder;
 
             }
 

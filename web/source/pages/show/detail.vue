@@ -125,7 +125,7 @@ export default {
                 setTimeout(() => {
                     var elem = document.getElementById("videoRef-id");
                     elem.scrollIntoView();
-                },50)
+                }, 50)
             }
         }
         // async loadData() {
@@ -225,7 +225,7 @@ export default {
 
         .detail-show-img-play {
             position: absolute;
-            width: 115px;
+            width: 70px;
             transform: translate(calc(-50% + 30px), calc(-50% - 20px));
             left: 50%;
             top: 50%;
@@ -325,6 +325,16 @@ export default {
                 z-index: 1;
                 width: 100%;
                 transform: translate(-50%);
+            }
+
+            .detail-show-img-play {
+                position: absolute;
+                width: 30px;
+                transform: translate(calc(-50% + 5px), calc(-50% - 0px));
+                left: 50%;
+                top: 50%;
+                z-index: 2;
+                cursor: pointer;
             }
         }
     }

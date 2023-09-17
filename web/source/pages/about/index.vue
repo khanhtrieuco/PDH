@@ -1,16 +1,22 @@
 <template>
     <div class="about-content">
         <div class="about-banner">
-            <img class="w-100" src="/images/about.jpg" v-if="!isMobile" />
-            <img class="about-banner-image" src="/images/about-top-m.jpg" v-if="isMobile" />
-            <div class="about-banner-content">
-                <div class="about-title">ABOUT P.D.H</div>
-                <img class="about-name-img" src="/images/about-name.png" />
-                <div class="about-des">A VIETNAMESE CHILD ARTIST HAS DECIDED PASS INTO THE WORLD OF FASHION AND CREATE THE
-                    NAME BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE
-                    TRADITIONAL VALUES OF THE COUNTRY OF THE COUNTRIES BRING CONtemporaries. HE LOVES EXPERIENCE WITH USE OF
-                    TECHNOLOGY IN THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW GENERATION IN
-                    THIS INDUSTRY.
+            <div class="about-banner-top">
+                <img class="w-100" src="/images/about-crop.jpeg" v-if="!isMobile" />
+                <!-- <img class="w-100" src="/images/about.jpg" v-if="!isMobile" /> -->
+                <img class="about-banner-image" src="/images/about-top-m.jpg" v-if="isMobile" />
+                <div class="about-banner-content">
+                    <div class="about-title">ABOUT P.D.H</div>
+                    <img class="about-name-img" src="/images/about-name.png" />
+                    <div class="about-des">A VIETNAMESE CHILD ARTIST HAS DECIDED PASS INTO THE WORLD OF FASHION AND CREATE
+                        THE
+                        NAME BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE
+                        TRADITIONAL VALUES OF THE COUNTRY OF THE COUNTRIES BRING CONtemporaries. HE LOVES EXPERIENCE WITH
+                        USE OF
+                        TECHNOLOGY IN THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW GENERATION
+                        IN
+                        THIS INDUSTRY.
+                    </div>
                 </div>
             </div>
         </div>
@@ -181,13 +187,23 @@ export default {
 .about-content {
     .about-banner {
         position: relative;
+        height: 100vh;
+        background-color: #000;
+        align-items: center;
+        justify-content: center;
+
+        .about-banner-top {
+            top: 50%;
+            position: relative;
+            transform: translateY(-50%);
+        }
 
         .about-banner-content {
             position: absolute;
-            top: 40%;
+            top: 50%;
             text-align: center;
             left: 50%;
-            transform: translate(-50%);
+            transform: translate(-50%, -50%);
 
             .about-title {
                 color: #FFF;

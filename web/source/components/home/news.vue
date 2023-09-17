@@ -101,7 +101,7 @@ export default {
 
   .news-category {
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     text-align: left;
 
     .news-cate-item {
