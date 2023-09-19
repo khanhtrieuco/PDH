@@ -561,7 +561,251 @@ export default {
         }
     }
 }
+@media (max-width: 820px) {
+    .product-detail-content {
+        padding-bottom: 30px;
 
+        .product-detail-info {
+            margin: 20px 0px;
+            position: relative;
+            text-align: center;
+            display: block;
+
+            .product-detail-color {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                height: 30px;
+
+                .color-text {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 12px;
+                    line-height: 15px;
+                    height: 18px;
+                }
+
+                .color-value {
+                    color: #717171;
+                    font-family: 'Aeroport-light';
+                    font-size: 11px;
+                }
+            }
+
+            .product-detail-size {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+
+                .size-text {
+                    font-size: 12px;
+                    font-family: 'Aeroport';
+                }
+
+                .size-value {
+                    font-size: 12px;
+                    font-family: 'Aeroport-light';
+                    height: 16px;
+                    &:not(:last-child):after {
+                        content: '';
+                        display: inline-block;
+                        height: 10px;
+                        padding-right: 6px;
+                        border-right: 1px solid #000;
+                    }
+                }
+            }
+
+            .product-detail-img {
+                width: 100%;
+            }
+
+            .product-detail-name {
+                position: relative;
+                bottom: unset;
+                text-align: left;
+
+                .product-detail-name-title {
+                    width: 240px;
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 20px;
+                }
+
+                .product-detail-name-price {
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 12px;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .product-detail-btn {
+                position: relative;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                cursor: pointer;
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 11px;
+                border: 1px solid;
+            }
+
+        }
+
+        .product-detail-media {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 50px;
+
+            .product-detail-media-img {
+                width: 100%;
+
+                &:nth-child(even) {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .product-detail-data {
+            width: 100%;
+            display: inline-block;
+            padding-left: 0px;
+
+            .product-detail-data-title {
+                color: #000;
+                font-family: 'Aeroport';
+                font-size: 12px;
+
+                &:not(:first-child) {
+                    margin-top: 20px;
+                }
+            }
+
+            .product-detail-data-text {
+                color: #717171;
+                font-family: 'Aeroport-light';
+                font-size: 10px;
+            }
+
+            .product-detail-help-box {
+                padding: 10px 25px;
+                border: 2px solid #717171;
+
+                .product-detail-help-item {
+                    color: #717171;
+                    font-family: 'Aeroport-light';
+                    font-size: 11px;
+                    margin: 6px 0px;
+                    text-decoration-line: underline;
+                    text-transform: uppercase;
+                }
+            }
+
+            .product-detail-data-color {
+                margin-top: 20px;
+                margin-bottom: 10px;
+                height: 30px;
+                display: flex;
+                gap: 4px;
+
+                .product-detail-data-color-text {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 11px;
+                    line-height: 15px;
+                }
+            }
+
+            .product-detail-data-size-text {
+                color: #000;
+                font-family: 'Aeroport';
+                font-size: 10px;
+                margin-bottom: 10px;
+            }
+
+            .product-detail-data-size-des {
+                color: #717171;
+                font-family: 'Aeroport-light';
+                font-size: 10px;
+                text-decoration-line: underline;
+                margin-bottom: 10px;
+            }
+
+            .product-detail-data-inventory {
+                margin-top: 20px;
+                margin-bottom: 10px;
+                display: flex;
+
+                .product-detail-data-inventory-text {
+                    color: #000;
+                    font-family: 'Aeroport';
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+
+                .product-detail-data-inventory-des {
+                    color: #000;
+                    font-family: 'Aeroport-light';
+                    font-size: 10px;
+                    line-height: 15px;
+                    margin-left: 10px;
+                }
+            }
+
+            .product-detail-data-btn {
+                margin-top: 30px;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                cursor: pointer;
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 11px;
+                border: 1px solid;
+            }
+        }
+
+        .product-detail-list-related {
+            margin-top: 60px;
+            padding: 60px 0px 0px 0px;
+            border-top: 1px solid #717171;
+
+            .product-detail-list-title {
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 12px;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+            }
+
+            .product-detail-list-btn {
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 11px;
+                border: 1px solid #000;
+                cursor: pointer;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 60px;
+            }
+        }
+    }
+}
 @media (max-width: 520px) {
     .product-detail-content {
         padding-bottom: 30px;

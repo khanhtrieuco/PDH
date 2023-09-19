@@ -556,6 +556,182 @@ export default {
   }
 }
 
+@media (max-width: 900px) {
+  .header {
+    position: relative;
+    top: 0px;
+    width: 100%;
+    height: 47px;
+    line-height: 47px;
+
+    .lang-btn {
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Aeroport-light';
+      color: #777;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .menu-text {
+      font-size: 18px;
+      cursor: pointer;
+      font-family: 'Aeroport';
+
+      &:hover {
+        font-weight: bolder;
+      }
+    }
+
+    .menu-logo {
+      width: 45px;
+      height: 17px;
+      margin-top: 16px;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      margin-left: 20px;
+      width: 17px;
+      height: 17px;
+      margin-top: 17px;
+    }
+
+    .menu-icon-bag {
+      cursor: pointer;
+      margin-left: 10px;
+      width: 17px;
+      height: 17px;
+      margin-top: 16px;
+    }
+
+    .menu-mobile-icon {
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%);
+      bottom: 45px;
+      width: 70px;
+      height: 45px;
+      z-index: 2;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      border-radius: 24px;
+    }
+
+    .menu-mobile-close-icon {
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%);
+      bottom: 45px;
+      width: 70px;
+      height: 45px;
+      z-index: 2;
+    }
+  }
+
+  .menu-mobile {
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    .menu-mobile-top {
+      height: 47px;
+      line-height: 47px;
+      position: relative;
+
+      .menu-logo {
+        width: 45px;
+        height: fit-content;
+        margin-top: 16px;
+      }
+
+      .menu-icon {
+        cursor: pointer;
+        margin-left: 20px;
+        width: 17px;
+        height: 17px;
+        margin-top: 17px;
+      }
+
+      .menu-icon-bag {
+        cursor: pointer;
+        margin-left: 10px;
+        width: 17px;
+        height: 17px;
+        margin-top: 16px;
+      }
+
+      .menu-mobile-icon {
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 45px;
+        width: 70px;
+        height: 45px;
+        z-index: 2;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 24px;
+      }
+    }
+
+    .menu-mobile-list {
+      margin-top: 100px;
+
+      .menu-mobile-item {
+        border-bottom: 1px solid #8D8D8D;
+        height: 50px;
+        line-height: 50px;
+
+        .menu-mobile-title {
+          color: #000;
+          font-family: 'Aeroport';
+          font-size: 20px;
+          text-transform: uppercase;
+        }
+
+        .menu-open {
+          width: 13px;
+          height: fit-content;
+          margin-top: 25px;
+        }
+
+        .menu-left {
+          width: 8px;
+          height: fit-content;
+          margin-top: 20px;
+        }
+      }
+
+      .menu-mobile-list-sub {
+        padding-left: 40px;
+        margin-bottom: 20px;
+
+        .menu-mobile-sub-item {
+          border-bottom: 1px solid #8D8D8D;
+          height: 50px;
+          line-height: 50px;
+
+          .menu-mobile-title {
+            color: #000;
+            font-family: 'Aeroport-light';
+            font-size: 16px;
+          }
+
+          .menu-open {
+            // width: 13px;
+            // height: fit-content;
+            height: 13px;
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 520px) {
   .header {
     position: relative;
@@ -586,7 +762,7 @@ export default {
 
     .menu-logo {
       width: 45px;
-      height: fit-content;
+      height: 17px;
       margin-top: 16px;
     }
 

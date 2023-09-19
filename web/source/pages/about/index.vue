@@ -380,7 +380,208 @@ export default {
 
     }
 }
+@media (max-width: 820px) {
+    .about-content {
+        .about-banner {
+            position: relative;
 
+            .about-banner-image {
+                height: 100vh;
+                width: 100%;
+            }
+
+            .about-banner-content {
+                position: absolute;
+                top: 30%;
+                text-align: center;
+                left: 50%;
+                transform: translate(-50%);
+
+                .about-title {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    font-size: 10px;
+                }
+
+                .about-name-img {
+                    width: 100%;
+                    margin: 40px 0px;
+                }
+
+                .about-des {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: 'Aeroport-light';
+                    font-size: 10px;
+                    text-transform: uppercase;
+                    width: 280px;
+                    margin: auto;
+                    line-height: 18px;
+                    margin-top: 40px;
+                }
+            }
+        }
+
+        .about-info {
+            text-align: center;
+            padding: 60px 0px;
+
+            .about-achievement {
+                margin-bottom: 30px;
+                color: #000;
+                text-align: center;
+                font-family: 'Aeroport';
+                font-size: 16px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .about-text {
+                color: #000;
+                text-align: center;
+                font-family: 'Aeroport-light';
+                font-size: 10px;
+                line-height: 30px;
+                font-weight: 200;
+                width: 275px;
+                margin: auto;
+            }
+        }
+
+        .about-mid {
+            position: relative;
+
+            .about-mid-content {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0px;
+                left: 0px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+
+                .about-mid-des {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: 'Aeroport';
+                    text-transform: uppercase;
+                    font-size: 12px;
+                    width: 280px;
+                    margin: auto;
+                }
+            }
+        }
+
+        .about-list {
+            padding: 60px 0px;
+            min-height: 700px;
+
+            .about-item {
+                display: block;
+
+                .about-item-img {
+                    position: relative;
+                    width: 310px;
+                    margin: auto;
+                    border: 1px solid #000;
+                    padding: 6px;
+
+                    img {
+                        width: 100%;
+                    }
+
+                    .about-item-dot {
+                        width: 16px;
+                        height: 12px;
+                        border-radius: 50%;
+                        position: absolute;
+                        background-color: #fff;
+                        padding: 4px;
+
+                        div {
+                            width: 8px;
+                            height: 6px;
+                            border-radius: 50%;
+                            background-color: #000;
+                        }
+                    }
+
+                    .about-item-dot1 {
+                        left: -8px;
+                        top: -7px;
+                    }
+
+                    .about-item-dot2 {
+                        right: -8px;
+                        top: -7px;
+                    }
+
+                    .about-item-dot3 {
+                        left: -8px;
+                        bottom: -4px;
+                    }
+
+                    .about-item-dot4 {
+                        right: -8px;
+                        bottom: -4px;
+                    }
+                }
+
+                .about-item-content {
+                    text-align: center;
+                    width: 310px;
+                    margin: auto;
+                    position: relative;
+
+                    .about-item-content-title {
+                        color: #000;
+                        text-align: center;
+                        font-family: 'Aeroport';
+                        font-size: 17px;
+                        margin-bottom: 30px;
+                        margin-top: 40px;
+                        width: 180px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .about-item-content-des {
+                        color: #5A5552;
+                        text-align: center;
+                        font-family: 'Aeroport-light';
+                        font-size: 10px;
+                        width: 250px;
+                        margin: auto;
+                    }
+
+                    .about-item-tab {
+                        display: flex;
+                        position: absolute;
+                        bottom: -50px;
+                        left: 50%;
+                        transform: translate(-50%);
+
+                        .about-item-tab-choice {
+                            width: 60px;
+                            height: 3px;
+                            border-top: 3px solid #E3DEDA;
+                            cursor: pointer;
+                        }
+
+                        .about-item-tab-choice-active {
+                            border-top: 3px solid #000;
+                        }
+                    }
+                }
+
+
+            }
+
+        }
+    }
+}
 @media (max-width: 520px) {
     .about-content {
         .about-banner {

@@ -128,7 +128,75 @@ export default {
 		}
 	}
 }
+@media (max-width: 820px) {
+	.client-service-content {
+		background-color: #F8F8F8;
+		padding-top: 80px;
+		padding-bottom: 120px;
 
+		.client-service-title {
+			color: #000;
+			text-align: center;
+			font-family: 'Aeroport';
+			font-size: 20px;
+			margin-bottom: 30px;
+		}
+
+		.client-service-des {
+			color: #000;
+			text-align: center;
+			font-family: 'Aeroport-light';
+			font-size: 10px;
+			width: 330px;
+			margin: auto;
+		}
+
+		.client-service-item-content {
+			margin-top: 60px;
+
+			.client-service-item {
+				width: 200px;
+				margin: auto;
+				position: relative;
+				margin-top: 30px;
+				padding-bottom: 20px;
+
+				.client-service-item-title {
+					color: #000;
+					text-align: center;
+					font-family: 'Aeroport';
+					font-size: 17px;
+					margin-bottom: 20px;
+					text-transform: uppercase;
+				}
+
+				.client-service-item-des {
+					color: #000;
+					text-align: center;
+					font-family: 'Aeroport-light';
+					font-size: 10px;
+				}
+
+				&:after {
+					content: "";
+					height: 90%;
+					width: 100px;
+					display: block;
+					border-bottom: 1px solid #000;
+					border-right: none;
+					position: absolute;
+					bottom: 0px;
+					left: 50%;
+					transform: translate(-50%);
+				}
+
+				&:last-child:after {
+					display: none;
+				}
+			}
+		}
+	}
+}
 @media (max-width: 520px) {
 	.client-service-content {
 		background-color: #F8F8F8;
