@@ -320,9 +320,7 @@ export default {
       }
       let listColl = this.listCategory[i].attributes.child.data
       for (let j = 0; j < listColl.length; j++) {
-        console.log(listColl[j].attributes.name)
         if (listColl[j].attributes.collections.data.length > 6) {
-          // this.listCollection.push(temp)
           let listTemp = listColl[j].attributes.collections.data.slice(6)
           listColl[j].attributes.collections.data = listColl[j].attributes.collections.data.slice(0, 6)
           let sTemp = {
@@ -338,8 +336,6 @@ export default {
       temp.child = listColl
       this.listCollection.push(temp)
     }
-    // this.listCollection = this.listCategory
-    console.log(this.listCollection)
   },
   methods: {
     ...mapActions({

@@ -23,11 +23,11 @@ export default {
     },
     alt: {
       type: String,
-      default: "NAS",
+      default: "Phan Dang Hoang",
     },
     title: {
       type: String,
-      default: "NAS",
+      default: "Phan Dang Hoang",
     },
     src: {
       type: String,
