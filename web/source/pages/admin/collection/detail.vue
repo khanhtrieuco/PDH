@@ -62,6 +62,15 @@
                         @onSelect="(e) => form.collection_cate = e" />
                 </a-form-model-item>
             </a-col>
+            <a-col :span="24">
+                <a-col :span="12">
+                    <a-form-model-item label="Hiển thị slider trang chủ">
+                        <a-switch :checked="form.show_home" @change="(e) => form.show_home = e" />
+                    </a-form-model-item>
+                </a-col>
+                <a-col :span="12">
+                </a-col>
+            </a-col>
         </a-row>
         <a-form-model-item :wrapper-col="{ span: 4, offset: 20 }">
             <a-button v-if="modalType === 'create'" type="primary" @click="onSubmitAdd">
@@ -117,6 +126,7 @@ export default {
                 detail_thub_mobile: undefined,
                 collection_cate: undefined,
                 order: 0,
+                show_home: false
             },
             rules: {
                 name: [{ required: true, message: 'Tên không thể để trống', trigger: 'blur' }],
@@ -139,7 +149,8 @@ export default {
                 detail_thub_mobile: this.item.attributes.detail_thub_mobile?.data?.id,
                 collection_cate: this.item.attributes.collection_cate?.data?.id,
                 order: this.item.attributes.order,
-                state: this.item.attributes.state
+                state: this.item.attributes.state,
+                show_home: this.item.attributes.show_home
             }
         }
     },
@@ -168,7 +179,9 @@ export default {
                     detail_thub_mobile: val.attributes.detail_thub_mobile?.data?.id,
                     collection_cate: val.attributes.collection_cate?.data?.id,
                     order: val.attributes.order,
-                    state: val.attributes.state
+                    state: val.attributes.state,
+                    show_home: val.attributes.show_home
+
                 }
             }
         },
