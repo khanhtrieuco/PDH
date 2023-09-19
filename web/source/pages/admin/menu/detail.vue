@@ -110,8 +110,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            updatePlace: "place/updatePlace",
-            createPlace: "place/createPlace",
+            updateItem: "collectionCate/updateItem",
+            createPlace: "collectionCate/createPlace",
             getListItemSub: "collectionCate/getListItemSub",
         }),
         async loadSubItem() {
@@ -130,11 +130,11 @@ export default {
                         }
                     })
                     if (rs && rs.id) {
-                        this.$message.success('Tạo mới địa điểm thành công');
+                        this.$message.success('Tạo mới chuyên mục thành công');
                         this.$emit('onReload')
                         this.$emit('onCancel')
                     } else {
-                        this.$message.error('Tạo mới địa điểm không thành công! Xin thử lại sau!');
+                        this.$message.error('Tạo mới chuyên mục không thành công! Xin thử lại sau!');
                     }
                 } else {
                     console.log('error submit!!');
@@ -145,18 +145,18 @@ export default {
         async onSubmitUpdate() {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
-                    let rs = await this.updatePlace({
+                    let rs = await this.updateItem({
                         id: this.item.id,
                         data: {
                             ...this.form
                         }
                     })
                     if (rs && rs.id) {
-                        this.$message.success('Cập nhật địa điểm thành công');
+                        this.$message.success('Cập nhật chuyên mục thành công');
                         this.$emit('onReload')
                         this.$emit('onCancel')
                     } else {
-                        this.$message.error('Cập nhật địa điểm không thành công! Xin thử lại sau!');
+                        this.$message.error('Cập nhật chuyên mục không thành công! Xin thử lại sau!');
                     }
                 } else {
                     console.log('error submit!!');

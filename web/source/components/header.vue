@@ -8,15 +8,17 @@
             <span>/</span>
             <span :class="`lang-btn ${$i18n.locale === 'vn' ? 'lang-btn-active' : ''}`" @click="changeLang()">VI</span>
           </div>
-          <span @click="choicetab(idx + 1)" :class="`menu-text ${tab == (idx + 1) ? 'menu-text-active' : ''}`" v-for="(_i, idx) in listCollection" :key="idx">
-            {{ $i18n.locale === 'vn' ? _i.attributes.name : _i.attributes.name_en ?? _i.attributes.name }}
+          <span @click="choicetab(idx + 1)" :class="`menu-text ${tab == (idx + 1) ? 'menu-text-active' : ''}`"
+            v-for="(_i, idx) in listCollection" :key="idx">
+            {{ $i18n.locale === 'vn' ? _i.name : _i.name_en ?? _i.name }}
           </span>
           <div @click="goPage('/')">
             <img v-if="!tab" class="menu-logo" src="/images/logo-head.png" />
             <img v-else class="menu-logo" src="/images/menu.png" />
           </div>
           <span :class="`menu-text ${tab == 4 ? 'menu-text-active' : ''}`" @click="choicetab(4)">{{ $t('About') }}</span>
-          <span :class="`menu-text ${tab == 5 ? 'menu-text-active' : ''}`" @click="choicetab(5)">{{ $t('Friendship') }}</span>
+          <span :class="`menu-text ${tab == 5 ? 'menu-text-active' : ''}`" @click="choicetab(5)">{{ $t('Friendship')
+          }}</span>
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
@@ -155,12 +157,12 @@
     </div>
     <div v-if="tab === 1" class="header-tab-menu" v-click-outside="closeTab">
       <div class="container header-tab-menu-container d-flex justify-content-start">
-        <div class="header-tab-menu-col-1">
-          <div class="header-tab-menu-title">EVENING GOWN</div>
-          <div class="header-tab-menu-text" @click="goPage('/collection/121')">Women’s SS23 Collection</div>
-          <div class="header-tab-menu-text" @click="goPage('/collection/121')">Women’s AW23 Collection</div>
+        <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[0].child" :key="idx">
+          <div class="header-tab-menu-title">{{ _menu.attributes.name }}</div>
+          <div class="header-tab-menu-text" v-for="(_coll, index) in _menu.attributes.collections.data" :key="index"
+            @click="goPage(_coll?.attributes.slug)">{{ _coll?.attributes.name }}</div>
         </div>
-        <div class="header-tab-menu-col-1">
+        <!-- <div class="header-tab-menu-col-1">
           <div class="header-tab-menu-title">READY TO WEAR</div>
           <div class="header-tab-menu-text">View all</div>
           <div class="header-tab-menu-text">Tailoring</div>
@@ -195,7 +197,7 @@
           <div class="header-tab-menu-text">Sanddals and Slides</div>
           <div class="header-tab-menu-text">Flat Shoes</div>
           <div class="header-tab-menu-text">Sneakers</div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div v-if="tab === 4" class="header-tab-menu" v-click-outside="closeTab">
@@ -254,26 +256,19 @@ export default {
       tab: null,
       isOpenTab: false,
       subTab: null,
-      listCollection: [
-        {
-          attributes: {
-            name: 'Women',
-            name_en: 'Women',
-            slug: 'women'
-          }
-        }, {
-          attributes: {
-            name: 'Man',
-            name_en: 'Man',
-            slug: 'Man'
-          }
-        }, {
-          attributes: {
-            name: 'Gifts',
-            name_en: 'Gifts',
-            slug: 'Gifts'
-          }
-        }
+      listCollection: [{
+        name: 'Women',
+        name_en: 'Women',
+        child: []
+      }, {
+        name: 'Man',
+        name_en: 'Man',
+        child: []
+      }, {
+        name: 'Gifts',
+        name_en: 'Gifts',
+        child: []
+      }
       ],
       listShow: [1, 2],
       showMenuMobile: false,
@@ -289,7 +284,7 @@ export default {
       profile: "auth/getProfile",
       loggedIn: "auth/getloggedIn",
       listUserCart: "cart/getListUserCart",
-      // listCategory: "category/getListCategory",
+      listCategory: "category/getListCategory",
     }),
   },
   components: {
@@ -316,6 +311,35 @@ export default {
     window.addEventListener('scroll', this.handleScroll);
     this.isMobile = this.checkMobile()
     this.setLoggedIn()
+    await this.getListCategory({ sort: { 'order': 'desc' }, filters: { type: 'main' } })
+    this.listCollection = []
+    for (let i = 0; i < this.listCategory.length; i++) {
+      let temp = {
+        name: this.listCategory[i].attributes.name,
+        name_en: this.listCategory[i].attributes.name_en,
+      }
+      let listColl = this.listCategory[i].attributes.child.data
+      for (let j = 0; j < listColl.length; j++) {
+        console.log(listColl[j].attributes.name)
+        if (listColl[j].attributes.collections.data.length > 6) {
+          // this.listCollection.push(temp)
+          let listTemp = listColl[j].attributes.collections.data.slice(6)
+          listColl[j].attributes.collections.data = listColl[j].attributes.collections.data.slice(0, 6)
+          let sTemp = {
+            attributes: {
+              name: ' ',
+              name_en: ' ',
+              collections: { data: [...listTemp] }
+            }
+          }
+          listColl.splice(j + 1, 0, sTemp)
+        }
+      }
+      temp.child = listColl
+      this.listCollection.push(temp)
+    }
+    // this.listCollection = this.listCategory
+    console.log(this.listCollection)
   },
   methods: {
     ...mapActions({
@@ -323,7 +347,7 @@ export default {
       userLogout: "auth/logout",
       getListCartUser: "cart/getListCartUser",
       // getSiteInfo: "common/getSiteInfo",
-      // getListCategory: "category/getListCategory"
+      getListCategory: "category/getListCategory"
     }),
     closeTab() {
       if (this.isOpenTab) {
@@ -477,6 +501,7 @@ export default {
     cursor: pointer;
     font-family: 'Aeroport';
     padding: 0px 10px;
+
     &:hover {
       font-weight: bolder;
     }
@@ -516,7 +541,7 @@ export default {
   bottom: 67px;
 
   .header-tab-menu-container {
-    padding: 0px 135px;
+    padding: 0px 100px;
 
     .header-tab-menu-title {
       color: #1E1E1E;
@@ -525,6 +550,7 @@ export default {
       font-weight: 700;
       text-transform: uppercase;
       line-height: 40px;
+      height: 40px;
       cursor: pointer;
 
       &:hover {
@@ -545,6 +571,7 @@ export default {
       min-height: 40px;
       text-transform: uppercase;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .header-tab-menu-sub-item {

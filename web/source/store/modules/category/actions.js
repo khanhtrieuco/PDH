@@ -3,23 +3,29 @@ import ApiService from '@/service/api.service'
 export default {
     getListCategory: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
+            filters: data.filters,
             sort: data.sort,
             populate: {
-                products: { populate: '*' },
                 thub: { populate: 'url' },
                 thub_mobile: { populate: 'url' },
-                home_thub: { populate: 'url' },
-                home_thub_mobile: { populate: 'url' }
+                child: {
+                    populate: {
+                        collections: {
+                            sort: ['order:desc']
+                        }
+                    },
+                    sort: ['order:desc']
+                }
             }
         }, {
             encodeValuesOnly: true, // prettify URL
         });
         let res = await ApiService.request({
             method: 'get',
-            url: `/api/categories?${query}`
+            url: `/api/collection-cates?${query}`
         })
         commit('set_list_category', {
-            list_category: res.data.filter(i => i.attributes.state === 'active')
+            list_category: res.data
         })
     },
 

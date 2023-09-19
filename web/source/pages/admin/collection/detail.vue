@@ -14,7 +14,8 @@
             </a-col>
             <a-col :span="12">
                 <a-form-model-item ref="description" label="Nội dung" prop="description">
-                    <a-textarea v-model="form.description" :auto-size="{ minRows: 2, maxRows: 5 }" @blur="() => { $refs.description.onFieldBlur(); }" />
+                    <a-textarea v-model="form.description" :auto-size="{ minRows: 2, maxRows: 5 }"
+                        @blur="() => { $refs.description.onFieldBlur(); }" />
                 </a-form-model-item>
             </a-col>
             <a-col :span="12" style="padding-left: 10px;">
@@ -25,36 +26,40 @@
             <a-col :span="24">
                 <a-col :span="12">
                     <a-form-model-item label="Hình banner">
-                        <upload-image :thub.sync="form.main_thub" :thubLink="item?.attributes?.main_thub.data?.attributes.url" />
+                        <upload-image :thub.sync="form.main_thub"
+                            :thubLink="item?.attributes?.main_thub.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
                 <a-col :span="12">
                     <a-form-model-item label="Hình banner mobile">
-                        <upload-image :thub.sync="form.main_thub_mobile" :thubLink="item?.attributes?.main_thub_mobile.data?.attributes.url" />
+                        <upload-image :thub.sync="form.main_thub_mobile"
+                            :thubLink="item?.attributes?.main_thub_mobile.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
             </a-col>
             <a-col :span="24">
                 <a-col :span="12">
                     <a-form-model-item label="Hình chi tiết">
-                        <upload-image :thub.sync="form.detail_thub" :thubLink="item?.attributes?.detail_thub.data?.attributes.url" />
+                        <upload-image :thub.sync="form.detail_thub"
+                            :thubLink="item?.attributes?.detail_thub.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
                 <a-col :span="12">
                     <a-form-model-item label="Hình chi tiết mobile">
-                        <upload-image :thub.sync="form.detail_thub_mobile" :thubLink="item?.attributes?.detail_thub_mobile.data?.attributes.url" />
+                        <upload-image :thub.sync="form.detail_thub_mobile"
+                            :thubLink="item?.attributes?.detail_thub_mobile.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
             </a-col>
             <a-col :span="12">
                 <a-form-model-item label="Vị trí hiển thị" prop="order">
-                    <a-input v-model="form.order" type="number"/>
+                    <a-input v-model="form.order" type="number" />
                 </a-form-model-item>
             </a-col>
             <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item label="Chuyên mục" prop="collection_cate">
-                    <Select :default="form.collection_cate" placeholder="Chọn chuyên mục" 
-                    :listItem="listMenu" @onSelect="(e) => form.collection_cate = e"  />
+                    <Select :default="form.collection_cate" placeholder="Chọn chuyên mục" :listItem="listMenu"
+                        @onSelect="(e) => form.collection_cate = e" />
                 </a-form-model-item>
             </a-col>
         </a-row>
@@ -93,6 +98,10 @@ export default {
         modalType: {
             type: String,
             default: 'create'
+        },
+        modalOpen: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -140,6 +149,10 @@ export default {
                 this.$refs.ruleForm.resetFields();
                 this.imageUrl = undefined
             }
+        },
+        modalOpen: function (val) {
+            this.$refs.ruleForm.resetFields();
+            this.imageUrl = undefined
         },
         item: function (val) {
             if (val && val.id && val.attributes) {

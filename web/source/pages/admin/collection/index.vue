@@ -52,7 +52,8 @@
         </a-table>
         <a-modal title="Thông tin bộ sưu tập" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :listMenu="listMenu" :modalType="modalType" @onCancel="() => this.modalOpen = false"
+            <Detail :item="current" :listMenu="listMenu" :modalOpen="modalOpen"
+                :modalType="modalType" @onCancel="() => this.modalOpen = false"
                 @onReload="() => this.onRefresh()" />
         </a-modal>
     </div>
