@@ -1,6 +1,27 @@
 import qs from 'qs';
 import ApiService from '@/service/api.service'
 export default {
+    getListHomeCollection: async ({ commit, rootState }, data = {}) => {
+        const query = qs.stringify({
+            filters: data.filters,
+            sort: data.sort,
+            populate: {
+                products: { populate: '*' },
+                slider_thub: { populate: 'url' },
+                slider_thub_mobile: { populate: 'url' }
+            }
+        }, {
+            encodeValuesOnly: true, // prettify URL
+        });
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/collections?${query}`
+        })
+        commit('set_list_home_collection', {
+            list_home_collection: res.data.filter(i => i.attributes.state === 'active')
+        })
+    },
+
     getListCollection: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             sort: data.sort,

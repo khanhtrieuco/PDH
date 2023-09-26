@@ -5,8 +5,8 @@
         <div class="banner-about-item">
           <img class="banner-about-img-top" src="/images/about-banner.png" />
           <img class="banner-about-img" :src="item.attributes?.imagelink.data?.attributes.url" />
-          <div class="banner-about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla urna, rutrum
-            ut est quis, imperdiet auctor ipsum.</div>
+          <!-- <div class="banner-about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla urna, rutrum
+            ut est quis, imperdiet auctor ipsum.</div> -->
         </div>
       </div>
       <!-- <template slot="prevArrow">

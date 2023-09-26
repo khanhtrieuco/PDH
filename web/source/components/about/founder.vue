@@ -15,7 +15,7 @@
         <b-container class="founder-content">
             <b-row v-if="!isMobile">
                 <b-col cols="4">
-                    <h3 class="founder-title">Nhà sáng lập của NAS</h3>
+                    <h3 class="founder-title">Nhà sáng lập của PDH</h3>
                     <div class="founder-des">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the
                         industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.
@@ -44,7 +44,7 @@
             </b-row>
             <b-row v-if="isMobile">
                 <b-col cols="6">
-                    <h3 class="founder-title">Nhà sáng lập của NAS</h3>
+                    <h3 class="founder-title">Nhà sáng lập của PDH</h3>
                     <div class="founder-des">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the
                         industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.

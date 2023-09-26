@@ -53,17 +53,20 @@
         </div>
         <div class="menu-mobile-list">
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
-            <div class="menu-mobile-title">Women</div>
-            <img class="menu-open" :src="openMobile === 1 ? '/images/menu-up.png' : '/images/menu-down.png'"
-              @click="openMobile = openMobile === 1 ? null : 1" />
-          </div>
-          <div v-if="openMobile === 1 && !openSubChild" class="menu-mobile-list-sub">
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title">Evening gown</div>
-              <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-right.png'"
-                @click="openSubChild = openSubChild === 1 ? null : 1" />
+            <div class="menu-mobile-title">
+              {{ $i18n.locale === 'vn' ? listCollection[0].name : listCollection[0].name_en ?? listCollection[0].name }}
             </div>
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
+            <img class="menu-open" :src="openMobile === 0 ? '/images/menu-up.png' : '/images/menu-down.png'"
+              @click="openMobile = openMobile === 0 ? null : 0" />
+          </div>
+          <div v-if="openMobile === 0 && !openSubChild" class="menu-mobile-list-sub">
+            <div class="menu-mobile-sub-item d-flex justify-content-between"
+              v-for="(coll, idx) in listCollection[0].child" :key="idx">
+              <div class="menu-mobile-title">{{ coll.attributes.name }}</div>
+              <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'"
+                @click="openSubChild = openSubChild === idx ? null : idx" />
+            </div>
+            <!-- <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Ready-to-wear</div>
               <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="openSubMobile = openSubMobile === 2 ? null : 2" />
@@ -77,13 +80,13 @@
               <div class="menu-mobile-title">Shoes</div>
               <img class="menu-open" :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="openSubMobile = openSubMobile === 4 ? null : 4" />
-            </div>
+            </div> -->
           </div>
-          <div class="menu-mobile-item d-flex justify-content-between" v-if="openSubChild === 1">
+          <div class="menu-mobile-item d-flex justify-content-between" v-if="openSubChild === 0">
             <div class="menu-mobile-title">EVENING GOWN</div>
             <img class="menu-left" src="/images/menu-left.png" @click="openSubChild = null" />
           </div>
-          <div v-if="openSubChild === 1" class="menu-mobile-list-sub">
+          <div v-if="openSubChild === 0" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/collection/121')">Women’s SS23 Collection  </div>
             </div>
@@ -92,12 +95,16 @@
             </div>
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
-            <div class="menu-mobile-title">Men</div>
+            <div class="menu-mobile-title">
+              {{ $i18n.locale === 'vn' ? listCollection[1].name : listCollection[1].name_en ?? listCollection[1].name }}
+            </div>
             <img class="menu-open" :src="openMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'"
               @click="openMobile = openMobile === 2 ? null : 2" />
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
-            <div class="menu-mobile-title">Gifts</div>
+            <div class="menu-mobile-title">
+              {{ $i18n.locale === 'vn' ? listCollection[2].name : listCollection[2].name_en ?? listCollection[2].name }}
+            </div>
             <img class="menu-open" :src="openMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'"
               @click="openMobile = openMobile === 3 ? null : 3" />
           </div>
@@ -160,7 +167,7 @@
         <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[0].child" :key="idx">
           <div class="header-tab-menu-title">{{ _menu.attributes.name }}</div>
           <div class="header-tab-menu-text" v-for="(_coll, index) in _menu.attributes.collections.data" :key="index"
-            @click="goPage(_coll?.attributes.slug)">{{ _coll?.attributes.name }}</div>
+            @click="goPage(`/collection/${_coll?.attributes.slug}`)">{{ _coll?.attributes.name }}</div>
         </div>
         <!-- <div class="header-tab-menu-col-1">
           <div class="header-tab-menu-title">READY TO WEAR</div>
@@ -204,9 +211,9 @@
       <div class="container header-tab-menu-container d-flex justify-content-start">
         <div class="header-tab-menu-col-1">
           <div @click="subTab = 1" class="header-tab-menu-title">Shows</div>
-          <div @click="subTab = 1" class="header-tab-menu-title">Lookbook</div>
-          <div @click="subTab = 1" class="header-tab-menu-title">Campaigns</div>
-          <div @click="subTab = 1" class="header-tab-menu-title">News</div>
+          <!-- <div @click="subTab = 1" class="header-tab-menu-title">Lookbook</div> -->
+          <!-- <div @click="subTab = 1" class="header-tab-menu-title">Campaigns</div> -->
+          <!-- <div @click="subTab = 1" class="header-tab-menu-title">News</div> -->
           <div @click="subTab = 3" class="header-tab-menu-title">About P.D.H</div>
         </div>
         <div class="header-tab-menu-col-2">
@@ -215,9 +222,10 @@
             <div class="header-tab-menu-text" @click="goPage('/house-of-pdh')">vision - mission - value</div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 1">
-            <div @click="goPage('/show/121')" class="header-tab-menu-sub-item" v-for="_item, index in listShow"
+            <div @click="goPage(`/show/${_item.attributes.slug}`)" class="header-tab-menu-sub-item" v-for="_item, index in listShow"
               :key="index">
-              <MenuItem>
+              <MenuItem :link="_item.attributes.slug" :image_link="_item.attributes.thub?.data.attributes.url"
+                :title="_item.attributes.name">
               </MenuItem>
             </div>
           </div>
@@ -270,7 +278,6 @@ export default {
         child: []
       }
       ],
-      listShow: [1, 2],
       showMenuMobile: false,
       openMobile: null,
       openSubMobile: null,
@@ -285,6 +292,7 @@ export default {
       loggedIn: "auth/getloggedIn",
       listUserCart: "cart/getListUserCart",
       listCategory: "category/getListCategory",
+      listShow: "show/getListShow",
     }),
   },
   components: {
@@ -320,7 +328,7 @@ export default {
       }
       let listColl = this.listCategory[i].attributes.child.data
       for (let j = 0; j < listColl.length; j++) {
-        if (listColl[j].attributes.collections.data.length > 6) {
+        if (listColl[j].attributes.collections.data.length > 6 && !this.isMobile) {
           let listTemp = listColl[j].attributes.collections.data.slice(6)
           listColl[j].attributes.collections.data = listColl[j].attributes.collections.data.slice(0, 6)
           let sTemp = {
@@ -335,6 +343,7 @@ export default {
       }
       temp.child = listColl
       this.listCollection.push(temp)
+      this.getListShow()
     }
   },
   methods: {
@@ -343,7 +352,8 @@ export default {
       userLogout: "auth/logout",
       getListCartUser: "cart/getListCartUser",
       // getSiteInfo: "common/getSiteInfo",
-      getListCategory: "category/getListCategory"
+      getListCategory: "category/getListCategory",
+      getListShow: "show/getListShow",
     }),
     closeTab() {
       if (this.isOpenTab) {
@@ -381,6 +391,7 @@ export default {
       }
     },
     goPage(url) {
+      if (url.includes('collection') && url !== '/collection/spring-summer-2024') return
       if (this.$router.history.current.path !== url) {
         this.tab = null
         this.showMenuMobile = false;

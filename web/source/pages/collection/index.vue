@@ -62,7 +62,7 @@ export default {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
         if (this.$route.params.id) {
-            await this.getCollectionBySlug('women-aw') //(this.$route.params.id)
+            await this.getCollectionBySlug(this.$route.params.id) //(this.$route.params.id)
         }
         await this.loadProducts()
         // this.listProduct = [1, 2, 3, 4, 5, 6]

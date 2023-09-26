@@ -76,11 +76,11 @@ export function createRouter() {
             },
             {
                 path: '/collection/:id',
-                component: Collection
+                component: CollectionDetail
             },
             {
                 path: '/collection/detail/:id',
-                component: CollectionDetail
+                component: Collection
             },
             {
                 path: '/san-pham/:id',

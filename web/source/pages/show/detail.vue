@@ -1,43 +1,40 @@
 <template>
-    <div class="detail-show">
+    <div class="detail-show" v-if="show && show.attributes">
         <div class="detail-show-image">
             <ThumbImage ratio="16-9" :src="'/images/show-banner.jpg'" v-if="!isMobile"></ThumbImage>
             <ThumbImage ratio="9-21" :src="'/images/show-banner.jpg'" v-if="isMobile"></ThumbImage>
             <div class="detail-show-info">
-                <h1 class="detail-show-title">MILAN</br> FASHION WEEK 2023</h1>
-                <div class="detail-show-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla urna,
-                    rutrum ut est quis, imperdiet auctor ipsum.</div>
+                <h1 class="detail-show-title">{{ show.attributes?.name }}</h1>
+                <div class="detail-show-des">{{ show.attributes?.content }}</div>
             </div>
         </div>
         <div class="detail-show-content" v-if="!isMobile">
             <div class="d-flex align-items-center">
-                <img class="detail-show-content-img" src="/images/show1.jpg" />
+                <img class="detail-show-content-img" :src="show.attributes.media1.data?.attributes.url" />
                 <div class="detail-show-data">
-                    <div class="detail-show-data-title">MILAN</br> FASHION WEEK 2023</div>
-                    <div class="detail-show-data-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                    <img class="detail-show-content-img-data" src="/images/show2.jpg" />
-                    <div class="detail-show-data-sub">I am so happy to be back in New York. We showed the Dante collection
-                        here in 1996, and then came again with Eye in the autumn of 1999.</div>
+                    <div class="detail-show-data-title">{{ show.attributes?.name }}</div>
+                    <div class="detail-show-data-des">{{ show.attributes?.short_content }}</div>
+                    <img class="detail-show-content-img-data" :src="show.attributes.media2.data?.attributes.url" />
+                    <div class="detail-show-data-sub">{{ show.attributes?.content }}</div>
                 </div>
             </div>
             <div class="d-flex align-items-center">
                 <div class="detail-show-data">
-                    <img class="detail-show-content-img-data" src="/images/show4.jpg" />
+                    <img class="detail-show-content-img-data" :src="show.attributes.media3.data?.attributes.url" />
                 </div>
-                <img class="detail-show-content-img" src="/images/show3.jpg" />
+                <img class="detail-show-content-img" :src="show.attributes.media4.data?.attributes.url" />
             </div>
         </div>
         <div class="container detail-show-content" v-if="isMobile">
             <div class="detail-show-data">
-                <div class="detail-show-data-title">MILAN</br> FASHION WEEK 2023</div>
-                <div class="detail-show-data-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                <img class="detail-show-content-img-data" src="/images/show2.jpg" />
-                <div class="detail-show-data-sub">I am so happy to be back in New York. We showed the Dante collection
-                    here in 1996, and then came again with Eye in the autumn of 1999.</div>
+                <div class="detail-show-data-title">{{ show.attributes?.name }}</div>
+                <div class="detail-show-data-des">{{ show.attributes?.short_content }}</div>
+                <img class="detail-show-content-img-data" :src="show.attributes.media2.data?.attributes.url" />
+                <div class="detail-show-data-sub">{{ show.attributes?.content }}</div>
             </div>
-            <img class="detail-show-content-img" src="/images/show1.jpg" />
-            <img class="detail-show-content-img" src="/images/show3.jpg" />
-            <img class="detail-show-content-img" src="/images/show4.jpg" />
+            <img class="detail-show-content-img" :src="show.attributes.media1.data?.attributes.url" />
+            <img class="detail-show-content-img" :src="show.attributes.media3.data?.attributes.url" />
+            <img class="detail-show-content-img" :src="show.attributes.media4.data?.attributes.url" />
         </div>
         <div class="detail-show-video">
             <img class="detail-show-img-video" src="/images/PDH.png" />
@@ -61,11 +58,11 @@ export default {
             isMobile: false
         }
     },
-    // computed: {
-    //     ...mapGetters({
-    //         club: "club/getClub"
-    //     }),
-    // },
+    computed: {
+        ...mapGetters({
+            show: "show/getShow"
+        }),
+    },
     // watch: {
     //     '$i18n.locale': function (val) {
     //         if (val) {
@@ -89,12 +86,13 @@ export default {
     async mounted() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
-        // await this.loadData()
+        await this.loadData()
+        console.log(this.show)
     },
     methods: {
-        // ...mapActions({
-        //     getClubBySlug: "club/getClubBySlug"
-        // }),
+        ...mapActions({
+            getShowBySlug: "show/getShowBySlug"
+        }),
         checkMobile() {
             if (!process.server) {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -127,13 +125,12 @@ export default {
                     elem.scrollIntoView();
                 }, 50)
             }
+        },
+        async loadData() {
+            if (this.$route.params.id) {
+                await this.getShowBySlug(this.$route.params.id)
+            }
         }
-        // async loadData() {
-        //     if (this.$route.params.id) {
-        //         await this.getClubBySlug(this.$route.params.id)
-        //         this.breadcrumb[2].text = this.$i18n.locale === 'vn' ? this.club?.attributes?.title : this.club?.attributes?.title_en
-        //     }
-        // }
     }
 }
 </script>

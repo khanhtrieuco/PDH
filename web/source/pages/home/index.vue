@@ -27,8 +27,8 @@
 
     <Collections :isMobile="isMobile" />
     <BannerAbout :isMobile="isMobile" />
-    <News :isMobile="isMobile" />
-    <Store :isMobile="isMobile" />
+    <!-- <News :isMobile="isMobile" /> -->
+    <!-- <Store :isMobile="isMobile" /> -->
   </div>
 </template>
 

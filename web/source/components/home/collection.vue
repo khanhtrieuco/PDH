@@ -1,26 +1,35 @@
 <template>
   <div class="collection-container">
     <img class="collection-title-image" src="/images/collection-lable.png" />
-    <carousel-3d class="collection-slide" v-if="!isMobile" :width="1000" :height="800" :animation-speed="1400"
+    <carousel-3d class="collection-slide" v-if="!isMobile && listCollection && listCollection.length > 0" :width="1000" :height="800" :animation-speed="1400"
       :autoplay="true" :autoplay-timeout="5000" :display="3" :space="1500" :inverse-scaling="300"
       :controls-visible="true"
       :controls-width="45">
       <!-- :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
       :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'" -->
-      <slide v-for="(collection, i) in listcollection" :index="i" :key="i">
+      <slide v-for="(collection, i) in listCollection" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <div class="collection-item d-flex justify-content-center align-items-center"
-            style="background-image: url(/images/coll.jpg)">
-            <div class="collection-item-content">
-              <NuxtLink :to="`/collection/123`">
-                <div class="collection-item-title">LA PEINTURE</div>
-                <div class="collection-item-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla
-                  urna, rutrum ut est quis, imperdiet auctor ipsum. </div>
+            :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes.url})`">
+            <div class="collection-item-content" v-if="collection.id === 24">
+              <NuxtLink :to="`/collection/${collection.attributes.slug}`">
+                <div class="collection-item-title">{{ collection.attributes.name }}</div>
+                <div class="collection-item-des">{{ collection.attributes.description }}</div>
                 <div class="shop-now-link">
                   <span class="shop-now-link-text">Shop now</span>
                   <img class="shop-now-link-img" src="/images/more.png" />
                 </div>
               </NuxtLink>
+            </div>
+            <div class="collection-item-content" v-else>
+              <div>
+                <div class="collection-item-title">{{ collection.attributes.name }}</div>
+                <div class="collection-item-des">{{ collection.attributes.description }}</div>
+                <div class="shop-now-link">
+                  <span class="shop-now-link-text">Shop now</span>
+                  <img class="shop-now-link-img" src="/images/more.png" />
+                </div>
+              </div>
             </div>
           </div>
         </template>
@@ -31,7 +40,7 @@
       :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
       :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'"
       :controls-width="45">
-      <slide v-for="(collection, i) in listcollection" :index="i" :key="i">
+      <slide v-for="(collection, i) in listCollection" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <div class="collection-item d-flex justify-content-center align-items-center"
             style="background-image: url(/images/coll.jpg)">
@@ -79,29 +88,28 @@ export default {
         "slidesToShow": 3,
         "slidesToScroll": 1
       },
-      listcollection: [1, 2, 3, 4, 5]
+      // listcollection: [1, 2, 3, 4, 5]
     }
   },
-  // computed: {
-  //   ...mapGetters({
-  //     listCategory: "category/getListCategory"
-  //   }),
-  // },
-  // async mounted() {
-  //   if (this.listCategory.length === 0) {
-  //     await this.getListCategory()
-  //   }
-  //   if (this.listCategory.length >= 3) {
-  //     this.cate1 = this.listCategory[0].attributes
-  //     this.cate2 = this.listCategory[1].attributes
-  //     this.cate3 = this.listCategory[2].attributes
-  //   }
-  // },
-  // methods: {
-  //   ...mapActions({
-  //     getListCategory: "category/getListCategory"
-  //   }),
-  // }
+  computed: {
+    ...mapGetters({
+      listCollection: "collection/getListHomeCollection"
+    }),
+  },
+  async mounted() {
+    if (this.listCollection.length === 0) {
+      await this.getListHomeCollection({
+        filters: {
+          show_home: true
+        }
+      })
+    }
+  },
+  methods: {
+    ...mapActions({
+      getListHomeCollection: "collection/getListHomeCollection"
+    }),
+  }
 }
 </script>
 <style lang="scss">

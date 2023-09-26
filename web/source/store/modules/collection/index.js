@@ -5,6 +5,7 @@ import mutations from './mutations';
 export const state = () => ({
     collection: {},
     list_collection : [],
+    list_home_collection : [],
     list_item: {
         data: [],
         pagination: {

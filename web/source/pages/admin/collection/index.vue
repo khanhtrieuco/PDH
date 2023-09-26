@@ -43,6 +43,10 @@
                 <a-tag color="green" v-if="state === 'active'">Active</a-tag>
                 <a-tag color="red" v-else>Deleted</a-tag>
             </span>
+            <span slot="show" slot-scope="show_home">
+                <a-tag color="green" v-if="show_home">Có</a-tag>
+                <a-tag color="red" v-else>Không</a-tag>
+            </span>
             <span slot="action" slot-scope="text, record">
                 <a-button class="admin-btn" type="primary" @click="onEdit(record)">Cập nhật</a-button>
                 <a-button @click="deletedItem(record.id)" class="admin-btn" type="danger"
@@ -93,6 +97,14 @@ export default {
                     dataIndex: 'attributes.order',
                     sorter: true,
                     key: 'order',
+                }, {
+                    title: 'Slider trang chủ',
+                    dataIndex: 'attributes.show_home',
+                    width: 180,
+                    align: 'center',
+                    scopedSlots: { customRender: 'show' },
+                    key: 'show_home',
+                    sorter: true
                 }, {
                     title: 'Trạng thái',
                     dataIndex: 'attributes.state',

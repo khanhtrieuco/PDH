@@ -25,7 +25,7 @@
                         crossorigin="Anonymous" />
                 </div>
             </div>
-            <div class="btn-collection-top" @click="$router.go(-1)">SHOP NOW</div>
+            <!-- <div class="btn-collection-top" @click="$router.go(-1)">SHOP NOW</div> -->
         </div>
     </div>
 </template>
@@ -53,7 +53,7 @@ export default {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
         if (this.$route.params.id) {
-            await this.getCollectionBySlug('women-aw') //(this.$route.params.id)
+            await this.getCollectionBySlug(this.$route.params.id) //(this.$route.params.id)
         }
         // await this.loadProducts()
         this.collection.attributes.media.data.map(o => {

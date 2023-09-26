@@ -20,6 +20,19 @@ export default {
         })
     },
 
+    getShowBySlug: async ({ commit, rootState }, data) => {
+        let res = await ApiService.request({
+            method: 'get',
+            url: `/api/shows?populate=*&filters[slug][$eq]=${data}`
+        })
+        if (res && res.data && res.data.length > 0) {
+            commit('set_data', {
+                name: 'show',
+                data: res.data[0]
+            })
+        }
+    },
+
     getListItem: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             filters: data.filters,
