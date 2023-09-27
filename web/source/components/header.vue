@@ -543,6 +543,7 @@ export default {
       text-transform: uppercase;
       line-height: 40px;
       height: 40px;
+      margin-bottom: 10px;
       cursor: pointer;
 
       &:hover {
@@ -559,10 +560,11 @@ export default {
       color: #000;
       font-family: 'Aeroport-light';
       font-size: 13px;
-      line-height: 16px;
-      min-height: 40px;
+      line-height: 20px;
+      // min-height: 40px;
       text-transform: uppercase;
       cursor: pointer;
+      margin-bottom: 20px;
       // white-space: nowrap;
     }
 
@@ -727,7 +729,7 @@ export default {
 
       .menu-mobile-list-sub {
         padding-left: 40px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
 
         .menu-mobile-sub-item {
           border-bottom: 1px solid #8D8D8D;
@@ -737,7 +739,7 @@ export default {
           .menu-mobile-title {
             color: #000;
             font-family: 'Aeroport-light';
-            font-size: 16px;
+            font-size: 14px;
             white-space: nowrap;
 
           }
@@ -908,7 +910,7 @@ export default {
 
       .menu-mobile-list-sub {
         padding-left: 40px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
 
         .menu-mobile-sub-item {
           border-bottom: 1px solid #8D8D8D;
@@ -918,7 +920,7 @@ export default {
           .menu-mobile-title {
             color: #000;
             font-family: 'Aeroport-light';
-            font-size: 16px;
+            font-size: 14px;
           }
 
           .menu-open {
