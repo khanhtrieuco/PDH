@@ -1,28 +1,34 @@
 <template>
     <div class="collection-content">
         <div class="collection-banner">
-            <ThumbImage class="customer-image" ratio="21-9" v-if="!isMobile"
-                :src="collection.attributes?.detail_thub?.data?.attributes.url"></ThumbImage>
-            <ThumbImage class="customer-image" ratio="9-21" v-if="isMobile"
-                :src="collection.attributes?.detail_thub?.data?.attributes.url"></ThumbImage>
+            <img class="customer-image" ratio="21-9" v-if="!isMobile"
+                :src="collection.attributes?.detail_thub?.data?.attributes.url"/>
+            <img class="customer-image" ratio="9-21" v-if="isMobile"
+                :src="collection.attributes?.detail_thub_mobile?.data?.attributes.url" />
             <div class="container customer-des" v-if="isMobile">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
                 dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
                 suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
                 vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
                 accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                nulla facilisi. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                nulla facilisi. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod
+                tincidunt ut
                 laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                 ullamcor
             </div>
         </div>
         <div class="container">
-            <div class="photo-wrap">
+            <div class="photo-wrap" v-if="isMobile">
                 <div class="photo" v-for="imgData, index in imgDataArray" :key="index"
                     :style="{ 'width': imgData.size.width * 800 / imgData.size.height + 'px', 'flex-grow': imgData.size.width * 800 / imgData.size.height }">
                     <i :style="{ 'padding-bottom': imgData.size.height / imgData.size.width * 100 + '%' }"></i>
                     <img class="collection-detail-image" :src="imgData.src" :alt="imgData.title" @load="loaded(index)"
                         crossorigin="Anonymous" />
+                </div>
+            </div>
+            <div class="photo-list" v-if="!isMobile">
+                <div class="photo-img" v-for="imgData, index in imgDataArray" :key="index">
+                    <img class="photo-img-detail" :src="imgData.src" :alt="imgData.title" />
                 </div>
             </div>
             <!-- <div class="btn-collection-top" @click="$router.go(-1)">SHOP NOW</div> -->
@@ -142,6 +148,27 @@ export default {
         box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
     }
 
+    .photo-list {
+        width: 100%;
+        margin-top: 5px;
+        .photo-img {
+            width: 50%;
+            display: inline-block;
+            padding: 5px;
+            .photo-img-detail {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                height: 800px;
+                object-fit: cover;
+                vertical-align: bottom;
+                border-radius: 3px;
+                box-sizing: border-box;
+                box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+            }
+        }
+    }
+
     .btn-collection-top {
         width: 240px;
         height: 30px;
@@ -157,7 +184,7 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .customer-des{
+    .customer-des {
         font-size: 12px;
         padding: 20px 25px;
         font-family: 'Aeroport-light';

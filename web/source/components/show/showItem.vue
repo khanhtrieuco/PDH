@@ -1,12 +1,12 @@
 <template>
     <div class="show-item">
-        <NuxtLink :to="`/show/${item.slug}`">
+        <NuxtLink :to="`/show/${item.attributes.slug}`">
             <div class="show-img">
-                <ThumbImage ratio="3-4" :src="`images/news.jpg`"></ThumbImage>
+                <ThumbImage ratio="3-4" :src="item.attributes.thub_mobile.data.attributes.url"></ThumbImage>
             </div>
         </NuxtLink>
-        <div class="show-title"> {{ item.title }}</div>
-        <div class="show-des"> {{ get_excerpt(item.description, 37) }} </div>
+        <div class="show-title"> {{ item.attributes.name }}</div>
+        <div class="show-des"> {{ get_excerpt(item.attributes.short_content, 37) }} </div>
     </div>
 </template>
   
@@ -19,9 +19,11 @@ export default {
             type: Object,
             default: () => {
                 return {
-                    image: '/images/show.jpg',
-                    title: 'LIT EXHIBITION',
-                    description: "Sun Life Vietnam"
+                    attributes: {
+                        image: '/images/show.jpg',
+                        name: 'LIT EXHIBITION',
+                        short_content: "Sun Life Vietnam"
+                    }
                 }
             }
         },

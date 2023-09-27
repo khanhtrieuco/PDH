@@ -2,10 +2,10 @@
     <div class="show-content container">
         <img class="show-title-image" src="/images/show.png" />
         <div class="list-main-show">
-            <b-row v-if="listShow">
-                <b-col class="mb-3" cols="6" lg="3" v-for="index in 4" :key="index">
-                    <NuxtLink :to="`/show/123`">
-                        <ShowItem :isMobile="isMobile" />
+            <b-row v-if="listShow && listShow.length > 0">
+                <b-col class="mb-3" cols="6" lg="3" v-for="(show, idx) in listShow" :key="idx">
+                    <NuxtLink :to="`/show/${show.attributes.slug}`">
+                        <ShowItem :isMobile="isMobile" :item="show" />
                     </NuxtLink>
                 </b-col>
             </b-row>
@@ -23,15 +23,14 @@ export default {
     components: {
         ShowItem,
     },
-    // computed: {
-    //     ...mapGetters({
-    //         listClub: "club/getListClub"
-    //     }),
-    // },
+    computed: {
+        ...mapGetters({
+            listShow: "show/getListShow"
+        }),
+    },
     mixins: [general],
     data() {
         return {
-            listShow: [1, 2, 3, 4],
             isMobile: false
         }
     },
@@ -54,6 +53,7 @@ export default {
     async mounted() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
+        this.getListShow()
         // if (this.isMobile) {
         //     await this.getListClub({
         //         pagination: {
@@ -82,10 +82,10 @@ export default {
         // }
     },
     methods: {
-        // ...mapActions({
-        //     getListClub: "club/getListClub",
-        //     getListClubMore: "club/getListClubMore",
-        // }),
+        ...mapActions({
+            getListShow: "show/getListShow",
+            // getListClubMore: "club/getListClubMore",
+        }),
         checkMobile() {
             if (!process.server) {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

@@ -48,50 +48,34 @@
             <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
             <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
-            <span class="lang-btn" v-if="$i18n.locale === 'vi'" @click="changeLang()">VI</span>
+            <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span>
           </div>
         </div>
         <div class="menu-mobile-list">
-          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
+          <div v-if="!mobileSubMenu" class="menu-mobile-item d-flex justify-content-between">
             <div class="menu-mobile-title">
               {{ $i18n.locale === 'vn' ? listCollection[0].name : listCollection[0].name_en ?? listCollection[0].name }}
             </div>
             <img class="menu-open" :src="openMobile === 0 ? '/images/menu-up.png' : '/images/menu-down.png'"
               @click="openMobile = openMobile === 0 ? null : 0" />
           </div>
-          <div v-if="openMobile === 0 && !openSubChild" class="menu-mobile-list-sub">
+          <div v-if="openMobile === 0 && !mobileSubMenu" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between"
               v-for="(coll, idx) in listCollection[0].child" :key="idx">
               <div class="menu-mobile-title">{{ coll.attributes.name }}</div>
               <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'"
-                @click="openSubChild = openSubChild === idx ? null : idx" />
+                @click="mobileSubMenu = coll" />
             </div>
-            <!-- <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title">Ready-to-wear</div>
-              <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-right.png'"
-                @click="openSubMobile = openSubMobile === 2 ? null : 2" />
-            </div>
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title">Hand Bags</div>
-              <img class="menu-open" :src="openSubMobile === 3 ? '/images/menu-up.png' : '/images/menu-right.png'"
-                @click="openSubMobile = openSubMobile === 3 ? null : 3" />
-            </div>
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title">Shoes</div>
-              <img class="menu-open" :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-right.png'"
-                @click="openSubMobile = openSubMobile === 4 ? null : 4" />
-            </div> -->
           </div>
-          <div class="menu-mobile-item d-flex justify-content-between" v-if="openSubChild === 0">
-            <div class="menu-mobile-title">EVENING GOWN</div>
-            <img class="menu-left" src="/images/menu-left.png" @click="openSubChild = null" />
+          <div class="menu-mobile-item d-flex justify-content-between" v-if="mobileSubMenu">
+            <div class="menu-mobile-title">{{ mobileSubMenu.attributes.name }}</div>
+            <img class="menu-left" src="/images/menu-left.png" @click="mobileSubMenu = null" />
           </div>
-          <div v-if="openSubChild === 0" class="menu-mobile-list-sub">
+          <div v-if="mobileSubMenu && mobileSubMenu?.attributes.collections" class="menu-mobile-list-sub"
+            v-for="(subMenu, idx) in mobileSubMenu?.attributes.collections?.data" :key="idx">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title" @click="goPage('/collection/121')">Women’s SS23 Collection  </div>
-            </div>
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title" @click="goPage('/collection/121')">Women’s AW23 Collection</div>
+              <div class="menu-mobile-title" @click="goPage(`/collection/${subMenu.attributes.slug}`)">{{
+                subMenu.attributes.name }}</div>
             </div>
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
@@ -222,8 +206,8 @@
             <div class="header-tab-menu-text" @click="goPage('/house-of-pdh')">vision - mission - value</div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 1">
-            <div @click="goPage(`/show/${_item.attributes.slug}`)" class="header-tab-menu-sub-item" v-for="_item, index in listShow"
-              :key="index">
+            <div @click="goPage(`/show/${_item.attributes.slug}`)" class="header-tab-menu-sub-item"
+              v-for="_item, index in listShow" :key="index">
               <MenuItem :link="_item.attributes.slug" :image_link="_item.attributes.thub?.data.attributes.url"
                 :title="_item.attributes.name">
               </MenuItem>
@@ -282,6 +266,7 @@ export default {
       openMobile: null,
       openSubMobile: null,
       openSubChild: null,
+      mobileSubMenu: null,
       isOpen: false,
       showListCart: false
     }
@@ -574,11 +559,11 @@ export default {
       color: #000;
       font-family: 'Aeroport-light';
       font-size: 13px;
-      line-height: 40px;
+      line-height: 16px;
       min-height: 40px;
       text-transform: uppercase;
       cursor: pointer;
-      white-space: nowrap;
+      // white-space: nowrap;
     }
 
     .header-tab-menu-sub-item {
@@ -724,6 +709,7 @@ export default {
           font-family: 'Aeroport';
           font-size: 20px;
           text-transform: uppercase;
+          white-space: nowrap;
         }
 
         .menu-open {
@@ -752,6 +738,8 @@ export default {
             color: #000;
             font-family: 'Aeroport-light';
             font-size: 16px;
+            white-space: nowrap;
+
           }
 
           .menu-open {
@@ -889,6 +877,8 @@ export default {
 
     .menu-mobile-list {
       margin-top: 100px;
+      overflow: scroll;
+      height: 80vh;
 
       .menu-mobile-item {
         border-bottom: 1px solid #8D8D8D;
@@ -900,6 +890,7 @@ export default {
           font-family: 'Aeroport';
           font-size: 20px;
           text-transform: uppercase;
+          white-space: nowrap;
         }
 
         .menu-open {
