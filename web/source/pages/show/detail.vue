@@ -1,8 +1,8 @@
 <template>
     <div class="detail-show" v-if="show && show.attributes">
         <div class="detail-show-image">
-            <ThumbImage ratio="16-9" :src="'/images/show-banner.jpg'" v-if="!isMobile"></ThumbImage>
-            <ThumbImage ratio="9-21" :src="'/images/show-banner.jpg'" v-if="isMobile"></ThumbImage>
+            <ThumbImage ratio="16-9" :src="show.attributes.banner.data?.attributes.url" v-if="!isMobile"></ThumbImage>
+            <ThumbImage ratio="9-21" :src="show.attributes.banner_mobile.data?.attributes.url" v-if="isMobile"></ThumbImage>
             <div class="detail-show-info">
                 <h1 class="detail-show-title">{{ show.attributes?.name }}</h1>
                 <div class="detail-show-des">{{ show.attributes?.content }}</div>
