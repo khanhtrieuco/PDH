@@ -115,6 +115,10 @@ export default {
 .collection-content {
     padding-bottom: 100px;
 
+    .customer-image{
+        width: 100%;
+    }
+
     .photo-wrap {
         position: relative;
         display: flex;
