@@ -39,7 +39,7 @@
         <div class="detail-show-video">
             <img class="detail-show-img-video" src="/images/PDH.png" />
             <video id="videoRef-id" ref="videoRef" preload="auto" class="detail-show-video-inner" @click="onStopVideo">
-                <source :src="'/uploads/Untitled_5f724864c9.webm'" type="video/mp4" />
+                <source :src="show.attributes.video.data?.attributes.url" type="video/mp4" />
             </video>
             <img class="detail-show-img-play" src="/images/play.png" @click="onPlayVideo" />
         </div>

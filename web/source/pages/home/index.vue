@@ -6,10 +6,10 @@
       <div class="home-top-content">
         <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
         <div class="home-top-name-des">{{ banner.attributes?.description }}</div>
-        <div class="shop-now-link-home">
+        <!-- <div class="shop-now-link-home">
           <span class="shop-now-link-text">Shop now</span>
           <img class="shop-now-link-img" src="/images/more.png" />
-        </div>
+        </div> -->
       </div>
     </div>
     <div v-if="isMobile" class="home-top-video">
@@ -18,10 +18,10 @@
       <div class="home-top-content container">
         <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
         <div class="home-top-name-des">{{ banner.attributes?.description }}</div>
-        <div class="shop-now-link-home">
+        <!-- <div class="shop-now-link-home">
           <span class="shop-now-link-text">Shop now</span>
           <img class="shop-now-link-img" src="/images/more.png" />
-        </div>
+        </div> -->
       </div>
     </div>
 

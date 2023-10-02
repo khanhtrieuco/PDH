@@ -15,20 +15,20 @@
               <NuxtLink :to="`/collection/${collection.attributes.slug}`">
                 <div class="collection-item-title">{{ collection.attributes.name }}</div>
                 <div class="collection-item-des">{{ collection.attributes.description }}</div>
-                <div class="shop-now-link">
+                <!-- <div class="shop-now-link">
                   <span class="shop-now-link-text">Shop now</span>
                   <img class="shop-now-link-img" src="/images/more.png" />
-                </div>
+                </div> -->
               </NuxtLink>
             </div>
             <div class="collection-item-content" v-else>
               <div>
                 <div class="collection-item-title">{{ collection.attributes.name }}</div>
                 <div class="collection-item-des">{{ collection.attributes.description }}</div>
-                <div class="shop-now-link">
+                <!-- <div class="shop-now-link">
                   <span class="shop-now-link-text">Shop now</span>
                   <img class="shop-now-link-img" src="/images/more.png" />
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -144,7 +144,7 @@ export default {
           font-family: 'Aeroport-light';
           font-size: 15px;
           font-weight: 300;
-          width: 330px;
+          width: 100%;
           margin-top: 10px;
           margin-bottom: 30px;
         }
