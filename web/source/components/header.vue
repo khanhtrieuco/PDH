@@ -665,7 +665,7 @@ export default {
 
       .menu-logo {
         width: 45px;
-        height: fit-content;
+        height: 17px;
         margin-top: 16px;
       }
 
@@ -716,19 +716,19 @@ export default {
 
         .menu-open {
           width: 13px;
-          height: fit-content;
+          height: 8px;
           margin-top: 25px;
         }
 
         .menu-left {
           width: 8px;
-          height: fit-content;
+          height: 13px;
           margin-top: 20px;
         }
       }
 
       .menu-mobile-list-sub {
-        padding-left: 40px;
+        padding-left: 25px;
         margin-bottom: 10px;
 
         .menu-mobile-sub-item {
@@ -844,7 +844,7 @@ export default {
 
       .menu-logo {
         width: 45px;
-        height: fit-content;
+        height: 17px;
         margin-top: 16px;
       }
 
@@ -897,19 +897,19 @@ export default {
 
         .menu-open {
           width: 13px;
-          height: fit-content;
+          height: 8px;
           margin-top: 25px;
         }
 
         .menu-left {
           width: 8px;
-          height: fit-content;
+          height: 13px;
           margin-top: 20px;
         }
       }
 
       .menu-mobile-list-sub {
-        padding-left: 40px;
+        padding-left: 25px;
         margin-bottom: 10px;
 
         .menu-mobile-sub-item {
