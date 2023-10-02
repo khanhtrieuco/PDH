@@ -1,10 +1,9 @@
 <template>
   <div class="collection-container">
     <img class="collection-title-image" src="/images/collection-lable.png" />
-    <carousel-3d class="collection-slide" v-if="!isMobile && listCollection && listCollection.length > 0" :width="1000" :height="800" :animation-speed="1400"
-      :autoplay="true" :autoplay-timeout="5000" :display="3" :space="1500" :inverse-scaling="300"
-      :controls-visible="true"
-      :controls-width="45">
+    <carousel-3d class="collection-slide" v-if="!isMobile && listCollection && listCollection.length > 0" :width="1000"
+      :height="800" :animation-speed="1400" :autoplay="true" :autoplay-timeout="5000" :display="3" :space="1500"
+      :inverse-scaling="300" :controls-visible="true" :controls-width="45">
       <!-- :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
       :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'" -->
       <slide v-for="(collection, i) in listCollection" :index="i" :key="i">
@@ -35,29 +34,28 @@
         </template>
       </slide>
     </carousel-3d>
-    <carousel-3d class="collection-slide" v-if="isMobile" :width="250" :height="350" :animation-speed="1000"
+    <carousel-3d class="collection-slide" v-if="isMobile && listCollection && listCollection.length > 0" :width="250" :height="350" :animation-speed="1000"
       :autoplay="false" :autoplay-timeout="5000" :display="3" :space="340" :inverse-scaling="300" :controls-visible="true"
       :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
       :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'"
-      :controls-width="45">
+      :controls-width="45" @after-slide-change="onAfterSlideChange">
       <slide v-for="(collection, i) in listCollection" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <div class="collection-item d-flex justify-content-center align-items-center"
-            style="background-image: url(/images/coll.jpg)">
+          :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes?.url})`">
           </div>
         </template>
       </slide>
     </carousel-3d>
 
     <div class="collection-item-content" v-if="isMobile">
-      <NuxtLink :to="`/collection/123`">
-        <div class="collection-item-title">LA PEINTURE</div>
-        <div class="collection-item-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla
-          urna, rutrum ut est quis, imperdiet auctor ipsum. </div>
-        <div class="shop-now-link">
+      <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`">
+        <div class="collection-item-title">{{ current_coll?.attributes?.name }}</div>
+        <div class="collection-item-des">{{ current_coll?.attributes?.description }}</div>
+        <!-- <div class="shop-now-link">
           <span class="shop-now-link-text">Shop now</span>
           <img class="shop-now-link-img" src="/images/moreb.png" />
-        </div>
+        </div> -->
       </NuxtLink>
     </div>
 
@@ -88,6 +86,9 @@ export default {
         "slidesToShow": 3,
         "slidesToScroll": 1
       },
+      current_coll: {
+
+      }
       // listcollection: [1, 2, 3, 4, 5]
     }
   },
@@ -103,12 +104,17 @@ export default {
           show_home: true
         }
       })
+      this.onAfterSlideChange(0)
     }
   },
   methods: {
     ...mapActions({
       getListHomeCollection: "collection/getListHomeCollection"
     }),
+    onAfterSlideChange(index) {
+      console.log(index)
+      this.current_coll = this.listCollection[index]
+    }
   }
 }
 </script>

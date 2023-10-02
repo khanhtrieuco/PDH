@@ -5,7 +5,7 @@
                 :src="collection.attributes?.detail_thub?.data?.attributes.url"/>
             <img class="customer-image" ratio="9-21" v-if="isMobile"
                 :src="collection.attributes?.detail_thub_mobile?.data?.attributes.url" />
-            <div class="container customer-des" v-if="isMobile">
+            <!-- <div class="container customer-des" v-if="isMobile">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
                 dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
                 suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
@@ -15,7 +15,7 @@
                 tincidunt ut
                 laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                 ullamcor
-            </div>
+            </div> -->
         </div>
         <div class="container">
             <div class="photo-wrap" v-if="isMobile">
