@@ -45,15 +45,12 @@
                 </div>
             </div>
         </div>
-        <div class="container about-list">
-            <div class="about-item">
-                <div class="about-item-img">
-                    <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
+        <!-- <div class="container about-list">
+            <div class="about-item"> -->
+                <!-- <div class="about-item-img">
                     <img v-if="tab === 1" src="/images/about1.jpg" />
-                    <!-- <img v-if="tab === 2" src="/images/about2.jpg" />
-                    <img v-if="tab === 3" src="/images/about3.jpg" /> -->
-                    <!-- </transition> -->
-
+                    <img v-if="tab === 2" src="/images/about2.jpg" />
+                    <img v-if="tab === 3" src="/images/about3.jpg" />
                     <div class="about-item-dot about-item-dot1">
                         <div></div>
                     </div>
@@ -66,21 +63,21 @@
                     <div class="about-item-dot about-item-dot4">
                         <div></div>
                     </div>
-                </div>
+                </div> -->
                 <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
-                <div v-if="tab === 1" class="about-item-content">
+                <!-- <div v-if="tab === 1" class="about-item-content">
                     <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
                     <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
                         collection here in 1996, and then came again with Eye in the autumn of 1999.</div>
                     <div class="about-item-tab">
                         <div @click="tab = 1"
                             :class="`about-item-tab-choice ${tab === 1 ? 'about-item-tab-choice-active' : ''}`"></div>
-                        <!-- <div @click="tab = 2"
+                        <div @click="tab = 2"
                             :class="`about-item-tab-choice ${tab === 2 ? 'about-item-tab-choice-active' : ''}`"></div>
                         <div @click="tab = 3"
-                            :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div> -->
+                            :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
                     </div>
-                </div>
+                </div> -->
                 <!-- </transition> -->
                 <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                 <!-- <div v-if="tab === 2" class="about-item-content">
@@ -113,8 +110,8 @@
                 </div> -->
                 <!-- </transition> -->
 
-            </div>
-        </div>
+            <!-- </div>
+        </div> -->
     </div>
 </template>
   

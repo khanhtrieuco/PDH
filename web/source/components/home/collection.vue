@@ -34,15 +34,16 @@
         </template>
       </slide>
     </carousel-3d>
-    <carousel-3d class="collection-slide" v-if="isMobile && listCollection && listCollection.length > 0" :width="250" :height="350" :animation-speed="1000"
-      :autoplay="false" :autoplay-timeout="5000" :display="3" :space="340" :inverse-scaling="300" :controls-visible="true"
+    <carousel-3d class="collection-slide" v-if="isMobile && listCollection && listCollection.length > 0" :width="250"
+      :height="350" :animation-speed="1000" :autoplay="false" :autoplay-timeout="5000" :display="3" :space="340"
+      :inverse-scaling="300" :controls-visible="true"
       :controls-prev-html="'&lt;img class=&quot;col-img-left&quot; src=&quot;/images/left-b.png&quot; /&gt;'"
       :controls-next-html="'&lt;img class=&quot;col-img-right&quot; src=&quot;/images/right-b.png&quot; /&gt;'"
       :controls-width="45" @after-slide-change="onAfterSlideChange">
       <slide v-for="(collection, i) in listCollection" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <div class="collection-item d-flex justify-content-center align-items-center"
-          :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes?.url})`">
+            :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes?.url})`">
           </div>
         </template>
       </slide>
@@ -129,6 +130,7 @@ export default {
 
   .collection-slide {
     .collection-item {
+      background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
       width: 100%;
@@ -208,6 +210,7 @@ export default {
 
     .collection-slide {
       .collection-item {
+        background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         width: 100%;
