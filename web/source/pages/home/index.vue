@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isMobile" class="home-top-video">
-      <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink.data?.attributes.url"
+      <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink_mobile.data?.attributes.url"
         :nameClass="'image-banner'" :contain="false" :video="true" ratio="16-9" />
       <div class="home-top-content">
         <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div v-if="isMobile" class="home-top-video">
-      <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink.data?.attributes.url"
+      <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink_mobile.data?.attributes.url"
         :nameClass="'image-banner'" :contain="false" :video="true" ratio="9-21" />
       <div class="home-top-content container">
         <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
