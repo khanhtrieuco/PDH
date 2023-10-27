@@ -3,7 +3,7 @@ version: "3.5"
 services:
     pdh.site.dev:
         container_name: pdh.site.dev
-        image: pdh.site
+        image: pdh.site.dev
         build: .
         ports:
         - "8087:8086"
