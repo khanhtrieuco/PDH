@@ -11,7 +11,8 @@ export const state = () => ({
             page: 1,
             pageSize: 10
         }
-    }
+    },
+    news: {}
 });
 
 export default {

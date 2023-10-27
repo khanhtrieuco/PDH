@@ -4,7 +4,7 @@
             <ThumbImage class="customer-image" ratio="21-9" v-if="!isMobile"
                 :src="collection.attributes?.main_thub?.data?.attributes.url"></ThumbImage>
             <ThumbImage class="customer-image" ratio="9-21" v-if="isMobile"
-                :src="collection.attributes?.main_thub?.data?.attributes.url"></ThumbImage>
+                :src="collection.attributes?.main_thub_mobile?.data?.attributes.url"></ThumbImage>
         </div>
         <div class="container">
             <h1 class="collection-title">
@@ -22,14 +22,14 @@
                 </div>
             </NuxtLink>
             <div class="collection-products">
-                <b-row v-if="listProduct">
+                <b-row v-if="listProduct && listProduct.length > 0">
                     <b-col class="mb-3" cols="6" lg="4" v-for="_pro,index in listProduct" :key="index">
                         <ProductItem :item="_pro" :isMobile="isMobile" :height="isMobile ? '215px' : '600px'" />
                     </b-col>
                 </b-row>
-                <!-- <div v-else>
+                <div v-else>
                     <div class="collection-empty">{{ $t('Catogory_empty_product') }}</div>
-                </div> -->
+                </div>
             </div>
             <div class="btn-collection-top" @click="goTop()">Back to top</div>
         </div>
@@ -97,6 +97,7 @@ export default {
                     arrayFilter.push({ subcategories: _data.filterSub })
                 }
                 await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
+                console.log(this.listProduct)
             }
         }
     }
@@ -163,7 +164,9 @@ export default {
         width: 12px;
     }
 }
-
+.collection-empty{
+    text-align: center;
+}
 @media (max-width: 520px) {
     .collection-content {
         padding-bottom: 100px;

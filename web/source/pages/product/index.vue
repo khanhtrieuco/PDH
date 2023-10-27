@@ -61,7 +61,11 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="product-detail-data-size-text">Size:</div>
-                        <div class="product-detail-data-size-des">Size guide</div>
+                        <div>
+                            <span class="product-detail-data-size-des">Size guide</span>
+                            <span class="product-detail-data-size-des" v-if="selectSize"
+                                @click="clearChoice">Clear choice</span>
+                        </div>
                     </div>
                     <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
                         @onChange="choiceSize"></Select>
@@ -74,7 +78,8 @@
                     </div>
                 </div>
             </div>
-            <VueSlickCarousel v-bind="settings" class="product-detail-media" v-if="isMobile && product.attributes?.media.data">
+            <VueSlickCarousel v-bind="settings" class="product-detail-media"
+                v-if="isMobile && product.attributes?.media.data">
                 <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
                     <img class="product-detail-media-img" :src="imgData.attributes?.url" />
                 </div>
@@ -126,20 +131,20 @@
             </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recommend</div>
-                <b-row v-if="listRelated">
-                    <b-col class="mb-4" cols="6" lg="3" v-for="index in 4" :key="index">
-                        <ProductItem :isMobile="isMobile" height="290px" />
+                <b-row v-if="listRelated && listRelated.length > 0">
+                    <b-col class="mb-4" cols="6" lg="3" v-for="_item, index in listRelated" :key="index">
+                        <ProductItem :item="_item" :isMobile="isMobile" height="290px"/>
                     </b-col>
                 </b-row>
             </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recently viewed</div>
-                <b-row v-if="listRelated">
-                    <b-col class="mb-4" cols="6" lg="3" v-for="index in 3" :key="index">
-                        <ProductItem :isMobile="isMobile" height="290px" />
+                <b-row v-if="listView && listView.length > 0">
+                    <b-col class="mb-4" cols="6" lg="3"  v-for="_item, index in listView" :key="index">
+                        <ProductItem :item="_item" :isMobile="isMobile" height="290px" />
                     </b-col>
                 </b-row>
-                <div class="product-detail-list-btn">More items from collection</div>
+                <!-- <div class="product-detail-list-btn">More items from collection</div> -->
             </div>
         </div>
     </div>
@@ -187,7 +192,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            product: "product/getProduct"
+            product: "product/getProduct",
+            listView: "product/getListProductView"
         }),
     },
     async mounted() {
@@ -208,13 +214,16 @@ export default {
                 }
             });
         }
+
         this.listSizeChoice = this.listSize.map(o => {
             return {
                 item: o.id,
                 name: o.attributes.name
             }
         })
-        // this.listRelated = this.product.attributes?.related.data
+
+        this.listRelated = this.product.attributes?.related.data
+
         // if (this.isMobile) {
         //     this.menuTab = ''
         // }
@@ -241,6 +250,7 @@ export default {
         async loadData() {
             if (this.$route.params.id) {
                 await this.getProductBySlug(this.$route.params.id)
+                this.listRelated = this.product.attributes?.related.data ?? []
             }
         },
         updateValue(_v) {
@@ -284,6 +294,27 @@ export default {
             if (this.selectColor) {
                 this.variant = listFilter.find(o => o.attributes.color.data.id === this.selectColor)
             }
+        },
+        clearChoice() {
+            this.selectSize = null
+            this.selectColor = null
+            let listFilter = this.product.attributes.variants.data
+            this.listColor = []
+            listFilter.forEach(v => {
+                let color = v.attributes.color.data
+                let _cc = this.listColor.find(o => o.id === color.id)
+                if (!_cc) {
+                    this.listColor.push(color)
+                }
+            });
+            this.listSize = []
+            listFilter.forEach(v => {
+                let size = v.attributes.size.data
+                let _cs = this.listSize.find(o => o.id === size.id)
+                if (!_cs) {
+                    this.listSize.push(size)
+                }
+            });
         },
         addProductToCart() {
             if (!this.selectSize) {
@@ -330,6 +361,7 @@ export default {
             gap: 8px;
             height: 40px;
             cursor: pointer;
+
             .color-text {
                 color: #000;
                 font-family: 'Aeroport';
@@ -361,6 +393,7 @@ export default {
             align-items: center;
             gap: 8px;
             cursor: pointer;
+
             .size-text {
                 font-size: 20px;
                 font-family: 'Aeroport';
@@ -378,6 +411,10 @@ export default {
                     border-right: 1px solid #000;
                 }
             }
+        }
+
+        .product-detail-img {
+            max-width: 550px;
         }
 
         .product-detail-name {
@@ -398,6 +435,7 @@ export default {
                 font-family: 'Aeroport-light';
                 font-size: 25px;
                 margin-top: 20px;
+                letter-spacing: -2px;
             }
         }
 
@@ -424,8 +462,10 @@ export default {
         display: inline-block;
 
         .product-detail-media-img {
-            width: calc(50% - 5px);
+            width: 320px;
+            height: 400px;
             margin-bottom: 10px;
+            object-fit: cover;
 
             &:nth-child(even) {
                 margin-left: 10px;
@@ -494,6 +534,8 @@ export default {
             font-family: 'Aeroport-light';
             font-size: 16px;
             text-decoration-line: underline;
+            margin-left: 10px;
+            cursor: pointer;
         }
 
         .product-detail-data-inventory {
@@ -561,6 +603,7 @@ export default {
         }
     }
 }
+
 @media (max-width: 820px) {
     .product-detail-content {
         padding-bottom: 30px;
@@ -612,6 +655,7 @@ export default {
                     font-size: 12px;
                     font-family: 'Aeroport-light';
                     height: 16px;
+
                     &:not(:last-child):after {
                         content: '';
                         display: inline-block;
@@ -644,6 +688,7 @@ export default {
                     font-size: 12px;
                     margin-top: 10px;
                     margin-bottom: 10px;
+
                 }
             }
 
@@ -806,6 +851,7 @@ export default {
         }
     }
 }
+
 @media (max-width: 520px) {
     .product-detail-content {
         padding-bottom: 30px;
@@ -857,6 +903,7 @@ export default {
                     font-size: 12px;
                     font-family: 'Aeroport-light';
                     height: 16px;
+
                     &:not(:last-child):after {
                         content: '';
                         display: inline-block;

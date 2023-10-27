@@ -195,9 +195,9 @@
       <div class="container header-tab-menu-container d-flex justify-content-start">
         <div class="header-tab-menu-col-1">
           <div @click="subTab = 1" class="header-tab-menu-title">Shows</div>
-          <!-- <div @click="subTab = 1" class="header-tab-menu-title">Lookbook</div> -->
-          <!-- <div @click="subTab = 1" class="header-tab-menu-title">Campaigns</div> -->
-          <!-- <div @click="subTab = 1" class="header-tab-menu-title">News</div> -->
+          <div @click="subTab = 2" class="header-tab-menu-title">Lookbook</div>
+          <div @click="subTab = 4" class="header-tab-menu-title">Campaigns</div>
+          <div @click="subTab = 5" class="header-tab-menu-title">News</div>
           <div @click="subTab = 3" class="header-tab-menu-title">About P.D.H</div>
         </div>
         <div class="header-tab-menu-col-2">
@@ -210,6 +210,30 @@
               v-for="_item, index in listShow" :key="index">
               <MenuItem :link="_item.attributes.slug" :image_link="_item.attributes.thub?.data.attributes.url"
                 :title="_item.attributes.name">
+              </MenuItem>
+            </div>
+          </div>
+          <div class="header-tab-menu-sub" v-if="subTab === 2">
+            <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
+              v-for="_new, index in listNewsType1" :key="index">
+              <MenuItem :link="_new.attributes.slug" :image_link="_new.attributes.thub?.data.attributes.url"
+                :title="_new.attributes.title">
+              </MenuItem>
+            </div>
+          </div>
+          <div class="header-tab-menu-sub" v-if="subTab === 4">
+            <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
+              v-for="_new, index in listNewsType2" :key="index">
+              <MenuItem :link="_new.attributes.slug" :image_link="_new.attributes.thub?.data.attributes.url"
+                :title="_new.attributes.title">
+              </MenuItem>
+            </div>
+          </div>
+          <div class="header-tab-menu-sub" v-if="subTab === 5">
+            <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
+              v-for="_new, index in listNewsType3" :key="index">
+              <MenuItem :link="_new.attributes.slug" :image_link="_new.attributes.thub?.data.attributes.url"
+                :title="_new.attributes.title">
               </MenuItem>
             </div>
           </div>
@@ -268,7 +292,10 @@ export default {
       openSubChild: null,
       mobileSubMenu: null,
       isOpen: false,
-      showListCart: false
+      showListCart: false,
+      listNewsType1: [],
+      listNewsType2: [],
+      listNewsType3: [],
     }
   },
   computed: {
@@ -330,6 +357,7 @@ export default {
       this.listCollection.push(temp)
       this.getListShow()
     }
+    this.loadDataNews()
   },
   methods: {
     ...mapActions({
@@ -339,7 +367,22 @@ export default {
       // getSiteInfo: "common/getSiteInfo",
       getListCategory: "category/getListCategory",
       getListShow: "show/getListShow",
+      getMenuNews: "news/getMenuNews"
     }),
+    async loadDataNews() {
+      this.listNewsType1 = await this.getMenuNews({
+        filters: { type : 'lookbook' },
+        pagination: {page: 1, pageSize: 2}
+      })
+      this.listNewsType2 = await this.getMenuNews({
+        filters: { type : 'campaigns' },
+        pagination: {page: 1, pageSize: 2}
+      })
+      this.listNewsType3 = await this.getMenuNews({
+        filters: { type : 'news' },
+        pagination: {page: 1, pageSize: 2}
+      })
+    },
     closeTab() {
       if (this.isOpenTab) {
         this.tab = null

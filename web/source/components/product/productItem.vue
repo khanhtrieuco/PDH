@@ -75,22 +75,22 @@ export default {
       this.likeImage = '/images/liked.png'
     }
     this.product_image = this.item.attributes.thub_main?.data.attributes.url
-    if (this.item.attributes && this.item.attributes.variants?.data) {
-      this.item.attributes.variants.data.forEach(v => {
-        if(v.attributes.color?.data && v.attributes.size?.data) {
-          let color = v.attributes.color?.data
-          let size = v.attributes.size?.data
-          let _cc = this.listColor.find(o => o.id === color.id)
-          if (!_cc) {
-            this.listColor.push(color)
-          }
-          let _cs = this.listSize.find(o => o.id === size.id)
-          if (!_cs) {
-            this.listSize.push(size)
-          }
-        }
-      });
-    }
+    // if (this.item.attributes && this.item.attributes.variants?.data) {
+    //   this.item.attributes.variants.data.forEach(v => {
+    //     if(v.attributes.color?.data && v.attributes.size?.data) {
+    //       let color = v.attributes.color?.data
+    //       let size = v.attributes.size?.data
+    //       let _cc = this.listColor.find(o => o.id === color.id)
+    //       if (!_cc) {
+    //         this.listColor.push(color)
+    //       }
+    //       let _cs = this.listSize.find(o => o.id === size.id)
+    //       if (!_cs) {
+    //         this.listSize.push(size)
+    //       }
+    //     }
+    //   });
+    // }
   },
   methods: {
     ...mapActions({

@@ -139,6 +139,7 @@ export default {
       font-weight: 300;
       text-transform: uppercase;
       margin-top: 20px;
+      cursor: pointer;
     }
   }
 

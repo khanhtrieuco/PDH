@@ -21,8 +21,8 @@ export default {
     getListProductLike: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             filters: {
-                likes : {
-                    user_id : data.user_id
+                likes: {
+                    user_id: data.user_id
                 }
             },
             populate: '*'
@@ -60,6 +60,7 @@ export default {
                     populate: {
                         likes: '*',
                         thub: '*',
+                        thub_main: '*',
                     }
                 },
                 thub_main: '*',
