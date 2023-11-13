@@ -107,7 +107,7 @@ module.exports = {
   telemetry: false,
   mode: 'universal',
   head: {
-    title: 'PDH',
+    title: 'PHAN DANG HOANG',
     htmlAttrs: {
       lang: 'vi'
     },
