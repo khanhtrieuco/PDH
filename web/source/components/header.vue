@@ -198,7 +198,7 @@
           <div @click="subTab = 2" class="header-tab-menu-title">Lookbook</div>
           <div @click="subTab = 4" class="header-tab-menu-title">Campaigns</div>
           <div @click="subTab = 5" class="header-tab-menu-title">News</div>
-          <div @click="subTab = 3" class="header-tab-menu-title">About P.D.H</div>
+          <div @click="goPage('/house-of-pdh')" class="header-tab-menu-title">About P.D.H</div>
         </div>
         <div class="header-tab-menu-col-2">
           <div class="header-tab-menu-sub" v-if="subTab === 3">
@@ -548,6 +548,7 @@ export default {
 
   .menu-logo {
     width: 300px;
+    cursor: pointer;
   }
 
   .menu-icon {
@@ -576,7 +577,7 @@ export default {
   bottom: 67px;
 
   .header-tab-menu-container {
-    padding: 0px 100px;
+    padding: 0px 20px;
 
     .header-tab-menu-title {
       color: #1E1E1E;

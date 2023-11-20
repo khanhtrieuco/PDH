@@ -3,7 +3,7 @@
     <img class="store-title-image" src="/images/store.png" />
     <div class="d-flex justify-content-center">
       <div class="store-content">
-        <div class="store-filter-item">
+        <!-- <div class="store-filter-item">
           <div class="filter-title">{{ $t('Store_select_1') }}</div>
           <Select :default="$i18n.locale === 'vn' ? 'Select Nation' : 'Select Nation'"
             :listItem="$i18n.locale === 'vn' ? select_data_1 : select_data_1" />
@@ -12,8 +12,8 @@
           <div class="filter-title">{{ $t('Store_select_2') }}</div>
           <Select :default="$i18n.locale === 'vn' ? 'Select City' : 'Select City'"
             :listItem="$i18n.locale === 'vn' ? select_data_2 : select_data_2" />
-        </div>
-        <div class="store-btn">{{ $t('Store_select_3') }}</div>
+        </div> -->
+        <!-- <div class="store-btn">{{ $t('Store_select_3') }}</div> -->
         <img class="store-image" src="/images/ple.jpg" v-if="isMobile" />
 
         <div class="store-item">
@@ -23,13 +23,13 @@
           <div class="store-item-text">T: 0868284222</div>
           <div class="store-btn">{{ $t('Store_select_4') }}</div>
         </div>
-        <div class="store-item">
+        <!-- <div class="store-item">
           <img class="store-item-maker" src="/images/place-maker.png" />
           <div class="store-item-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city</div>
           <div class="store-item-text">House today: 10:00 AM - 9:00 PM</div>
           <div class="store-item-text">T: 0868284222</div>
           <div class="store-btn">{{ $t('Store_select_4') }}</div>
-        </div>
+        </div> -->
       </div>
       <img class="store-image" src="/images/ple.jpg" v-if="!isMobile"/>
     </div>
@@ -111,7 +111,7 @@ export default {
     .store-item {
       background-color: #D9D9D980;
       padding: 20px;
-      margin-top: 30px;
+      // margin-top: 30px;
 
       .store-item-maker {
         width: 30px;

@@ -23,7 +23,7 @@
                     Add to cart
                 </div>
             </div>
-            <div class="d-flex" v-if="!isMobile">
+            <!-- <div class="d-flex" v-if="!isMobile">
                 <div class="product-detail-media" v-if="product.attributes?.media.data">
                     <img class="product-detail-media-img" v-for="imgData, index in product.attributes?.media.data"
                         :key="index" :src="imgData.attributes.url" />
@@ -56,8 +56,6 @@
                             <ColorMobile :color="_color.attributes.value" :selected="selectColor === _color.id" v-else>
                             </ColorMobile>
                         </div>
-                        <!-- <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
-                            :style="`background-color: ${_color.attributes.value};`"></div> -->
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="product-detail-data-size-text">Size:</div>
@@ -77,8 +75,8 @@
                         Add to cart
                     </div>
                 </div>
-            </div>
-            <VueSlickCarousel v-bind="settings" class="product-detail-media"
+            </div> -->
+            <!-- <VueSlickCarousel v-bind="settings" class="product-detail-media"
                 v-if="isMobile && product.attributes?.media.data">
                 <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
                     <img class="product-detail-media-img" :src="imgData.attributes?.url" />
@@ -112,8 +110,6 @@
                         <ColorMobile :color="_color.attributes.value" :selected="selectColor === _color.id" v-else>
                         </ColorMobile>
                     </div>
-                    <!-- <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
-                            :style="`background-color: ${_color.attributes.value};`"></div> -->
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="product-detail-data-size-text">Size:</div>
@@ -128,7 +124,7 @@
                 <div class="product-detail-data-btn" @click="addProductToCart">
                     Add to cart
                 </div>
-            </div>
+            </div> -->
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recommend</div>
                 <b-row v-if="listRelated && listRelated.length > 0">
@@ -414,7 +410,7 @@ export default {
         }
 
         .product-detail-img {
-            max-width: 550px;
+            max-width: 38%;
         }
 
         .product-detail-name {
@@ -426,8 +422,8 @@ export default {
                 width: 360px;
                 color: #000;
                 font-family: 'Aeroport';
-                font-size: 40px;
-                line-height: 40px;
+                font-size: 28px;
+                line-height: 28px;
             }
 
             .product-detail-name-price {
@@ -443,9 +439,9 @@ export default {
             position: absolute;
             bottom: 0px;
             right: 0px;
-            width: 310px;
-            height: 55px;
-            line-height: 55px;
+            width: 280px;
+            height: 50px;
+            line-height: 48px;
             text-align: center;
             cursor: pointer;
             color: #000;
@@ -462,8 +458,8 @@ export default {
         display: inline-block;
 
         .product-detail-media-img {
-            width: 320px;
-            height: 400px;
+            width: calc(50% - 5px);
+            height: 380px;
             margin-bottom: 10px;
             object-fit: cover;
 
@@ -676,10 +672,11 @@ export default {
                 text-align: left;
 
                 .product-detail-name-title {
-                    width: 240px;
+                    width: 100%;
                     color: #000;
                     font-family: 'Aeroport';
                     font-size: 20px;
+                    margin-top: 10px;
                 }
 
                 .product-detail-name-price {
@@ -924,10 +921,11 @@ export default {
                 text-align: left;
 
                 .product-detail-name-title {
-                    width: 240px;
+                    width: 100%;
                     color: #000;
                     font-family: 'Aeroport';
                     font-size: 20px;
+                    margin-top: 50x;
                 }
 
                 .product-detail-name-price {

@@ -391,7 +391,7 @@ export default {
     }
 
     .account-content-data {
-        background-color: #EEEEEE;
+        background-color: #000;
         padding: 65px 0px;
 
         .account-content-left {

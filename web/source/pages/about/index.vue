@@ -20,20 +20,68 @@
                 </div>
             </div>
         </div>
-        <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
-        <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
-        <div class="about-info">
-            <div class="about-achievement">achievement</div>
-            <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
-            <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012, 2011
+        <VueSlickCarousel v-bind="settings" class="about-list-banner">
+            <div class="about-list-item">
+                <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
+                <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
+                <div class="about-info">
+                    <div class="about-achievement">achievement</div>
+                    <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
+                    <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012,
+                        2011
+                    </div>
+                    <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003
+                    </div>
+                    <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore
+                        Fashion
+                        Connection</div>
+                    <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
+                    <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London
+                        Fashion
+                        Week</div>
+                </div>
             </div>
-            <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003</div>
-            <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore Fashion
-                Connection</div>
-            <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
-            <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London Fashion
-                Week</div>
-        </div>
+            <div class="about-list-item">
+                <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
+                <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
+                <div class="about-info">
+                    <div class="about-achievement">achievement - 1</div>
+                    <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
+                    <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012,
+                        2011
+                    </div>
+                    <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003
+                    </div>
+                    <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore
+                        Fashion
+                        Connection</div>
+                    <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
+                    <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London
+                        Fashion
+                        Week</div>
+                </div>
+            </div>
+            <div class="about-list-item">
+                <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
+                <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
+                <div class="about-info">
+                    <div class="about-achievement">achievement - 2</div>
+                    <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
+                    <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012,
+                        2011
+                    </div>
+                    <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003
+                    </div>
+                    <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore
+                        Fashion
+                        Connection</div>
+                    <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
+                    <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London
+                        Fashion
+                        Week</div>
+                </div>
+            </div>
+        </VueSlickCarousel>
         <div class="about-mid">
             <img class="w-100" src="/images/about-mid.jpg" v-if="!isMobile" />
             <img class="w-100" src="/images/about-mid-mobile.jpg" v-if="isMobile" />
@@ -127,7 +175,18 @@ export default {
     data() {
         return {
             isMobile: false,
-            tab: 1
+            tab: 1,
+            settings: {
+                "dots": true,
+                "autoplay": true,
+                "autoplaySpeed": 5000,
+                "arrows": false,
+                "edgeFriction": 0.35,
+                "infinite": true,
+                "speed": 500,
+                "slidesToShow": 1,
+                "slidesToScroll": 1
+            }
         }
     },
     // watch: {
@@ -376,7 +435,27 @@ export default {
         }
 
     }
+
+    .about-list-banner {
+        margin-bottom: 80px;
+
+        .slick-dots {
+            bottom: 0px !important;
+        }
+
+        .slick-dots li button:before {
+            color: #D9D9D9 !important;
+            width: 10px !important;
+            line-height: 10px !important;
+            font-size: 10px !important;
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: #717171 !important;
+        }
+    }
 }
+
 @media (max-width: 820px) {
     .about-content {
         .about-banner {
@@ -579,6 +658,7 @@ export default {
         }
     }
 }
+
 @media (max-width: 520px) {
     .about-content {
         .about-banner {
@@ -780,5 +860,4 @@ export default {
 
         }
     }
-}
-</style>
+}</style>

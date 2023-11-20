@@ -156,14 +156,14 @@ export default {
         width: 100%;
         margin-top: 5px;
         .photo-img {
-            width: 50%;
+            width: calc(100% / 3);
             display: inline-block;
             padding: 5px;
             .photo-img-detail {
                 width: 100%;
                 min-width: 100%;
                 max-width: 100%;
-                height: 800px;
+                height: 500px;
                 object-fit: cover;
                 vertical-align: bottom;
                 border-radius: 3px;
