@@ -191,7 +191,7 @@
         </div> -->
       </div>
     </div>
-    <div v-if="tab === 4" class="header-tab-menu" v-click-outside="closeTab">
+    <div v-if="tab === 4" class="header-tab-menu-about" v-click-outside="closeTab">
       <div class="container header-tab-menu-container d-flex justify-content-start">
         <div class="header-tab-menu-col-1">
           <div @click="subTab = 1" class="header-tab-menu-title">Shows</div>
@@ -617,6 +617,64 @@ export default {
       float: left;
       width: 280px;
       margin-right: 35px;
+    }
+  }
+}
+
+.header-tab-menu-about {
+  position: fixed;
+  width: 100vw;
+  background-color: #fff;
+  padding: 50px;
+  padding-top: 100px;
+  bottom: 67px;
+  height: calc(100vh - 65px);
+
+  .header-tab-menu-col-2{
+    width: calc(100% - 250px);
+  }
+
+  .header-tab-menu-container {
+    padding: 0px 20px;
+
+    .header-tab-menu-title {
+      color: #1E1E1E;
+      font-family: 'Aeroport';
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration-line: underline;
+      }
+    }
+
+    .header-tab-menu-col-1 {
+      width: 250px;
+      min-height: 400px;
+    }
+
+    .header-tab-menu-text {
+      color: #000;
+      font-family: 'Aeroport-light';
+      font-size: 13px;
+      line-height: 20px;
+      // min-height: 40px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-bottom: 20px;
+      // white-space: nowrap;
+    }
+
+    .header-tab-menu-sub-item {
+      display: inline-block;
+      float: left;
+      width: calc(50% - 20px);
+      margin-right: 20px;
     }
   }
 }
