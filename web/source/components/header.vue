@@ -35,7 +35,8 @@
             <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span>
           </div>
         </div>
-        <img class="menu-mobile-icon" v-if="!showMenuMobile" src="/images/menu-mobile.png" @click="onShowMenuMobile()" />
+        <img class="menu-mobile-icon" v-if="!showMenuMobile && showMenuScroll" src="/images/menu-mobile.png"
+          @click="onShowMenuMobile()" />
         <img class="menu-mobile-close-icon" v-if="showMenuMobile" src="/images/menu-close.png"
           @click="onShowMenuMobile()" />
       </div>
@@ -52,24 +53,23 @@
           </div>
         </div>
         <div class="menu-mobile-list">
-          <div v-if="!mobileSubMenu" class="menu-mobile-item d-flex justify-content-between">
+          <div v-if="!mobileSubMenu" class="menu-mobile-item d-flex justify-content-between"
+            @click="openMobile = openMobile === 0 ? null : 0">
             <div class="menu-mobile-title">
               {{ $i18n.locale === 'vn' ? listCollection[0].name : listCollection[0].name_en ?? listCollection[0].name }}
             </div>
-            <img class="menu-open" :src="openMobile === 0 ? '/images/menu-up.png' : '/images/menu-down.png'"
-              @click="openMobile = openMobile === 0 ? null : 0" />
+            <img class="menu-open" :src="openMobile === 0 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
           <div v-if="openMobile === 0 && !mobileSubMenu" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between"
-              v-for="(coll, idx) in listCollection[0].child" :key="idx">
+              v-for="(coll, idx) in listCollection[0].child" :key="idx" @click="mobileSubMenu = coll">
               <div class="menu-mobile-title">{{ coll.attributes.name }}</div>
-              <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'"
-                @click="mobileSubMenu = coll" />
+              <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
           </div>
-          <div class="menu-mobile-item d-flex justify-content-between" v-if="mobileSubMenu">
+          <div class="menu-mobile-item d-flex justify-content-between" v-if="mobileSubMenu" @click="mobileSubMenu = null">
             <div class="menu-mobile-title">{{ mobileSubMenu.attributes.name }}</div>
-            <img class="menu-left" src="/images/menu-left.png" @click="mobileSubMenu = null" />
+            <img class="menu-left" src="/images/menu-left.png" />
           </div>
           <div v-if="mobileSubMenu && mobileSubMenu?.attributes.collections" class="menu-mobile-list-sub"
             v-for="(subMenu, idx) in mobileSubMenu?.attributes.collections?.data" :key="idx">
@@ -78,24 +78,24 @@
                 subMenu.attributes.name }}</div>
             </div>
           </div>
-          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
+          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
+            @click="openMobile = openMobile === 2 ? null : 2">
             <div class="menu-mobile-title">
               {{ $i18n.locale === 'vn' ? listCollection[1].name : listCollection[1].name_en ?? listCollection[1].name }}
             </div>
-            <img class="menu-open" :src="openMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'"
-              @click="openMobile = openMobile === 2 ? null : 2" />
+            <img class="menu-open" :src="openMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
-          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
+          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
+            @click="openMobile = openMobile === 3 ? null : 3">
             <div class="menu-mobile-title">
               {{ $i18n.locale === 'vn' ? listCollection[2].name : listCollection[2].name_en ?? listCollection[2].name }}
             </div>
-            <img class="menu-open" :src="openMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'"
-              @click="openMobile = openMobile === 3 ? null : 3" />
+            <img class="menu-open" :src="openMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
-          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
+          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
+            @click="openMobile = openMobile === 4 ? null : 4">
             <div class="menu-mobile-title">House of P.D.H</div>
-            <img class="menu-open" :src="openMobile === 4 ? '/images/menu-up.png' : '/images/menu-down.png'"
-              @click="openMobile = openMobile === 4 ? null : 4" />
+            <img class="menu-open" :src="openMobile === 4 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
           <div v-if="openMobile === 4 && !openSubChild" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
@@ -126,10 +126,10 @@
               <img class="menu-open" :src="openSubMobile === 6 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
           </div>
-          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between">
+          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
+            @click="openMobile = openMobile === 5 ? null : 5">
             <div class="menu-mobile-title">Friendship</div>
-            <img class="menu-open" :src="openMobile === 5 ? '/images/menu-up.png' : '/images/menu-down.png'"
-              @click="openMobile = openMobile === 5 ? null : 5" />
+            <img class="menu-open" :src="openMobile === 5 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
           <div v-if="openMobile === 5 && !openSubChild" class="menu-mobile-list-sub">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
@@ -192,7 +192,8 @@
       </div>
     </div>
     <div v-if="tab === 4" class="header-tab-menu-about" v-click-outside="closeTab">
-      <div class="container header-tab-menu-container d-flex justify-content-start">
+      <div class="container header-tab-menu-container d-flex justify-content-start"
+        style="position: absolute;bottom: 70px;margin-left: 30px;">
         <div class="header-tab-menu-col-1">
           <div @click="subTab = 1" class="header-tab-menu-title">Shows</div>
           <div @click="subTab = 2" class="header-tab-menu-title">Lookbook</div>
@@ -287,6 +288,8 @@ export default {
       }
       ],
       showMenuMobile: false,
+      showMenuScroll: true,
+      lastScrollTop: 0,
       openMobile: null,
       openSubMobile: null,
       openSubChild: null,
@@ -310,6 +313,9 @@ export default {
   components: {
     MenuItem,
     ListCartItem
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   // watch: {
   //   searchText: function (val) {
@@ -371,16 +377,16 @@ export default {
     }),
     async loadDataNews() {
       this.listNewsType1 = await this.getMenuNews({
-        filters: { type : 'lookbook' },
-        pagination: {page: 1, pageSize: 2}
+        filters: { type: 'lookbook' },
+        pagination: { page: 1, pageSize: 2 }
       })
       this.listNewsType2 = await this.getMenuNews({
-        filters: { type : 'campaigns' },
-        pagination: {page: 1, pageSize: 2}
+        filters: { type: 'campaigns' },
+        pagination: { page: 1, pageSize: 2 }
       })
       this.listNewsType3 = await this.getMenuNews({
-        filters: { type : 'news' },
-        pagination: {page: 1, pageSize: 2}
+        filters: { type: 'news' },
+        pagination: { page: 1, pageSize: 2 }
       })
     },
     closeTab() {
@@ -463,6 +469,15 @@ export default {
     },
     onShowMenuMobile() {
       this.showMenuMobile = !this.showMenuMobile
+    },
+    handleScroll(e) {
+      let st = document.documentElement.scrollTop;
+      if (st > this.lastScrollTop) {
+        this.showMenuScroll = true
+      } else if (st < this.lastScrollTop) {
+        this.showMenuScroll = false
+      }
+      this.lastScrollTop = st <= 0 ? 0 : st;
     }
   },
   directives: {
@@ -630,7 +645,7 @@ export default {
   bottom: 67px;
   height: calc(100vh - 65px);
 
-  .header-tab-menu-col-2{
+  .header-tab-menu-col-2 {
     width: calc(100% - 250px);
   }
 
@@ -689,12 +704,13 @@ export default {
 
     .lang-btn {
       cursor: pointer;
-      font-size: 13px;
+      font-size: 16px;
       font-family: 'Aeroport-light';
       color: #777;
       text-transform: uppercase;
       display: inline-block;
       margin-left: 10px;
+      line-height: 48px;
     }
 
     .menu-text {
@@ -716,16 +732,16 @@ export default {
     .menu-icon {
       cursor: pointer;
       margin-left: 20px;
-      width: 17px;
-      height: 17px;
+      width: 15px;
+      height: 15px;
       margin-top: 17px;
     }
 
     .menu-icon-bag {
       cursor: pointer;
       margin-left: 10px;
-      width: 17px;
-      height: 17px;
+      width: 15px;
+      height: 15px;
       margin-top: 16px;
     }
 
@@ -810,7 +826,7 @@ export default {
 
         .menu-mobile-title {
           color: #000;
-          font-family: 'Aeroport';
+          font-family: 'Aeroport-bold';
           font-size: 20px;
           text-transform: uppercase;
           white-space: nowrap;
@@ -868,12 +884,13 @@ export default {
 
     .lang-btn {
       cursor: pointer;
-      font-size: 13px;
+      font-size: 16px;
       font-family: 'Aeroport-light';
       color: #777;
       text-transform: uppercase;
       display: inline-block;
-      margin-left: 10px;
+      margin-left: 12px;
+      line-height: 48px;
     }
 
     .menu-text {
@@ -895,16 +912,16 @@ export default {
     .menu-icon {
       cursor: pointer;
       margin-left: 20px;
-      width: 17px;
-      height: 17px;
+      width: 15px;
+      height: 15px;
       margin-top: 17px;
     }
 
     .menu-icon-bag {
       cursor: pointer;
-      margin-left: 10px;
-      width: 17px;
-      height: 17px;
+      margin-left: 12px;
+      width: 15px;
+      height: 15px;
       margin-top: 16px;
     }
 
@@ -991,7 +1008,7 @@ export default {
 
         .menu-mobile-title {
           color: #000;
-          font-family: 'Aeroport';
+          font-family: 'Aeroport-bold';
           font-size: 20px;
           text-transform: uppercase;
           white-space: nowrap;

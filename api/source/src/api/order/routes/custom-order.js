@@ -39,6 +39,11 @@ module.exports = {
       method: 'GET',
       path: '/app/chartorder', 
       handler: 'apporder.chartorder'
+    },
+    {
+      method: 'GET',
+      path: '/app/getemail', 
+      handler: 'apporder.getemail'
     }
   ]
 }

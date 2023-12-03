@@ -3,31 +3,31 @@
     <div class="container" v-if="!isMobile">
       <div class="row">
         <div class="col-3">
-          <div class="footer-title mb-4">{{ $t('Footer_title_1') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_1') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_2') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_3') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_4') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_5') }}</div>
-          <div class="footer-title mb-4 mt-5">{{ $t('Footer_title_2') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_6') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_7') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_8') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_1') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_1') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_2') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_3') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_4') }}</div>
+          <div class="footer-text footer-break">{{ $t('Footer_text_5') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_2') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_6') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_7') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_8') }}</div>
         </div>
         <div class="col-3">
-          <div class="footer-title mb-4">{{ $t('Footer_title_3') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_9') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_10') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_11') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_12') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_13') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_14') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_15') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_16') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_3') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_9') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_10') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_11') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_12') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_13') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_14') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_15') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_16') }}</div>
         </div>
         <div class="col-6">
-          <div class="footer-title mb-4">{{ $t('Footer_title_4') }}</div>
-          <div class="footer-des mb-4 mt-1">{{ $t('Footer_text_17') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_4') }}</div>
+          <div class="footer-des mt-1">{{ $t('Footer_text_17') }}</div>
           <div class="d-flex justify-content-between w-100">
             <span class="footer-text-span">{{ $t('Footer_text_18') }}</span>
             <span class="footer-text-span">{{ $t('Footer_text_19') }}</span>
@@ -40,7 +40,7 @@
               {{ $t('Footer_text_20') }}
             </label>
             <label class="footer-check">
-              <input type="checkbox" checked="checked">
+              <input type="checkbox">
               <span class="checkmark"></span>
               {{ $t('Footer_text_21') }}
             </label>
@@ -52,7 +52,7 @@
             <img class="footer-icon" src="/images/face.png" />
             <img class="footer-icon" src="/images/inta.png" />
           </div>
-          <div class="footer-copy mt-5">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
+          <div class="footer-copy">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
         </div>
       </div>
       <img class="footer-logo" src="/images/footer.png" />
@@ -60,8 +60,8 @@
     <div class="container" v-if="isMobile">
       <div class="row">
         <div class="col-12">
-          <div class="footer-title mb-4">{{ $t('Footer_title_4') }}</div>
-          <div class="footer-des mb-4 mt-1">{{ $t('Footer_text_17') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_4') }}</div>
+          <div class="footer-des mt-1">{{ $t('Footer_text_17') }}</div>
           <div class="d-flex justify-content-between w-100">
             <span class="footer-text-span">{{ $t('Footer_text_18') }}</span>
             <span class="footer-text-span">{{ $t('Footer_text_19') }}</span>
@@ -83,27 +83,27 @@
           <div class="footer-btn-login">{{ $t('Footer_text_23') }}</div>
         </div>
         <div class="col-12">
-          <div class="footer-title mb-4">{{ $t('Footer_title_1') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_1') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_2') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_3') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_4') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_5') }}</div>
-          <div class="footer-title mb-4 mt-5">{{ $t('Footer_title_2') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_6') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_7') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_8') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_1') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_1') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_2') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_3') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_4') }}</div>
+          <div class="footer-text footer-break">{{ $t('Footer_text_5') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_2') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_6') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_7') }}</div>
+          <div class="footer-text footer-break">{{ $t('Footer_text_8') }}</div>
         </div>
         <div class="col-12">
-          <div class="footer-title mb-4 mt-5">{{ $t('Footer_title_3') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_9') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_10') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_11') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_12') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_13') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_14') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_15') }}</div>
-          <div class="footer-text mb-3">{{ $t('Footer_text_16') }}</div>
+          <div class="footer-title">{{ $t('Footer_title_3') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_9') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_10') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_11') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_12') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_13') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_14') }}</div>
+          <div class="footer-text">{{ $t('Footer_text_15') }}</div>
+          <div class="footer-text footer-break">{{ $t('Footer_text_16') }}</div>
         </div>
         <div class="col-12">
           <div class="d-inline-flex justify-content-between">
@@ -163,6 +163,11 @@ export default {
     font-size: 19px;
     font-weight: 700;
     text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  .footer-break{
+    margin-bottom: 45px !important;
   }
 
   .footer-text {
@@ -171,6 +176,7 @@ export default {
     font-weight: 300;
     text-decoration-line: underline;
     cursor: pointer;
+    margin-bottom: 15px;
   }
 
   .footer-des {
@@ -306,6 +312,7 @@ export default {
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
     .footer-text {
@@ -314,6 +321,11 @@ export default {
       font-weight: 300;
       text-decoration-line: underline;
       cursor: pointer;
+      margin-bottom: 3px;
+    }
+
+    .footer-break{
+      margin-bottom: 20px;
     }
 
     .footer-des {
@@ -424,9 +436,10 @@ export default {
     .footer-icon {
       cursor: pointer;
       margin-left: 0px;
-      margin-right: 25px;
+      margin-right: 15px;
       margin-bottom: 10px;
       margin-top: 10px;
+      width: 15px;
     }
 
     .footer-copy {

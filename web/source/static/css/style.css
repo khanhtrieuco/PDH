@@ -9,6 +9,16 @@
 }
 
 @font-face {
+  font-family: 'Aeroport-bold';
+  src: url('../font/FSAeroportBold.ttf');
+}
+
+@font-face {
+  font-family: 'Aeroport-medium';
+  src: url('../font/FSAeroportMedium.ttf');
+}
+
+@font-face {
   font-family: 'inter-bold';
   src: url('../font/Inter-Bold.ttf');
 }
@@ -79,7 +89,9 @@
 .ant-form-item-control{
   line-height: 22px !important;
 }
-
+.carousel-3d-slide{
+  border: none !important;
+}
 html {
   font-size: 16px;
 }

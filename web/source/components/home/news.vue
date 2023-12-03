@@ -152,11 +152,12 @@ export default {
 @media (max-width: 520px) {
   .news-container {
   text-align: center;
-  padding: 60px 0px;
+  padding-top: 60px;
+  padding-bottom: 0px;
 
   .news-title-image {
     width: 110px;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
   }

@@ -16,10 +16,11 @@
       </NuxtLink>
       <div class="product-price">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
     </div>
-    <div class="product-item-color">
+    <!-- <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
-      <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ?  listColor.length - 1 : 1 }}</div>
-    </div>
+      <ColorMobile v-if="isMobile"></ColorMobile>
+      <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ? listColor.length - 1 : 1 }}</div>
+    </div> -->
   </div>
 </template>
 
@@ -143,7 +144,7 @@ export default {
       }
     },
     checkIsLiked(listLike) {
-      if(listLike) {
+      if (listLike) {
         let rs = null
         let _c = listLike.find(o => o.attributes.user_id === this.profile.id)
         if (_c) rs = _c
@@ -209,8 +210,9 @@ export default {
 
   .product-price {
     color: #000;
-    font-family: 'Aeroport-light';
+    font-family: 'Aeroport';
     font-size: 20px;
+    font-weight: 300;
   }
 
   .img-heart {
@@ -219,6 +221,16 @@ export default {
     right: 14px;
     cursor: pointer;
     width: 32px;
+  }
+
+  .product-item-color {
+    margin-left: -5px;
+
+    .product-item-color-value {
+      color: #717171;
+      font-family: "Aeroport";
+      font-size: 15px;
+    }
   }
 }
 
@@ -253,8 +265,9 @@ export default {
 
     .product-price {
       color: #000;
-      font-family: 'Aeroport-light';
+      font-family: 'Aeroport';
       font-size: 10px;
+      font-weight: 300;
     }
 
     .img-heart {
@@ -263,6 +276,16 @@ export default {
       right: 7px;
       cursor: pointer;
       width: 16px;
+    }
+
+    .product-item-color {
+      margin-left: -5px;
+
+      .product-item-color-value {
+        color: #717171;
+        font-family: "Aeroport";
+        font-size: 12px;
+      }
     }
   }
 }
@@ -298,8 +321,9 @@ export default {
 
     .product-price {
       color: #000;
-      font-family: 'Aeroport-light';
+      font-family: 'Aeroport';
       font-size: 10px;
+      font-weight: 300;
     }
 
     .img-heart {
@@ -308,6 +332,15 @@ export default {
       right: 7px;
       cursor: pointer;
       width: 16px;
+    }
+
+    .product-item-color {
+      margin-left: -5px;
+      .product-item-color-value {
+        color: #717171;
+        font-family: "Aeroport";
+        font-size: 10px;
+      }
     }
   }
 }

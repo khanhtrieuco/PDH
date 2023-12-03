@@ -38,8 +38,8 @@
         </div>
         <div class="detail-show-video">
             <img class="detail-show-img-video" src="/images/PDH.png" />
-            <video id="videoRef-id" ref="videoRef" preload="auto" class="detail-show-video-inner" @click="onStopVideo">
-                <source :src="show.attributes.video.data?.attributes.url" type="video/mp4" />
+            <video id="videoRef-id" ref="videoRef" preload="auto" class="detail-show-video-inner" muted playsinline @click="onStopVideo">
+                <source :src="show.attributes.video.data?.attributes.url" type="video/webm" />
             </video>
             <img class="detail-show-img-play" src="/images/play.png" @click="onPlayVideo" />
         </div>
@@ -206,7 +206,7 @@ export default {
 
         .detail-show-img-video {
             width: 100%;
-            margin: 100px 0px;
+            margin: 75px 0px;
             position: relative;
             z-index: 2;
         }
@@ -225,7 +225,7 @@ export default {
             width: 70px;
             transform: translate(calc(-50% + 30px), calc(-50% - 20px));
             left: 50%;
-            top: 50%;
+            top: 51%;
             z-index: 2;
             cursor: pointer;
         }

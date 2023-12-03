@@ -16,10 +16,10 @@
       </NuxtLink>
       <div class="product-price">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
     </div>
-    <div class="product-item-color">
+    <!-- <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
       <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ? listColor.length - 1 : 1 }}</div>
-    </div>
+    </div> -->
     <NuxtLink style="width: 100%;" :to="`/san-pham/${item.attributes.slug}`">
       <div class="product-item-add">ADD TO CART</div>
     </NuxtLink>
@@ -213,8 +213,9 @@ export default {
 
   .product-price {
     color: #000;
-    font-family: 'Aeroport-light';
+    font-family: 'Aeroport';
     font-size: 16px;
+    font-weight: 300;
   }
 
   .img-heart {
@@ -271,8 +272,9 @@ export default {
 
     .product-price {
       color: #000;
-      font-family: 'Aeroport-light';
+      font-family: 'Aeroport';
       font-size: 10px;
+      font-weight: 300;
     }
 
     .img-heart {

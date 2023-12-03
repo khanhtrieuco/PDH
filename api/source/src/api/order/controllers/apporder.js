@@ -109,7 +109,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 
 	async approveOrder(ctx) {
 		const { user } = ctx.state
-		let { order_id} = ctx.request.body;
+		let { order_id } = ctx.request.body;
 		// let { order_id } = ctx.query;
 
 
@@ -253,7 +253,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			return { data: rs[0] }
 		return { data: [] }
 	},
-
 	async chartorder(ctx) {
 		let _time = moment()
 		let rs = await strapi.db.connection.raw(
@@ -261,6 +260,15 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 		if (rs && rs.length > 0)
 			return { data: rs[0] }
 		return { data: [] }
+	},
+
+	async getemail(ctx) {
+		let { email } = ctx.query;
+		let check = await strapi.db.query("plugin::users-permissions.user").findOne({
+			select: ['*'],
+			where: { email: email }
+		});
+		return check ? { data : true } : { }
 	}
 
 }));

@@ -302,7 +302,7 @@ module.exports =  {
   Store_select_4: 'Book an appoinment',
   Footer_title_1: 'May we help you?',
   Footer_title_2: 'P.D.H SERVICES',
-  Footer_title_3: 'about P.D.H',
+  Footer_title_3: 'THE COMPANY',
   Footer_title_4: 'SIGN UP FOR NEWLETTER',
   Footer_text_1: 'Contact Us',
   Footer_text_2: 'My Order',

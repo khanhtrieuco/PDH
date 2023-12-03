@@ -431,7 +431,7 @@ export default {
                 font-family: 'Aeroport-light';
                 font-size: 25px;
                 margin-top: 20px;
-                letter-spacing: -2px;
+                letter-spacing: -0.7px;
             }
         }
 

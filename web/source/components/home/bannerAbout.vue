@@ -134,13 +134,13 @@ export default {
 @media (max-width: 820px) {
   .banner-about {
     width: 100%;
-    height: 100vh;
+    height: auto;
     overflow: hidden;
     text-align: center;
 
     .banner-about-img-top {
       width: 80%;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
     }
   }
 }
@@ -148,13 +148,13 @@ export default {
 @media (max-width: 520px) {
   .banner-about {
     width: 100%;
-    height: 100vh;
+    height: auto;
     overflow: hidden;
     text-align: center;
 
     .banner-about-img-top {
       width: 80%;
-      margin-bottom: 30px;
+      margin-bottom: 60px;
     }
   }
 }

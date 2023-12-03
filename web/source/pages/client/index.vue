@@ -76,6 +76,7 @@ export default {
 		font-family: 'Aeroport';
 		font-size: 35px;
 		margin-bottom: 30px;
+		text-transform: uppercase;
 	}
 
 	.client-service-des {
@@ -152,13 +153,13 @@ export default {
 		}
 
 		.client-service-item-content {
-			margin-top: 60px;
+			margin-top: 30px;
 
 			.client-service-item {
 				width: 200px;
 				margin: auto;
 				position: relative;
-				margin-top: 30px;
+				margin-top: 20px;
 				padding-bottom: 20px;
 
 				.client-service-item-title {
@@ -166,7 +167,7 @@ export default {
 					text-align: center;
 					font-family: 'Aeroport';
 					font-size: 17px;
-					margin-bottom: 20px;
+					margin-bottom: 15px;
 					text-transform: uppercase;
 				}
 
@@ -221,13 +222,13 @@ export default {
 		}
 
 		.client-service-item-content {
-			margin-top: 60px;
+			margin-top: 30px;
 
 			.client-service-item {
 				width: 200px;
 				margin: auto;
 				position: relative;
-				margin-top: 30px;
+				margin-top: 20px;
 				padding-bottom: 20px;
 
 				.client-service-item-title {
@@ -235,7 +236,7 @@ export default {
 					text-align: center;
 					font-family: 'Aeroport';
 					font-size: 17px;
-					margin-bottom: 20px;
+					margin-bottom: 15px;
 					text-transform: uppercase;
 				}
 

@@ -20,65 +20,39 @@
                 </div>
             </div>
         </div>
+        <div>
+            <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
+            <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
+        </div>
         <VueSlickCarousel v-bind="settings" class="about-list-banner">
             <div class="about-list-item">
-                <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
-                <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
                 <div class="about-info">
                     <div class="about-achievement">achievement</div>
-                    <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
-                    <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012,
-                        2011
-                    </div>
-                    <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003
-                    </div>
-                    <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore
-                        Fashion
-                        Connection</div>
-                    <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
-                    <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London
-                        Fashion
-                        Week</div>
+                    <div class="about-text-title">/2023/</div>
+                    <div class="about-text">Tham gia triển lãm LIT EXHIBITION và show diễn đầu tiên tại VIỆT NAM do nhãn hàng SUNLIFE VIỆT NAM tổ chức.</div>
+                    <div class="about-text">Chiến thắng giải thưởng NTK triển vọng của năm do SR FASHION AWARDS tổ chức</div>
+                    <div class="about-text">Lọt top 21 thương hiệu trẻ triển vọng do VOGUE ITALIA bình chọn</div>
+                    <div class="about-text">Tham dự tuần lễ thời trang MILANO FASHION WEEK THU ĐÔNG 2023</div>
                 </div>
             </div>
             <div class="about-list-item">
-                <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
-                <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
                 <div class="about-info">
-                    <div class="about-achievement">achievement - 1</div>
-                    <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
-                    <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012,
-                        2011
-                    </div>
-                    <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003
-                    </div>
-                    <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore
-                        Fashion
-                        Connection</div>
-                    <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
-                    <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London
-                        Fashion
-                        Week</div>
+                    <div class="about-achievement">achievement</div>
+                    <div class="about-text-title">/2022/</div>
+                    <div class="about-text">Trở thành đại diện cựu sinh viên tiêu biểu cho khóa học tham gia phỏng vấn trong series “NABA MEETS ALUMNI” </div>
+                    <div class="about-text">NTK Việt đầu tiên tham dự chính thức tuần lễ thời trang MILANO FASHION WEEK XUÂN HÈ 2023 ra mắt thương hiệu cá nhân “PHAN DANG HOANG” </div>
+                    <div class="about-text">Tham dự tuần lễ thời trang AFRO FASHION WEEK THU ĐÔNG 2022 được VOGUE ITALIA trình chiếu bst</div>
                 </div>
             </div>
             <div class="about-list-item">
-                <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
-                <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
                 <div class="about-info">
-                    <div class="about-achievement">achievement - 2</div>
-                    <div class="about-text">First Vietnamese member - of the Asian Couture Federation, 2014</div>
-                    <div class="about-text">Winner - Designer of the Year by Sport and Culture Magazine in 2014, 2013, 2012,
-                        2011
-                    </div>
-                    <div class="about-text">Winner - Designer of the Year by Beauty Magazine in 2013, 2011, 2005, 2004, 2003
-                    </div>
-                    <div class="about-text">2nd Prize - “Sublimation of Land and Water” Collection in 2011 by Singapore
-                        Fashion
-                        Connection</div>
-                    <div class="about-text">Winner - Asia Collection Makihari in Japan in 2000 by Bay FM</div>
-                    <div class="about-text">Winner - Vietnam Collection Grand Prix, Green Leaves Collection in 2000 London
-                        Fashion
-                        Week</div>
+                    <div class="about-achievement about-achievement-1">achievement</div>
+                    <div class="about-text-title">/2021/</div>
+                    <div class="about-text">Mở màn tuần lễ thời trang AFRO FASHION WEEK XUÂN HÈ 2022 gặp gỡ những nhân vật có ảnh hưởng trong giới thời trang: ANNA WINTOUR, NAOMI CAMPBELL,...</div>
+                    <div class="about-text">TOP 30 BEST COLLECTION do hội đồng thời trang bình chọn cho show diễn PLANET DRESS của ĐẠI HỌC NABA</div>
+                    <div class="about-text"><b>/2018/</b> Nhận học bổng du học chuyên ngành thiết kế thời trang đại học Naba (MILANO-ITALY)</div>
+                    <div class="about-text"><b>/2016/</b> Hoạ sĩ trẻ VN đầu tiên xuất hiện trên 2 tạp chí nghệ thuật mỹ năm 2016 với những tác phẩm truyền thần</div>
+                    <div class="about-text"><b>/2015/</b> Tham gia vẽ tranh cho Lynk show của doanh nhân LÝ NHÃ KỲ</div>
                 </div>
             </div>
         </VueSlickCarousel>
@@ -178,8 +152,8 @@ export default {
             tab: 1,
             settings: {
                 "dots": true,
-                "autoplay": true,
-                "autoplaySpeed": 5000,
+                "autoplay": false,
+                "autoplaySpeed": 300000,
                 "arrows": false,
                 "edgeFriction": 0.35,
                 "infinite": true,
@@ -290,7 +264,7 @@ export default {
         padding: 60px 0px;
 
         .about-achievement {
-            margin-bottom: 30px;
+            margin-bottom: 60px;
             color: #000;
             text-align: center;
             font-family: 'Aeroport';
@@ -299,12 +273,18 @@ export default {
             text-transform: uppercase;
         }
 
+        .about-text-title{
+            font-family: 'Aeroport-bold';
+            color: #000;
+            margin-bottom: 25px;
+        }
+
         .about-text {
             color: #000;
             text-align: center;
             font-family: 'Aeroport-light';
             font-size: 15px;
-            line-height: 30px;
+            margin-bottom: 25px;
             font-weight: 200;
         }
     }
@@ -347,7 +327,7 @@ export default {
                 position: relative;
                 width: 50%;
                 border: 1px solid #000;
-                padding: 6px;
+                padding: 10px;
 
                 img {
                     width: 100%;
@@ -402,6 +382,7 @@ export default {
                     font-family: 'Aeroport';
                     font-size: 35px;
                     margin-bottom: 30px;
+                    line-height: 40px;
                 }
 
                 .about-item-content-des {
@@ -504,7 +485,7 @@ export default {
             padding: 60px 0px;
 
             .about-achievement {
-                margin-bottom: 30px;
+                margin-bottom: 60px;
                 color: #000;
                 text-align: center;
                 font-family: 'Aeroport';
@@ -512,16 +493,21 @@ export default {
                 font-weight: 600;
                 text-transform: uppercase;
             }
+            .about-text-title{
+                font-family: 'Aeroport-bold';
+                color: #000;
+                margin-bottom: 25px;
+            }
 
             .about-text {
                 color: #000;
                 text-align: center;
                 font-family: 'Aeroport-light';
-                font-size: 10px;
-                line-height: 30px;
+                font-size: 14px;
                 font-weight: 200;
                 width: 275px;
                 margin: auto;
+                margin-bottom: 25px;
             }
         }
 
@@ -621,6 +607,7 @@ export default {
                         width: 180px;
                         margin-left: auto;
                         margin-right: auto;
+                        line-height: unset;
                     }
 
                     .about-item-content-des {
@@ -707,7 +694,7 @@ export default {
             padding: 60px 0px;
 
             .about-achievement {
-                margin-bottom: 30px;
+                margin-bottom: 60px;
                 color: #000;
                 text-align: center;
                 font-family: 'Aeroport';
@@ -715,16 +702,23 @@ export default {
                 font-weight: 600;
                 text-transform: uppercase;
             }
-
+            .about-achievement-1 {
+                margin-bottom: 30px;
+            }
+            .about-text-title{
+                font-family: 'Aeroport-bold';
+                color: #000;
+                margin-bottom: 25px;
+            }
             .about-text {
                 color: #000;
                 text-align: center;
                 font-family: 'Aeroport-light';
-                font-size: 10px;
-                line-height: 30px;
+                font-size: 12px;
                 font-weight: 200;
                 width: 275px;
                 margin: auto;
+                margin-bottom: 25px;
             }
         }
 
@@ -824,6 +818,7 @@ export default {
                         width: 180px;
                         margin-left: auto;
                         margin-right: auto;
+                        line-height: unset;
                     }
 
                     .about-item-content-des {
@@ -860,4 +855,5 @@ export default {
 
         }
     }
-}</style>
+}
+</style>

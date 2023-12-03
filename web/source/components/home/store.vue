@@ -161,7 +161,7 @@ export default {
     }
 
     .store-content {
-      margin-top: 30px;
+      margin-top: 10px;
       width: 100%;
       margin-right: auto;
       text-align: left;

@@ -119,7 +119,8 @@ module.exports = {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon-light.ico', id:"light-scheme-icon" },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', id:"dark-scheme-icon" },
       // {
       //   rel: 'preload',
       //   as: 'video',

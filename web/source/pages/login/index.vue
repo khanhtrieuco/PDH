@@ -8,9 +8,26 @@
         <div class="page-login-des">or </br> CONTINUE WITH YOUR EMAIL </br> ADDRESS</div>
         <div class="page-login-sub">Sign in with your PHANDANGHOANG email and password or create a profile if you are new.
         </div>
-        <b-form-input class="page-input-login" v-model="username" placeholder="Email*"></b-form-input>
-        <b-form-input class="page-input-login" v-model="password" type="password" placeholder="Password*"></b-form-input>
-        <div class="page-input-btn" @click="onLogin()">continue</div>
+        <b-form-input class="page-input-login" v-model="email" placeholder="Email*"></b-form-input>
+        <b-form-input class="page-input-login" v-if="hadaccount" v-model="password" type="password"
+            placeholder="Password*"></b-form-input>
+        <b-form-input class="page-input-login" v-if="onlogin" v-model="newpassword" type="password"
+            placeholder="Create Password*"></b-form-input>
+        <div class="text-pass-first" v-if="onlogin">- Please enter at least 8 characters</div>
+        <div class="text-pass" v-if="onlogin">- Please enter at least one number</div>
+        <div class="text-pass" v-if="onlogin">- Please enter one special character (!+,-./:;<=>?@)</div>
+        <div class="page-input-btn" v-if="!hadaccount && !onlogin" @click="onCheck()">continue</div>
+        <div class="page-input-btn" v-if="hadaccount" @click="onLogin()">continue</div>
+        <b-form-input class="page-input-login" v-if="onlogin" v-model="username" placeholder="User Name*"></b-form-input>
+        <div class="text-pass-sub" v-if="onlogin">By choosing "Create my profile", you confirm that
+            you agree to our <u>Terms of Use</u>, that you have acknowledged
+            our privacy policy, and that you want to create your PHANDANGHOANG profile.</div>
+        <div class="text-pass-sub" v-if="onlogin">By creating your PHANDANGHOANG profile, you confirm that you have reached
+            the age of
+            consent in your country of residence (or, if you are under the age of consent, that your parent or legal
+            guardian also agrees to such
+            registration).</div>
+        <div class="page-input-btn" v-if="onlogin" @click="onRegister()">continue</div>
     </div>
 </template>
   
@@ -23,8 +40,12 @@ export default {
     data() {
         return {
             isMobile: false,
+            email: null,
             username: null,
             password: null,
+            newpassword: null,
+            hadaccount: false,
+            onlogin: false
         }
     },
     computed: {
@@ -53,7 +74,9 @@ export default {
     },
     methods: {
         ...mapActions({
-            loginEmail: "auth/loginEmail"
+            loginEmail: "auth/loginEmail",
+            registerByEmail: "auth/registerByEmail",
+            checkEmail: "auth/checkEmail"
         }),
         checkMobile() {
             if (!process.server) {
@@ -64,17 +87,53 @@ export default {
                 }
             }
         },
+        async onCheck() {
+            if (!this.email) {
+                this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
+                return
+            }
+            let rs = await this.checkEmail({ email: this.email })
+            console.log(rs)
+            if (rs) {
+                this.hadaccount = true
+            } else {
+                this.hadaccount = false
+                this.onlogin = true
+            }
+        },
         async onLogin() {
-            if (!this.username || !this.password) {
+            if (!this.email || !this.password) {
                 this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
                 return
             }
             let rs = await this.loginEmail({
-                identifier: this.username,
+                identifier: this.email,
                 password: this.password
             })
             if (rs) {
                 this.showNotification('success', `Đăng nhập thành công`)
+                this.$router.push({ path: '/' })
+            } else {
+                this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
+            }
+        },
+        async onRegister() {
+            if (!this.email || !this.newpassword || !this.username) {
+                this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
+                return
+            }
+            const re = /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()~¥=_+}{":;'?/>.<,`\-\|\[\]]{8,50}$/
+            if (!re.test(this.newpassword)) {
+                this.showNotification('warning', `Vui lòng nhập password theo yêu cầu`)
+                return
+            }
+            let rs = await this.registerByEmail({
+                username: this.username,
+                email: this.email,
+                password: this.newpassword,
+            })
+            if (rs) {
+                this.showNotification('success', `Tạo tài khoản thành công`)
                 this.$router.push({ path: '/' })
             } else {
                 this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
@@ -172,6 +231,27 @@ export default {
         cursor: pointer;
         margin-top: 30px;
     }
+
+    .text-pass {
+        color: #717171;
+        font-family: "Aeroport";
+        font-size: 16px;
+    }
+
+    .text-pass-first {
+        margin-top: 20px;
+        color: #717171;
+        font-family: "Aeroport";
+        font-size: 16px;
+    }
+
+    .text-pass-sub {
+        color: #000;
+        font-family: "Aeroport";
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
 }
 
 @media (max-width: 520px) {
