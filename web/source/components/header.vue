@@ -20,8 +20,8 @@
           <span :class="`menu-text ${tab == 5 ? 'menu-text-active' : ''}`" @click="choicetab(5)">{{ $t('Friendship')
           }}</span>
           <div class="d-inline-flex" style="position: relative;">
-            <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
-            <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
+            <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
+            <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
           </div>
         </div>
       </div>
@@ -29,8 +29,8 @@
         <div class="d-flex justify-content-between">
           <img class="menu-logo" @click="goPage('/')" src="/images/logo.png" />
           <div class="d-inline-flex" style="position: relative;">
-            <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
-            <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
+            <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
+            <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
             <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
             <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span>
           </div>
