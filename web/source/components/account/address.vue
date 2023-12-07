@@ -1,89 +1,94 @@
 <template>
     <div class="backgroud-black">
-        <div class="address-content">
-            <img class="address-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" />
-            <div class="address-title">Add new address</div>
-            <div class="input-form-des-text">*required field</div>
-            <b-row v-if="!isMobile" class="mt-3">
-                <b-col cols="12">
-                    <div class="input-form-des">*Full name</div>
-                    <b-form-input class="input-form-address" v-model="form.name" placeholder="Họ và tên*"></b-form-input>
-                </b-col>
-                <b-col cols="6">
-                    <div class="input-form-des">*Phone</div>
-                    <b-form-input class="input-form-address" v-model="form.phone"
-                        placeholder="Số điện thoại*"></b-form-input>
-                </b-col>
-                <b-col cols="6">
-                    <div class="input-form-des">*Email</div>
-                    <b-form-input class="input-form-address" v-model="form.email"
-                        placeholder="Địa chỉ Email*"></b-form-input>
-                </b-col>
-                <b-col cols="6">
-                    <div class="input-form-des">*Country/ Region</div>
-                    <b-form-select class="input-form-address" v-model="country"
-                        :options="[{ text: 'Việt Nam', value: null }]">
-                    </b-form-select>
-                </b-col>
-                <b-col cols="6">
-                    <div class="input-form-des">*Province</div>
-                    <b-form-select class="input-form-address" v-model="province" :options="provinces"></b-form-select>
-                </b-col>
-                <b-col cols="6">
-                    <div class="input-form-des">*District</div>
-                    <b-form-select class="input-form-address" v-model="district" :options="districts"></b-form-select>
-                </b-col>
-                <b-col cols="6">
-                    <div class="input-form-des">*Ward</div>
-                    <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">Address</div>
-                    <b-form-input class="input-form-address" v-model="form.full_address"
-                        placeholder="Địa chỉ nhận"></b-form-input>
-                </b-col>
-            </b-row>
-            <b-row v-else>
-                <b-col cols="12">
-                    <div class="input-form-des">*Full name</div>
-                    <b-form-input class="input-form-address" v-model="form.name" placeholder="Họ và tên*"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Phone</div>
-                    <b-form-input class="input-form-address" v-model="form.phone"
-                        placeholder="Số điện thoại*"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Email</div>
-                    <b-form-input class="input-form-address" v-model="form.email"
-                        placeholder="Địa chỉ Email*"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">Address</div>
-                    <b-form-input class="input-form-address" v-model="form.full_address"
-                        placeholder="Địa chỉ nhận"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Country/ Region</div>
-                    <b-form-select class="input-form-address" v-model="country"
-                        :options="[{ text: 'Việt Nam', value: null }]">
-                    </b-form-select>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Province</div>
-                    <b-form-select class="input-form-address" v-model="province" :options="provinces"></b-form-select>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*District</div>
-                    <b-form-select class="input-form-address" v-model="district" :options="districts"></b-form-select>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Ward</div>
-                    <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
-                </b-col>
-            </b-row>
-            <div class="up-add-btn" @click="type === 'create' ? onAddNew() : onUpdate()">Cập nhật
+        <div class="popup-content">
+            <div class="address-content">
+                <!-- <img class="address-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
+                <div class="address-title">Add new address</div>
+                <div class="input-form-des-text">*required field</div>
+                <b-row v-if="!isMobile" class="mt-3">
+                    <b-col cols="12">
+                        <div class="input-form-des">*Full name</div>
+                        <b-form-input class="input-form-address" v-model="form.name"
+                            placeholder="Họ và tên*"></b-form-input>
+                    </b-col>
+                    <b-col cols="6">
+                        <div class="input-form-des">*Phone</div>
+                        <b-form-input class="input-form-address" v-model="form.phone"
+                            placeholder="Số điện thoại*"></b-form-input>
+                    </b-col>
+                    <b-col cols="6">
+                        <div class="input-form-des">*Email</div>
+                        <b-form-input class="input-form-address" v-model="form.email"
+                            placeholder="Địa chỉ Email*"></b-form-input>
+                    </b-col>
+                    <b-col cols="6">
+                        <div class="input-form-des">*Country/ Region</div>
+                        <b-form-select class="input-form-address" v-model="country"
+                            :options="[{ text: 'Việt Nam', value: null }]">
+                        </b-form-select>
+                    </b-col>
+                    <b-col cols="6">
+                        <div class="input-form-des">*Province</div>
+                        <b-form-select class="input-form-address" v-model="province" :options="provinces"></b-form-select>
+                    </b-col>
+                    <b-col cols="6">
+                        <div class="input-form-des">*District</div>
+                        <b-form-select class="input-form-address" v-model="district" :options="districts"></b-form-select>
+                    </b-col>
+                    <b-col cols="6">
+                        <div class="input-form-des">*Ward</div>
+                        <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">Address</div>
+                        <b-form-input class="input-form-address" v-model="form.full_address"
+                            placeholder="Địa chỉ nhận"></b-form-input>
+                    </b-col>
+                </b-row>
+                <b-row v-else>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Full name</div>
+                        <b-form-input class="input-form-address" v-model="form.name"
+                            placeholder="Họ và tên*"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Phone</div>
+                        <b-form-input class="input-form-address" v-model="form.phone"
+                            placeholder="Số điện thoại*"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Email</div>
+                        <b-form-input class="input-form-address" v-model="form.email"
+                            placeholder="Địa chỉ Email*"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">Address</div>
+                        <b-form-input class="input-form-address" v-model="form.full_address"
+                            placeholder="Địa chỉ nhận"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Country/ Region</div>
+                        <b-form-select class="input-form-address" v-model="country"
+                            :options="[{ text: 'Việt Nam', value: null }]">
+                        </b-form-select>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Province</div>
+                        <b-form-select class="input-form-address" v-model="province" :options="provinces"></b-form-select>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*District</div>
+                        <b-form-select class="input-form-address" v-model="district" :options="districts"></b-form-select>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Ward</div>
+                        <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
+                    </b-col>
+                </b-row>
+                <div class="up-add-btn" @click="type === 'create' ? onAddNew() : onUpdate()">Cập nhật
+                </div>
             </div>
+            <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>
         </div>
     </div>
 </template>
@@ -268,14 +273,30 @@ export default {
     top: 0px;
     background-color: #000000b3;
     z-index: 15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .popup-content {
+        position: relative;
+    }
+
+    .back-close-popup {
+        font-family: 'Aeroport-light';
+        text-align: center;
+        font-size: 16px;
+        text-decoration-line: underline;
+        text-transform: uppercase;
+        color: #000;
+        cursor: pointer;
+        margin-top: 30px;
+    }
 }
 
 .address-content {
     position: relative;
-    top: calc(50% - 630px/2);
     margin: auto;
     width: 550px;
-    height: 630px;
     background-color: #ffffff;
     padding: 30px;
 

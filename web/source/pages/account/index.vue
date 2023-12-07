@@ -75,7 +75,8 @@
                             <div class="account-content-card-head-title">My orders</div>
                         </div>
                         <div class="account-content-body">
-                            <div class="account-content-order-item" v-for="_order, index in listUserOrder" :key="index">
+                            <div class="account-content-order-item" v-if="index < 3" v-for="_order, index in listUserOrder"
+                                :key="index">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <img class="account-content-order-item-img"
@@ -172,9 +173,9 @@
                         <div class="account-content-card-head-title">My orders</div>
                     </div>
                     <div class="account-content-body">
-                        <div class="account-content-order-item" v-for="_order, index in listUserOrder" :key="index">
+                        <div class="account-content-order-item" v-if="index < 3" v-for="_order, index in listUserOrder" :key="index">
                             <div class="d-flex justify-content-between">
-                                <div>
+                                <div class="account-content-order-item-media">
                                     <img class="account-content-order-item-img"
                                         :src="_order.cart.product.data.attributes.thub.data.attributes.url" />
                                     <div class="account-content-order-item-state">{{ $i18n.locale === 'vn' ?
@@ -391,7 +392,7 @@ export default {
     }
 
     .account-content-data {
-        background-color: #000;
+        background-color: #EEE;
         padding: 65px 0px;
 
         .account-content-left {
@@ -443,6 +444,7 @@ export default {
             }
 
             .account-content-footer {
+                font-family: 'Aeroport-light';
                 height: 35px;
                 line-height: 35px;
                 padding: 0px 20px;
@@ -607,6 +609,10 @@ export default {
                     background-color: #FAFAFA;
                     padding: 5px 0px;
                     margin-bottom: 5px;
+
+                    .account-content-order-item-media{
+                        width: 80px;
+                    }
 
                     .account-content-order-item-img {
                         width: 70px;

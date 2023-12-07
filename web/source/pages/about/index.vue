@@ -284,7 +284,7 @@ export default {
             text-align: center;
             font-family: 'Aeroport-light';
             font-size: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 5px;
             font-weight: 200;
         }
     }

@@ -23,7 +23,7 @@
                     Add to cart
                 </div>
             </div>
-            <!-- <div class="d-flex" v-if="!isMobile">
+            <div class="d-flex" v-if="!isMobile">
                 <div class="product-detail-media" v-if="product.attributes?.media.data">
                     <img class="product-detail-media-img" v-for="imgData, index in product.attributes?.media.data"
                         :key="index" :src="imgData.attributes.url" />
@@ -61,8 +61,8 @@
                         <div class="product-detail-data-size-text">Size:</div>
                         <div>
                             <span class="product-detail-data-size-des">Size guide</span>
-                            <span class="product-detail-data-size-des" v-if="selectSize"
-                                @click="clearChoice">Clear choice</span>
+                            <span class="product-detail-data-size-des" v-if="selectSize" @click="clearChoice">Clear
+                                choice</span>
                         </div>
                     </div>
                     <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
@@ -75,8 +75,8 @@
                         Add to cart
                     </div>
                 </div>
-            </div> -->
-            <!-- <VueSlickCarousel v-bind="settings" class="product-detail-media"
+            </div>
+            <VueSlickCarousel v-bind="settings" class="product-detail-media"
                 v-if="isMobile && product.attributes?.media.data">
                 <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
                     <img class="product-detail-media-img" :src="imgData.attributes?.url" />
@@ -124,19 +124,19 @@
                 <div class="product-detail-data-btn" @click="addProductToCart">
                     Add to cart
                 </div>
-            </div> -->
+            </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recommend</div>
                 <b-row v-if="listRelated && listRelated.length > 0">
                     <b-col class="mb-4" cols="6" lg="3" v-for="_item, index in listRelated" :key="index">
-                        <ProductItem :item="_item" :isMobile="isMobile" height="290px"/>
+                        <ProductItem :item="_item" :isMobile="isMobile" height="290px" />
                     </b-col>
                 </b-row>
             </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recently viewed</div>
                 <b-row v-if="listView && listView.length > 0">
-                    <b-col class="mb-4" cols="6" lg="3"  v-for="_item, index in listView" :key="index">
+                    <b-col class="mb-4" cols="6" lg="3" v-for="_item, index in listView" :key="index">
                         <ProductItem :item="_item" :isMobile="isMobile" height="290px" />
                     </b-col>
                 </b-row>
@@ -449,6 +449,11 @@ export default {
             font-size: 20px;
             border: 1px solid;
             text-transform: uppercase;
+
+            &:hover {
+                color: #fff;
+                background-color: #000;
+            }
         }
 
     }
@@ -567,6 +572,11 @@ export default {
             font-size: 20px;
             border: 1px solid;
             text-transform: uppercase;
+
+            &:hover {
+                color: #fff;
+                background-color: #000;
+            }
         }
     }
 

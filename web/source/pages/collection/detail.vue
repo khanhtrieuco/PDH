@@ -2,7 +2,7 @@
     <div class="collection-content">
         <div class="collection-banner">
             <img class="customer-image" ratio="21-9" v-if="!isMobile"
-                :src="collection.attributes?.detail_thub?.data?.attributes.url"/>
+                :src="collection.attributes?.detail_thub?.data?.attributes.url" />
             <img class="customer-image" ratio="9-21" v-if="isMobile"
                 :src="collection.attributes?.detail_thub_mobile?.data?.attributes.url" />
             <!-- <div class="container customer-des" v-if="isMobile">
@@ -18,12 +18,17 @@
             </div> -->
         </div>
         <div class="container">
-            <div class="photo-wrap" v-if="isMobile">
+            <!-- <div class="photo-wrap" v-if="isMobile">
                 <div class="photo" v-for="imgData, index in imgDataArray" :key="index"
                     :style="{ 'width': imgData.size.width * 800 / imgData.size.height + 'px', 'flex-grow': imgData.size.width * 800 / imgData.size.height }">
                     <i :style="{ 'padding-bottom': imgData.size.height / imgData.size.width * 100 + '%' }"></i>
                     <img class="collection-detail-image" :src="imgData.src" :alt="imgData.title" @load="loaded(index)"
                         crossorigin="Anonymous" />
+                </div>
+            </div> -->
+            <div class="photo-list-mobile" v-if="isMobile">
+                <div :class="index%6 < 2 ? 'photo-img' : 'photo-img-half'" v-for="imgData, index in imgDataArray" :key="index">
+                    <img class="photo-img-detail" :src="imgData.src" :alt="imgData.title" />
                 </div>
             </div>
             <div class="photo-list" v-if="!isMobile">
@@ -62,16 +67,18 @@ export default {
             await this.getCollectionBySlug(this.$route.params.id) //(this.$route.params.id)
         }
         // await this.loadProducts()
-        this.collection.attributes.media.data.map(o => {
-            this.imgDataArray.push({
-                src: o.attributes.url,  // for spotlight too
-                title: o.attributes.name,
-                size: {
-                    width: o.attributes.width,
-                    height: o.attributes.height,
-                }
-            });
-        })
+        if (this.collection.attributes) {
+            this.collection.attributes.media.data.map(o => {
+                this.imgDataArray.push({
+                    src: o.attributes.url,  // for spotlight too
+                    title: o.attributes.name,
+                    size: {
+                        width: o.attributes.width,
+                        height: o.attributes.height,
+                    }
+                });
+            })
+        }
     },
     methods: {
         ...mapActions({
@@ -115,7 +122,7 @@ export default {
 .collection-content {
     padding-bottom: 100px;
 
-    .customer-image{
+    .customer-image {
         width: 100%;
     }
 
@@ -147,18 +154,20 @@ export default {
         flex-grow: 1;
         object-fit: cover;
         vertical-align: bottom;
-        border-radius: 3px;
-        box-sizing: border-box;
-        box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+        // border-radius: 3px;
+        // box-sizing: border-box;
+        // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
     }
 
     .photo-list {
         width: 100%;
         margin-top: 5px;
+
         .photo-img {
             width: calc(100% / 3);
             display: inline-block;
             padding: 5px;
+
             .photo-img-detail {
                 width: 100%;
                 min-width: 100%;
@@ -166,9 +175,20 @@ export default {
                 height: 500px;
                 object-fit: cover;
                 vertical-align: bottom;
-                border-radius: 3px;
-                box-sizing: border-box;
-                box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+                // border-radius: 3px;
+                // box-sizing: border-box;
+                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+            }
+            .photo-img-detail-half {
+                width: calc(50% - 5px);
+                min-width: calc(50% - 5px);
+                max-width: calc(50% - 5px);
+                height: 250px;
+                object-fit: cover;
+                vertical-align: bottom;
+                // border-radius: 3px;
+                // box-sizing: border-box;
+                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
             }
         }
     }
@@ -193,5 +213,44 @@ export default {
         padding: 20px 25px;
         font-family: 'Aeroport-light';
         text-align: center;
+    }
+    .photo-list-mobile {
+        width: 100%;
+        margin-top: 5px;
+
+        .photo-img {
+            width: 100%;
+            display: inline-block;
+            padding: 5px;
+
+            .photo-img-detail {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                height: 500px;
+                object-fit: cover;
+                vertical-align: bottom;
+                // border-radius: 3px;
+                // box-sizing: border-box;
+                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+            }
+        }
+        .photo-img-half {
+            width: calc(100% / 2);
+            display: inline-block;
+            padding: 3px;
+
+            .photo-img-detail {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                height: 250px;
+                object-fit: cover;
+                vertical-align: bottom;
+                // border-radius: 3px;
+                // box-sizing: border-box;
+                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+            }
+        }
     }
 }</style>

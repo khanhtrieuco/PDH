@@ -179,7 +179,7 @@ export default {
 </script>
 <style lang="scss">
 .product-item {
-  padding: 5px;
+  padding: 0px;
 
   .product-img {
     position: relative;

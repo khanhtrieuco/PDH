@@ -473,9 +473,9 @@ export default {
     handleScroll(e) {
       let st = document.documentElement.scrollTop;
       if (st > this.lastScrollTop) {
-        this.showMenuScroll = true
-      } else if (st < this.lastScrollTop) {
         this.showMenuScroll = false
+      } else if (st < this.lastScrollTop) {
+        this.showMenuScroll = true
       }
       this.lastScrollTop = st <= 0 ? 0 : st;
     }
@@ -535,7 +535,7 @@ export default {
       cursor: pointer;
       font-size: 18px;
       font-family: 'Aeroport';
-      color: #777;
+      color: #000;
       text-transform: uppercase;
       display: inline-block;
     }
@@ -706,7 +706,7 @@ export default {
       cursor: pointer;
       font-size: 16px;
       font-family: 'Aeroport-light';
-      color: #777;
+      color: #000;
       text-transform: uppercase;
       display: inline-block;
       margin-left: 10px;
@@ -886,7 +886,7 @@ export default {
       cursor: pointer;
       font-size: 16px;
       font-family: 'Aeroport-light';
-      color: #777;
+      color: #000;
       text-transform: uppercase;
       display: inline-block;
       margin-left: 12px;

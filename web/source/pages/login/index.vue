@@ -8,11 +8,28 @@
         <div class="page-login-des">or </br> CONTINUE WITH YOUR EMAIL </br> ADDRESS</div>
         <div class="page-login-sub">Sign in with your PHANDANGHOANG email and password or create a profile if you are new.
         </div>
-        <b-form-input class="page-input-login" v-model="email" placeholder="Email*"></b-form-input>
-        <b-form-input class="page-input-login" v-if="hadaccount" v-model="password" type="password"
-            placeholder="Password*"></b-form-input>
-        <b-form-input class="page-input-login" v-if="onlogin" v-model="newpassword" type="password"
+        <b-input-group>
+            <template #append>
+                <img class="input-icon" src="/images/Edit_light.svg" v-if="onlogin" />
+            </template>
+            <b-form-input class="page-input-login" v-model="email" placeholder="Email*"></b-form-input>
+        </b-input-group>
+        <b-input-group v-if="hadaccount">
+            <template #append>
+                <img class="input-icon" src="/images/View_fill.svg" @click="onSwitchType" />
+            </template>
+            <b-form-input class="page-input-login" v-model="password" :type="typeshow"
+                placeholder="Password*"></b-form-input>
+        </b-input-group>
+        <b-input-group v-if="onlogin">
+            <template #append>
+                <img class="input-icon" src="/images/View_fill.svg" @click="onSwitchType" />
+            </template>
+            <b-form-input class="page-input-login" v-model="newpassword" :type="typeshow"
             placeholder="Create Password*"></b-form-input>
+        </b-input-group>
+
+        
         <div class="text-pass-first" v-if="onlogin">- Please enter at least 8 characters</div>
         <div class="text-pass" v-if="onlogin">- Please enter at least one number</div>
         <div class="text-pass" v-if="onlogin">- Please enter one special character (!+,-./:;<=>?@)</div>
@@ -45,7 +62,8 @@ export default {
             password: null,
             newpassword: null,
             hadaccount: false,
-            onlogin: false
+            onlogin: false,
+            typeshow:'password'
         }
     },
     computed: {
@@ -78,6 +96,13 @@ export default {
             registerByEmail: "auth/registerByEmail",
             checkEmail: "auth/checkEmail"
         }),
+        onSwitchType() {
+            if(this.typeshow === 'password') {
+                this.typeshow = 'text'
+            } else {
+                this.typeshow = 'password'
+            }
+        },
         checkMobile() {
             if (!process.server) {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -215,6 +240,14 @@ export default {
         color: #000;
     }
 
+    .input-icon {
+        position: absolute;
+        top: 45px;
+        right: 15px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
     .page-input-btn {
         width: 100%;
         height: 60px;
@@ -234,20 +267,20 @@ export default {
 
     .text-pass {
         color: #717171;
-        font-family: "Aeroport";
+        font-family: "Aeroport-light";
         font-size: 16px;
     }
 
     .text-pass-first {
         margin-top: 20px;
         color: #717171;
-        font-family: "Aeroport";
+        font-family: "Aeroport-light";
         font-size: 16px;
     }
 
     .text-pass-sub {
         color: #000;
-        font-family: "Aeroport";
+        font-family: "Aeroport-light";
         font-size: 16px;
         margin-top: 20px;
     }
