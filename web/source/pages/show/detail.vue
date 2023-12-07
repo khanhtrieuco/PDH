@@ -38,7 +38,7 @@
         </div>
         <div class="detail-show-video">
             <img class="detail-show-img-video" src="/images/PDH.png" />
-            <video id="videoRef-id" ref="videoRef" preload="auto" class="detail-show-video-inner" 
+            <video id="videoRef-id" ref="videoRef" class="detail-show-video-inner" 
                 autoplay loop muted playsinline @click="onStopVideo">
                 <source :src="show.attributes.video.data?.attributes.url" type='video/webm;codecs="vp8, vorbis"' />
             </video>
