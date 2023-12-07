@@ -74,7 +74,7 @@
               {{ $t('Footer_text_20') }}
             </label>
             <label class="footer-check">
-              <input type="checkbox" checked="checked">
+              <input type="checkbox">
               <span class="checkmark"></span>
               {{ $t('Footer_text_21') }}
             </label>
