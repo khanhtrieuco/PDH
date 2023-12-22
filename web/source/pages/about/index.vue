@@ -9,13 +9,11 @@
                     <div class="about-title">ABOUT P.D.H</div>
                     <img class="about-name-img" src="/images/about-name.png" />
                     <div class="about-des">A VIETNAMESE CHILD ARTIST HAS DECIDED PASS INTO THE WORLD OF FASHION AND CREATE
-                        THE
-                        NAME BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE
+                        THE NAME BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE
                         TRADITIONAL VALUES OF THE COUNTRY OF THE COUNTRIES BRING CONtemporaries. HE LOVES EXPERIENCE WITH
-                        USE OF
-                        TECHNOLOGY IN THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW GENERATION
-                        IN
-                        THIS INDUSTRY.
+                        USE OF TECHNOLOGY IN THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW
+                        GENERATION
+                        IN THIS INDUSTRY.
                     </div>
                 </div>
             </div>
@@ -24,13 +22,15 @@
             <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
             <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
         </div>
-        <VueSlickCarousel v-bind="settings" class="about-list-banner">
+        <VueSlickCarousel v-bind="settings" class="about-list-banner" :arrows="isMobile ? false : true">
             <div class="about-list-item">
                 <div class="about-info">
                     <div class="about-achievement">achievement</div>
                     <div class="about-text-title">/2023/</div>
-                    <div class="about-text">Tham gia triển lãm LIT EXHIBITION và show diễn đầu tiên tại VIỆT NAM do nhãn hàng SUNLIFE VIỆT NAM tổ chức.</div>
-                    <div class="about-text">Chiến thắng giải thưởng NTK triển vọng của năm do SR FASHION AWARDS tổ chức</div>
+                    <div class="about-text">Tham gia triển lãm LIT EXHIBITION và show diễn đầu tiên tại VIỆT NAM do nhãn
+                        hàng SUNLIFE VIỆT NAM tổ chức.</div>
+                    <div class="about-text">Chiến thắng giải thưởng NTK triển vọng của năm do SR FASHION AWARDS tổ chức
+                    </div>
                     <div class="about-text">Lọt top 21 thương hiệu trẻ triển vọng do VOGUE ITALIA bình chọn</div>
                     <div class="about-text">Tham dự tuần lễ thời trang MILANO FASHION WEEK THU ĐÔNG 2023</div>
                 </div>
@@ -39,22 +39,39 @@
                 <div class="about-info">
                     <div class="about-achievement">achievement</div>
                     <div class="about-text-title">/2022/</div>
-                    <div class="about-text">Trở thành đại diện cựu sinh viên tiêu biểu cho khóa học tham gia phỏng vấn trong series “NABA MEETS ALUMNI” </div>
-                    <div class="about-text">NTK Việt đầu tiên tham dự chính thức tuần lễ thời trang MILANO FASHION WEEK XUÂN HÈ 2023 ra mắt thương hiệu cá nhân “PHAN DANG HOANG” </div>
-                    <div class="about-text">Tham dự tuần lễ thời trang AFRO FASHION WEEK THU ĐÔNG 2022 được VOGUE ITALIA trình chiếu bst</div>
+                    <div class="about-text">Trở thành đại diện cựu sinh viên tiêu biểu cho khóa học tham gia phỏng vấn trong
+                        series “NABA MEETS ALUMNI” </div>
+                    <div class="about-text">NTK Việt đầu tiên tham dự chính thức tuần lễ thời trang MILANO FASHION WEEK XUÂN
+                        HÈ 2023 ra mắt thương hiệu cá nhân “PHAN DANG HOANG” </div>
+                    <div class="about-text">Tham dự tuần lễ thời trang AFRO FASHION WEEK THU ĐÔNG 2022 được VOGUE ITALIA
+                        trình chiếu bst</div>
                 </div>
             </div>
             <div class="about-list-item">
                 <div class="about-info">
                     <div class="about-achievement about-achievement-1">achievement</div>
                     <div class="about-text-title">/2021/</div>
-                    <div class="about-text">Mở màn tuần lễ thời trang AFRO FASHION WEEK XUÂN HÈ 2022 gặp gỡ những nhân vật có ảnh hưởng trong giới thời trang: ANNA WINTOUR, NAOMI CAMPBELL,...</div>
-                    <div class="about-text">TOP 30 BEST COLLECTION do hội đồng thời trang bình chọn cho show diễn PLANET DRESS của ĐẠI HỌC NABA</div>
-                    <div class="about-text"><b>/2018/</b> Nhận học bổng du học chuyên ngành thiết kế thời trang đại học Naba (MILANO-ITALY)</div>
-                    <div class="about-text"><b>/2016/</b> Hoạ sĩ trẻ VN đầu tiên xuất hiện trên 2 tạp chí nghệ thuật mỹ năm 2016 với những tác phẩm truyền thần</div>
+                    <div class="about-text">Mở màn tuần lễ thời trang AFRO FASHION WEEK XUÂN HÈ 2022 gặp gỡ những nhân vật
+                        có ảnh hưởng trong giới thời trang: ANNA WINTOUR, NAOMI CAMPBELL,...</div>
+                    <div class="about-text">TOP 30 BEST COLLECTION do hội đồng thời trang bình chọn cho show diễn PLANET
+                        DRESS của ĐẠI HỌC NABA</div>
+                    <div class="about-text"><b>/2018/</b> Nhận học bổng du học chuyên ngành thiết kế thời trang đại học Naba
+                        (MILANO-ITALY)</div>
+                    <div class="about-text"><b>/2016/</b> Hoạ sĩ trẻ VN đầu tiên xuất hiện trên 2 tạp chí nghệ thuật mỹ năm
+                        2016 với những tác phẩm truyền thần</div>
                     <div class="about-text"><b>/2015/</b> Tham gia vẽ tranh cho Lynk show của doanh nhân LÝ NHÃ KỲ</div>
                 </div>
             </div>
+            <template slot="prevArrow">
+                <div class="pre-arrow">
+                    <img src="/images/left-a.svg" />
+                </div>
+            </template>
+            <template slot="nextArrow">
+                <div class="next-arrow">
+                    <img src="/images/right-a.svg" />
+                </div>
+            </template>
         </VueSlickCarousel>
         <div class="about-mid">
             <img class="w-100" src="/images/about-mid.jpg" v-if="!isMobile" />
@@ -67,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="container about-list">
+        <!-- <div class="container about-list">
             <div class="about-item">
                 <div class="about-item-img">
                     <img v-if="tab === 1" src="/images/about1.jpg" />
@@ -86,7 +103,6 @@
                         <div></div>
                     </div>
                 </div>
-                <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                 <div v-if="tab === 1" class="about-item-content">
                     <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
                     <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
@@ -100,8 +116,6 @@
                             :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
                     </div>
                 </div>
-                <!-- </transition> -->
-                <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                 <div v-if="tab === 2" class="about-item-content">
                     <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
                     <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
@@ -115,8 +129,6 @@
                             :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
                     </div>
                 </div>
-                <!-- </transition> -->
-                <!-- <transition :duration="{ enter: 500, leave: 100 }" name="slide-fade"> -->
                 <div v-if="tab === 3" class="about-item-content">
                     <div class="about-item-content-title">LOREM IPSUM DOLOR SIT AMET LA</div>
                     <div class="about-item-content-des">I am so happy to be back in New York. We showed the Dante
@@ -130,9 +142,57 @@
                             :class="`about-item-tab-choice ${tab === 3 ? 'about-item-tab-choice-active' : ''}`"></div>
                     </div>
                 </div>
-                <!-- </transition> -->
-
             </div>
+        </div> -->
+        <div class="about-vision-list">
+            <VueSlickCarousel v-bind="setting_vision" class="about-vision-slider">
+                <div class="about-vision-item">
+                    <img class="about-vision-img" src="/images/vs1.jpg" />
+                    <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
+                    <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
+                </div>
+                <div class="about-vision-item">
+                    <img class="about-vision-img" src="/images/vs2.jpg" />
+                    <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
+                    <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
+                </div>
+                <div class="about-vision-item">
+                    <img class="about-vision-img" src="/images/vs3.jpg" />
+                    <div class="about-vison-list-content">
+                        <div class="about-vison-content-item">
+                            <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
+                            <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
+                        </div>
+                        <div class="about-vison-content-item">
+                            <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
+                            <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
+                        </div>
+                        <div class="about-vison-content-item">
+                            <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
+                            <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
+                        </div>
+                        <div class="about-vison-content-item">
+                            <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
+                            <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
+                        </div>
+                        <div class="about-vison-content-item">
+                            <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
+                            <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
+                        </div>
+                    </div>
+
+                </div>
+                <template slot="prevArrow">
+                    <div class="pre-arrow">
+                        <img src="/images/left-s.svg" />
+                    </div>
+                </template>
+                <template slot="nextArrow">
+                    <div class="next-arrow">
+                        <img src="/images/right-s.svg" />
+                    </div>
+                </template>
+            </VueSlickCarousel>
         </div>
     </div>
 </template>
@@ -154,7 +214,18 @@ export default {
                 "dots": true,
                 "autoplay": false,
                 "autoplaySpeed": 300000,
-                "arrows": false,
+                // "arrows": this.isMobile ? false : true,
+                "edgeFriction": 0.35,
+                "infinite": true,
+                "speed": 500,
+                "slidesToShow": 1,
+                "slidesToScroll": 1
+            },
+            setting_vision: {
+                "dots": false,
+                "autoplay": false,
+                "autoplaySpeed": 300000,
+                "arrows": true,
                 "edgeFriction": 0.35,
                 "infinite": true,
                 "speed": 500,
@@ -273,7 +344,7 @@ export default {
             text-transform: uppercase;
         }
 
-        .about-text-title{
+        .about-text-title {
             font-family: 'Aeroport-bold';
             color: #000;
             margin-bottom: 25px;
@@ -434,6 +505,141 @@ export default {
         .slick-dots li.slick-active button:before {
             color: #717171 !important;
         }
+
+        .pre-arrow {
+            margin-top: 20px;
+            margin-left: 45px;
+
+            &:before {
+                display: none;
+            }
+
+            img {
+                width: auto;
+            }
+        }
+
+        .next-arrow {
+            margin-top: 20px;
+            margin-right: 75px;
+
+            &:before {
+                display: none;
+            }
+
+            img {
+                width: auto;
+            }
+        }
+    }
+
+    .about-vision-list {
+        background-color: #000;
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        .about-vision-slider {
+            margin: auto;
+            width: 90%;
+            text-align: center;
+
+            .about-vision-item {
+                text-align: center;
+
+                .about-vision-text {
+                    color: #fff;
+                    text-align: center;
+                    font-family: "Aeroport";
+                    font-size: 16px;
+                    font-weight: 700;
+                    margin-top: 50px;
+                    text-transform: uppercase;
+                    width: 530px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .about-vision-sub {
+                    color: #fff;
+                    font-family: "Aeroport-light";
+                    font-size: 16px;
+                    margin-top: 50px;
+                    width: 700px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .about-vision-img {
+                    width: 80%;
+                    margin: auto;
+                }
+            }
+
+            .about-vison-list-content {
+                position: relative;
+                width: 100%;
+                margin-top: 20px;
+
+                .about-vison-content-item {
+                    float: left;
+                    margin-top: 20px;
+                    padding-left: 50px;
+                    padding-right: 50px;
+                    width: calc(100% / 3);
+
+                    .about-vision-text {
+                        color: #fff;
+                        text-align: center;
+                        font-family: "Aeroport";
+                        font-size: 16px;
+                        font-weight: 700;
+                        margin-top: 20px;
+                        text-transform: uppercase;
+                        width: 100%;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .about-vision-sub-1 {
+                        color: #fff;
+                        font-family: "Aeroport-light";
+                        font-size: 14px;
+                        margin-top: 5px;
+                        width: 90%;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                }
+
+            }
+
+            .pre-arrow {
+                margin-top: -120px;
+                margin-left: 45px;
+
+                &:before {
+                    display: none;
+                }
+
+                img {
+                    width: auto;
+                }
+            }
+
+            .next-arrow {
+                margin-top: -120px;
+                margin-right: 75px;
+
+                &:before {
+                    display: none;
+                }
+
+                img {
+                    width: auto;
+                }
+            }
+        }
     }
 }
 
@@ -493,7 +699,8 @@ export default {
                 font-weight: 600;
                 text-transform: uppercase;
             }
-            .about-text-title{
+
+            .about-text-title {
                 font-family: 'Aeroport-bold';
                 color: #000;
                 margin-bottom: 25px;
@@ -702,14 +909,17 @@ export default {
                 font-weight: 600;
                 text-transform: uppercase;
             }
+
             .about-achievement-1 {
                 margin-bottom: 30px;
             }
-            .about-text-title{
+
+            .about-text-title {
                 font-family: 'Aeroport-bold';
                 color: #000;
                 margin-bottom: 25px;
             }
+
             .about-text {
                 color: #000;
                 text-align: center;
@@ -853,6 +1063,115 @@ export default {
 
             }
 
+        }
+
+        .about-vision-list {
+            background-color: #000;
+            text-align: center;
+            padding-top: 100px;
+            padding-bottom: 0px;
+
+            .about-vision-slider {
+                margin: auto;
+                width: 96%;
+                text-align: center;
+
+                .about-vision-item {
+                    text-align: center;
+                    height: 520px;
+                    .about-vision-text {
+                        color: #fff;
+                        text-align: center;
+                        font-family: "Aeroport";
+                        font-size: 9px;
+                        font-weight: 700;
+                        margin-top: 30px;
+                        text-transform: uppercase;
+                        width: 70%;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .about-vision-sub {
+                        color: #fff;
+                        font-family: "Aeroport-light";
+                        font-size: 9px;
+                        margin-top: 30px;
+                        width: 80%;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .about-vision-img {
+                        width: 80%;
+                        margin: auto;
+                    }
+                }
+
+                .about-vison-list-content {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 10px;
+
+                    .about-vison-content-item {
+                        float: left;
+                        margin-top: 5px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        width: calc(100% / 2);
+
+                        .about-vision-text {
+                            color: #fff;
+                            text-align: center;
+                            font-family: "Aeroport";
+                            font-size: 9px;
+                            font-weight: 700;
+                            margin-top: 5px;
+                            text-transform: uppercase;
+                            width: 100%;
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+
+                        .about-vision-sub-1 {
+                            color: #fff;
+                            font-family: "Aeroport-light";
+                            font-size: 7px;
+                            margin-top: 5px;
+                            width: 90%;
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+                    }
+
+                }
+
+                .pre-arrow {
+                    margin-top: 150px;
+                    margin-left: 100px;
+
+                    &:before {
+                        display: none;
+                    }
+
+                    img {
+                        width: auto;
+                    }
+                }
+
+                .next-arrow {
+                    margin-top: 150px;
+                    margin-right: 100px;
+
+                    &:before {
+                        display: none;
+                    }
+
+                    img {
+                        width: auto;
+                    }
+                }
+            }
         }
     }
 }

@@ -26,7 +26,19 @@
     </div>
 
     <Collections :isMobile="isMobile" />
-    <BannerAbout :isMobile="isMobile" />
+    <!-- <BannerAbout v-if="isMobile" :isMobile="isMobile" /> -->
+    <div class="about-home" v-if="!isMobile">
+      <img class="about-home-img-background" src="/images/home-about.jpg" />
+      <div class="about-home-text">{{ $t('Home_about') }}</div>
+    </div>
+    <div class="about-home" v-if="isMobile">
+      <img class="about-home-img-background" src="/images/home-about-m.jpg" />
+      <div class="abount-home-mobile">
+        <img class="about-home-title-mobile" src="/images/about-text.svg" />
+        <div class="about-home-text-mobile">{{ $t('Home_about') }}</div>
+        <img class="about-home-read-mobile" src="/images/read-now.svg" @click="goAbout()"/>
+      </div>
+    </div>
     <News :isMobile="isMobile" />
     <Store :isMobile="isMobile" />
   </div>
@@ -36,7 +48,7 @@
 import { mapGetters, mapActions } from "vuex"
 // import Banner from "~/components/home/banner.vue"
 import Collections from "~/components/home/collection.vue"
-import BannerAbout from "~/components/home/bannerAbout.vue"
+// import BannerAbout from "~/components/home/bannerAbout.vue"
 import News from "~/components/home/news.vue"
 import Store from "~/components/home/store.vue"
 
@@ -45,7 +57,7 @@ export default {
   components: {
     // Banner,
     Collections,
-    BannerAbout,
+    // BannerAbout,
     News,
     Store,
   },
@@ -80,6 +92,9 @@ export default {
         }
       }
     },
+    goAbout() {
+      this.$router.push({ path: '/house-of-pdh' })
+    }
     // async loadData() {
     //   await this.getListWork()
     //   console.log(this.listWork)
@@ -129,6 +144,25 @@ export default {
   }
 }
 
+.about-home {
+  width: 100%;
+  position: relative;
+
+  .about-home-img-background {
+    width: 100%;
+  }
+
+  .about-home-text {
+    position: absolute;
+    bottom: 29.5%;
+    left: 28.5%;
+    color: #000;
+    font-family: "Aeroport-light";
+    font-size: 16px;
+    width: 388px;
+  }
+}
+
 @media (max-width: 520px) {
   .home-top-video {
     position: relative;
@@ -171,4 +205,34 @@ export default {
       width: 12px;
     }
   }
-}</style>
+
+  .about-home {
+    width: 100%;
+    position: relative;
+
+    .about-home-img-background {
+      width: 100%;
+    }
+
+    .abount-home-mobile {
+      position: absolute;
+      top: 0px;
+      left: calc(50% + 5px);
+      .about-home-title-mobile {
+        width: 146px;
+      }
+      .about-home-text-mobile {
+        color: #000;
+        font-family: "Aeroport-light";
+        font-size: 9px;
+        width: 164px;
+        margin-top: 5px;
+      }
+      .about-home-read-mobile{
+          width: 70px;
+          cursor: pointer;
+      }
+    }
+  }
+}
+</style>

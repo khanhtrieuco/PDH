@@ -1,12 +1,10 @@
 <template>
   <div class="container news-container">
     <img class="news-title-image" src="/images/neck_label_1.png" />
-    <div class="news-category">
+    <!-- <div class="news-category">
       <div v-for="(_cate, idx) in  listItem" :key="idx" @click="choiceCate(_cate)"
       :class="`news-cate-item ${active === _cate.id ? 'news-cate-active' : ''}`">{{ _cate.attributes.name }}, </div>
-      <!-- <div class="news-cate-item">KOLS, </div>
-      <div class="news-cate-item">BLOGS, </div> -->
-    </div>
+    </div> -->
     <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news" v-if=" listNews && listNews.length ">
       <div v-for="( item, index ) in  listNews " :key=" index ">
         <NewItem :isMobile=" isMobile " />
@@ -184,7 +182,7 @@ export default {
   }
 
   .list-news {
-    padding-top: 0px;
+    padding-top: 30px;
 
     .slick-prev {
       width: 45px;

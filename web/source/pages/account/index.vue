@@ -257,6 +257,7 @@ export default {
         if (!this.loggedIn) {
             this.$router.push({ path: '/dang-nhap' })
         }
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
         await this.getAddressByUser(this.profile.id)
         await this.getListOrder({

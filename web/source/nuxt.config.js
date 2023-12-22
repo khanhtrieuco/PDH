@@ -115,7 +115,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Phan Dang Hoang' },
-      { hid: 'og:image', name: 'og:image', content: '/logo.png' },
+      { hid: 'og:image', name: 'og:image', content: '/share.jpg' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [

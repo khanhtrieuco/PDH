@@ -60,7 +60,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="product-detail-data-size-text">Size:</div>
                         <div>
-                            <span class="product-detail-data-size-des">Size guide</span>
+                            <span class="product-detail-data-size-des" @click="showSize = true">Size guide</span>
                             <span class="product-detail-data-size-des" v-if="selectSize" @click="clearChoice">Clear
                                 choice</span>
                         </div>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="product-detail-data-size-text">Size:</div>
-                    <div class="product-detail-data-size-des">Size guide</div>
+                    <div class="product-detail-data-size-des" @click="showSize = true">Size guide</div>
                 </div>
                 <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
                     @onChange="choiceSize"></Select>
@@ -143,6 +143,8 @@
                 <!-- <div class="product-detail-list-btn">More items from collection</div> -->
             </div>
         </div>
+        <Size v-if="showSize" :isMobile="isMobile" @closeUpdate="showSize = false"/>
+        
     </div>
 </template>
 
@@ -151,6 +153,7 @@ import { mapGetters, mapActions } from "vuex"
 import Select from "~/components/common/select.vue"
 import Color from "~/components/common/color.vue"
 import ProductItem from "~/components/product/productItem.vue"
+import Size from "~/components/product/size.vue"
 // import ListMedia from "~/components/product/mediaList.vue"
 import general from "~/mixins/general"
 import ColorMobile from "~/components/common/colorMobile.vue"
@@ -161,7 +164,8 @@ export default {
         ProductItem,
         Select,
         Color,
-        ColorMobile
+        ColorMobile,
+        Size
     },
     mixins: [general],
     data() {
@@ -183,7 +187,8 @@ export default {
             listSizeChoice: [],
             selectColor: null,
             selectSize: null,
-            variant: null
+            variant: null,
+            showSize: false
         }
     },
     computed: {
