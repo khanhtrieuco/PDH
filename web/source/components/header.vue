@@ -517,7 +517,7 @@ export default {
 <style lang="scss">
 .header {
   position: fixed;
-  z-index: 3;
+  z-index: 6;
   bottom: 0px;
   width: 100%;
   height: 67px;

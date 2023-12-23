@@ -145,54 +145,301 @@
             </div>
         </div> -->
         <div class="about-vision-list">
-            <VueSlickCarousel v-bind="setting_vision" class="about-vision-slider">
-                <div class="about-vision-item">
-                    <img class="about-vision-img" src="/images/vs1.jpg" />
-                    <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
-                    <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
-                </div>
-                <div class="about-vision-item">
-                    <img class="about-vision-img" src="/images/vs2.jpg" />
-                    <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
-                    <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
-                </div>
-                <div class="about-vision-item">
-                    <img class="about-vision-img" src="/images/vs3.jpg" />
-                    <div class="about-vison-list-content">
-                        <div class="about-vison-content-item">
-                            <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
-                            <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
+            <div class="inside-slider ">
+                <div class="slide-to-move">
+                    <div class="slider-content">
+                        <div class="slide chance " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
+                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
+                                VISION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 0 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl1.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
+                            </div>
                         </div>
-                        <div class="about-vison-content-item">
-                            <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
-                            <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
+                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
+                                MISSION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 1 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl2.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
+                            </div>
                         </div>
-                        <div class="about-vison-content-item">
-                            <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
-                            <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
+                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word "
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
+                                CORE VALUE</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 2 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl3.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
+                                <div class="about-vison-list-content">
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="about-vison-content-item">
-                            <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
-                            <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
+                        <div class="slide chance " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
+                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
+                                VISION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 3 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl1.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
+                            </div>
                         </div>
-                        <div class="about-vison-content-item">
-                            <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
-                            <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
+                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
+                                MISSION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 4 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl2.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
+                            </div>
+                        </div>
+                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word "
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
+                                CORE VALUE</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 5 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl3.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
+                                <div class="about-vison-list-content">
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide chance " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
+                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
+                                VISION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 6 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl1.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
+                            </div>
+                        </div>
+                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
+                                MISSION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 7 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl2.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
+                            </div>
+                        </div>
+                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word "
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
+                                CORE VALUE</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 8 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl3.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
+                                <div class="about-vison-list-content">
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide chance " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
+                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
+                                VISION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 9 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl1.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
+                            </div>
+                        </div>
+                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word"
+                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
+                                MISSION</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 10 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl2.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
+                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
+                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
+                            </div>
+                        </div>
+                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
+                            <h3 class="text text_huge text_white slide-word "
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
+                                CORE VALUE</h3>
+                            <div class="slide-image-wrapper"
+                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
+                                <img :class="`about-vision-img ${index === 11 ? 'mask-in-next' : 'mask-out-next'}`"
+                                    src="/images/avl3.jpg" />
+                            </div>
+                            <div class="slide-text-block"
+                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
+                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
+                                <div class="about-vison-list-content">
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
+                                    </div>
+                                    <div class="about-vison-content-item">
+                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
+                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-                <template slot="prevArrow">
-                    <div class="pre-arrow">
-                        <img src="/images/left-s.svg" />
-                    </div>
-                </template>
-                <template slot="nextArrow">
-                    <div class="next-arrow">
-                        <img src="/images/right-s.svg" />
-                    </div>
-                </template>
-            </VueSlickCarousel>
+                <div class="slide-hidder-left "></div>
+                <div class="slider_nav in">
+                    <img class="slider_nav_prev" src="/images/left-s.svg" @click="onPrev()" />
+                    <img class="slider_nav_next" src="/images/right-s.svg" @click="onNext()" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -214,7 +461,6 @@ export default {
                 "dots": true,
                 "autoplay": false,
                 "autoplaySpeed": 300000,
-                // "arrows": this.isMobile ? false : true,
                 "edgeFriction": 0.35,
                 "infinite": true,
                 "speed": 500,
@@ -228,33 +474,27 @@ export default {
                 "arrows": true,
                 "edgeFriction": 0.35,
                 "infinite": true,
-                "speed": 500,
+                "speed": 900,
                 "slidesToShow": 1,
                 "slidesToScroll": 1
-            }
+            },
+            position: 1600,
+            index: 6
         }
     },
-    // watch: {
-    //     '$i18n.locale': function (val) {
-    //         if (val) {
-    //             this.breadcrumb = [
-    //                 {
-    //                     text: this.$t('Home'),
-    //                     href: '/'
-    //                 },
-    //                 {
-    //                     text: this.$t('About'),
-    //                     active: true
-    //                 }
-    //             ]
-    //         }
-    //     },
-    // },
     async mounted() {
         if (!this.$route.hash) {
             window.scrollTo({ top: 0, behavior: 'smooth' })
         }
         this.isMobile = this.checkMobile()
+        if (this.isMobile) {
+            this.position = 380
+        }
+        let width = document.body.clientWidth
+        console.log(width)
+        if(width < 1600) {
+            this.position = 1200
+        }
         // setInterval(() => {
         //     this.tab = this.tab + 1
         //     if (this.tab >= 4) {
@@ -271,20 +511,187 @@ export default {
                     return false
                 }
             }
+        },
+        onNext() {
+            this.index = this.index + 1
+            if (this.index === 12) {
+                this.index = 6
+            }
+        },
+        onPrev() {
+            this.index = this.index - 1
+            if (this.index === -1) {
+                this.index = 7
+            }
         }
     }
-    // methods: {
-    //   ...mapActions({
-    //     getListWork: "work/getListWork"
-    //   }),
-    //   async loadData() {
-    //     await this.getListWork()
-    //     console.log(this.listWork)
-    //   }
-    // }
 }
 </script>
 <style lang="scss">
+.about-vision-list {
+    background-color: #000;
+    text-align: center;
+    padding-top: 150px;
+    padding-bottom: 20px;
+
+    .inside-slider {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: auto;
+        max-width: 1600px;
+        overflow: hidden;
+        position: relative;
+        transition: all 1s;
+        height: 980px;
+
+        .slide-to-move {
+            height: 100%;
+            position: relative;
+            width: 100%;
+
+            .slider-content {
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                justify-content: space-between;
+                width: 100%;
+
+                .slide {
+                    flex-shrink: 0;
+                    height: 100%;
+                    position: relative;
+                    width: 100%;
+
+                    .slide-word {
+                        left: 50%;
+                        opacity: 0;
+                        position: absolute;
+                        text-align: center;
+                        transform: translateX(-50%);
+                        z-index: 3;
+                        color: #FFF;
+                        font-family: "Aeroport";
+                        font-size: 108px;
+                        font-weight: 500;
+                        line-height: 140%;
+                        text-transform: uppercase;
+                        top: 205px;
+                    }
+
+                    .slide-text-block {
+                        width: 90%;
+                        margin-left: 18px;
+                        position: absolute;
+                        top: 590px;
+                        white-space: pre-wrap;
+                        z-index: 3;
+                        transform: translate(-50%);
+
+                        .about-vision-text {
+                            color: #fff;
+                            text-align: center;
+                            font-family: "Aeroport";
+                            font-size: 16px;
+                            font-weight: 700;
+                            margin-top: 50px;
+                            text-transform: uppercase;
+                            width: 530px;
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+
+                        .about-vision-sub {
+                            color: #fff;
+                            font-family: "Aeroport-light";
+                            font-size: 16px;
+                            margin-top: 50px;
+                            width: 700px;
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+
+                        .about-vison-list-content {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 20px;
+
+                            .about-vison-content-item {
+                                float: left;
+                                margin-top: 20px;
+                                padding-left: 50px;
+                                padding-right: 50px;
+                                width: calc(100% / 3);
+
+                                .about-vision-text {
+                                    color: #fff;
+                                    text-align: center;
+                                    font-family: "Aeroport";
+                                    font-size: 16px;
+                                    font-weight: 700;
+                                    margin-top: 20px;
+                                    text-transform: uppercase;
+                                    width: 100%;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                }
+
+                                .about-vision-sub-1 {
+                                    color: #fff;
+                                    font-family: "Aeroport-light";
+                                    font-size: 14px;
+                                    margin-top: 5px;
+                                    width: 90%;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                }
+                            }
+
+                        }
+                    }
+
+                    .slide-image-wrapper {
+                        overflow: hidden;
+                        position: relative;
+
+                        img {
+                            width: 65%;
+                        }
+
+                        .mask-out-next {
+                            animation: maskOutNext 2s forwards;
+                        }
+
+                        .mask-in-next {
+                            animation: maskInNext 2s forwards;
+                        }
+                    }
+                }
+            }
+        }
+
+        .slider_nav {
+            .slider_nav_prev {
+                position: absolute;
+                left: 0;
+                top: calc(50% - 200px);
+                transform: translateY(-50%);
+                cursor: pointer;
+                z-index: 4;
+            }
+
+            .slider_nav_next {
+                position: absolute;
+                right: 0;
+                top: calc(50% - 200px);
+                transform: translateY(-50%);
+                cursor: pointer;
+                z-index: 4;
+            }
+        }
+    }
+}
+
 .about-content {
     .about-banner {
         position: relative;
@@ -533,114 +940,173 @@ export default {
         }
     }
 
+}
+
+@media (min-width: 1200px) and (max-width: 1600px) {
     .about-vision-list {
         background-color: #000;
         text-align: center;
-        padding-top: 20px;
+        padding-top: 150px;
         padding-bottom: 20px;
 
-        .about-vision-slider {
+        .inside-slider {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             margin: auto;
-            width: 90%;
-            text-align: center;
+            max-width: 1200px;
+            overflow: hidden;
+            position: relative;
+            transition: all 1s;
+            height: 810px;
 
-            .about-vision-item {
-                text-align: center;
-
-                .about-vision-text {
-                    color: #fff;
-                    text-align: center;
-                    font-family: "Aeroport";
-                    font-size: 16px;
-                    font-weight: 700;
-                    margin-top: 50px;
-                    text-transform: uppercase;
-                    width: 530px;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .about-vision-sub {
-                    color: #fff;
-                    font-family: "Aeroport-light";
-                    font-size: 16px;
-                    margin-top: 50px;
-                    width: 700px;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .about-vision-img {
-                    width: 80%;
-                    margin: auto;
-                }
-            }
-
-            .about-vison-list-content {
+            .slide-to-move {
+                height: 100%;
                 position: relative;
                 width: 100%;
-                margin-top: 20px;
 
-                .about-vison-content-item {
-                    float: left;
-                    margin-top: 20px;
-                    padding-left: 50px;
-                    padding-right: 50px;
-                    width: calc(100% / 3);
+                .slider-content {
+                    display: flex;
+                    flex-direction: row;
+                    height: 100%;
+                    justify-content: space-between;
+                    width: 100%;
 
-                    .about-vision-text {
-                        color: #fff;
-                        text-align: center;
-                        font-family: "Aeroport";
-                        font-size: 16px;
-                        font-weight: 700;
-                        margin-top: 20px;
-                        text-transform: uppercase;
+                    .slide {
+                        flex-shrink: 0;
+                        height: 100%;
+                        position: relative;
                         width: 100%;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
 
-                    .about-vision-sub-1 {
-                        color: #fff;
-                        font-family: "Aeroport-light";
-                        font-size: 14px;
-                        margin-top: 5px;
-                        width: 90%;
-                        margin-left: auto;
-                        margin-right: auto;
+                        .slide-word {
+                            left: 50%;
+                            opacity: 0;
+                            position: absolute;
+                            text-align: center;
+                            transform: translateX(-50%);
+                            z-index: 3;
+                            color: #FFF;
+                            font-family: "Aeroport";
+                            font-size: 90px;
+                            font-weight: 500;
+                            line-height: 140%;
+                            text-transform: uppercase;
+                            top: 140px;
+                        }
+
+                        .slide-text-block {
+                            width: 90%;
+                            margin-left: 18px;
+                            position: absolute;
+                            top: 440px;
+                            white-space: pre-wrap;
+                            z-index: 3;
+                            transform: translate(-50%);
+
+                            .about-vision-text {
+                                color: #fff;
+                                text-align: center;
+                                font-family: "Aeroport";
+                                font-size: 16px;
+                                font-weight: 700;
+                                margin-top: 50px;
+                                text-transform: uppercase;
+                                width: 530px;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+
+                            .about-vision-sub {
+                                color: #fff;
+                                font-family: "Aeroport-light";
+                                font-size: 16px;
+                                margin-top: 50px;
+                                width: 700px;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+
+                            .about-vison-list-content {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 20px;
+
+                                .about-vison-content-item {
+                                    float: left;
+                                    margin-top: 20px;
+                                    padding-left: 50px;
+                                    padding-right: 50px;
+                                    width: calc(100% / 3);
+
+                                    .about-vision-text {
+                                        color: #fff;
+                                        text-align: center;
+                                        font-family: "Aeroport";
+                                        font-size: 16px;
+                                        font-weight: 700;
+                                        margin-top: 20px;
+                                        text-transform: uppercase;
+                                        width: 100%;
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                    }
+
+                                    .about-vision-sub-1 {
+                                        color: #fff;
+                                        font-family: "Aeroport-light";
+                                        font-size: 14px;
+                                        margin-top: 5px;
+                                        width: 90%;
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        .slide-image-wrapper {
+                            overflow: hidden;
+                            position: relative;
+
+                            img {
+                                width: 65%;
+                            }
+
+                            .mask-out-next {
+                                animation: maskOutNext 2s forwards;
+                            }
+
+                            .mask-in-next {
+                                animation: maskInNext 2s forwards;
+                            }
+                        }
                     }
                 }
-
             }
 
-            .pre-arrow {
-                margin-top: -120px;
-                margin-left: 45px;
-
-                &:before {
-                    display: none;
+            .slider_nav {
+                .slider_nav_prev {
+                    position: absolute;
+                    left: 0;
+                    top: calc(50% - 200px);
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    z-index: 4;
                 }
 
-                img {
-                    width: auto;
-                }
-            }
-
-            .next-arrow {
-                margin-top: -120px;
-                margin-right: 75px;
-
-                &:before {
-                    display: none;
-                }
-
-                img {
-                    width: auto;
+                .slider_nav_next {
+                    position: absolute;
+                    right: 0;
+                    top: calc(50% - 200px);
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    z-index: 4;
                 }
             }
         }
     }
+
 }
 
 @media (max-width: 820px) {
@@ -849,6 +1315,174 @@ export default {
 
             }
 
+        }
+    }
+
+    .about-vision-list {
+        background-color: #000;
+        text-align: center;
+        padding-top: 100px;
+        padding-bottom: 20px;
+
+        .inside-slider {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: auto;
+            max-width: 380px;
+            overflow: hidden;
+            position: relative;
+            transition: all 1s;
+            height: 500px;
+
+            .slide-to-move {
+                height: 100%;
+                position: relative;
+                width: 100%;
+
+                .slider-content {
+                    display: flex;
+                    flex-direction: row;
+                    height: 100%;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    .slide {
+                        flex-shrink: 0;
+                        height: 100%;
+                        position: relative;
+                        width: 100%;
+
+                        .slide-word {
+                            left: 50%;
+                            opacity: 0;
+                            position: absolute;
+                            text-align: center;
+                            transform: translateX(-50%);
+                            z-index: 3;
+                            color: #FFF;
+                            font-family: "Aeroport";
+                            font-size: 32px;
+                            font-weight: 500;
+                            line-height: 140%;
+                            text-transform: uppercase;
+                            top: 57px;
+                        }
+
+                        .slide-text-block {
+                            width: 90%;
+                            margin-left: 0px;
+                            position: absolute;
+                            top: 200px;
+                            white-space: pre-wrap;
+                            z-index: 3;
+                            transform: translate(-50%);
+
+                            .about-vision-text {
+                                color: #fff;
+                                text-align: center;
+                                font-family: "Aeroport";
+                                font-size: 9px;
+                                font-weight: 700;
+                                margin-top: 0px;
+                                text-transform: uppercase;
+                                width: 90%;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+
+                            .about-vision-sub {
+                                color: #fff;
+                                font-family: "Aeroport-light";
+                                font-size: 9px;
+                                margin-top: 0px;
+                                width: 90%;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+
+                            .about-vison-list-content {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 0px;
+
+                                .about-vison-content-item {
+                                    float: left;
+                                    margin-top: 5px;
+                                    padding-left: 0px;
+                                    padding-right: 0px;
+                                    width: calc(100% / 2 - 2px);
+
+                                    .about-vision-text {
+                                        color: #fff;
+                                        text-align: center;
+                                        font-family: "Aeroport";
+                                        font-size: 9px;
+                                        font-weight: 700;
+                                        margin-top: 5px;
+                                        text-transform: uppercase;
+                                        width: 100%;
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                    }
+
+                                    .about-vision-sub-1 {
+                                        color: #fff;
+                                        font-family: "Aeroport-light";
+                                        font-size: 7px;
+                                        margin-top: 0px;
+                                        width: 90%;
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                        height: 35px;
+                                        margin-top: -20px;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        .slide-image-wrapper {
+                            overflow: hidden;
+                            position: relative;
+
+                            img {
+                                width: 80%;
+                            }
+
+                            .mask-out-next {
+                                animation: maskOutNext 2s forwards;
+                            }
+
+                            .mask-in-next {
+                                animation: maskInNext 2s forwards;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .slider_nav {
+                .slider_nav_prev {
+                    position: absolute;
+                    left: 80px;
+                    top: auto;
+                    bottom: 50px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    z-index: 4;
+                }
+
+                .slider_nav_next {
+                    position: absolute;
+                    right: 80px;
+                    top: auto;
+                    bottom: 50px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    z-index: 4;
+                }
+            }
         }
     }
 }
@@ -1064,112 +1698,171 @@ export default {
             }
 
         }
+    }
 
-        .about-vision-list {
-            background-color: #000;
-            text-align: center;
-            padding-top: 100px;
-            padding-bottom: 0px;
+    .about-vision-list {
+        background-color: #000;
+        text-align: center;
+        padding-top: 100px;
+        padding-bottom: 20px;
 
-            .about-vision-slider {
-                margin: auto;
-                width: 96%;
-                text-align: center;
+        .inside-slider {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: auto;
+            max-width: 380px;
+            overflow: hidden;
+            position: relative;
+            transition: all 1s;
+            height: 500px;
 
-                .about-vision-item {
-                    text-align: center;
-                    height: 520px;
-                    .about-vision-text {
-                        color: #fff;
-                        text-align: center;
-                        font-family: "Aeroport";
-                        font-size: 9px;
-                        font-weight: 700;
-                        margin-top: 30px;
-                        text-transform: uppercase;
-                        width: 70%;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
+            .slide-to-move {
+                height: 100%;
+                position: relative;
+                width: 100%;
 
-                    .about-vision-sub {
-                        color: #fff;
-                        font-family: "Aeroport-light";
-                        font-size: 9px;
-                        margin-top: 30px;
-                        width: 80%;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-
-                    .about-vision-img {
-                        width: 80%;
-                        margin: auto;
-                    }
-                }
-
-                .about-vison-list-content {
-                    position: relative;
+                .slider-content {
+                    display: flex;
+                    flex-direction: row;
+                    height: 100%;
+                    justify-content: space-between;
                     width: 100%;
-                    margin-top: 10px;
 
-                    .about-vison-content-item {
-                        float: left;
-                        margin-top: 5px;
-                        padding-left: 5px;
-                        padding-right: 5px;
-                        width: calc(100% / 2);
+                    .slide {
+                        flex-shrink: 0;
+                        height: 100%;
+                        position: relative;
+                        width: 100%;
 
-                        .about-vision-text {
-                            color: #fff;
+                        .slide-word {
+                            left: 50%;
+                            opacity: 0;
+                            position: absolute;
                             text-align: center;
+                            transform: translateX(-50%);
+                            z-index: 3;
+                            color: #FFF;
                             font-family: "Aeroport";
-                            font-size: 9px;
-                            font-weight: 700;
-                            margin-top: 5px;
+                            font-size: 32px;
+                            font-weight: 500;
+                            line-height: 140%;
                             text-transform: uppercase;
-                            width: 100%;
-                            margin-left: auto;
-                            margin-right: auto;
+                            top: 57px;
                         }
 
-                        .about-vision-sub-1 {
-                            color: #fff;
-                            font-family: "Aeroport-light";
-                            font-size: 7px;
-                            margin-top: 5px;
+                        .slide-text-block {
                             width: 90%;
-                            margin-left: auto;
-                            margin-right: auto;
+                            margin-left: 0px;
+                            position: absolute;
+                            top: 200px;
+                            white-space: pre-wrap;
+                            z-index: 3;
+                            transform: translate(-50%);
+
+                            .about-vision-text {
+                                color: #fff;
+                                text-align: center;
+                                font-family: "Aeroport";
+                                font-size: 9px;
+                                font-weight: 700;
+                                margin-top: 0px;
+                                text-transform: uppercase;
+                                width: 90%;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+
+                            .about-vision-sub {
+                                color: #fff;
+                                font-family: "Aeroport-light";
+                                font-size: 9px;
+                                margin-top: 0px;
+                                width: 90%;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+
+                            .about-vison-list-content {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 0px;
+
+                                .about-vison-content-item {
+                                    float: left;
+                                    margin-top: 5px;
+                                    padding-left: 0px;
+                                    padding-right: 0px;
+                                    width: calc(100% / 2 - 2px);
+
+                                    .about-vision-text {
+                                        color: #fff;
+                                        text-align: center;
+                                        font-family: "Aeroport";
+                                        font-size: 9px;
+                                        font-weight: 700;
+                                        margin-top: 5px;
+                                        text-transform: uppercase;
+                                        width: 100%;
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                    }
+
+                                    .about-vision-sub-1 {
+                                        color: #fff;
+                                        font-family: "Aeroport-light";
+                                        font-size: 7px;
+                                        margin-top: 0px;
+                                        width: 90%;
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                        height: 35px;
+                                        margin-top: -20px;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        .slide-image-wrapper {
+                            overflow: hidden;
+                            position: relative;
+
+                            img {
+                                width: 80%;
+                            }
+
+                            .mask-out-next {
+                                animation: maskOutNext 2s forwards;
+                            }
+
+                            .mask-in-next {
+                                animation: maskInNext 2s forwards;
+                            }
                         }
                     }
+                }
+            }
 
+            .slider_nav {
+                .slider_nav_prev {
+                    position: absolute;
+                    left: 80px;
+                    top: auto;
+                    bottom: 50px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    z-index: 4;
                 }
 
-                .pre-arrow {
-                    margin-top: 150px;
-                    margin-left: 100px;
-
-                    &:before {
-                        display: none;
-                    }
-
-                    img {
-                        width: auto;
-                    }
-                }
-
-                .next-arrow {
-                    margin-top: 150px;
-                    margin-right: 100px;
-
-                    &:before {
-                        display: none;
-                    }
-
-                    img {
-                        width: auto;
-                    }
+                .slider_nav_next {
+                    position: absolute;
+                    right: 80px;
+                    top: auto;
+                    bottom: 50px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    z-index: 4;
                 }
             }
         }

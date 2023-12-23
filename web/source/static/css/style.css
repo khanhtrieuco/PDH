@@ -67,6 +67,40 @@
   }
 }
 
+@keyframes maskInNext {
+  0% {
+    /* -webkit-clip-path: polygon(100% 0,100% 0,100% 100%,100% 100%); */
+    /* clip-path: polygon(100% 0,100% 0,100% 100%,100% 100%); */
+    -webkit-clip-path: ellipse(50% 50% at 50% 50%);
+    clip-path: ellipse(50% 50% at 50% 50%);
+    transform: scale(1.6);
+  }
+
+  100% {
+    -webkit-clip-path: ellipse(50% 50% at 50% 50%);
+    clip-path: ellipse(50% 50% at 50% 50%);
+    transform: scale(1);
+  }
+}
+
+@keyframes maskOutNext {
+  0% {
+    /* -webkit-clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+    clip-path: polygon(0 0,100% 0,100% 100%,0 100%); */
+    -webkit-clip-path: ellipse(50% 50% at 50% 50%);
+    clip-path: ellipse(50% 50% at 50% 50%);
+    transform: scale(1);
+  }
+
+  100% {
+    /* -webkit-clip-path: polygon(100% 0,100% 0,100% 100%,100% 100%);
+    clip-path: polygon(100% 0,100% 0,100% 100%,100% 100%); */
+    -webkit-clip-path: ellipse(50% 32% at 50% 50%);
+    clip-path: ellipse(50% 32% at 50% 50%);
+    transform: scale(1.6);
+  }
+}
+
 @media (max-width: 520px) {
   @keyframes bounce-in {
     0% {
