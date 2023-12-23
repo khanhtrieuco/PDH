@@ -30,6 +30,8 @@
     <div class="about-home" v-if="!isMobile">
       <img class="about-home-img-background" src="/images/home-about.jpg" />
       <div class="about-home-text">{{ $t('Home_about') }}</div>
+      <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()"/>
+
     </div>
     <div class="about-home" v-if="isMobile">
       <img class="about-home-img-background" src="/images/home-about-m.jpg" />
@@ -160,6 +162,13 @@ export default {
     font-family: "Aeroport-light";
     font-size: 16px;
     width: 388px;
+  }
+  .about-home-read{
+    position: absolute;
+    right: 30px;
+    top: 260px;
+    width: 100px;
+    cursor: pointer;
   }
 }
 
