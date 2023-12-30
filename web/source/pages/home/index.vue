@@ -153,7 +153,6 @@ export default {
   .about-home-img-background {
     width: 100%;
   }
-
   .about-home-text {
     position: absolute;
     bottom: 29.5%;

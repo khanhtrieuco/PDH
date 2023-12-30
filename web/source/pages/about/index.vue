@@ -151,16 +151,17 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 0 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl1.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -168,16 +169,17 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 1 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl2.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -185,16 +187,17 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 2 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl3.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -222,16 +225,17 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 3 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl1.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -239,16 +243,17 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 4 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl2.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -256,16 +261,17 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 5 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl3.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -293,16 +299,17 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 6 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl1.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -310,16 +317,17 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 7 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl2.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -327,16 +335,17 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 8 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl3.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -364,16 +373,17 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 9 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl1.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -381,16 +391,17 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 10 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl2.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -398,16 +409,17 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
                                 <img :class="`about-vision-img ${index === 11 ? 'mask-in-next' : 'mask-out-next'}`"
                                     src="/images/avl3.jpg" />
+                                <img class="about-vision-img-mask" src="/images/VISION-07.png" />
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -467,18 +479,7 @@ export default {
                 "slidesToShow": 1,
                 "slidesToScroll": 1
             },
-            setting_vision: {
-                "dots": false,
-                "autoplay": false,
-                "autoplaySpeed": 300000,
-                "arrows": true,
-                "edgeFriction": 0.35,
-                "infinite": true,
-                "speed": 900,
-                "slidesToShow": 1,
-                "slidesToScroll": 1
-            },
-            position: 1600,
+            position: 1400,
             index: 6
         }
     },
@@ -487,13 +488,13 @@ export default {
             window.scrollTo({ top: 0, behavior: 'smooth' })
         }
         this.isMobile = this.checkMobile()
+
+        let width = document.body.clientWidth
+        if (width < 1400) {
+            this.position = 1200
+        }
         if (this.isMobile) {
             this.position = 380
-        }
-        let width = document.body.clientWidth
-        console.log(width)
-        if(width < 1600) {
-            this.position = 1200
         }
         // setInterval(() => {
         //     this.tab = this.tab + 1
@@ -539,8 +540,8 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         margin: auto;
-        max-width: 1600px;
-        overflow: hidden;
+        max-width: 1400px;
+        // overflow: hidden;
         position: relative;
         transition: all 1s;
         height: 980px;
@@ -576,7 +577,7 @@ export default {
                         font-weight: 500;
                         line-height: 140%;
                         text-transform: uppercase;
-                        top: 205px;
+                        top: 180px;
                     }
 
                     .slide-text-block {
@@ -621,7 +622,7 @@ export default {
                                 margin-top: 20px;
                                 padding-left: 50px;
                                 padding-right: 50px;
-                                width: calc(100% / 3);
+                                width: calc(100% / 3 - 4px);
 
                                 .about-vision-text {
                                     color: #fff;
@@ -654,8 +655,16 @@ export default {
                         overflow: hidden;
                         position: relative;
 
-                        img {
+                        .about-vision-img {
                             width: 65%;
+                        }
+
+                        .about-vision-img-mask {
+                            width: 100%;
+                            position: absolute;
+                            top: calc(65%);
+                            left: 50%;
+                            transform: translate(-50%, -50%);
                         }
 
                         .mask-out-next {
@@ -674,7 +683,7 @@ export default {
             .slider_nav_prev {
                 position: absolute;
                 left: 0;
-                top: calc(50% - 200px);
+                top: calc(50% - 230px);
                 transform: translateY(-50%);
                 cursor: pointer;
                 z-index: 4;
@@ -683,7 +692,7 @@ export default {
             .slider_nav_next {
                 position: absolute;
                 right: 0;
-                top: calc(50% - 200px);
+                top: calc(50% - 230px);
                 transform: translateY(-50%);
                 cursor: pointer;
                 z-index: 4;
@@ -955,7 +964,7 @@ export default {
             justify-content: space-between;
             margin: auto;
             max-width: 1200px;
-            overflow: hidden;
+            // overflow: hidden;
             position: relative;
             transition: all 1s;
             height: 810px;
@@ -1036,7 +1045,7 @@ export default {
                                     margin-top: 20px;
                                     padding-left: 50px;
                                     padding-right: 50px;
-                                    width: calc(100% / 3);
+                                    width: calc(100% / 3 - 4px);
 
                                     .about-vision-text {
                                         color: #fff;
@@ -1069,8 +1078,16 @@ export default {
                             overflow: hidden;
                             position: relative;
 
-                            img {
+                            .about-vision-img {
                                 width: 65%;
+                            }
+
+                            .about-vision-img-mask {
+                                width: 100%;
+                                position: absolute;
+                                top: calc(65%);
+                                left: 50%;
+                                transform: translate(-50%, -50%);
                             }
 
                             .mask-out-next {
@@ -1330,7 +1347,7 @@ export default {
             justify-content: space-between;
             margin: auto;
             max-width: 380px;
-            overflow: hidden;
+            // overflow: hidden;
             position: relative;
             transition: all 1s;
             height: 500px;
@@ -1445,9 +1462,19 @@ export default {
                         .slide-image-wrapper {
                             overflow: hidden;
                             position: relative;
+                            background-color: #000;
+                            padding: 2px;
 
-                            img {
-                                width: 80%;
+                            .about-vision-img {
+                                width: 70%;
+                            }
+
+                            .about-vision-img-mask {
+                                width: 100%;
+                                position: absolute;
+                                top: calc(65%);
+                                left: 50%;
+                                transform: translate(-50%, -50%);
                             }
 
                             .mask-out-next {
@@ -1712,7 +1739,7 @@ export default {
             justify-content: space-between;
             margin: auto;
             max-width: 380px;
-            overflow: hidden;
+            // overflow: hidden;
             position: relative;
             transition: all 1s;
             height: 500px;

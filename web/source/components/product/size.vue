@@ -80,6 +80,11 @@ export default {
     .popup-content {
         position: relative;
 
+        .size-content-img {
+            max-width: 100%;
+            width: 1024px;
+        }
+
         .size-close {
             position: absolute;
             right: 30px;
