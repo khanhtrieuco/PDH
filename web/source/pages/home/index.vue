@@ -27,18 +27,24 @@
 
     <Collections :isMobile="isMobile" />
     <!-- <BannerAbout v-if="isMobile" :isMobile="isMobile" /> -->
-    <div class="about-home" v-if="!isMobile">
-      <img class="about-home-img-background" src="/images/home-about.jpg" />
-      <div class="about-home-text">{{ $t('Home_about') }}</div>
-      <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()"/>
-
+    <div class="about-home" style="background-image: url('/images/home_bg_about.jpg');" v-if="!isMobile">
+      <div class="about-home-content">
+        <img class="about-home-img-model" src="/images/home-about-model.jpg" />
+        <div class="about-home-text-content">
+          <img class="about-home-img-text" src="/images/home-about-text1.svg" />
+          <div class="about-home-text">{{ $t('Home_about') }}</div>
+          <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()" />
+        </div>
+      </div>
     </div>
-    <div class="about-home" v-if="isMobile">
-      <img class="about-home-img-background" src="/images/home-about-m.jpg" />
-      <div class="abount-home-mobile">
-        <img class="about-home-title-mobile" src="/images/about-text.svg" />
-        <div class="about-home-text-mobile">{{ $t('Home_about') }}</div>
-        <img class="about-home-read-mobile" src="/images/read-now.svg" @click="goAbout()"/>
+    <div class="about-home" style="background-image: url('/images/home_bg_aboutm.jpg');" v-if="isMobile">
+      <div class="about-home-img-left">
+        <img class="about-home-img-mobile" src="/images/home-about-modelm.jpg" />
+      </div>
+      <div class="about-home-right-content">
+        <img class="about-home-img-text" src="/images/about-text.svg" />
+        <div class="about-home-text">{{ $t('Home_about') }}</div>
+        <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()" />
       </div>
     </div>
     <News :isMobile="isMobile" />
@@ -80,6 +86,7 @@ export default {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     this.isMobile = this.checkMobile()
     this.getBannerTop()
+    setTimeout(()=>{this.animateOnScroll()},300)
   },
   methods: {
     ...mapActions({
@@ -96,6 +103,99 @@ export default {
     },
     goAbout() {
       this.$router.push({ path: '/house-of-pdh' })
+    },
+    animateOnScroll() {
+      console.log(this.isMobile)
+      if (this.isMobile) {
+        this.$gsap.fromTo('.about-home-img-mobile',
+          { x: -200, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 4,
+            ease: 'Power1.easeInOut',
+            scrollTrigger: {
+              trigger: '.collection-container',
+              start: 'top top',
+              end: '+=300',
+              scrub: true
+            }
+          })
+        this.$gsap.fromTo('.about-home-img-text',
+          { x: 200, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 4,
+            ease: 'Power1.easeInOut',
+            scrollTrigger: {
+              trigger: '.collection-container',
+              start: 'top top',
+              end: '+=300',
+              scrub: true
+            }
+          })
+        this.$gsap.fromTo('.about-home-text',
+          { y: 200, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 4,
+            ease: 'Power1.easeInOut',
+            scrollTrigger: {
+              trigger: '.collection-container',
+              start: 'top top',
+              end: '+=300',
+              scrub: true
+            }
+          })
+      } else {
+        this.$gsap.fromTo('.about-home-img-model',
+          { x: -400, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 4,
+            ease: 'Power1.easeInOut',
+            scrollTrigger: {
+              trigger: '.about-home',
+              // pin: true,
+              start: 'top top',
+              end: '+=600',
+              scrub: true
+            }
+          })
+        this.$gsap.fromTo('.about-home-img-text',
+          { x: 400, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 4,
+            ease: 'Power1.easeInOut',
+            scrollTrigger: {
+              trigger: '.about-home',
+              // pin: true,
+              start: 'top top',
+              end: '+=600',
+              scrub: true
+            }
+          })
+        this.$gsap.fromTo('.about-home-text',
+          { y: 300, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 4,
+            ease: 'Power1.easeInOut',
+            scrollTrigger: {
+              trigger: '.about-home',
+              // pin: true,
+              start: 'top top',
+              end: '+=600',
+              scrub: true
+            }
+          })
+      }
     }
     // async loadData() {
     //   await this.getListWork()
@@ -148,26 +248,60 @@ export default {
 
 .about-home {
   width: 100%;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 160px 0px;
+  overflow: hidden;
 
-  .about-home-img-background {
-    width: 100%;
-  }
-  .about-home-text {
-    position: absolute;
-    bottom: 29.5%;
-    left: 28.5%;
-    color: #000;
-    font-family: "Aeroport-light";
-    font-size: 16px;
-    width: 388px;
-  }
-  .about-home-read{
-    position: absolute;
-    right: 30px;
-    top: 260px;
-    width: 100px;
-    cursor: pointer;
+  .about-home-content {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin-left: -30px;
+    padding: 0px 60px;
+
+    .about-home-img-model {
+      display: inline-block;
+      height: 38vh;
+      min-height: 370px;
+      max-height: 420px;
+      margin-right: 50px;
+      max-width: 22%;
+    }
+
+    .about-home-text-content {
+      display: inline-block;
+      position: relative;
+      width: 72%;
+
+      .about-home-img-text {
+        height: 38vh;
+        max-height: 420px;
+        min-height: 370px;
+      }
+
+      .about-home-text {
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        color: #000;
+        text-align: left;
+        font-family: "Aeroport-light";
+        font-size: 16px;
+        width: 388px;
+      }
+
+      .about-home-read {
+        position: absolute;
+        right: -50px;
+        top: 0px;
+        width: 100px;
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -216,29 +350,45 @@ export default {
 
   .about-home {
     width: 100%;
-    position: relative;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    padding: 30px 0px;
+    overflow: hidden;
 
-    .about-home-img-background {
-      width: 100%;
+    .about-home-img-left {
+      width: 50%;
+      float: left;
+      text-align: right;
+
+      .about-home-img-mobile {
+        height: 240px;
+        margin-right: 10px;
+      }
     }
 
-    .abount-home-mobile {
-      position: absolute;
-      top: 0px;
-      left: calc(50% + 5px);
-      .about-home-title-mobile {
-        width: 146px;
-      }
-      .about-home-text-mobile {
+    .about-home-right-content {
+      position: relative;
+      height: 240px;
+      width: 50%;
+      float: right;
+      padding-left: 10px;
+      .about-home-text{
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
         color: #000;
+        text-align: left;
         font-family: "Aeroport-light";
         font-size: 9px;
-        width: 164px;
-        margin-top: 5px;
+        width: 160px;
       }
-      .about-home-read-mobile{
-          width: 70px;
-          cursor: pointer;
+      .about-home-read{
+        position: absolute;
+        bottom: -5px;
+        left: 10px;
+        width: 75px;
       }
     }
   }

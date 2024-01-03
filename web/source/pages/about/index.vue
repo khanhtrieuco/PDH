@@ -541,7 +541,7 @@ export default {
         justify-content: space-between;
         margin: auto;
         max-width: 1400px;
-        // overflow: hidden;
+        overflow: hidden;
         position: relative;
         transition: all 1s;
         height: 980px;
@@ -964,7 +964,7 @@ export default {
             justify-content: space-between;
             margin: auto;
             max-width: 1200px;
-            // overflow: hidden;
+            overflow: hidden;
             position: relative;
             transition: all 1s;
             height: 810px;
@@ -1347,7 +1347,7 @@ export default {
             justify-content: space-between;
             margin: auto;
             max-width: 380px;
-            // overflow: hidden;
+            overflow: hidden;
             position: relative;
             transition: all 1s;
             height: 500px;
@@ -1739,7 +1739,7 @@ export default {
             justify-content: space-between;
             margin: auto;
             max-width: 380px;
-            // overflow: hidden;
+            overflow: hidden;
             position: relative;
             transition: all 1s;
             height: 500px;
