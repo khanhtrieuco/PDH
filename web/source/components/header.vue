@@ -3,11 +3,11 @@
     <header class="container">
       <div class="container-header" v-if="!isMobile">
         <div class="d-flex justify-content-between">
-          <div class="header-lang-content">
+          <!-- <div class="header-lang-content">
             <span :class="`lang-btn ${$i18n.locale === 'en' ? 'lang-btn-active' : ''}`" @click="changeLang()">EN</span>
             <span>/</span>
             <span :class="`lang-btn ${$i18n.locale === 'vn' ? 'lang-btn-active' : ''}`" @click="changeLang()">VI</span>
-          </div>
+          </div> -->
           <span @click="choicetab(idx + 1)" :class="`menu-text ${tab == (idx + 1) ? 'menu-text-active' : ''}`"
             v-for="(_i, idx) in listCollection" :key="idx">
             {{ $i18n.locale === 'vn' ? _i.name : _i.name_en ?? _i.name }}
@@ -31,8 +31,8 @@
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
-            <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
-            <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span>
+            <!-- <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
+            <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span> -->
           </div>
         </div>
         <img class="menu-mobile-icon" v-if="!showMenuMobile && showMenuScroll" src="/images/menu-mobile.png"

@@ -18,9 +18,9 @@
 
         <div class="store-item">
           <img class="store-item-maker" src="/images/place-maker.png" />
-          <div class="store-item-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city</div>
-          <div class="store-item-text">House today: 10:00 AM - 9:00 PM</div>
-          <div class="store-item-text">T: 0868284222</div>
+          <div class="store-item-text">106, C3 Hoang Ngoc Phach, Dong Da, Hanoi</div>
+          <div class="store-item-text">House today: 09AM - 9PM</div>
+          <div class="store-item-text">T: 0986375167</div>
           <div class="store-btn">{{ $t('Store_select_4') }}</div>
         </div>
         <!-- <div class="store-item">

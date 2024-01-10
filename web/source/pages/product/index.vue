@@ -44,9 +44,9 @@
                         v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
                     </div>
                     <div class="product-detail-help-box">
-                        <div class="product-detail-help-item">Shipping and packaging</div>
-                        <div class="product-detail-help-item">Exchange and return</div>
-                        <div class="product-detail-help-item">Need help</div>
+                        <div class="product-detail-help-item" @click="showShiping = true">Shipping and packaging</div>
+                        <div class="product-detail-help-item" @click="showExchange = true">Exchange and return</div>
+                        <div class="product-detail-help-item" @click="showHelp = true">Need help</div>
                     </div>
                     <div class="product-detail-data-color">
                         <span class="product-detail-data-color-text">Color:</span>
@@ -98,9 +98,9 @@
                     v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
                 </div>
                 <div class="product-detail-help-box">
-                    <div class="product-detail-help-item">Shipping and packaging</div>
-                    <div class="product-detail-help-item">Exchange and return</div>
-                    <div class="product-detail-help-item">Need help</div>
+                    <div class="product-detail-help-item" @click="showShiping = true">Shipping and packaging</div>
+                    <div class="product-detail-help-item" @click="showExchange = true">Exchange and return</div>
+                    <div class="product-detail-help-item" @click="showHelp = true">Need help</div>
                 </div>
                 <div class="product-detail-data-color">
                     <span class="product-detail-data-color-text">Color:</span>
@@ -144,6 +144,9 @@
             </div>
         </div>
         <Size v-if="showSize" :isMobile="isMobile" @closeUpdate="showSize = false"/>
+        <Shipping v-if="showShiping" :isMobile="isMobile" @closeUpdate="showShiping = false"/>
+        <Help v-if="showHelp" :isMobile="isMobile" @closeUpdate="showHelp = false"/>
+        <Exchange v-if="showExchange" :isMobile="isMobile" @closeUpdate="showExchange = false"/>
         
     </div>
 </template>
@@ -154,6 +157,9 @@ import Select from "~/components/common/select.vue"
 import Color from "~/components/common/color.vue"
 import ProductItem from "~/components/product/productItem.vue"
 import Size from "~/components/product/size.vue"
+import Shipping from "~/components/product/shipping.vue"
+import Exchange from "~/components/product/exchange.vue"
+import Help from "~/components/product/help.vue"
 // import ListMedia from "~/components/product/mediaList.vue"
 import general from "~/mixins/general"
 import ColorMobile from "~/components/common/colorMobile.vue"
@@ -165,7 +171,10 @@ export default {
         Select,
         Color,
         ColorMobile,
-        Size
+        Size,
+        Shipping,
+        Help,
+        Exchange
     },
     mixins: [general],
     data() {
@@ -188,7 +197,10 @@ export default {
             selectColor: null,
             selectSize: null,
             variant: null,
-            showSize: false
+            showSize: false,
+            showShiping: false,
+            showExchange: false,
+            showHelp: false,
         }
     },
     computed: {
@@ -511,6 +523,7 @@ export default {
                 margin: 6px 0px;
                 text-decoration-line: underline;
                 text-transform: uppercase;
+                cursor: pointer;
             }
         }
 

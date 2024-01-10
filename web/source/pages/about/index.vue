@@ -8,12 +8,13 @@
                 <div class="about-banner-content">
                     <div class="about-title">ABOUT P.D.H</div>
                     <img class="about-name-img" src="/images/about-name.png" />
-                    <div class="about-des">A VIETNAMESE CHILD ARTIST HAS DECIDED PASS INTO THE WORLD OF FASHION AND CREATE
-                        THE NAME BRANCH. INCREDIBLE FROM HIS CHILDHOOD Memories, HOANG HAS CREATED PRODUCTS THAT REPEAT THE
-                        TRADITIONAL VALUES OF THE COUNTRY OF THE COUNTRIES BRING CONtemporaries. HE LOVES EXPERIENCE WITH
-                        USE OF TECHNOLOGY IN THE FASHION WORLD AND HAS A WISH TO BECOME A POINT OF RESPONSE FOR THE NEW
-                        GENERATION
-                        IN THIS INDUSTRY.
+                    <div class="about-des">PHAN DANG HOANG - a fashion brand founded by designer Phan Dang Hoang with
+                        inspirations from painting, architecture and East and West cultural interference. The brand's
+                        designs are boldly personal but always balance artistic concepts and high application. Phan Dang
+                        Hoang wants to connect the past and the present, bringing fashion values that bring the voice of the
+                        times, the breath of tradition, with durable materials and delicate treatments in every pattern.
+                        Therefore, each customer who experiences the product will be clothed with a meaningful message and
+                        find their aspirations through fashion so that they can speak for themselves.
                     </div>
                 </div>
             </div>
@@ -27,39 +28,38 @@
                 <div class="about-info">
                     <div class="about-achievement">achievement</div>
                     <div class="about-text-title">/2023/</div>
-                    <div class="about-text">Tham gia triển lãm LIT EXHIBITION và show diễn đầu tiên tại VIỆT NAM do nhãn
-                        hàng SUNLIFE VIỆT NAM tổ chức.</div>
-                    <div class="about-text">Chiến thắng giải thưởng NTK triển vọng của năm do SR FASHION AWARDS tổ chức
-                    </div>
-                    <div class="about-text">Lọt top 21 thương hiệu trẻ triển vọng do VOGUE ITALIA bình chọn</div>
-                    <div class="about-text">Tham dự tuần lễ thời trang MILANO FASHION WEEK THU ĐÔNG 2023</div>
+                    <div class="about-text">Attended MILANO Fashion Week Autumn | Winter 2022</div>
+                    <div class="about-text">Top 21 promising emerging brands voted by VOGUE Italy</div>
+                    <div class="about-text">Won - Promising Designer of the Year by SR Fashion Awards</div>
+                    <div class="about-text">Participated in LIT exhibition and debuted the first show in Vietnam organized
+                        by Sun Life Vietnam</div>
                 </div>
             </div>
             <div class="about-list-item">
                 <div class="about-info">
                     <div class="about-achievement">achievement</div>
                     <div class="about-text-title">/2022/</div>
-                    <div class="about-text">Trở thành đại diện cựu sinh viên tiêu biểu cho khóa học tham gia phỏng vấn trong
-                        series “NABA MEETS ALUMNI” </div>
-                    <div class="about-text">NTK Việt đầu tiên tham dự chính thức tuần lễ thời trang MILANO FASHION WEEK XUÂN
-                        HÈ 2023 ra mắt thương hiệu cá nhân “PHAN DANG HOANG” </div>
-                    <div class="about-text">Tham dự tuần lễ thời trang AFRO FASHION WEEK THU ĐÔNG 2022 được VOGUE ITALIA
-                        trình chiếu bst</div>
+                    <div class="about-text">Attended the AFRO Fashion Week Fall | Winter 2022 with a collection presented by
+                        VOGUE Italy</div>
+                    <div class="about-text">The first Vietnamese designer to officially attend the MILANO Fashion Week 2023
+                        & launch his own brand "PHAN DANG HOANG"</div>
+                    <div class="about-text">Became a representative alumni to participate in the interview of the series
+                        “NABA Meets Alumni”</div>
                 </div>
             </div>
             <div class="about-list-item">
                 <div class="about-info">
                     <div class="about-achievement about-achievement-1">achievement</div>
                     <div class="about-text-title">/2021/</div>
-                    <div class="about-text">Mở màn tuần lễ thời trang AFRO FASHION WEEK XUÂN HÈ 2022 gặp gỡ những nhân vật
-                        có ảnh hưởng trong giới thời trang: ANNA WINTOUR, NAOMI CAMPBELL,...</div>
-                    <div class="about-text">TOP 30 BEST COLLECTION do hội đồng thời trang bình chọn cho show diễn PLANET
-                        DRESS của ĐẠI HỌC NABA</div>
-                    <div class="about-text"><b>/2018/</b> Nhận học bổng du học chuyên ngành thiết kế thời trang đại học Naba
-                        (MILANO-ITALY)</div>
-                    <div class="about-text"><b>/2016/</b> Hoạ sĩ trẻ VN đầu tiên xuất hiện trên 2 tạp chí nghệ thuật mỹ năm
-                        2016 với những tác phẩm truyền thần</div>
-                    <div class="about-text"><b>/2015/</b> Tham gia vẽ tranh cho Lynk show của doanh nhân LÝ NHÃ KỲ</div>
+                    <div class="about-text">TOP 30 BEST COLLECTION voted by fashion council for the PLANET DRESS show of
+                        NABA University</div>
+                    <div class="about-text">Opened the AFRO Fashion Week Spring | Summer 2022 and meet influential figures
+                        in the fashion world: Anna Wintour, Naomi Campbell,...</div>
+                    <div class="about-text"><b>/2018/</b> Won a scholarship to study abroad at NABA University (Milano,
+                        Italy), fashion design major</div>
+                    <div class="about-text"><b>/2016/</b> The first young Vietnamese artist to appear in 2 American art
+                        magazines in 2016</div>
+                    <div class="about-text"><b>/2015/</b> Participating in Lynk Show by Ly Nha Ky</div>
                 </div>
             </div>
             <template slot="prevArrow">
@@ -78,9 +78,19 @@
             <img class="w-100" src="/images/about-mid-mobile.jpg" v-if="isMobile" />
             <div class="about-mid-content">
                 <div class="about-mid-des">
-                    From one-off pieces created by independent designers using Gucci materials, to the House's archived
-                    pieces that have been restored by its artisans, Vault is a treasure trove of unique objects representing
-                    beauty, dreams, passions, and above all, the search for ideas beyond the confines of time and space.
+                    <p>Love for the simple and familiar things, childhood memories associated with the image of a grandfather
+                    painting, a mother with a sewing machine, and a grandmother knitting shirts have long become a part of
+                    forming the designer's personality.</p>
+
+                    <p>Despite experiencing Western civilization, receiving modern technologies, and encountering
+                    groundbreaking new images, the designer still chooses to embrace the beautiful memories of childhood.
+                    This choice is reflected in the creation of a brand identity with the concept of ""Fusion Fashion,""
+                    inspired by the image of a familiar sewing machine from childhood—a needle threading stitches that
+                    compose the soul of a shirt.</p>
+
+                    <p>These elements serve as an extension of the customer's fashion experience with the Phan Dang Hoang
+                    brand. It represents a new way of reception from a Gen Z designer who always seeks to incorporate a
+                    simple part of childhood, preserving traditional values and bringing soul into fashion products.</p>
                 </div>
             </div>
         </div>
@@ -151,7 +161,7 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -161,7 +171,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -169,7 +179,7 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -179,7 +189,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -187,7 +197,7 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -197,7 +207,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -225,7 +235,7 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -235,7 +245,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -243,7 +253,7 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -253,7 +263,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -261,7 +271,7 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -271,7 +281,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -299,7 +309,7 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -309,7 +319,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -317,7 +327,7 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -327,7 +337,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -335,7 +345,7 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -345,7 +355,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -373,7 +383,7 @@
                         <div class="slide chance " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
                                 VISION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -383,7 +393,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
                             </div>
@@ -391,7 +401,7 @@
                         <div class="slide affranchie " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word"
                                 :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
                                 MISSION</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -401,7 +411,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
                                 <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
                                 <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
                             </div>
@@ -409,7 +419,7 @@
                         <div class="slide instinctive " tabindex="-1" aria-hidden="true">
                             <h3 class="text text_huge text_white slide-word "
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
                                 CORE VALUE</h3>
                             <div class="slide-image-wrapper"
                                 :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
@@ -419,7 +429,7 @@
                             </div>
                             <div class="slide-text-block"
                                 :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 11 ? '1' : '0'};`">
                                 <div class="about-vison-list-content">
                                     <div class="about-vison-content-item">
                                         <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
@@ -490,7 +500,9 @@ export default {
         this.isMobile = this.checkMobile()
 
         let width = document.body.clientWidth
-        if (width < 1400) {
+        if (width < 1600) {
+            this.position = 1200
+        } else if (width < 1400) {
             this.position = 1200
         }
         if (this.isMobile) {
@@ -794,7 +806,7 @@ export default {
                 text-align: center;
                 font-family: 'Aeroport';
                 text-transform: uppercase;
-                font-size: 26px;
+                font-size: 20px;
                 width: 750px;
                 margin: auto;
             }
@@ -1894,5 +1906,4 @@ export default {
             }
         }
     }
-}
-</style>
+}</style>

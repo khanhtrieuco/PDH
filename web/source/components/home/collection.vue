@@ -13,9 +13,9 @@
             <div class="collection-item-content" v-if="collection.id === 24">
               <NuxtLink :to="`/collection/${collection.attributes.slug}`">
                 <div class="collection-item-title">{{ collection.attributes.name }}</div>
-                <div class="collection-item-des">{{ collection.attributes.description }}</div>
+                <!-- <div class="collection-item-des">{{ collection.attributes.description }}</div> -->
                 <div class="shop-now-link">
-                  <span class="shop-now-link-text">Shop now</span>
+                  <span class="shop-now-link-text">Read more</span>
                   <img class="shop-now-link-img" src="/images/more.png" />
                 </div>
               </NuxtLink>
@@ -23,9 +23,9 @@
             <div class="collection-item-content" v-else>
               <div>
                 <div class="collection-item-title">{{ collection.attributes.name }}</div>
-                <div class="collection-item-des">{{ collection.attributes.description }}</div>
+                <!-- <div class="collection-item-des">{{ collection.attributes.description }}</div> -->
                 <div class="shop-now-link">
-                  <span class="shop-now-link-text">Shop now</span>
+                  <span class="shop-now-link-text">Read more</span>
                   <img class="shop-now-link-img" src="/images/more.png" />
                 </div>
               </div>
@@ -52,9 +52,9 @@
     <div class="collection-item-content" v-if="isMobile">
       <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`">
         <div class="collection-item-title">{{ current_coll?.attributes?.name }}</div>
-        <div class="collection-item-des">{{ current_coll?.attributes?.description }}</div>
+        <!-- <div class="collection-item-des">{{ current_coll?.attributes?.description }}</div> -->
         <!-- <div class="shop-now-link">
-          <span class="shop-now-link-text">Shop now</span>
+          <span class="shop-now-link-text">Read more</span>
           <img class="shop-now-link-img" src="/images/moreb.png" />
         </div> -->
       </NuxtLink>
@@ -189,6 +189,7 @@ export default {
     font-size: 15px;
     text-transform: uppercase;
     margin-right: 10px;
+    margin-top: 10px;
   }
 
   .shop-now-link-img {
