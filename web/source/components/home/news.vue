@@ -7,7 +7,7 @@
     </div> -->
     <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news" v-if=" listNews && listNews.length ">
       <div v-for="( item, index ) in  listNews " :key=" index ">
-        <NewItem :isMobile=" isMobile " />
+        <NewItem :isMobile="isMobile" :item="item" />
       </div>
       <template slot="prevArrow" v-if="!isMobile">
         <div class="pre-arrow">
@@ -57,20 +57,19 @@ export default {
     }),
   },
   async mounted() {
-    await this.getListNewsCategory()
-    console.log(this.listItem)
-    if (this.listItem.length >= 1) {
-      this.active = this.listItem[0].id
+    // await this.getListNewsCategory()
+    // if (this.listItem.length >= 1) {
+      // this.active = this.listItem[0].id
       this.getListNews({
-        filters: {
-          new_category: this.active
-        },
+        // filters: {
+        //   new_category: this.active
+        // },
         pagination: {
           page: 1,
-          pageSize: 5
+          pageSize: 3
         }
       })
-    }
+    // }
   },
   methods: {
     ...mapActions({

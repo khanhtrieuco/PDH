@@ -1,17 +1,17 @@
 <template>
-    <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }"
+    <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }"
         labelAlign="left">
         <a-row>
-            <a-col :span="12">
+            <a-col :span="24">
                 <a-form-model-item ref="title" label="Tiêu đề" prop="title">
                     <a-input v-model="form.title" @blur="() => { $refs.title.onFieldBlur(); }" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="title_en" label="Tiêu đề tiếng anh" prop="title_en">
                     <a-input v-model="form.title_en" />
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="24">
                 <a-col :span="12">
                     <a-form-model-item label="Hình đại diện">
@@ -45,27 +45,27 @@
                     </a-select>
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12">
+            <a-col :span="24">
                 <a-form-model-item ref="short_content" label="Nội dung rút gọn" prop="short_content">
                     <a-input v-model="form.short_content" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
                         @blur="() => { $refs.short_content.onFieldBlur(); }" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="short_content_en" label="Nd rút ngọn tiếng anh" prop="short_content_en">
                     <a-input v-model="form.short_content_en" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }" />
                 </a-form-model-item>
-            </a-col>
-            <a-col :span="12">
+            </a-col> -->
+            <a-col :span="24">
                 <a-form-model-item ref="content" label="Nội dung" prop="content">
                     <quill-html :content_html.sync="form.content"></quill-html>
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="content_en" label="Nội dung tiếng anh" prop="content_en">
-                    <quill-html :content_en_html.sync="form.content_en"></quill-html>
+                    <quill-html :content_html.sync="form.content_en"></quill-html>
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
         </a-row>
         <a-form-model-item :wrapper-col="{ span: 4, offset: 20 }">
             <a-button v-if="modalType === 'create'" type="primary" @click="onSubmitAdd">
@@ -186,6 +186,9 @@ export default {
             }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
+                    this.form.title_en = this.form.title
+                    this.form.short_content_en = this.form.short_content
+                    this.form.content_en = this.form.content
                     let rs = await this.createItem({
                         data: {
                             ...this.form,
@@ -216,6 +219,9 @@ export default {
             }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
+                    this.form.title_en = this.form.title
+                    this.form.short_content_en = this.form.short_content
+                    this.form.content_en = this.form.content
                     let rs = await this.updateItem({
                         id: this.item.id,
                         data: {
