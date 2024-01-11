@@ -2,7 +2,7 @@
   <div>
     <quill-editor :style="{
       'height': '400px', display: 'inline-block', 'border': 'solid 1px #acacac',
-      'border-radius': '12px', 'overflow': 'hidden', 'font-size': '16px','padding-bottom': '41px'
+      'border-radius': '12px', 'overflow': 'hidden', 'font-size': '16px','padding-bottom': '41px','max-width': '100%'
     }" :content="message" :options="editorOption" :ref="quill_id" @blur="onBlur($event)" @focus="onFocus($event)"
       @ready="onEditorReady($event)" @change="onEditorChange($event)"></quill-editor>
     <input
