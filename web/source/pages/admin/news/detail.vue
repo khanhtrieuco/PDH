@@ -2,11 +2,16 @@
     <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }"
         labelAlign="left">
         <a-row>
-            <a-col :span="24">
+            <a-col :span="12">
                 <a-form-model-item ref="title" label="Tiêu đề" prop="title">
                     <a-input v-model="form.title" @blur="() => { $refs.title.onFieldBlur(); }" />
                 </a-form-model-item>
             </a-col>
+            <a-col :span="12">
+                    <a-form-model-item label="Vị trí hiển thị" prop="order">
+                        <a-input v-model="form.order" type="number" />
+                    </a-form-model-item>
+                </a-col>
             <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="title_en" label="Tiêu đề tiếng anh" prop="title_en">
                     <a-input v-model="form.title_en" />
@@ -14,13 +19,13 @@
             </a-col> -->
             <a-col :span="24">
                 <a-col :span="12">
-                    <a-form-model-item label="Hình đại diện">
+                    <a-form-model-item label="Hình trang chủ">
                         <upload-image :thub.sync="form.thub" :thubLink="item?.attributes?.thub.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
                 <a-col :span="12">
-                    <a-form-model-item label="Vị trí hiển thị" prop="order">
-                        <a-input v-model="form.order" type="number" />
+                    <a-form-model-item label="Hình top banner">
+                        <upload-image :thub.sync="form.banner" :thubLink="item?.attributes?.banner.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
             </a-col>
@@ -116,6 +121,7 @@ export default {
                 content: undefined,
                 content_en: undefined,
                 thub: undefined,
+                banner: undefined,
                 order: 0,
                 type: undefined,
                 new_category: undefined
@@ -139,6 +145,7 @@ export default {
                 content: this.item.attributes.content,
                 content_en: this.item.attributes.content_en,
                 thub: this.item.attributes.thub?.data?.id,
+                banner: this.item.attributes.banner?.data?.id,
                 order: this.item.attributes.order,
                 new_category: this.item.attributes.new_category.data?.id,
                 type: this.item.attributes.type
@@ -163,6 +170,7 @@ export default {
                     content: val.attributes.content,
                     content_en: val.attributes.content_en,
                     thub: val.attributes.thub?.data?.id,
+                    banner: val.attributes.banner?.data?.id,
                     order: val.attributes.order,
                     new_category: val.attributes.new_category.data?.id,
                     type: val.attributes.type

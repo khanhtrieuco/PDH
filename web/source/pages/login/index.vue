@@ -1,7 +1,7 @@
 <template>
     <div class="page-login-content container">
         <div class="page-login-title">My account</div>
-        <div class="page-login-google-btn d-flex justify-content-around align-items-center">
+        <div class="page-login-google-btn d-flex justify-content-around align-items-center" @click="onGoogleLogin()">
             <img class="page-login-google-image" src="/images/google.png" />
             <div class="page-login-google-text">CONTINUE WITH GOOGLE</div>
         </div>
