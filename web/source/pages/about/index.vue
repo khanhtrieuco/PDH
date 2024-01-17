@@ -160,324 +160,48 @@
             <div class="inside-slider ">
                 <div class="slide-to-move">
                     <div class="slider-content">
-                        <div class="slide chance " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
-                                VISION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 0 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs1.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 0 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
-                                MISSION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 1 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs2.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 1 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word "
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
-                                CORE VALUE</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 2 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs3.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 2 ? '1' : '0'};`">
-                                <div class="about-vison-list-content">
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">FUSION</div>
-                                        <div class="about-vision-sub-1">Phan Dang Hoang is a dialogue between East and West,
-                                            art and application. We connect inspiration, human beings in the new era,
-                                            creating the value of intertwine and uniqueness.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide chance " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
-                                VISION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 3 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs1.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 3 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
-                                MISSION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 4 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs2.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 4 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word "
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
-                                CORE VALUE</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 5 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs3.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 5 ? '1' : '0'};`">
-                                <div class="about-vison-list-content">
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">FUSION</div>
-                                        <div class="about-vision-sub-1">Phan Dang Hoang is a dialogue between East and West,
-                                            art and application. We connect inspiration, human beings in the new era,
-                                            creating the value of intertwine and uniqueness.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide chance " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
-                                VISION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 6 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs1.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 6 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
-                                MISSION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 7 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs2.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 7 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word "
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
-                                CORE VALUE</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 8 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs3.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 8 ? '1' : '0'};`">
-                                <div class="about-vison-list-content">
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">FUSION</div>
-                                        <div class="about-vision-sub-1">Phan Dang Hoang is a dialogue between East and West,
-                                            art and application. We connect inspiration, human beings in the new era,
-                                            creating the value of intertwine and uniqueness.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide chance " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
-                                VISION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 9 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs1.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 9 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_1') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_1_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide affranchie " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word"
-                                :style="`left: calc(-${position * index}px + 50%); transition: left 1.3s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
-                                MISSION</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 10 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs2.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: ${index === 10 ? '1' : '0'};`">
-                                <div class="about-vision-text">{{ $t('About_vs_2') }}</div>
-                                <div class="about-vision-sub">{{ $t('About_vs_2_sub') }}</div>
-                            </div>
-                        </div>
-                        <div class="slide instinctive " tabindex="-1" aria-hidden="true">
-                            <h3 class="text text_huge text_white slide-word "
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.3s ease 0s, opacity 0.7s ease 0s; opacity: ${index === 11 ? '1' : '0'};`">
-                                CORE VALUE</h3>
-                            <div class="slide-image-wrapper"
-                                :style="`left: -${position * index}px; transition: all 2s ease 0.2s;`">
-                                <img :class="`about-vision-img ${index === 11 ? 'mask-in-next' : 'mask-out-next'}`"
-                                    src="/images/vs3.jpg" />
-                                <img class="about-vision-img-mask" src="/images/VISION-071.png" />
-                            </div>
-                            <div class="slide-text-block"
-                                :style="`left: calc(-${position * index}px + 50%);transition: left 1.6s ease 0s, opacity 0.7s ease 0s; opacity: ${index === 11 ? '1' : '0'};`">
-                                <div class="about-vison-list-content">
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_1') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_1_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_2') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_2_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_3') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_3_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_4') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_4_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">{{ $t('About_vs_3_5') }}</div>
-                                        <div class="about-vision-sub-1">{{ $t('About_vs_3_5_sub') }}</div>
-                                    </div>
-                                    <div class="about-vison-content-item">
-                                        <div class="about-vision-text">FUSION</div>
-                                        <div class="about-vision-sub-1">Phan Dang Hoang is a dialogue between East and West,
-                                            art and application. We connect inspiration, human beings in the new era,
-                                            creating the value of intertwine and uniqueness.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <Slider1 :position="position" :index="index" :check="index" />
+                        <Slider2 :position="position" :index="index" :check="index" />
+                        <Slider3 :position="position" :index="index" :check="index" />
+                        <!-- <Slider1 :position="position" :index="index" :check="6" />
+                        <Slider2 :position="position" :index="index" :check="7" />
+                        <Slider3 :position="position" :index="index" :check="8" />
+                        <Slider1 :position="position" :index="index" :check="9" />
+                        <Slider2 :position="position" :index="index" :check="10" />
+                        <Slider3 :position="position" :index="index" :check="11" />
+                        <Slider1 :position="position" :index="index" :check="12" />
+                        <Slider2 :position="position" :index="index" :check="13" />
+                        <Slider3 :position="position" :index="index" :check="14" />
+                        <Slider1 :position="position" :index="index" :check="15" />
+                        <Slider2 :position="position" :index="index" :check="16" />
+                        <Slider3 :position="position" :index="index" :check="17" />
+                        <Slider1 :position="position" :index="index" :check="18" />
+                        <Slider2 :position="position" :index="index" :check="19" />
+                        <Slider3 :position="position" :index="index" :check="20" />
+                        <Slider1 :position="position" :index="index" :check="21" />
+                        <Slider2 :position="position" :index="index" :check="22" />
+                        <Slider3 :position="position" :index="index" :check="23" /> -->
                     </div>
                 </div>
                 <div class="slide-hidder-left "></div>
@@ -492,8 +216,17 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex"
+import Slider1 from "./slide1.vue"
+import Slider2 from "./slide2.vue"
+import Slider3 from "./slide3.vue"
+
 export default {
     name: 'AboutPage',
+    components: {
+        Slider1,
+        Slider2,
+        Slider3
+    },
     computed: {
         ...mapGetters({
             siteInfo: "common/getSiteinfo"
@@ -514,7 +247,7 @@ export default {
                 "slidesToScroll": 1
             },
             position: 1400,
-            index: 6
+            index: 12
         }
     },
     async mounted() {
@@ -548,15 +281,15 @@ export default {
         },
         onNext() {
             this.index = this.index + 1
-            if (this.index === 12) {
-                this.index = 6
-            }
+            // if (this.index === 24) {
+            //     this.index = 6
+            // }
         },
         onPrev() {
             this.index = this.index - 1
-            if (this.index === -1) {
-                this.index = 7
-            }
+            // if (this.index === -1) {
+            //     this.index = 10
+            // }
         }
     }
 }
