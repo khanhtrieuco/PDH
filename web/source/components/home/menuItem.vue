@@ -60,7 +60,9 @@ export default {
         font-family: 'Aeroport-light';
         font-size: 13px;
         font-weight: 600;
-        line-height: 35px;
+        line-height: 24px;
+        margin-top: 20px;
+        max-width: 310px;
     }
 }
 

@@ -16,7 +16,7 @@
                 <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
                 <div class="product-detail-name">
                     <div class="product-detail-name-title">{{ product.attributes?.name }}</div>
-                    <div class="product-detail-name-price">{{ product.attributes?.price | numberWithCommas }}{{ ' ' }}đ
+                    <div class="product-detail-name-price">${{ ' ' }}{{ product.attributes?.price | numberWithCommas }}
                     </div>
                 </div>
                 <div class="product-detail-btn" @click="scrollToAdd">
@@ -331,11 +331,11 @@ export default {
         },
         addProductToCart() {
             if (!this.selectSize) {
-                this.$message.warning('Vui lòng chọn size');
+                this.$message.warning('Please choose size');
                 return
             }
             if (!this.selectColor) {
-                this.$message.warning('Vui lòng chọn màu');
+                this.$message.warning('Please select color');
                 return
             }
             let _t = {
@@ -349,7 +349,7 @@ export default {
                 quantity: 1
             }
             this.addCartItem(_t)
-            this.showNotification('success', `Đã thêm sản phẩm vào giỏ hàng`)
+            this.showNotification('success', `Product added to cart`)
         }
     }
 }

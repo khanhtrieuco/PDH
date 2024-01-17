@@ -1,6 +1,6 @@
 <template>
-    <div class="backgroud-black">
-        <div class="popup-content">
+    <div class="backgroud-black" @click="$emit('closeUpdate')">
+        <div class="popup-content" @click.stop="">
             <div class="password-content">
                 <!-- <img class="password-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
                 <div class="password-title">Change password</div>
@@ -42,7 +42,7 @@
                         <div class="input-form-text-sub">- at least one upper case letter at least one special character (!+,-./:;<=>?@) at least one number</div>
                     </b-col>
                 </b-row>
-                <div class="up-add-btn" @click="onUpdate()">Cập nhật
+                <div class="up-add-btn" @click="onUpdate()">Save
                 </div>
             </div>
             <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>

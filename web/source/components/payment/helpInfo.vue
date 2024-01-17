@@ -33,12 +33,6 @@
           country.</div>
         <div class="help-card-des">Call us: +84 764 976 754</div>
       </div>
-      <div class="help-card">
-        <div class="help-card-title">EASY RETURNS</div>
-        <div class="help-card-des">We provide free pick up for your returns: you have 30 days from delivery to follow our
-          quick and easy return procedure*. Alternatively, orders can be returned in one of our stores.
-          *Exceptions apply.</div>
-      </div>
     </div>
   </div>
 </template>

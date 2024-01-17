@@ -1,6 +1,6 @@
 <template>
-    <div class="backgroud-black">
-        <div class="popup-content">
+    <div class="backgroud-black" @click="$emit('closeUpdate')">
+        <div class="popup-content" @click.stop="">
             <div class="address-content">
                 <!-- <img class="address-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
                 <div class="address-title">Add new address</div>
@@ -85,7 +85,7 @@
                         <b-form-select class="input-form-address" v-model="ward" :options="wards"></b-form-select>
                     </b-col>
                 </b-row>
-                <div class="up-add-btn" @click="type === 'create' ? onAddNew() : onUpdate()">Cập nhật
+                <div class="up-add-btn" @click="type === 'create' ? onAddNew() : onUpdate()">Save
                 </div>
             </div>
             <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>

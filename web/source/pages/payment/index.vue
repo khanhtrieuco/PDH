@@ -39,13 +39,13 @@
                             </div>
                             <div class="payment-step-address-info" v-if="shiping_type === 1">
                                 <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
-                                    Bạn chưa có địa chỉ. Bấm vào đây để cập nhật địa chỉ.</div>
+                                    You don't have an address yet. Click here to update the address.</div>
                                 <div v-else>
                                     <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
                                     <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
                                     <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                     </div>
-                                    <div class="payment-step-address-update mt-1" @click="openAddressPopup">Cập nhật</div>
+                                    <div class="payment-step-address-update mt-1" @click="openAddressPopup">Save</div>
                                 </div>
                                 <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
                                     @closeUpdate="closeUpdateAddress"></Address>
@@ -128,13 +128,13 @@
                     </div>
                     <div class="payment-step-address-info" v-if="shiping_type === 1">
                         <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
-                            Bạn chưa có địa chỉ. Bấm vào đây để cập nhật địa chỉ.</div>
+                            You don't have an address yet. Click here to update the address.</div>
                         <div v-else>
                             <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
                             <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
                             <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                             </div>
-                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Cập nhật</div>
+                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">slick-active</div>
                         </div>
                         <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
                             @closeUpdate="closeUpdateAddress"></Address>
@@ -182,8 +182,7 @@
                 <div class="payment-order-top-title">ORDERED SUCCESSFULLY</div>
                 <div class="payment-order-top-code">#CH0220</div>
                 <div class="payment-order-top-des">Your order is placed successfully, to track the order status, please
-                    click
-                    “My order” or add more products in the shopping cart </div>
+                    click “My order” or add more products in the shopping cart </div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
                     <div class="payment-order-btn" @click="goPage('/account')">my order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>

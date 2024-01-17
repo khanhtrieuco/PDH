@@ -435,7 +435,7 @@ export default {
         },
         showNotification(type, message) {
             this.$bvToast.toast(message, {
-                title: 'Thông báo',
+                title: 'Notification',
                 variant: type,
                 solid: true
             })

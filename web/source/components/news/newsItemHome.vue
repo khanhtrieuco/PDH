@@ -18,7 +18,7 @@
             </div>
         </NuxtLink>
         <NuxtLink :to="`/news/${item.attributes?.slug}`">
-            <div class="news-title"> {{ get_excerpt(item.attributes?.title, 100) }}</div>
+            <div class="news-title"> {{ get_excerpt(item.attributes?.title, 70) }}</div>
         </NuxtLink>
         <!-- <div class="news-des"> {{ get_excerpt(item.attributes?.short_content, 37) }} </div> -->
     </div>
@@ -130,8 +130,10 @@ export default {
 
 @media (max-width: 520px) {
     .news-item {
-        width: 100%;
+        width: 50%;
         text-align: left;
+        padding: 5px;
+        float: left;
 
         .news-img {
             border: 0.7px solid #000;

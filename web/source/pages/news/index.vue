@@ -1,15 +1,16 @@
 <template>
     <div class="news-content container news-container">
         <img class="news-title-image" src="/images/neck_label_1.png" />
-        <div class="news-category">
+        <!-- <div class="news-category">
             <div class="news-cate-item news-cate-active">FASHION SHOW, </div>
             <div class="news-cate-item">KOLS, </div>
             <div class="news-cate-item">BLOGS, </div>
-        </div>
+        </div> -->
         <b-container>
-            <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news" v-if="listNews && listNews.length">
+            <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news"
+                v-if="listNews && listNews.length">
                 <div v-for="(item, index) in listNews" :key="index">
-                    <NewItem :isMobile="isMobile" />
+                    <NewItem :isMobile="isMobile" :item="item" />
                 </div>
                 <template slot="prevArrow" v-if="!isMobile">
                     <div class="pre-arrow">
@@ -24,8 +25,8 @@
             </VueSlickCarousel>
             <div class="list-main-news">
                 <b-row v-if="listMainNews">
-                    <b-col class="mb-3" cols="6" lg="4" v-for="index in 6" :key="index">
-                        <newsItemNoBox :isMobile="isMobile" />
+                    <b-col class="mb-3" cols="6" lg="4" v-for="(item, index) in listMainNews" :key="index">
+                        <newsItemNoBox :isMobile="isMobile" :item="item" />
                     </b-col>
                 </b-row>
             </div>
@@ -45,11 +46,11 @@ export default {
         NewItem,
         newsItemNoBox
     },
-    // computed: {
-    //     ...mapGetters({
-    //         listClub: "club/getListClub"
-    //     }),
-    // },
+    computed: {
+        ...mapGetters({
+            listNews: "news/getListNews"
+        }),
+    },
     mixins: [general],
     data() {
         return {
@@ -61,7 +62,6 @@ export default {
                 "speed": 1000,
                 "slidesToScroll": 1
             },
-            listNews: [1, 2, 3, 4],
             listMainNews: [],
             isMobile: false
         }
@@ -85,38 +85,13 @@ export default {
     async mounted() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
-        // if (this.isMobile) {
-        //     await this.getListClub({
-        //         pagination: {
-        //             page: 1,
-        //             pageSize: 3
-        //         }
-        //     })
-        //     this.topListItem = [...this.listClub.items]
-        //     await this.getListClub({
-        //         pagination: {
-        //             page: this.page,
-        //             pageSize: 4
-        //         }
-        //     })
-        //     this.mainListItem = [...this.listClub.items]
-        // } else {
-        //     await this.getListClub({
-        //         pagination: {
-        //             page: this.page,
-        //             pageSize: 8
-        //         }
-        //     })
-        //     this.topListItem = [...this.listClub.items]
-        //     this.topListItem.length = 4
-        //     this.mainListItem = this.listClub.items.splice(4, 4);
-        // }
+        await this.getListNews()
+        this.listMainNews = this.listNews
     },
     methods: {
-        // ...mapActions({
-        //     getListClub: "club/getListClub",
-        //     getListClubMore: "club/getListClubMore",
-        // }),
+        ...mapActions({
+            getListNews: "news/getListNews"
+        }),
         checkMobile() {
             if (!process.server) {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -188,13 +163,16 @@ export default {
 @media (max-width: 520px) {
     .news-content {
         padding-bottom: 60px;
-        .news-title-image{
+
+        .news-title-image {
             width: 110px;
             margin: auto;
         }
-        .news-category{
+
+        .news-category {
             margin-top: 15px;
         }
+
         .list-main-news {
             margin-top: 30px;
         }

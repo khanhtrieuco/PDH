@@ -14,7 +14,7 @@
       <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
         <div class="product-name">{{ $i18n.locale === 'vn' ? item.attributes.name : item.attributes.name_en }}</div>
       </NuxtLink>
-      <div class="product-price">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
+      <div class="product-price">${{ ' ' }}{{ item.attributes.price | numberWithCommas }}</div>
     </div>
     <!-- <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
@@ -160,7 +160,7 @@ export default {
         price: this.item.attributes.price
       }
       this.addCartItem(_t)
-      this.showNotification('success', `Đã thêm sản phẩm vào giỏ hàng`)
+      this.showNotification('success', `Product added to cart`)
     }
   }
   // mounted() {

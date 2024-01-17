@@ -49,8 +49,12 @@
           <div class="footer-btn-login">{{ $t('Footer_text_23') }}</div>
           <div class="d-inline-flex justify-content-between">
             <img class="footer-icon" src="/images/you.png" />
-            <img class="footer-icon" src="/images/face.png" />
-            <img class="footer-icon" src="/images/inta.png" />
+            <a target="_blank" href="https://www.facebook.com/PhanDangHoangg">
+              <img class="footer-icon" src="/images/face.png" />
+            </a>
+            <a target="_blank" href="https://www.instagram.com/_phandanghoang_">
+              <img class="footer-icon" src="/images/inta.png" />
+            </a>
           </div>
           <div class="footer-copy">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
         </div>
@@ -108,8 +112,12 @@
         <div class="col-12">
           <div class="d-inline-flex justify-content-between">
             <img class="footer-icon" src="/images/you.png" />
-            <img class="footer-icon" src="/images/face.png" />
-            <img class="footer-icon" src="/images/inta.png" />
+            <a target="_blank" href="https://www.facebook.com/PhanDangHoangg">
+              <img class="footer-icon" src="/images/face.png" />
+            </a>
+            <a target="_blank" href="https://www.instagram.com/_phandanghoang_">
+              <img class="footer-icon" src="/images/inta.png" />
+            </a>
           </div>
           <div class="footer-copy">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
           <img class="footer-logo" src="/images/footer.png" />
@@ -166,7 +174,7 @@ export default {
     margin-bottom: 15px;
   }
 
-  .footer-break{
+  .footer-break {
     margin-bottom: 45px !important;
   }
 
@@ -324,7 +332,7 @@ export default {
       margin-bottom: 3px;
     }
 
-    .footer-break{
+    .footer-break {
       margin-bottom: 20px;
     }
 

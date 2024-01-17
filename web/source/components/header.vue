@@ -22,6 +22,8 @@
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
+            <div v-if="!loggedIn" @click="goLogin" class="menu-auth-btn">Sign in</div>
+            <div v-else @click="logoutAction" class="menu-auth-btn">Log out</div>
           </div>
         </div>
       </div>
@@ -31,6 +33,8 @@
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
+            <div v-if="!loggedIn" @click="goLogin" class="menu-auth-btn">Sign in</div>
+            <div v-else @click="logoutAction" class="menu-auth-btn">Log out</div>
             <!-- <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
             <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span> -->
           </div>
@@ -93,7 +97,7 @@
             <img class="menu-open" :src="openMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
-            @click="openMobile = openMobile === 4 ? null : 4">
+            @click="() => { mobileSubMenu = null; openMobile = openMobile === 4 ? null : 4 }">
             <div class="menu-mobile-title">House of P.D.H</div>
             <img class="menu-open" :src="openMobile === 4 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
@@ -121,13 +125,13 @@
               <img class="menu-open" @click="goPage('/house-of-pdh')"
                 :src="openSubMobile === 5 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
+            <!-- <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title">Achievement of P.D.H</div>
               <img class="menu-open" :src="openSubMobile === 6 ? '/images/menu-up.png' : '/images/menu-right.png'" />
-            </div>
+            </div> -->
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
-            @click="openMobile = openMobile === 5 ? null : 5">
+            @click="() => { mobileSubMenu = null; openMobile = openMobile === 5 ? null : 5 }">
             <div class="menu-mobile-title">Friendship</div>
             <img class="menu-open" :src="openMobile === 5 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
@@ -425,7 +429,7 @@ export default {
       }
     },
     goPage(url) {
-      if (url.includes('collection') && url !== '/collection/spring-summer-2024') return
+      if (url.includes('collection') && url !== '/collection/womens-ss24-collection') return
       if (this.$router.history.current.path !== url) {
         this.tab = null
         this.showMenuMobile = false;
@@ -433,6 +437,9 @@ export default {
         this.openSubMobile = null;
         this.$router.push({ path: this.localePath(url) })
       }
+    },
+    goLogin() {
+      this.$router.push('/dang-nhap')
     },
     openMenu() {
       this.showMenu = true
@@ -551,6 +558,7 @@ export default {
     cursor: pointer;
     font-family: 'Aeroport';
     padding: 0px 10px;
+    color: #000;
 
     &:hover {
       font-weight: bolder;
@@ -559,6 +567,7 @@ export default {
 
   .menu-text-active {
     border-top: 2px solid #000;
+    font-family: 'Aeroport-bold';
   }
 
   .menu-logo {
@@ -580,6 +589,26 @@ export default {
     width: 17px;
     height: 17px;
     margin-top: 25px;
+  }
+
+  .menu-auth-btn {
+    font-family: 'Aeroport';
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 15px;
+    padding-left: 15px;
+    color: #000;
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 0;
+      height: 20px;
+      position: absolute;
+      border-left: 0.8px solid black;
+      top: 25px;
+      left: 0px;
+    }
   }
 
 }
@@ -743,6 +772,26 @@ export default {
       width: 15px;
       height: 15px;
       margin-top: 16px;
+    }
+
+    .menu-auth-btn {
+      font-family: 'Aeroport';
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 15px;
+      padding-left: 15px;
+      color: #000;
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 0;
+        height: 15px;
+        position: absolute;
+        border-left: 0.8px solid black;
+        top: 18px;
+        left: 0px;
+      }
     }
 
     .menu-mobile-icon {

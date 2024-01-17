@@ -1,6 +1,6 @@
 <template>
-    <div class="backgroud-black">
-        <div class="popup-content">
+    <div class="backgroud-black" @click="$emit('closeUpdate')">
+        <div class="popup-content" @click.stop="">
             <div class="prodile-content">
                 <!-- <img class="prodile-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
                 <div class="prodile-title">Edit Profile</div>
@@ -21,7 +21,7 @@
                     <b-col cols="12">
                         <div class="input-form-des">*Brithday</div>
                         <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
-                            :locale="'vi'"></b-form-datepicker>
+                            :locale="'en'"></b-form-datepicker>
                     </b-col>
                 </b-row>
                 <b-row v-else>
@@ -40,10 +40,10 @@
                     <b-col cols="12">
                         <div class="input-form-des">*Brithday</div>
                         <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
-                            :locale="'vi'"></b-form-datepicker>
+                            :locale="'en'"></b-form-datepicker>
                     </b-col>
                 </b-row>
-                <div class="up-add-btn" @click="onUpdate()">Cập nhật
+                <div class="up-add-btn" @click="onUpdate()">Save
                 </div>
             </div>
             <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>

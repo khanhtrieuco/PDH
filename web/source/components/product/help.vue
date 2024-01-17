@@ -1,14 +1,14 @@
 <template>
     <div class="backgroud-black" @click="closeUpdate">
-        <div class="popup-content-shipping" @click.stop="">
+        <div class="popup-content-help" @click.stop="">
             <img class="size-close" src="/images/close.svg" @click="$emit('closeUpdate')" />
-            <div class="shiping-full-content">
-                <h4>NEED HELP</h4>
-                <p>We only allow orders to be changed once, for free. Please call & email to assist with any adjustments you
-                    would like to make to your order.</p>
-                <p>Call us: 0986375167</p>
-                <p>Mail us: p.d.h.brand@gmail.com </p>
-            </div>
+            <img class="popup-logo" src="/images/logo-p.svg" />
+            <div class="help-title">NEED HELP</div>
+            <div class="help-text">We only allow orders to be changed once, for free. Please call & email to assist with any
+                adjustments you
+                would like to make to your order.</div>
+            <div class="help-bold">Call us: 0986375167</div>
+            <div class="help-bold">Mail us: p.d.h.brand@gmail.com </div>
         </div>
     </div>
 </template>
@@ -77,31 +77,39 @@ export default {
     align-items: center;
     justify-content: center;
 
-    .popup-content-shipping {
+    .popup-content-help {
         position: relative;
-        width: 70%;
+        width: 60%;
+        max-width: 750px;
+        padding: 40px 120px 60px;
         background-color: #fff;
+        text-align: center;
 
-        .shiping-haft-content {
-            width: 50%;
-            display: inline-block;
-            padding: 50px 20px;
-            color: #000;
-            float: left;
-
-            h2 {
-                text-transform: uppercase;
-            }
+        .popup-logo {
+            margin: auto;
+            margin-top: 20px;
+            width: 120px;
         }
 
-        .shiping-full-content {
-            width: 100%;
-            display: inline-block;
-            padding: 50px 20px;
+        .help-title {
+            font-size: 14px;
+            margin-top: 40px;
+            font-family: 'Aeroport-bold';
             color: #000;
-            h2 {
-                text-transform: uppercase;
-            }
+        }
+
+        .help-text {
+            font-size: 11px;
+            margin-top: 40px;
+            font-family: 'Aeroport';
+            color: #000;
+        }
+
+        .help-bold {
+            font-size: 11px;
+            margin-top: 10px;
+            font-family: 'Aeroport-bold';
+            color: #000;
         }
 
         .size-close {
@@ -115,21 +123,56 @@ export default {
 
 @media (max-width: 520px) {
     .backgroud-black {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        background-color: #000000b3;
+        z-index: 15;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        .popup-content-shipping {
+        .popup-content-help {
             position: relative;
             width: 100%;
+            max-width: 750px;
+            padding: 20px 80px 40px;
+            background-color: #fff;
+            text-align: center;
 
-            .shiping-haft-content {
-                width: 100%;
-                display: inline-block;
-                padding: 16px;
+            .popup-logo {
+                margin: auto;
+                margin-top: 20px;
+                width: 120px;
+            }
+
+            .help-title {
+                font-size: 14px;
+                margin-top: 30px;
+                font-family: 'Aeroport-bold';
+                color: #000;
+            }
+
+            .help-text {
+                font-size: 11px;
+                margin-top: 30px;
+                font-family: 'Aeroport';
+                color: #000;
+            }
+
+            .help-bold {
+                font-size: 11px;
+                margin-top: 10px;
+                font-family: 'Aeroport-bold';
+                color: #000;
             }
 
             .size-close {
                 position: absolute;
-                right: 15px;
-                top: 15px;
+                right: 30px;
+                top: 30px;
                 cursor: pointer;
             }
         }
