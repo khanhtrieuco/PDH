@@ -28,11 +28,16 @@
     <Collections :isMobile="isMobile" />
     <!-- <BannerAbout v-if="isMobile" :isMobile="isMobile" /> -->
     <div class="about-home" style="background-image: url('/images/home_bg_about.jpg');" v-if="!isMobile">
-      <div class="about-home-content">
+      <div class="about-home-content container">
         <img class="about-home-img-model" src="/images/home-about-model.jpg" />
         <div class="about-home-text-content">
-          <img class="about-home-img-text" src="/images/home-about-text1.svg" />
-          <div class="about-home-text">{{ $t('Home_about') }}</div>
+          <!-- <img class="about-home-img-text" src="/images/home-about-text1.svg" /> -->
+          <div class="about-home-name"><img class="about-home-img-text" src="/images/a1.svg" /></div>
+          <div class="about-home-name"><img class="about-home-img-text" src="/images/a2.svg" /></div>
+          <div class="about-home-name-1"><img class="about-home-img-text" src="/images/a3.svg" /></div>
+          <div class="about-home-sub-content">
+            <div class="about-home-text">{{ $t('Home_about') }}</div>
+          </div>
           <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()" />
         </div>
       </div>
@@ -42,9 +47,23 @@
         <img class="about-home-img-mobile" src="/images/home-about-modelm.jpg" />
       </div>
       <div class="about-home-right-content">
-        <img class="about-home-img-text" src="/images/about-text.svg" />
-        <div class="about-home-text">{{ $t('Home_about') }}</div>
-        <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()" />
+        <!-- <img class="about-home-img-text" src="/images/about-text.svg" /> -->
+        <div class="about-home-mobile-text">
+          <div class="about-home-mobile-text-div">HOUSE OF</div>
+        </div>
+        <div class="about-home-mobile-text">
+          <div class="about-home-mobile-text-div">PHAN</div>
+        </div>
+        <div class="about-home-mobile-text">
+          <div class="about-home-mobile-text-div">DANG</div>
+        </div>
+        <div class="about-home-mobile-text">
+          <div class="about-home-mobile-text-div">HOANG</div>
+        </div>
+        <div class="about-home-sub-content">
+          <div class="about-home-text">{{ $t('Home_about') }}</div>
+          <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()" />
+        </div>
       </div>
     </div>
     <News :isMobile="isMobile" />
@@ -86,7 +105,7 @@ export default {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     this.isMobile = this.checkMobile()
     this.getBannerTop()
-    setTimeout(()=>{this.animateOnScroll()},300)
+    setTimeout(() => { this.animateOnScroll() }, 300)
   },
   methods: {
     ...mapActions({
@@ -105,7 +124,6 @@ export default {
       this.$router.push({ path: '/house-of-pdh' })
     },
     animateOnScroll() {
-      console.log(this.isMobile)
       if (this.isMobile) {
         this.$gsap.fromTo('.about-home-img-mobile',
           { x: -200, opacity: 0 },
@@ -121,12 +139,12 @@ export default {
               scrub: true
             }
           })
-        this.$gsap.fromTo('.about-home-img-text',
-          { x: 200, opacity: 0 },
+        this.$gsap.fromTo('.about-home-mobile-text-div',
+          { y: 100, opacity: 0.7 },
           {
-            x: 0,
+            y: 0,
             opacity: 1,
-            duration: 4,
+            duration: 2,
             ease: 'Power1.easeInOut',
             scrollTrigger: {
               trigger: '.collection-container',
@@ -136,7 +154,7 @@ export default {
             }
           })
         this.$gsap.fromTo('.about-home-text',
-          { y: 200, opacity: 0 },
+          { y: 100, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -149,34 +167,44 @@ export default {
               scrub: true
             }
           })
+        this.$gsap.fromTo('.about-home-read',
+          { y: 150, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 2,
+            ease: 'Power1.easeInOut',
+            scrollTrigger: {
+              trigger: '.collection-container',
+              start: 'top top',
+              end: '+=300',
+              scrub: true
+            }
+          })
       } else {
         this.$gsap.fromTo('.about-home-img-model',
-          { x: -400, opacity: 0 },
+          { x: -200, opacity: 0 },
           {
             x: 0,
             opacity: 1,
-            duration: 4,
+            duration: 2,
             ease: 'Power1.easeInOut',
             scrollTrigger: {
-              trigger: '.about-home',
-              // pin: true,
-              start: 'top top',
-              end: '+=600',
+              trigger: '.collection-container',
+              start: 'top +=300px',
               scrub: true
             }
           })
         this.$gsap.fromTo('.about-home-img-text',
-          { x: 400, opacity: 0 },
+          { y: 300, opacity: 0.7 },
           {
-            x: 0,
+            y: 0,
             opacity: 1,
-            duration: 4,
+            duration: 2,
             ease: 'Power1.easeInOut',
             scrollTrigger: {
-              trigger: '.about-home',
-              // pin: true,
-              start: 'top top',
-              end: '+=600',
+              trigger: '.collection-container',
+              start: 'top +=300px',
               scrub: true
             }
           })
@@ -188,10 +216,8 @@ export default {
             duration: 4,
             ease: 'Power1.easeInOut',
             scrollTrigger: {
-              trigger: '.about-home',
-              // pin: true,
-              start: 'top top',
-              end: '+=600',
+              trigger: '.collection-container',
+              start: 'top +=300px',
               scrub: true
             }
           })
@@ -260,27 +286,42 @@ export default {
     position: relative;
     display: inline-block;
     text-align: center;
-    margin-left: -30px;
-    padding: 0px 60px;
+    padding: 0px 0px;
+    margin-left: auto;
+    margin-right: auto;
 
     .about-home-img-model {
       display: inline-block;
-      height: 38vh;
-      min-height: 370px;
-      max-height: 420px;
-      margin-right: 50px;
-      max-width: 22%;
+      width: 22%;
+      margin-right: 30px;
     }
 
     .about-home-text-content {
       display: inline-block;
       position: relative;
-      width: 72%;
+      float: right;
+      width: calc(77% - 30px);
 
-      .about-home-img-text {
-        height: 38vh;
-        max-height: 420px;
-        min-height: 370px;
+      .about-home-name {
+        height: 113px;
+        overflow: hidden;
+        text-align: left;
+        margin-bottom: 30px;
+
+        .about-home-img-text {
+          height: 100%;
+        }
+      }
+
+      .about-home-name-1 {
+        height: 113px;
+        overflow: hidden;
+        text-align: right;
+        margin-bottom: 5px;
+
+        .about-home-img-text {
+          height: 100%;
+        }
       }
 
       .about-home-text {
@@ -292,6 +333,15 @@ export default {
         font-family: "Aeroport-light";
         font-size: 16px;
         width: 388px;
+      }
+
+      .about-home-sub-content {
+        height: 125px;
+        width: 388px;
+        overflow: hidden;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
       }
 
       .about-home-read {
@@ -361,6 +411,7 @@ export default {
       width: 50%;
       float: left;
       text-align: right;
+      overflow: hidden;
 
       .about-home-img-mobile {
         height: 240px;
@@ -374,21 +425,43 @@ export default {
       width: 50%;
       float: right;
       padding-left: 10px;
-      .about-home-text{
+      margin-top: -5px;
+
+      .about-home-text {
         position: absolute;
         bottom: 20px;
-        left: 10px;
         color: #000;
         text-align: left;
         font-family: "Aeroport-light";
         font-size: 9px;
         width: 160px;
       }
-      .about-home-read{
+
+      .about-home-read {
         position: absolute;
         bottom: -5px;
-        left: 10px;
+        left: 0px;
         width: 75px;
+      }
+
+      .about-home-sub-content {
+        height: 125px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .about-home-mobile-text {
+        height: 30px;
+        overflow: hidden;
+
+        .about-home-mobile-text-div {
+          font-size: 50px;
+          line-height: 22px;
+          font-size: 34px;
+          font-family: "Aeroport";
+          color: #000;
+          line-height: 30px;
+        }
       }
     }
   }

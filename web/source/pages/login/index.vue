@@ -114,7 +114,7 @@ export default {
         },
         async onCheck() {
             if (!this.email) {
-                this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
+                this.showNotification('warning', `Please enter complete login information`)
                 return
             }
             let rs = await this.checkEmail({ email: this.email })
@@ -128,7 +128,7 @@ export default {
         },
         async onLogin() {
             if (!this.email || !this.password) {
-                this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
+                this.showNotification('warning', `Please enter complete login information`)
                 return
             }
             let rs = await this.loginEmail({
@@ -136,20 +136,20 @@ export default {
                 password: this.password
             })
             if (rs) {
-                this.showNotification('success', `Đăng nhập thành công`)
+                this.showNotification('success', `Logged in successfully`)
                 this.$router.push({ path: '/' })
             } else {
-                this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
+                this.showNotification('danger', `Login failed, please try again`)
             }
         },
         async onRegister() {
             if (!this.email || !this.newpassword || !this.username) {
-                this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
+                this.showNotification('warning', `Please enter complete login information`)
                 return
             }
             const re = /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()~¥=_+}{":;'?/>.<,`\-\|\[\]]{8,50}$/
             if (!re.test(this.newpassword)) {
-                this.showNotification('warning', `Vui lòng nhập password theo yêu cầu`)
+                this.showNotification('warning', `Please enter password as requested`)
                 return
             }
             let rs = await this.registerByEmail({
@@ -158,10 +158,10 @@ export default {
                 password: this.newpassword,
             })
             if (rs) {
-                this.showNotification('success', `Tạo tài khoản thành công`)
+                this.showNotification('success', `Account successfully created`)
                 this.$router.push({ path: '/' })
             } else {
-                this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
+                this.showNotification('danger', `Login failed, please try again`)
             }
         },
         async onGoogleLogin() {

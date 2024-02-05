@@ -487,7 +487,7 @@ export default {
     },
     logoutAction() {
       this.userLogout()
-      this.showNotification('success', `Đăng xuất thành công`)
+      this.showNotification('success', `Signed out successfully`)
       this.$router.push({ path: '/' })
     },
     onShowMenuMobile() {

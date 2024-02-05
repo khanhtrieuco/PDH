@@ -39,8 +39,16 @@
                     </b-col>
                     <b-col cols="12">
                         <div class="input-form-des">*Brithday</div>
-                        <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
-                            :locale="'en'"></b-form-datepicker>
+                        <!-- <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
+                            :locale="'en'"></b-form-datepicker> -->
+                        <b-input-group class="mb-3">
+                            <b-form-input class="input-form-prodile" id="example-input" v-model="form.brithday" type="text" placeholder="YYYY-MM-DD"
+                                autocomplete="off"></b-form-input>
+                            <b-input-group-append>
+                                <b-form-datepicker v-model="form.brithday" button-only right locale="en-US"
+                                    aria-controls="example-input"></b-form-datepicker>
+                            </b-input-group-append>
+                        </b-input-group>
                     </b-col>
                 </b-row>
                 <div class="up-add-btn" @click="onUpdate()">Save
@@ -181,6 +189,10 @@ export default {
         font-size: 13px;
         border: 1px solid #000;
         border-radius: 0px;
+    }
+
+    .btn-secondary{
+        padding: 4px 8px;
     }
 
     .up-add-btn {
