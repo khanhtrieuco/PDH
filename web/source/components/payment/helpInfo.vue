@@ -14,10 +14,25 @@
         <div class="help-card-des">Call us: +84 764 976 754</div>
       </div>
       <div class="help-card">
-        <div class="help-card-title">EASY RETURNS</div>
-        <div class="help-card-des">We provide free pick up for your returns: you have 30 days from delivery to follow our
-          quick and easy return procedure*. Alternatively, orders can be returned in one of our stores.
-          *Exceptions apply.</div>
+        <div class="help-card-title">PAYMENT METHODS</div>
+        <div class="help-card-des-last">
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-visa.svg" />
+            <div class="help-card-item-text">Visa</div>
+          </div>
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-master.svg" />
+            <div class="help-card-item-text">Mastercard</div>
+          </div>
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-ae.svg" />
+            <div class="help-card-item-text">American Express</div>
+          </div>
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-paypal.svg" />
+            <div class="help-card-item-text">Paypal</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="container" v-if="isMobile">
@@ -32,6 +47,27 @@
         <div class="help-card-des">By contacting Client Service, you agree that your data will be transferred outside your
           country.</div>
         <div class="help-card-des">Call us: +84 764 976 754</div>
+      </div>
+      <div class="help-card">
+        <div class="help-card-title">PAYMENT METHODS</div>
+        <div class="help-card-des-last">
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-visa.svg" />
+            <div class="help-card-item-text">Visa</div>
+          </div>
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-master.svg" />
+            <div class="help-card-item-text">Mastercard</div>
+          </div>
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-ae.svg" />
+            <div class="help-card-item-text">American Express</div>
+          </div>
+          <div class="help-card-item">
+            <img class="help-card-image" src="/images/p-paypal.svg" />
+            <div class="help-card-item-text">Paypal</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -75,12 +111,40 @@ export default {
       margin-bottom: 10px;
     }
 
+    .help-card-des-last {
+      color: #717171;
+      text-align: center;
+      font-family: 'Aeroport-light';
+      font-size: 13px;
+      margin-bottom: 10px;
+      padding-left: 30px;
+
+      .help-card-item {
+        width: 50%;
+        display: inline-block;
+        float: left;
+        text-align: left;
+
+        .help-card-image {
+          height: 25px;
+          margin-right: 15px;
+          margin-bottom: 10px;
+          margin-top: 5px;
+        }
+
+        .help-card-item-text {
+          line-height: 25px;
+          display: inline-block;
+        }
+      }
+    }
+
     &:after {
       content: "";
       height: 80%;
       width: 2px;
       display: block;
-      border-right: 1px solid #000;
+      border-right: 1px solid #717171;
       position: absolute;
       right: 0px;
       top: 15%;
@@ -95,7 +159,8 @@ export default {
 @media (max-width: 520px) {
   .help-panel {
     background: #F5F5F5;
-    padding: 20px 0px;
+    padding-top: 20px;
+    padding-bottom: 100px;
 
     .help-card {
       width: 100%;
@@ -118,6 +183,34 @@ export default {
         margin-bottom: 5px;
       }
 
+      .help-card-des-last {
+        color: #717171;
+        text-align: center;
+        font-family: 'Aeroport-light';
+        font-size: 10px;
+        margin-bottom: 10px;
+        padding-left: 0px;
+        .help-card-item {
+          width: 50%;
+          display: inline-block;
+          float: left;
+          text-align: left;
+
+          .help-card-image {
+            height: 25px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            margin-top: 5px;
+          }
+
+          .help-card-item-text {
+            line-height: 25px;
+            display: inline-block;
+            font-size: 10px;
+          }
+        }
+      }
+
       &:after {
         display: none;
       }
@@ -128,12 +221,11 @@ export default {
         width: 100%;
         display: block;
         border-right: none;
-        border-top: 1px solid #000;
+        border-top: 1px solid #d9d9d9;
         position: absolute;
         right: 0px;
         top: 0px;
       }
     }
   }
-}
-</style>
+}</style>

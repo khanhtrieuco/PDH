@@ -12,7 +12,7 @@
                         <div class="payment-step-title">1. {{ $t('Payment_title_1') }}</div>
                         <div class="payment-step-content" v-if="loggedIn">
                             <div class="payment-step-content-title">Email Address</div>
-                            <div class="payment-step-content-text">lmydu99@gmail.com</div>
+                            <div class="payment-step-content-text">{{profile.email}}</div>
                         </div>
                         <div class="payment-step-content" v-if="!loggedIn">
                             <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
@@ -100,7 +100,7 @@
                     <div class="payment-step-title">1. {{ $t('Payment_title_1') }}</div>
                     <div class="payment-step-content" v-if="loggedIn">
                         <div class="payment-step-content-title">Email Address</div>
-                        <div class="payment-step-content-text">lmydu99@gmail.com</div>
+                        <div class="payment-step-content-text">{{profile.email}}</div>
                     </div>
                     <div class="payment-step-content" v-if="!loggedIn">
                         <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
@@ -134,7 +134,7 @@
                             <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
                             <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                             </div>
-                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">slick-active</div>
+                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
                         </div>
                         <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
                             @closeUpdate="closeUpdateAddress"></Address>
@@ -198,8 +198,8 @@
                     <div class="d-flex justify-content-between">
                         <div class="w-50">
                             <div class="payment-step-success-title">Contact</div>
-                            <div class="payment-step-success-text">Email: lmydu99@gmail.com</div>
-                            <div class="payment-step-success-text">Phone: +66 785 5533</div>
+                            <div class="payment-step-success-text">Email: {{profile.email}}</div>
+                            <div class="payment-step-success-text">Phone: {{profile.phone}}</div>
                         </div>
                         <div class="w-50">
                             <div class="payment-step-success-title">Billing Address</div>
@@ -276,7 +276,7 @@
         </div>
         <div class="payment-success-info" v-if="paymentDone === 'fail'">
             <div class="payment-order-top">
-                <div class="payment-order-top-title">ORDERED UUSUCCESSFULLY</div>
+                <div class="payment-order-top-title">ORDERED UNSUCCESSFULLY</div>
                 <div class="payment-order-top-code">#CH0220</div>
                 <div class="payment-order-top-des">Your order is unsuccessful in payment. Please re-order and check again your payment method to continue the shopping experiences</div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
@@ -294,8 +294,8 @@
                     <div class="d-flex justify-content-between">
                         <div class="w-50">
                             <div class="payment-step-success-title">Contact</div>
-                            <div class="payment-step-success-text">Email: lmydu99@gmail.com</div>
-                            <div class="payment-step-success-text">Phone: +66 785 5533</div>
+                            <div class="payment-step-success-text">Email: {{profile.email}}</div>
+                            <div class="payment-step-success-text">Phone: {{profile.phone}}</div>
                         </div>
                         <div class="w-50">
                             <div class="payment-step-success-title">Billing Address</div>
@@ -428,6 +428,9 @@ export default {
         }),
     },
     async mounted() {
+        if (!this.$route.hash) {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
         this.isMobile = this.checkMobile()
         await this.getListCartUser()
         await this.getListPayment()
@@ -1164,7 +1167,7 @@ export default {
                 }
 
                 .payment-step-shipping-choice {
-                    background-color: #D9D9D9;
+                    background-color: #fff;
                     height: 40px;
                     width: 50%;
                     line-height: 40px;
@@ -1178,7 +1181,8 @@ export default {
 
                 .shiping-active {
                     font-family: 'Aeroport';
-                    background-color: #fff;
+                    background-color: #D9D9D9;
+                    font-weight: bolder;
 
                 }
 

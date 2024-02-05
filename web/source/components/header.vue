@@ -10,14 +10,17 @@
           </div> -->
           <span @click="choicetab(idx + 1)" :class="`menu-text ${tab == (idx + 1) ? 'menu-text-active' : ''}`"
             v-for="(_i, idx) in listCollection" :key="idx">
-            {{ $i18n.locale === 'vn' ? _i.name : _i.name_en ?? _i.name }}
+            <span v-if="idx === 0" :class="`${menuActive === 1 ? 'menu-text-bold' : ''}`">
+              {{ $i18n.locale === 'vn' ? _i.name : _i.name_en ?? _i.name }}
+            </span>
+            <span v-else>{{ $i18n.locale === 'vn' ? _i.name : _i.name_en ?? _i.name }}</span>
           </span>
           <div @click="goPage('/')">
             <img v-if="!tab" class="menu-logo" src="/images/logo-head.png" />
             <img v-else class="menu-logo" src="/images/menu.png" />
           </div>
-          <span :class="`menu-text ${tab == 4 ? 'menu-text-active' : ''}`" @click="choicetab(4)">{{ $t('About') }}</span>
-          <span :class="`menu-text ${tab == 5 ? 'menu-text-active' : ''}`" @click="choicetab(5)">{{ $t('Friendship')
+          <span :class="`menu-text ${tab == 4 ? 'menu-text-active' : ''} ${menuActive === 2 ? 'menu-text-bold' : ''}`" @click="choicetab(4)">{{ $t('About') }}</span>
+          <span :class="`menu-text ${tab == 5 ? 'menu-text-active' : ''} ${menuActive === 3 ? 'menu-text-bold' : ''}`" @click="choicetab(5)">{{ $t('Friendship')
           }}</span>
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
@@ -303,6 +306,7 @@ export default {
       listNewsType1: [],
       listNewsType2: [],
       listNewsType3: [],
+      menuActive: null
     }
   },
   computed: {
@@ -321,17 +325,29 @@ export default {
   unmounted() {
     window.removeEventListener('scroll', this.handleScroll);
   },
-  // watch: {
-  //   searchText: function (val) {
-  //     if (this.timeOut) {
-  //       clearTimeout(this.timeOut);
-  //       this.timeOut = null;
-  //     }
-  //     this.timeout = setTimeout(async () => {
-  //       this.loadProducts()
-  //     }, 400)
-  //   },
-  // },
+  watch: {
+    // searchText: function (val) {
+    //   if (this.timeOut) {
+    //     clearTimeout(this.timeOut);
+    //     this.timeOut = null;
+    //   }
+    //   this.timeout = setTimeout(async () => {
+    //     this.loadProducts()
+    //   }, 400)
+    // },
+    $route (to, from){
+      console.log(this.$route.path)
+      if(this.$route.path.includes('/women')) {
+        this.menuActive = 1
+      } else if(this.$route.path.includes('/show') || this.$route.path.includes('/news') || this.$route.path.includes('/house-of-pdh')) {
+        this.menuActive = 2
+      } else if(this.$route.path.includes('/account') || this.$route.path.includes('/client-service') ) {
+        this.menuActive = 3
+      } else {
+        this.menuActive = null
+      }
+    }
+  },
   async mounted() {
     let llang = window.localStorage.getItem('lang')
     if (llang) {
@@ -559,7 +575,7 @@ export default {
     font-family: 'Aeroport';
     padding: 0px 10px;
     color: #000;
-
+    width: 165px;
     &:hover {
       font-weight: bolder;
     }
@@ -567,6 +583,10 @@ export default {
 
   .menu-text-active {
     border-top: 2px solid #000;
+    font-family: 'Aeroport-bold';
+  }
+
+  .menu-text-bold {
     font-family: 'Aeroport-bold';
   }
 
@@ -930,6 +950,7 @@ export default {
     width: 100%;
     height: 47px;
     line-height: 47px;
+    overflow: hidden;
 
     .lang-btn {
       cursor: pointer;

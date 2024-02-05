@@ -1,11 +1,11 @@
 <template>
     <div class="about-content">
-        <!-- <div class="about-banner">
+        <div class="about-banner">
             <div class="about-banner-top">
                 <img class="w-100" src="/images/about-crop.jpeg" v-if="!isMobile" />
                 <img class="about-banner-image" src="/images/about-top-m.jpg" v-if="isMobile" />
                 <div class="about-banner-content">
-                    <div class="about-title">ABOUT P.D.H</div>
+                    <!-- <div class="about-title">ABOUT P.D.H</div> -->
                     <img class="about-name-img" src="/images/about-name.png" />
                     <div class="about-des">PHAN DANG HOANG - a fashion brand founded by designer Phan Dang Hoang with
                         inspirations from painting, architecture and East and West cultural interference. The brand's
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <div>
             <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
             <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
@@ -363,7 +363,7 @@ export default {
                             font-weight: 700;
                             margin-top: 70px;
                             text-transform: uppercase;
-                            width: 530px;
+                            width: 550px;
                             margin-left: auto;
                             margin-right: auto;
                         }
@@ -791,7 +791,7 @@ export default {
                                 font-weight: 700;
                                 margin-top: 70px;
                                 text-transform: uppercase;
-                                width: 530px;
+                                width: 550px;
                                 margin-left: auto;
                                 margin-right: auto;
                             }
@@ -1505,6 +1505,8 @@ export default {
         text-align: center;
         padding-top: 100px;
         padding-bottom: 20px;
+        max-width: 100%;
+        overflow: hidden;
 
         .inside-slider {
             display: flex;
@@ -1627,6 +1629,7 @@ export default {
                         .slide-image-wrapper {
                             overflow: hidden;
                             position: relative;
+                            width: 100%;
 
                             img {
                                 width: 80%;

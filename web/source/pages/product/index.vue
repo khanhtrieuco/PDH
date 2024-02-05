@@ -599,8 +599,9 @@ export default {
     }
 
     .product-detail-list-related {
-        margin-top: 120px;
-        padding: 120px 0px;
+        margin-top: 50px;
+        padding-top: 50px;
+        padding-bottom: 0px;
         border-top: 1px solid #717171;
 
         .product-detail-list-title {

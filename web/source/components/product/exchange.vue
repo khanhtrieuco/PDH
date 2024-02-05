@@ -4,72 +4,94 @@
             <img class="size-close" src="/images/close.svg" @click="$emit('closeUpdate')" />
             <img class="popup-logo" src="/images/logo-p.svg" />
             <div class="exchange-title">EXCHANGE AND RETURN</div>
-            <div class="exchange-haft-content">
-                <div class="exchange-title-box">EXCHANGE VALUE</div>
-                <div class="exchange-text">The amount of two-way shipping, customs fees, and any relevant duty must be paid
-                    by you</div>
-                <div class="exchange-text">The merchandise exchange amount will be granted based on the purchase price,
-                    excluding original intermediary fees, shipping expenses, and any applicable tax or custom.</div>
-                <div class="exchange-text">If the price of the items you wish to exchange is less than the exchange amount,
-                    the difference will be preserved as a reserved coupon or credit for future purchases at
-                    https://phandanghoang.com.</div>
-            </div>
-            <div class="exchange-haft-content">
-                <div class="exchange-title-box">RETURN/REFUND AND CANCELLATION WILL NOT BE PERMITTED.</div>
-                <div class="exchange-text">Completed orders will not be returned, refunded, or canceled under any
-                    circumstances.</div>
-                <div class="exchange-text-sub" style="margin-top: 20px;">* Please take note that:</div>
-                <div class="exchange-text-sub">All comments and recommendations from our customer service are only for
-                    purposes of reference. The order will be executed based on the final customer's decision and complete
-                    order confirmation.</div>
-            </div>
-            <div class="exchange-full-content">
-                <div class="exchange-title-box">IMPORTANT INFORMATION REGARDING DELIVERY AND EXCHANGE</div>
-                <div class="exchange-haft">
-                    <div class="exchange-haft-text">1. To ensure we give you the best service possible, please include
-                        videos and receipts as proof in your exchange question. We require this for all inquiries, and we do
-                        not resolve cases unless we receive unpacking videos.</div>
-                    <div class="exchange-haft-text">2. Only items that comply with these conditions may be accepted by Phan
-                        Dang Hoang. Items regarded as unacceptable will be promptly returned to clients at their expense.
+            <div class="exchange-scrool-content">
+                <div class="exchange-haft-content">
+                    <div class="exchange-title-box">EXCHANGE VALUE</div>
+                    <div class="exchange-text">The amount of two-way shipping, customs fees, and any relevant duty must be
+                        paid
+                        by you</div>
+                    <div class="exchange-text">The merchandise exchange amount will be granted based on the purchase price,
+                        excluding original intermediary fees, shipping expenses, and any applicable tax or custom.</div>
+                    <div class="exchange-text">If the price of the items you wish to exchange is less than the exchange
+                        amount,
+                        the difference will be preserved as a reserved coupon or credit for future purchases at
+                        https://phandanghoang.com.</div>
+                </div>
+                <div class="exchange-haft-content">
+                    <div class="exchange-title-box">RETURN/REFUND AND CANCELLATION WILL NOT BE PERMITTED.</div>
+                    <div class="exchange-text">Completed orders will not be returned, refunded, or canceled under any
+                        circumstances.</div>
+                    <div class="exchange-text-sub" style="margin-top: 20px;">* Please take note that:</div>
+                    <div class="exchange-text-sub">All comments and recommendations from our customer service are only for
+                        purposes of reference. The order will be executed based on the final customer's decision and
+                        complete
+                        order confirmation.</div>
+                </div>
+                <div class="exchange-full-content">
+                    <div class="exchange-title-box">IMPORTANT INFORMATION REGARDING DELIVERY AND EXCHANGE</div>
+                    <div class="exchange-haft">
+                        <div class="exchange-haft-text">1. To ensure we give you the best service possible, please include
+                            videos and receipts as proof in your exchange question. We require this for all inquiries, and
+                            we do
+                            not resolve cases unless we receive unpacking videos.</div>
+                        <div class="exchange-haft-text">2. Only items that comply with these conditions may be accepted by
+                            Phan
+                            Dang Hoang. Items regarded as unacceptable will be promptly returned to clients at their
+                            expense.
+                        </div>
+                        <div class="exchange-haft-text">3. Products need to be undamaged and in original condition, with all
+                            tags still on. Belts must also be returned, along with any packaging—such as zippered bags—if
+                            any
+                            was given.</div>
+                        <div class="exchange-haft-text">4. We advise using a tracking service with your neighborhood post
+                            office
+                            and carefully and securely packing the order. It is advisable to acquire documentation of the
+                            return
+                            shipping since you have the responsibility of handling the items with appropriate care and will
+                            be
+                            held accountable for any harm caused to them until the returned item reaches our atelier.
+                            Products
+                            that are damaged during delivery are not our responsibility.</div>
                     </div>
-                    <div class="exchange-haft-text">3. Products need to be undamaged and in original condition, with all
-                        tags still on. Belts must also be returned, along with any packaging—such as zippered bags—if any
-                        was given.</div>
-                    <div class="exchange-haft-text">4. We advise using a tracking service with your neighborhood post office
-                        and carefully and securely packing the order. It is advisable to acquire documentation of the return
-                        shipping since you have the responsibility of handling the items with appropriate care and will be
-                        held accountable for any harm caused to them until the returned item reaches our atelier. Products
-                        that are damaged during delivery are not our responsibility.</div>
+                    <div class="exchange-haft">
+                        <div class="exchange-haft-text">5. In terms of delivery, you can either permit us to arrange a
+                            return
+                            shipment for you or arrange a shipment on your own. Our technical team will thoroughly inspect
+                            the
+                            returned product before providing more assistance through our private customer service. The
+                            tracking
+                            information will be provided to the consumer for further investigation.</div>
+                        <div class="exchange-haft-text">6. If the shipment is handled by the customer, please provide
+                            evidence
+                            of the shipment for our records. After submitting the proof of delivery, the customer must
+                            provide
+                            us with the tracking number so that we may follow the shipment's location.</div>
+                        <div class="exchange-haft-text">7. In case we fail to collect tracking information from the customer
+                            in
+                            advance and the shipment is lost in transit, Phan Dang Hoang bears no responsibility for
+                            tracking
+                            and locating the delivery. Customers must be responsible for contacting the courier or customs
+                            and
+                            tracing the shipment. No exchange will be done until we successfully receive the products.</div>
+                        <div class="exchange-haft-text">8. We will cancel any exchange request if the shipment process takes
+                            more than 30 days.</div>
+                    </div>
                 </div>
-                <div class="exchange-haft">
-                    <div class="exchange-haft-text">5. In terms of delivery, you can either permit us to arrange a return
-                        shipment for you or arrange a shipment on your own. Our technical team will thoroughly inspect the
-                        returned product before providing more assistance through our private customer service. The tracking
-                        information will be provided to the consumer for further investigation.</div>
-                    <div class="exchange-haft-text">6. If the shipment is handled by the customer, please provide evidence
-                        of the shipment for our records. After submitting the proof of delivery, the customer must provide
-                        us with the tracking number so that we may follow the shipment's location.</div>
-                    <div class="exchange-haft-text">7. In case we fail to collect tracking information from the customer in
-                        advance and the shipment is lost in transit, Phan Dang Hoang bears no responsibility for tracking
-                        and locating the delivery. Customers must be responsible for contacting the courier or customs and
-                        tracing the shipment. No exchange will be done until we successfully receive the products.</div>
-                    <div class="exchange-haft-text">8. We will cancel any exchange request if the shipment process takes
-                        more than 30 days.</div>
+                <div class="exchange-full-content">
+                    <div class="exchange-title-box">WE DO NOT ACCEPT EXCHANGES IN THE FOLLOWING CASES:</div>
+                    <div class="exchange-haft-text">1. Phan Dang Hoang retains the right to reject any items that do not
+                        fulfill the stated conditions. Unacceptable items will be promptly returned to clients at their
+                        expense.
+                    </div>
+                    <div class="exchange-haft-text">2. Exchange requests for products that have been damaged (torn,
+                        deformed, broken, etc.) due to consumer mistakes will not be accepted. Items with makeup marks, tan,
+                        deodorant, lint or fur, the scent of perfume, smoke, body odors, or stains that have been altered or
+                        washed are inappropriate.</div>
+                    <div class="exchange-haft-text">3. We do not accept exchange requests for personalized items or
+                        discounted or gifted items.</div>
+                    <div class="exchange-haft-text">4. Please do not proceed with any exchange until we have confirmed it.
+                        In this case, we will not provide support or exchange the goods.</div>
                 </div>
-            </div>
-            <div class="exchange-full-content">
-                <div class="exchange-title-box">WE DO NOT ACCEPT EXCHANGES IN THE FOLLOWING CASES:</div>
-                <div class="exchange-haft-text">1. Phan Dang Hoang retains the right to reject any items that do not
-                    fulfill the stated conditions. Unacceptable items will be promptly returned to clients at their expense.
-                </div>
-                <div class="exchange-haft-text">2. Exchange requests for products that have been damaged (torn,
-                    deformed, broken, etc.) due to consumer mistakes will not be accepted. Items with makeup marks, tan,
-                    deodorant, lint or fur, the scent of perfume, smoke, body odors, or stains that have been altered or
-                    washed are inappropriate.</div>
-                <div class="exchange-haft-text">3. We do not accept exchange requests for personalized items or
-                    discounted or gifted items.</div>
-                <div class="exchange-haft-text">4. Please do not proceed with any exchange until we have confirmed it.
-                    In this case, we will not provide support or exchange the goods.</div>
             </div>
         </div>
     </div>
@@ -248,6 +270,11 @@ export default {
             cursor: pointer;
         }
     }
+
+    .exchange-scrool-content{
+        max-height: 600px;
+        overflow-y: scroll;
+    }
 }
 
 @media (max-width: 520px) {
@@ -361,6 +388,5 @@ export default {
             }
         }
     }
-}
-</style>
+}</style>
   

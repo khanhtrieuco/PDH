@@ -2,8 +2,11 @@
     <div class="backgroud-black" @click="closeUpdate">
         <div class="popup-content" @click.stop="">
             <img class="size-close" src="/images/close.svg" @click="$emit('closeUpdate')" />
-            <div class="size-content">
+            <div class="size-content" v-if="!isMobile">
                 <img class="size-content-img" src="/images/size.svg" />
+            </div>
+            <div class="size-content" v-else>
+                <img class="size-content-img" src="/images/size.jpg" />
             </div>
         </div>
     </div>
