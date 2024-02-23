@@ -1,6 +1,6 @@
 <template>
-    <div class="news-item">
-        <NuxtLink :to="`/news/${item.attributes?.slug}`">
+    <div class="news-item-home">
+        <a target="_blank" :href="item.attributes?.slug">
             <div class="news-img">
                 <ThumbImage ratio="3-4" :src="item.attributes?.thub.data.attributes.url"></ThumbImage>
                 <div class="news-dot news-dot1">
@@ -16,10 +16,10 @@
                     <div></div>
                 </div>
             </div>
-        </NuxtLink>
-        <NuxtLink :to="`/news/${item.attributes?.slug}`">
+        </a>
+        <a target="_blank" :href="item.attributes?.slug">
             <div class="news-title"> {{ get_excerpt(item.attributes?.title, 70) }}</div>
-        </NuxtLink>
+        </a>
         <!-- <div class="news-des"> {{ get_excerpt(item.attributes?.short_content, 37) }} </div> -->
     </div>
 </template>
@@ -64,7 +64,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.news-item {
+.news-item-home {
     width: 100%;
     text-align: left;
 
@@ -129,7 +129,7 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .news-item {
+    .news-item-home {
         width: 50%;
         text-align: left;
         padding: 5px;

@@ -54,7 +54,6 @@ export default {
 
                 // add Event Listeners
                 document.addEventListener('click', handler)
-                console.log('afafawa')
             },
 
             unbind: function (el, binding) {

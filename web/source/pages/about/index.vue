@@ -1299,7 +1299,7 @@ export default {
 
             .about-banner-content {
                 position: absolute;
-                top: 30%;
+                top: 28%;
                 text-align: center;
                 left: 50%;
                 transform: translate(-50%);

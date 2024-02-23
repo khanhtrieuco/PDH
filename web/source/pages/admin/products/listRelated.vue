@@ -67,7 +67,6 @@ export default {
             }
         },
         listRelated: function (val) {
-            console.log('reload')
             this.list_data = this.listRelated.data?.filter(o => o.id !== this.product_id)
             this.list_related_id = []
             for (let i = 0; i < this.list_data.length; i++) {

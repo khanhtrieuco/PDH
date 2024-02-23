@@ -118,7 +118,6 @@ export default {
                 return
             }
             let rs = await this.checkEmail({ email: this.email })
-            console.log(rs)
             if (rs) {
                 this.hadaccount = true
             } else {

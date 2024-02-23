@@ -14,7 +14,6 @@ export default {
         if(!_c) {
             state.list_product_view.push(payload.product);
         }
-        console.log(state.list_product_view)
 
     },
 };

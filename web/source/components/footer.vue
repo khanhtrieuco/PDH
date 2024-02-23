@@ -196,6 +196,8 @@ export default {
   .footer-text-span {
     font-family: 'Aeroport-light';
     font-size: 16px;
+    margin-top: 2rem;
+
   }
 
   .footer-input {

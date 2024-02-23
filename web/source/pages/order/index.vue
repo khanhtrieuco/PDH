@@ -312,7 +312,6 @@ export default {
     //   }),
     //   async loadData() {
     //     await this.getListWork()
-    //     console.log(this.listWork)
     //   }
     // }
 }

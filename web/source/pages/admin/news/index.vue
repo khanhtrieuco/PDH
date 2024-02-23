@@ -61,7 +61,7 @@
         </a-table>
         <a-modal title="Thông tin tin tức" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :modalType="modalType" :listCategory="listCategory"
+            <Detail :item="current" :modalType="modalType" :modalOpen="modalOpen" :listCategory="listCategory"
                 @onCancel="() => this.modalOpen = false" @onReload="() => this.onRefresh()" />
         </a-modal>
     </div>
@@ -108,11 +108,13 @@ export default {
                     align: 'center',
                     key: 'type',
                     sorter: true
-                }, {
-                    title: 'Nội dung',
-                    dataIndex: 'attributes.short_content',
-                    key: 'short_content',
-                }, {
+                }, 
+                // {
+                //     title: 'Nội dung',
+                //     dataIndex: 'attributes.short_content',
+                //     key: 'short_content',
+                // },
+                {
                     title: 'Sắp xếp',
                     width: 120,
                     align: 'center',

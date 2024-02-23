@@ -8,6 +8,9 @@
             <span>/</span>
             <span :class="`lang-btn ${$i18n.locale === 'vn' ? 'lang-btn-active' : ''}`" @click="changeLang()">VI</span>
           </div> -->
+          <div v-if="!loggedIn" @click="goLogin" class="menu-auth-btn">Sign in</div>
+          <div v-else @click="logoutAction" class="menu-auth-btn">Log out</div>
+
           <span @click="choicetab(idx + 1)" :class="`menu-text ${tab == (idx + 1) ? 'menu-text-active' : ''}`"
             v-for="(_i, idx) in listCollection" :key="idx">
             <span v-if="idx === 0" :class="`${menuActive === 1 ? 'menu-text-bold' : ''}`">
@@ -19,14 +22,14 @@
             <img v-if="!tab" class="menu-logo" src="/images/logo-head.png" />
             <img v-else class="menu-logo" src="/images/menu.png" />
           </div>
-          <span :class="`menu-text ${tab == 4 ? 'menu-text-active' : ''} ${menuActive === 2 ? 'menu-text-bold' : ''}`" @click="choicetab(4)">{{ $t('About') }}</span>
-          <span :class="`menu-text ${tab == 5 ? 'menu-text-active' : ''} ${menuActive === 3 ? 'menu-text-bold' : ''}`" @click="choicetab(5)">{{ $t('Friendship')
-          }}</span>
-          <div class="d-inline-flex" style="position: relative;">
+          <span :class="`menu-text menu-text-house ${tab == 4 ? 'menu-text-active' : ''} ${menuActive === 2 ? 'menu-text-bold' : ''}`"
+            @click="choicetab(4)">{{ $t('About') }}</span>
+          <span :class="`menu-text menu-text-house ${tab == 5 ? 'menu-text-active' : ''} ${menuActive === 3 ? 'menu-text-bold' : ''}`"
+            @click="choicetab(5)">{{ $t('Friendship')
+            }}</span>
+          <div class="d-inline-flex menu-icon-div" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
-            <div v-if="!loggedIn" @click="goLogin" class="menu-auth-btn">Sign in</div>
-            <div v-else @click="logoutAction" class="menu-auth-btn">Log out</div>
           </div>
         </div>
       </div>
@@ -335,13 +338,12 @@ export default {
     //     this.loadProducts()
     //   }, 400)
     // },
-    $route (to, from){
-      console.log(this.$route.path)
-      if(this.$route.path.includes('/women')) {
+    $route(to, from) {
+      if (this.$route.path.includes('/women')) {
         this.menuActive = 1
-      } else if(this.$route.path.includes('/show') || this.$route.path.includes('/news') || this.$route.path.includes('/house-of-pdh')) {
+      } else if (this.$route.path.includes('/show') || this.$route.path.includes('/news') || this.$route.path.includes('/house-of-pdh')) {
         this.menuActive = 2
-      } else if(this.$route.path.includes('/account') || this.$route.path.includes('/client-service') ) {
+      } else if (this.$route.path.includes('/account') || this.$route.path.includes('/client-service')) {
         this.menuActive = 3
       } else {
         this.menuActive = null
@@ -575,10 +577,11 @@ export default {
     font-family: 'Aeroport';
     padding: 0px 10px;
     color: #000;
-    width: 165px;
-    &:hover {
-      font-weight: bolder;
-    }
+    width: 100px;
+  }
+
+  .menu-text-house {
+    width: 160px;
   }
 
   .menu-text-active {
@@ -593,6 +596,16 @@ export default {
   .menu-logo {
     width: 300px;
     cursor: pointer;
+  }
+
+  .menu-icon-div::before{
+    content: "";
+    width: 0;
+    height: 20px;
+    position: absolute;
+    border-left: 0.8px solid black;
+    top: 25px;
+    left: 0px;
   }
 
   .menu-icon {
@@ -615,19 +628,19 @@ export default {
     font-family: 'Aeroport';
     cursor: pointer;
     font-size: 18px;
-    margin-left: 15px;
-    padding-left: 15px;
+    margin-right: 15px;
+    padding-right: 15px;
     color: #000;
     position: relative;
 
-    &::before {
+    &::after {
       content: '';
       width: 0;
       height: 20px;
       position: absolute;
-      border-left: 0.8px solid black;
+      border-right: 0.8px solid black;
       top: 25px;
-      left: 0px;
+      right: 0px;
     }
   }
 
@@ -800,16 +813,19 @@ export default {
       font-size: 14px;
       margin-left: 15px;
       padding-left: 15px;
+      margin-right: 0px;
+      padding-right: 0px;
       color: #000;
       position: relative;
 
-      &::before {
+      &::after {
         content: '';
         width: 0;
         height: 15px;
         position: absolute;
-        border-left: 0.8px solid black;
+        border-right: 0.8px solid black;
         top: 18px;
+        right: auto;
         left: 0px;
       }
     }

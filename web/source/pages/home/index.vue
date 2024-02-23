@@ -131,7 +131,7 @@ export default {
             x: 0,
             opacity: 1,
             duration: 4,
-            ease: 'Power1.easeInOut',
+            ease: 'Power4.easeInOut',
             scrollTrigger: {
               trigger: '.collection-container',
               start: 'top top',
@@ -145,7 +145,7 @@ export default {
             y: 0,
             opacity: 1,
             duration: 2,
-            ease: 'Power1.easeInOut',
+            ease: 'Power4.easeInOut',
             scrollTrigger: {
               trigger: '.collection-container',
               start: 'top top',
@@ -159,7 +159,7 @@ export default {
             y: 0,
             opacity: 1,
             duration: 4,
-            ease: 'Power1.easeInOut',
+            ease: 'Power4.easeInOut',
             scrollTrigger: {
               trigger: '.collection-container',
               start: 'top top',
@@ -173,7 +173,7 @@ export default {
             y: 0,
             opacity: 1,
             duration: 2,
-            ease: 'Power1.easeInOut',
+            ease: 'Power4.easeInOut',
             scrollTrigger: {
               trigger: '.collection-container',
               start: 'top top',
@@ -188,10 +188,10 @@ export default {
             x: 0,
             opacity: 1,
             duration: 2,
-            ease: 'Power1.easeInOut',
+            ease: 'Power4.easeInOut',
             scrollTrigger: {
-              trigger: '.collection-container',
-              start: 'top +=300px',
+              trigger: '.about-home-read',
+              start: 'top +=1200px',
               scrub: true
             }
           })
@@ -201,23 +201,23 @@ export default {
             y: 0,
             opacity: 1,
             duration: 2,
-            ease: 'Power1.easeInOut',
+            ease: 'Power4.easeInOut',
             scrollTrigger: {
-              trigger: '.collection-container',
-              start: 'top +=300px',
+              trigger: '.about-home-read',
+              start: 'top +=1200px',
               scrub: true
             }
           })
         this.$gsap.fromTo('.about-home-text',
-          { y: 300, opacity: 0 },
+          { y: 500, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 4,
-            ease: 'Power1.easeInOut',
+            duration: 2,
+            ease: 'Power4.easeInOut',
             scrollTrigger: {
-              trigger: '.collection-container',
-              start: 'top +=300px',
+              trigger: '.about-home-read',
+              start: 'top +=1200px',
               scrub: true
             }
           })
@@ -225,7 +225,6 @@ export default {
     }
     // async loadData() {
     //   await this.getListWork()
-    //   console.log(this.listWork)
     // }
   }
 }
@@ -306,7 +305,7 @@ export default {
         height: 113px;
         overflow: hidden;
         text-align: left;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
 
         .about-home-img-text {
           height: 100%;

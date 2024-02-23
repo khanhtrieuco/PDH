@@ -88,7 +88,6 @@ export default {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
         await this.loadData()
-        console.log(this.show)
     },
     methods: {
         ...mapActions({
@@ -104,7 +103,6 @@ export default {
             }
         },
         onPlayVideo() {
-            console.log(this.$refs.videoRef)
             var elem = document.getElementById("videoRef-id");
             if (this.$refs && this.$refs.videoRef) {
                 this.$refs.videoRef.play()

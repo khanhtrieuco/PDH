@@ -95,7 +95,6 @@ export default {
     if(this.listNews && this.listNews.length > 4) {
       let listTemp = []
       for (let i = 0; i < this.listNews.length; i++) {
-        console.log(i%4)
         if(i % 4 < 3) {
           listTemp.push(this.listNews[i])
         } else {
@@ -104,7 +103,6 @@ export default {
           listTemp = []
         }
       }
-      console.log(this.listNewsMobile)
     }
     // }
   },

@@ -98,7 +98,6 @@ export default {
                     arrayFilter.push({ subcategories: _data.filterSub })
                 }
                 await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
-                console.log(this.listProduct)
             }
         }
     }

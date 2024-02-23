@@ -1,13 +1,13 @@
 <template>
     <div class="news-item">
-        <NuxtLink :to="`/news/${item.attributes?.slug}`">
+        <a target="_blank" :href="item.attributes?.slug">
             <div class="news-img-no-box">
                 <ThumbImage ratio="3-4" :src="item.attributes?.thub.data.attributes.url"></ThumbImage>
             </div>
-        </NuxtLink>
-        <NuxtLink :to="`/news/${item.attributes?.slug}`">
+        </a>
+        <a target="_blank" :href="item.attributes?.slug">
             <div class="news-title"> {{ item.attributes?.title }}</div>
-        </NuxtLink>
+        </a>
 
         <!-- <div class="news-des"> {{ get_excerpt(item.attributes?.description, 37) }} </div> -->
 
