@@ -587,6 +587,7 @@ export default {
   .menu-text-active {
     border-top: 2px solid #000;
     font-family: 'Aeroport-bold';
+    white-space: nowrap;
   }
 
   .menu-text-bold {
