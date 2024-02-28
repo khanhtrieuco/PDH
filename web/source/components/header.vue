@@ -227,7 +227,7 @@
           <div class="header-tab-menu-sub" v-if="subTab === 2">
             <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
               v-for="_new, index in listNewsType1" :key="index">
-              <MenuItem :link="_new.attributes.slug" :image_link="_new.attributes.thub?.data.attributes.url"
+              <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
               </MenuItem>
             </div>
@@ -235,7 +235,7 @@
           <div class="header-tab-menu-sub" v-if="subTab === 4">
             <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
               v-for="_new, index in listNewsType2" :key="index">
-              <MenuItem :link="_new.attributes.slug" :image_link="_new.attributes.thub?.data.attributes.url"
+              <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
               </MenuItem>
             </div>
@@ -243,7 +243,7 @@
           <div class="header-tab-menu-sub" v-if="subTab === 5">
             <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
               v-for="_new, index in listNewsType3" :key="index">
-              <MenuItem :link="_new.attributes.slug" :image_link="_new.attributes.thub?.data.attributes.url"
+              <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
               </MenuItem>
             </div>
