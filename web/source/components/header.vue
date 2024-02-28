@@ -205,10 +205,10 @@
       <div class="container header-tab-menu-container d-flex justify-content-start"
         style="position: absolute;bottom: 70px;margin-left: 30px;">
         <div class="header-tab-menu-col-1">
-          <div @click="subTab = 1" class="header-tab-menu-title">Shows</div>
-          <div @click="subTab = 2" class="header-tab-menu-title">Lookbook</div>
-          <div @click="subTab = 4" class="header-tab-menu-title">Campaigns</div>
-          <div @click="subTab = 5" class="header-tab-menu-title">News</div>
+          <div @click="subTab = 1" @mouseover="subTab = 1" class="header-tab-menu-title">Shows</div>
+          <div @click="goPage('/news')" @mouseover="subTab = 2" type="news" class="header-tab-menu-title">Lookbook</div>
+          <div @click="goPage('/news')" @mouseover="subTab = 4" type="news" class="header-tab-menu-title">Campaigns</div>
+          <div @click="goPage('/news')" @mouseover="subTab = 5" type="news" class="header-tab-menu-title">News</div>
           <div @click="goPage('/house-of-pdh')" class="header-tab-menu-title">About P.D.H</div>
         </div>
         <div class="header-tab-menu-col-2">
@@ -225,7 +225,7 @@
             </div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 2">
-            <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
+            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item"
               v-for="_new, index in listNewsType1" :key="index">
               <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
@@ -233,7 +233,7 @@
             </div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 4">
-            <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
+            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item"
               v-for="_new, index in listNewsType2" :key="index">
               <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
@@ -241,7 +241,7 @@
             </div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 5">
-            <div @click="goPage(`/news/${_new.attributes.slug}`)" class="header-tab-menu-sub-item"
+            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item"
               v-for="_new, index in listNewsType3" :key="index">
               <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
@@ -592,6 +592,7 @@ export default {
 
   .menu-text-bold {
     font-family: 'Aeroport-bold';
+    white-space: nowrap;
   }
 
   .menu-logo {

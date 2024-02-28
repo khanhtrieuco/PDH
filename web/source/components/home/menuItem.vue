@@ -1,16 +1,16 @@
 <template>
     <div class="menu-item">
-        <NuxtLink :to="link" v-if="type === 'show'">
+        <NuxtLink :to="link" v-if="type == 'show'">
             <div class="menu-item-img">
                 <ThumbImage ratio="3-4" :src="image_link"></ThumbImage>
             </div>
         </NuxtLink>
-        <a target="_blank" :href="link" v-if="type === 'news'">
+        <a target="_blank" :href="link" v-if="type == 'news'">
             <div class="menu-item-img">
                 <ThumbImage ratio="3-4" :src="image_link"></ThumbImage>
             </div>
         </a>
-        <div class="menu-item-title"> {{ title }}</div>
+        <div class="menu-item-title"> {{ get_excerpt(title,85) }}</div>
     </div>
 </template>
   
@@ -54,7 +54,8 @@ export default {
         // if (lang === 'vn') {
         // this.description = this.get_excerpt(this.item.description_vn, 150)
         // } else {
-        this.description = this.get_excerpt(this.item?.description, 100)
+        // this.description = this.get_excerpt(this.item?.description, 100)
+        this.title = this.get_excerpt(this.title, 100)
         // }
     }
 }
@@ -72,6 +73,7 @@ export default {
         line-height: 24px;
         margin-top: 20px;
         max-width: 310px;
+        height: 50px;
     }
 }
 
