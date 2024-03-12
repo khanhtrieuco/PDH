@@ -134,7 +134,10 @@ module.exports = {
       //   href: '/images/video_atv_cut.mp4'
       // }
       // { rel: 'stylesheet', href: '/css/style.css' }
-    ]
+    ],
+    script: [{
+      src: 'https://www.paypal.com/sdk/js?client-id=AT4-PxZueVDnzKNSqDwGGuu03TNfQJNFhJre1yzmzuVzKMefyasd1EHQxsKw3rnOxypFSJX7XPnx_yXB'
+    }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
