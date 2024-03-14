@@ -348,8 +348,8 @@ export default {
                 price: this.product.attributes.price,
                 quantity: 1
             }
-            // this.addCartItem(_t)
-            // this.showNotification('success', `Product added to cart`)
+            this.addCartItem(_t)
+            this.showNotification('success', `Product added to cart`)
         }
     }
 }

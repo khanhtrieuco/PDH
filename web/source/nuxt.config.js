@@ -12,8 +12,8 @@ const messages = __importDefault(require("./lang/index.js"));
 
 // const host = 'http://localhost:3000'
 
-const hostapi = 'http://163.44.206.244:1338'
-// const hostapi = 'http://127.0.0.1:1338'
+// const hostapi = 'http://163.44.206.244:1338'
+const hostapi = 'http://127.0.0.1:1337'
 
 // const hostapi = env === 'local' ? 'https://nasbeauty.com.vn' : 'http://172.17.0.1:1337'
 

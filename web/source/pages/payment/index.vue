@@ -390,6 +390,7 @@ export default {
             paymentType: null,
             current_payment: {},
             isPaymentAccept: false,
+            order_id: null
         }
     },
     computed: {
@@ -415,8 +416,8 @@ export default {
         loadScript({ 'client-id': 'AT4-PxZueVDnzKNSqDwGGuu03TNfQJNFhJre1yzmzuVzKMefyasd1EHQxsKw3rnOxypFSJX7XPnx_yXB' }).then((paypal) => {
             paypal
                 .Buttons({
-                    createOrder: (data, actions) => { this.createPaypalOrder(data, actions) },
-                    onApprove: (data, actions) => { this.onPaypalApprove(data, actions) },
+                    createOrder: async () => { return await this.createPaypalOrder() },
+                    onApprove: async () => { await this.onPaypalApprove() },
                 })
                 .render('#paypal-button-container')
         })
@@ -432,6 +433,7 @@ export default {
         ...mapActions({
             loginEmail: "auth/loginEmail",
             createOrder: "order/createOrder",
+            captureOrder: "order/captureOrder",
             resetUserCart: "cart/resetUserCart",
             getListCartUser: "cart/getListCartUser",
             createCart: "cart/createCart",
@@ -439,21 +441,34 @@ export default {
             getPlace: 'place/getPlace',
             getAddressByUser: 'auth/getAddressByUser'
         }),
-        createPaypalOrder(data, actions) {
+        async createPaypalOrder() {
             console.log('Creating order...')
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: '0.01'
+            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
+            let _order = {
+                code: `#${this.makeString(8)}`,
+                state: 'new',
+                payment_type: this.paymentType,
+                shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
+                totalPrice: priceTotal,
+                listProductItem: this.listCart.map(o => {
+                    return {
+                        id: o.id,
+                        variant_id: o.variant_id,
+                        name: o.name,
+                        quantity: o.quantity,
+                        price: o.price
                     }
-                }]
-            });
+                })
+            }
+            let rs = await this.createOrder(_order)
+            console.log(rs)
+            this.order_id = rs.id
+            return rs.id;
         },
-        onPaypalApprove: function (data, actions) {
+        async onPaypalApprove() {
             console.log('Order approved...')
-            return actions.order.capture().then(function (details) {
-                alert('Transaction completed by ' + details.payer.name.given_name);
-            });
+            let rs = await this.captureOrder({ order_id: this.order_id })
+            console.log(rs)
         },
         checkMobile() {
             if (!process.server) {

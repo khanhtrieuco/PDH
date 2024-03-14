@@ -1,6 +1,10 @@
 const { createCoreController } = require('@strapi/strapi').factories;
+const axios = require('axios');
+const qs = require('qs');
 const moment = require('moment');
-
+const paypalHost = "https://api-m.sandbox.paypal.com";
+const PAYPAL_CLIENT_ID = 'AT4-PxZueVDnzKNSqDwGGuu03TNfQJNFhJre1yzmzuVzKMefyasd1EHQxsKw3rnOxypFSJX7XPnx_yXB'
+const PAYPAL_CLIENT_SECRET = 'EKbbuQaiDqeQN1vwiBLJ7V2NpkRZKhrGNQPmXyfc-qG3wUwjXs_LVXLym_ckt6ilWwxTwOaCqG0vFUac'
 module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 	async create(ctx) {
 		const { user } = ctx.state
@@ -28,6 +32,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 		}
 		if (listProductItem && listProductItem.length > 0) {
 			let listCartId = []
+			let listCartValue = []
 			let listProductId = []
 			let listVariantId = []
 			let listCartAdd = []
@@ -48,6 +53,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 					productName += product.name + ', '
 				}
 				total_price += listProductItem[i].quantity * product.price
+				listCartValue.push(listProductItem[i].quantity * product.price)
 
 				if (listProductItem[i].quantity <= 0) {
 					checkCart = false
@@ -102,9 +108,19 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			}
 			let res = await strapi.entityService.create('api::order.order', { data: _order });
 
-			ctx.send({ data: { ...res, productName } });
+		    return await createOrder(listCartValue);
 		}
 		return { message: 'Không tìm thấy thông tin giỏ hàng' };
+	},
+
+	async capture(ctx) {
+		let { order_id } = ctx.request.body;
+		try {
+		    return await captureOrder(order_id);
+		} catch (error) {
+		    console.error("Failed to create order:", error);
+		    return false
+		}
 	},
 
 	async approveOrder(ctx) {
@@ -272,3 +288,97 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 	}
 
 }));
+
+const generateAccessToken = async () => {
+  try {
+    if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+      throw new Error("MISSING_API_CREDENTIALS");
+    }
+
+    const response = await axios.request({
+    	method: 'post',
+		url: 'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+		headers: { 
+		    'Content-Type': 'application/x-www-form-urlencoded', 
+		    'Authorization': 'Basic QVQ0LVB4WnVlVkRuektOU3FEd0dHdXUwM1ROZlFKTkZoSnJlMXl6bXp1VnpLTWVmeWFzZDFFSFF4c0t3M3JuT3h5cEZTSlg3WFBueF95WEI6RUtiYnVRYWlEcWVRTjF2d2lCTEo3VjJOcGtSWktockdOUVBtWHlmYy1xRzN3VXdqWHNfTFZYTHltX2NrdDZpbFd3eFR3T2FDcUcwdkZVYWM='
+		},
+		data : qs.stringify({
+		  'grant_type': 'client_credentials' 
+		})
+    })
+    const data = await response.data;
+    return data.access_token;
+  } catch (error) {
+    console.error("Failed to generate Access Token:", error);
+  }
+};
+
+const createOrder = async (cart) => {
+  console.log(
+    "shopping cart information passed from the frontend createOrder() callback:",
+    cart,
+  );
+  let listUnit = []
+  for (let i = 0; i < cart.length; i++) {
+  	listUnit.push({
+  		amount: {
+	        currency_code: "USD",
+	        value: 10//cart[i]
+	    }
+  	})
+  }
+  
+  const accessToken = await generateAccessToken();
+  const url = `${paypalHost}/v2/checkout/orders`;
+  const payload = {
+    intent: "CAPTURE",
+    purchase_units: listUnit
+  };
+  console.log('payload', payload);
+  // const response = await axios.post(url,JSON.stringify(payload), {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: `Bearer ${accessToken}`
+  //   }
+  // });
+
+  const response = await axios.request({
+    	method: 'post',
+		url: url,
+		headers: { 
+		    'Content-Type': 'application/json', 
+		    'Authorization': `Bearer ${accessToken}`
+		},
+		data : JSON.stringify(payload)
+    })
+  console.log('llll', response);
+  
+  return response.data;
+};
+  
+/**
+* Capture payment for the created order to complete the transaction.
+* @see https://developer.paypal.com/docs/api/orders/v2/#orders_capture
+*/
+const captureOrder = async (orderID) => {
+  const accessToken = await generateAccessToken();
+  const url = `${paypalHost}/v2/checkout/orders/${orderID}/capture`;
+  
+  // const response = await axios.post(url,null, {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: `Bearer ${accessToken}`
+  //   }
+  // });
+  const response = await axios.request({
+    	method: 'post',
+		url: url,
+		headers: { 
+		    'Content-Type': 'application/json', 
+		    'Authorization': `Bearer ${accessToken}`
+		}
+    })
+  
+  return response.data;
+};
+  

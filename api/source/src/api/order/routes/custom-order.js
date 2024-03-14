@@ -7,6 +7,11 @@ module.exports = {
     },
     {
       method: 'POST',
+      path: '/app/captureorder', 
+      handler: 'apporder.capture'
+    },
+    {
+      method: 'POST',
       path: '/app/deletelike', 
       handler: 'apporder.deletelike'
     },

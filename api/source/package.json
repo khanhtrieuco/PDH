@@ -15,7 +15,8 @@
     "@strapi/strapi": "4.10.7",
     "better-sqlite3": "8.0.1",
     "moment": "^2.29.4",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "node-fetch": "^3.3.2"
   },
   "author": {
     "name": "A Strapi developer"
