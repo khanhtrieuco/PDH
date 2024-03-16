@@ -161,7 +161,7 @@
         <div class="payment-success-info" v-if="paymentDone === 'success'">
             <div class="payment-order-top">
                 <div class="payment-order-top-title">ORDERED SUCCESSFULLY</div>
-                <div class="payment-order-top-code">#CH0220</div>
+                <div class="payment-order-top-code">{{ payment_order.code }}</div>
                 <div class="payment-order-top-des">Your order is placed successfully, to track the order status, please
                     click “My order” or add more products in the shopping cart </div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
@@ -184,9 +184,8 @@
                         </div>
                         <div class="w-50">
                             <div class="payment-step-success-title">Billing Address</div>
-                            <div class="payment-step-success-text">Thuy Ninh Solngam Dulphi Lalalal</div>
-                            <div class="payment-step-success-text">Salthom bangkok TH-36</div>
-                            <div class="payment-step-success-text">+66 785 5533</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
                     </div>
                 </div>
@@ -194,27 +193,24 @@
             <div class="payment-step-card">
                 <div class="payment-step-title">2. Products</div>
                 <div class="payment-step-content">
-                    <div class="payment-product-item" v-for="(item, index) in listCart" :key="index">
+                    <div class="payment-product-item" v-for="(_items, index) in payment_order.cartitems" :key="index">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="payment-product-img">
-                                <img class="payment-product-image" :src="item.imagelink" />
+                                <img class="payment-product-image" :src="_items.product?.thub?.url" />
                             </div>
                             <div class="payment-product-info">
-                                <div class="payment-product-name">{{ item.name }}</div>
+                                <div class="payment-product-name">{{ _items.product?.name }}</div>
                                 <div class="payment-product-des">Color:
-                                    <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                                    <span>{{ _items.variant?.color?.name }}</span>
                                 </div>
                                 <div class="payment-product-des">Size:
                                     <span>
-                                        {{ item.variant.attributes.size.data.attributes.name }}
+                                        {{ _items.variant?.size?.name }}
                                     </span>
                                 </div>
-                                <div class="payment-product-des">Quantity
-                                    <CartButton :inumber="item.quantity"
-                                        @updateValue="(e) => updateCartValue(item.variant_id, e)" />
-                                </div>
+                                <div class="payment-product-des">Quantity : {{ _items.quantity }}</div>
                                 <div class="payment-product-price">
-                                    {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                                    {{ _items.total_price | numberWithCommas }}{{ ' ' }}$
                                 </div>
                             </div>
                         </div>
@@ -226,11 +222,11 @@
                 <div class="payment-step-content">
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Order number</div>
-                        <div>#62936</div>
+                        <div>{{ payment_order.code }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Date</div>
-                        <div>July 27, 2023</div>
+                        <div>{{ payment_order.pick_date }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Payment method</div>
@@ -241,15 +237,15 @@
                     <div class="payment-step-extra-content">
                         <div class="payment-info-text d-flex justify-content-between">
                             <div>Subtotal</div>
-                            <div>{{ 500000 | numberWithCommas }}{{ ' ' }}đ</div>
+                            <div>{{ payment_order.price | numberWithCommas }}{{ ' ' }}$</div>
                         </div>
-                        <div class="payment-info-text d-flex justify-content-between">
+                        <!-- <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
                             <div>{{ 0 | numberWithCommas }}{{ ' ' }}đ</div>
-                        </div>
+                        </div> -->
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
-                            <div><b>{{ 500000 + 0 | numberWithCommas }}{{ ' ' }}đ</b></div>
+                            <div><b>{{ payment_order.price + 0 | numberWithCommas }}{{ ' ' }}$</b></div>
                         </div>
                     </div>
                 </div>
@@ -258,7 +254,7 @@
         <div class="payment-success-info" v-if="paymentDone === 'fail'">
             <div class="payment-order-top">
                 <div class="payment-order-top-title">ORDERED UNSUCCESSFULLY</div>
-                <div class="payment-order-top-code">#CH0220</div>
+                <div class="payment-order-top-code">{{ payment_order.code }}</div>
                 <div class="payment-order-top-des">Your order is unsuccessful in payment. Please re-order and check
                     again your payment method to continue the shopping experiences</div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
@@ -281,9 +277,8 @@
                         </div>
                         <div class="w-50">
                             <div class="payment-step-success-title">Billing Address</div>
-                            <div class="payment-step-success-text">Thuy Ninh Solngam Dulphi Lalalal</div>
-                            <div class="payment-step-success-text">Salthom bangkok TH-36</div>
-                            <div class="payment-step-success-text">+66 785 5533</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
                     </div>
                 </div>
@@ -291,27 +286,24 @@
             <div class="payment-step-card">
                 <div class="payment-step-title">2. Products</div>
                 <div class="payment-step-content">
-                    <div class="payment-product-item" v-for="(item, index) in listCart" :key="index">
+                    <div class="payment-product-item" v-for="(_items, index) in payment_order.cartitems" :key="index">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="payment-product-img">
-                                <img class="payment-product-image" :src="item.imagelink" />
+                                <img class="payment-product-image" :src="_items.product?.thub?.url" />
                             </div>
                             <div class="payment-product-info">
-                                <div class="payment-product-name">{{ item.name }}</div>
+                                <div class="payment-product-name">{{ _items.product?.name }}</div>
                                 <div class="payment-product-des">Color:
-                                    <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                                    <span>{{ _items.variant?.color?.name }}</span>
                                 </div>
                                 <div class="payment-product-des">Size:
                                     <span>
-                                        {{ item.variant.attributes.size.data.attributes.name }}
+                                        {{ _items.variant?.size?.name }}
                                     </span>
                                 </div>
-                                <div class="payment-product-des">Quantity
-                                    <CartButton :inumber="item.quantity"
-                                        @updateValue="(e) => updateCartValue(item.variant_id, e)" />
-                                </div>
+                                <div class="payment-product-des">Quantity : {{ _items.quantity }}</div>
                                 <div class="payment-product-price">
-                                    {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                                    {{ _items.total_price | numberWithCommas }}{{ ' ' }}$
                                 </div>
                             </div>
                         </div>
@@ -323,11 +315,11 @@
                 <div class="payment-step-content">
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Order number</div>
-                        <div>#62936</div>
+                        <div>{{ payment_order.code }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Date</div>
-                        <div>July 27, 2023</div>
+                        <div>{{ payment_order.pick_date }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Payment method</div>
@@ -338,15 +330,15 @@
                     <div class="payment-step-extra-content">
                         <div class="payment-info-text d-flex justify-content-between">
                             <div>Subtotal</div>
-                            <div>{{ 500000 | numberWithCommas }}{{ ' ' }}đ</div>
+                            <div>{{ payment_order.price | numberWithCommas }}{{ ' ' }}$</div>
                         </div>
-                        <div class="payment-info-text d-flex justify-content-between">
+                        <!-- <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
                             <div>{{ 0 | numberWithCommas }}{{ ' ' }}đ</div>
-                        </div>
+                        </div> -->
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
-                            <div><b>{{ 500000 + 0 | numberWithCommas }}{{ ' ' }}đ</b></div>
+                            <div><b>{{ payment_order.price + 0 | numberWithCommas }}{{ ' ' }}$</b></div>
                         </div>
                     </div>
                 </div>
@@ -390,7 +382,8 @@ export default {
             paymentType: null,
             current_payment: {},
             isPaymentAccept: false,
-            order_id: null
+            order_id: null,
+            payment_order: {}
         }
     },
     computed: {
@@ -461,14 +454,24 @@ export default {
                 })
             }
             let rs = await this.createOrder(_order)
-            console.log(rs)
             this.order_id = rs.id
             return rs.id;
         },
         async onPaypalApprove() {
-            console.log('Order approved...')
             let rs = await this.captureOrder({ order_id: this.order_id })
-            console.log(rs)
+            if (rs.status === 'COMPLETED') {
+                this.paymentDone = 'success'
+                this.resetUserCart()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                this.showNotification('success', `Đã đặt đơn hàng thành công`)
+                this.payment_order = rs.order
+            } else {
+                this.showNotification('danger', `Đặt đơn hàng thất bại`)
+                this.paymentDone = 'fail'
+                this.payment_order = rs.order
+            }
+
+
         },
         checkMobile() {
             if (!process.server) {

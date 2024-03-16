@@ -114,6 +114,9 @@
       "relation": "manyToMany",
       "target": "api::variant.variant",
       "inversedBy": "orders"
+    },
+    "order_paypal_id": {
+      "type": "string"
     }
   }
 }

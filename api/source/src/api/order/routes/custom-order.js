@@ -49,6 +49,11 @@ module.exports = {
       method: 'GET',
       path: '/app/getemail', 
       handler: 'apporder.getemail'
+    },
+    {
+      method: 'GET',
+      path: '/app/test', 
+      handler: 'apporder.test'
     }
   ]
 }
