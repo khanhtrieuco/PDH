@@ -76,9 +76,9 @@
                                 <div class="payment-step-type-text">Paypal</div>
                             </div>
                             <div id="paypal-button-container"></div>
-                            <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
+                            <!-- <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
                             </div>
-                            <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
+                            <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
                         </div>
                     </div>
                 </div>
@@ -147,12 +147,13 @@
                     <div class="payment-step-title">3. {{ $t('Payment') }}</div>
                     <div class="payment-step-content">
                         <div class="payment-step-type-check">
-                            <Check :checked="paymentType === 'cod'" @choice="onChoicePayment('cod')"></Check>
-                            <div class="payment-step-type-text">COD</div>
+                            <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
+                            <div class="payment-step-type-text">Paypal</div>
                         </div>
-                        <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
+                        <div id="paypal-button-container"></div>
+                        <!-- <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
                         </div>
-                        <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
+                        <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
                     </div>
                 </div>
                 <UserCart :listItem="listCart" :isMobile="isMobile" :priceShip="priceShip" />

@@ -4,5 +4,8 @@ export default {
     },
     set_cart(state, payload) {
         state.cart = payload.cart;
-    }
+    },
+    set_update_cart(state, payload) {
+        state.update_cart = payload.update_cart;
+    },
 };

@@ -39,6 +39,12 @@ export default {
         }
     },
 
+    setUpdateCart: async ({ commit, rootState }, data = {}) => {
+        commit('set_update_cart', {
+            update_cart: data
+        })
+    },
+
     createCart: async function ({ commit }, data) {
         let res = await ApiService.request({
             method: "post",

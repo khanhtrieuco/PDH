@@ -247,6 +247,7 @@ export default {
             getProductBySlug: "product/getProductBySlug",
             addCartItem: "cart/addCartItemDirect",
             addView: "product/addView",
+            updateCart: "cart/setUpdateCart"
         }),
         checkMobile() {
             if (!process.server) {
@@ -349,6 +350,7 @@ export default {
                 quantity: 1
             }
             this.addCartItem(_t)
+            this.updateCart({..._t})
             this.showNotification('success', `Product added to cart`)
         }
     }

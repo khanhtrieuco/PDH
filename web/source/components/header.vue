@@ -22,14 +22,17 @@
             <img v-if="!tab" class="menu-logo" src="/images/logo-head.png" />
             <img v-else class="menu-logo" src="/images/menu.png" />
           </div>
-          <span :class="`menu-text menu-text-house ${tab == 4 ? 'menu-text-active' : ''} ${menuActive === 2 ? 'menu-text-bold' : ''}`"
+          <span
+            :class="`menu-text menu-text-house ${tab == 4 ? 'menu-text-active' : ''} ${menuActive === 2 ? 'menu-text-bold' : ''}`"
             @click="choicetab(4)">{{ $t('About') }}</span>
-          <span :class="`menu-text menu-text-house ${tab == 5 ? 'menu-text-active' : ''} ${menuActive === 3 ? 'menu-text-bold' : ''}`"
+          <span
+            :class="`menu-text menu-text-house ${tab == 5 ? 'menu-text-active' : ''} ${menuActive === 3 ? 'menu-text-bold' : ''}`"
             @click="choicetab(5)">{{ $t('Friendship')
             }}</span>
           <div class="d-inline-flex menu-icon-div" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
+            <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
           </div>
         </div>
       </div>
@@ -39,6 +42,7 @@
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
+            <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
             <div v-if="!loggedIn" @click="goLogin" class="menu-auth-btn">Sign in</div>
             <div v-else @click="logoutAction" class="menu-auth-btn">Log out</div>
             <!-- <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
@@ -77,7 +81,8 @@
               <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
           </div>
-          <div class="menu-mobile-item d-flex justify-content-between" v-if="mobileSubMenu" @click="mobileSubMenu = null">
+          <div class="menu-mobile-item d-flex justify-content-between" v-if="mobileSubMenu"
+            @click="mobileSubMenu = null">
             <div class="menu-mobile-title">{{ mobileSubMenu.attributes.name }}</div>
             <img class="menu-left" src="/images/menu-left.png" />
           </div>
@@ -85,7 +90,7 @@
             v-for="(subMenu, idx) in mobileSubMenu?.attributes.collections?.data" :key="idx">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage(`/collection/${subMenu.attributes.slug}`)">{{
-                subMenu.attributes.name }}</div>
+    subMenu.attributes.name }}</div>
             </div>
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
@@ -207,7 +212,8 @@
         <div class="header-tab-menu-col-1">
           <div @click="subTab = 1" @mouseover="subTab = 1" class="header-tab-menu-title">Shows</div>
           <div @click="goPage('/news')" @mouseover="subTab = 2" type="news" class="header-tab-menu-title">Lookbook</div>
-          <div @click="goPage('/news')" @mouseover="subTab = 4" type="news" class="header-tab-menu-title">Campaigns</div>
+          <div @click="goPage('/news')" @mouseover="subTab = 4" type="news" class="header-tab-menu-title">Campaigns
+          </div>
           <div @click="goPage('/news')" @mouseover="subTab = 5" type="news" class="header-tab-menu-title">News</div>
           <div @click="goPage('/house-of-pdh')" class="header-tab-menu-title">About P.D.H</div>
         </div>
@@ -225,24 +231,24 @@
             </div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 2">
-            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item"
-              v-for="_new, index in listNewsType1" :key="index">
+            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item" v-for="_new, index in listNewsType1"
+              :key="index">
               <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
               </MenuItem>
             </div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 4">
-            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item"
-              v-for="_new, index in listNewsType2" :key="index">
+            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item" v-for="_new, index in listNewsType2"
+              :key="index">
               <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
               </MenuItem>
             </div>
           </div>
           <div class="header-tab-menu-sub" v-if="subTab === 5">
-            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item"
-              v-for="_new, index in listNewsType3" :key="index">
+            <div @click="goPage(`/news`)" class="header-tab-menu-sub-item" v-for="_new, index in listNewsType3"
+              :key="index">
               <MenuItem :link="_new.attributes.slug" type="news" :image_link="_new.attributes.thub?.data.attributes.url"
                 :title="_new.attributes.title">
               </MenuItem>
@@ -309,7 +315,8 @@ export default {
       listNewsType1: [],
       listNewsType2: [],
       listNewsType3: [],
-      menuActive: null
+      menuActive: null,
+      num_cart: 0
     }
   },
   computed: {
@@ -317,6 +324,7 @@ export default {
       profile: "auth/getProfile",
       loggedIn: "auth/getloggedIn",
       listUserCart: "cart/getListUserCart",
+      updateCart: "cart/getUpdateCart",
       listCategory: "category/getListCategory",
       listShow: "show/getListShow",
     }),
@@ -348,6 +356,9 @@ export default {
       } else {
         this.menuActive = null
       }
+    },
+    updateCart: function (val) {
+      this.num_cart = this.listUserCart.length
     }
   },
   async mounted() {
@@ -385,7 +396,10 @@ export default {
       this.listCollection.push(temp)
       this.getListShow()
     }
+    await this.getListCartUser()
     this.loadDataNews()
+    this.num_cart = this.listUserCart.length
+
   },
   methods: {
     ...mapActions({
@@ -600,7 +614,7 @@ export default {
     cursor: pointer;
   }
 
-  .menu-icon-div::before{
+  .menu-icon-div::before {
     content: "";
     width: 0;
     height: 20px;
@@ -624,6 +638,20 @@ export default {
     width: 17px;
     height: 17px;
     margin-top: 25px;
+  }
+
+  .menu-icon-bag-num {
+    width: 14px;
+    height: 14px;
+    color: white;
+    background-color: #ff0000ab;
+    text-align: center;
+    line-height: 14px;
+    border-radius: 4px;
+    font-size: 10px;
+    position: absolute;
+    right: -10px;
+    top: 21px;
   }
 
   .menu-auth-btn {
@@ -807,6 +835,21 @@ export default {
       width: 15px;
       height: 15px;
       margin-top: 16px;
+    }
+
+    .menu-icon-bag-num {
+      width: 14px;
+      height: 14px;
+      color: white;
+      background-color: #ff0000ab;
+      text-align: center;
+      line-height: 14px;
+      border-radius: 4px;
+      font-size: 10px;
+      position: absolute;
+      right: auto;
+      top: 10px;
+      left: 58px;
     }
 
     .menu-auth-btn {
