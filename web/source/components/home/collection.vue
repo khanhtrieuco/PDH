@@ -10,7 +10,7 @@
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <div class="collection-item d-flex justify-content-center align-items-center"
             :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes.url})`">
-            <div class="collection-item-content" v-if="collection.id === 24">
+            <div class="collection-item-content" v-if="collection.attributes.view_detail">
               <NuxtLink :to="`/collection/${collection.attributes.slug}`">
                 <div class="collection-item-title">{{ collection.attributes.name }}</div>
                 <!-- <div class="collection-item-des">{{ collection.attributes.description }}</div> -->
@@ -42,7 +42,12 @@
       :controls-width="45" @after-slide-change="onAfterSlideChange">
       <slide v-for="(collection, i) in listCollection" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
-          <div class="collection-item d-flex justify-content-center align-items-center"
+          <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`" v-if="collection.attributes.view_detail">
+            <div class="collection-item d-flex justify-content-center align-items-center"
+              :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes?.url})`">
+            </div>
+          </NuxtLink>
+          <div v-else class="collection-item d-flex justify-content-center align-items-center"
             :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes?.url})`">
           </div>
         </template>
@@ -50,14 +55,10 @@
     </carousel-3d>
 
     <div class="collection-item-content" v-if="isMobile">
-      <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`">
+      <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`" v-if="collection.attributes.view_detail">
         <div class="collection-item-title">{{ current_coll?.attributes?.name }}</div>
-        <!-- <div class="collection-item-des">{{ current_coll?.attributes?.description }}</div> -->
-        <!-- <div class="shop-now-link">
-          <span class="shop-now-link-text">Read more</span>
-          <img class="shop-now-link-img" src="/images/moreb.png" />
-        </div> -->
       </NuxtLink>
+      <div v-else class="collection-item-title">{{ current_coll?.attributes?.name }}</div>
     </div>
 
   </div>

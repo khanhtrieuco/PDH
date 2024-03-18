@@ -89,8 +89,8 @@
           <div v-if="mobileSubMenu && mobileSubMenu?.attributes.collections" class="menu-mobile-list-sub"
             v-for="(subMenu, idx) in mobileSubMenu?.attributes.collections?.data" :key="idx">
             <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title" @click="goPage(`/collection/${subMenu.attributes.slug}`)">{{
-    subMenu.attributes.name }}</div>
+              <div class="menu-mobile-title" @click="goPage(`/collection/${subMenu.attributes.slug}`,subMenu.attributes.view_detail)">
+              {{ subMenu.attributes.name }}</div>
             </div>
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
@@ -166,7 +166,7 @@
         <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[0].child" :key="idx">
           <div class="header-tab-menu-title">{{ _menu.attributes.name }}</div>
           <div class="header-tab-menu-text" v-for="(_coll, index) in _menu.attributes.collections.data" :key="index"
-            @click="goPage(`/collection/${_coll?.attributes.slug}`)">{{ _coll?.attributes.name }}</div>
+            @click="goPage(`/collection/${_coll?.attributes.slug}`,_coll?.attributes.view_detail)">{{ _coll?.attributes.name }}</div>
         </div>
         <!-- <div class="header-tab-menu-col-1">
           <div class="header-tab-menu-title">READY TO WEAR</div>
@@ -460,8 +460,8 @@ export default {
         window.localStorage.setItem('lang', 'en')
       }
     },
-    goPage(url) {
-      if (url.includes('collection') && url !== '/collection/womens-ss24-collection') return
+    goPage(url,view_detail) {
+      if (url.includes('collection') && view_detail !== true) return
       if (this.$router.history.current.path !== url) {
         this.tab = null
         this.showMenuMobile = false;
@@ -1171,6 +1171,9 @@ export default {
             color: #000;
             font-family: 'Aeroport-light';
             font-size: 14px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
           }
 
           .menu-open {
