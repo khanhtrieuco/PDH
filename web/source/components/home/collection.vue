@@ -55,7 +55,7 @@
     </carousel-3d>
 
     <div class="collection-item-content" v-if="isMobile">
-      <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`" v-if="collection.attributes.view_detail">
+      <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`" v-if="current_coll.attributes.view_detail">
         <div class="collection-item-title">{{ current_coll?.attributes?.name }}</div>
       </NuxtLink>
       <div v-else class="collection-item-title">{{ current_coll?.attributes?.name }}</div>
