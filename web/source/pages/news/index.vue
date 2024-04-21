@@ -7,7 +7,7 @@
             <div class="news-cate-item">BLOGS, </div>
         </div> -->
         <b-container>
-            <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news"
+            <!-- <VueSlickCarousel v-bind="settings" :slidesToShow="isMobile ? 2 : 3" class="list-news"
                 v-if="listNews && listNews.length">
                 <div v-for="(item, index) in listNews" :key="index">
                     <NewItem :isMobile="isMobile" :item="item" />
@@ -22,11 +22,12 @@
                         <img src="/images/right-b.png" />
                     </div>
                 </template>
-            </VueSlickCarousel>
+            </VueSlickCarousel> -->
             <div class="list-main-news">
                 <b-row v-if="listMainNews">
                     <b-col class="mb-3" cols="6" lg="4" v-for="(item, index) in listMainNews" :key="index">
-                        <newsItemNoBox :isMobile="isMobile" :item="item" />
+                        <NewItem :isMobile="isMobile" :item="item" />
+                        <!-- <newsItemNoBox :isMobile="isMobile" :item="item" /> -->
                     </b-col>
                 </b-row>
             </div>
@@ -163,6 +164,7 @@ export default {
 @media (max-width: 520px) {
     .news-content {
         padding-bottom: 60px;
+        padding: 30px 0px;
 
         .news-title-image {
             width: 110px;

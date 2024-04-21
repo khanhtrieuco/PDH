@@ -7,13 +7,13 @@
                 <div class="about-banner-content">
                     <!-- <div class="about-title">ABOUT P.D.H</div> -->
                     <img class="about-name-img" src="/images/about-name.png" />
-                    <div class="about-des">PHAN DANG HOANG - a fashion brand founded by designer Phan Dang Hoang with
-                        inspirations from painting, architecture and East and West cultural interference. The brand's
-                        designs are boldly personal but always balance artistic concepts and high application. Phan Dang
-                        Hoang wants to connect the past and the present, bringing fashion values that bring the voice of the
-                        times, the breath of tradition, with durable materials and delicate treatments in every pattern.
-                        Therefore, each customer who experiences the product will be clothed with a meaningful message and
-                        find their aspirations through fashion so that they can speak for themselves.
+                    <div class="about-des">PHAN DANG HOANG - A fashion brand founded by designer PHAN DANG HOANG with
+                        inspirations from painting, architecture and east and west cultural interference. The brand's
+                        designs are boldly personal but always balance artistic concepts and high application. PHAN DANG
+                        HOANG wants to connect the past and the present, bringing fashion values that bring the voice of
+                        the times, the breath of tradition, with durable materials and delicate treatments in every
+                        pattern. Therefore, each customer who experiences the product will be clothed with a meaningful
+                        message and find their aspirations through fashion so that they can speak for themselves.
                     </div>
                 </div>
             </div>
@@ -30,7 +30,8 @@
                     <div class="about-text">Attended MILANO Fashion Week Autumn | Winter 2022</div>
                     <div class="about-text">Top 21 promising emerging brands voted by VOGUE Italy</div>
                     <div class="about-text">Won - Promising Designer of the Year by SR Fashion Awards</div>
-                    <div class="about-text">Participated in LIT exhibition and debuted the first show in Vietnam organized
+                    <div class="about-text">Participated in LIT exhibition and debuted the first show in Vietnam
+                        organized
                         by Sun Life Vietnam</div>
                 </div>
             </div>
@@ -38,9 +39,11 @@
                 <div class="about-info">
                     <div class="about-achievement">achievement</div>
                     <div class="about-text-title">/2022/</div>
-                    <div class="about-text">Attended the AFRO Fashion Week Fall | Winter 2022 with a collection presented by
+                    <div class="about-text">Attended the AFRO Fashion Week Fall | Winter 2022 with a collection
+                        presented by
                         VOGUE Italy</div>
-                    <div class="about-text">The first Vietnamese designer to officially attend the MILANO Fashion Week 2023
+                    <div class="about-text">The first Vietnamese designer to officially attend the MILANO Fashion Week
+                        2023
                         & launch his own brand "PHAN DANG HOANG"</div>
                     <div class="about-text">Became a representative alumni to participate in the interview of the series
                         “NABA Meets Alumni”</div>
@@ -52,13 +55,14 @@
                     <div class="about-text-title">/2021/</div>
                     <div class="about-text">TOP 30 BEST COLLECTION voted by fashion council for the PLANET DRESS show of
                         NABA University</div>
-                    <div class="about-text">Opened the AFRO Fashion Week Spring | Summer 2022 and meet influential figures
+                    <div class="about-text">Opened the AFRO Fashion Week Spring | Summer 2022 and meet influential
+                        figures
                         in the fashion world: Anna Wintour, Naomi Campbell,...</div>
                     <div class="about-text"><b>/2018/</b> Won a scholarship to study abroad at NABA University (Milano,
                         Italy), fashion design major</div>
-                    <div class="about-text"><b>/2016/</b> The first young Vietnamese artist to appear in 2 American art
+                    <!-- <div class="about-text"><b>/2016/</b> The first young Vietnamese artist to appear in 2 American art
                         magazines in 2016</div>
-                    <div class="about-text"><b>/2015/</b> Participating in Lynk Show by Ly Nha Ky</div>
+                    <div class="about-text"><b>/2015/</b> Participating in Lynk Show by Ly Nha Ky</div> -->
                 </div>
             </div>
             <template slot="prevArrow">
@@ -79,20 +83,26 @@
                 <div class="about-mid-des">
                     <p>Love for the simple and familiar things, childhood memories associated with the image of a
                         grandfather
-                        painting, a mother with a sewing machine, and a grandmother knitting shirts have long become a part
+                        painting, a mother with a sewing machine, and a grandmother knitting shirts have long become a
+                        part
                         of
                         forming the designer's personality.</p>
 
                     <p>Despite experiencing Western civilization, receiving modern technologies, and encountering
                         groundbreaking new images, the designer still chooses to embrace the beautiful memories of
                         childhood.
-                        This choice is reflected in the creation of a brand identity with the concept of ""Fusion Fashion,""
-                        inspired by the image of a familiar sewing machine from childhood—a needle threading stitches that
+                        This choice is reflected in the creation of a brand identity with the concept of ""Fusion
+                        Fashion,""
+                        inspired by the image of a familiar sewing machine from childhood—a needle threading stitches
+                        that
                         compose the soul of a shirt.</p>
 
-                    <p>These elements serve as an extension of the customer's fashion experience with the Phan Dang Hoang
-                        brand. It represents a new way of reception from a Gen Z designer who always seeks to incorporate a
-                        simple part of childhood, preserving traditional values and bringing soul into fashion products.</p>
+                    <p>These elements serve as an extension of the customer's fashion experience with the Phan Dang
+                        Hoang
+                        brand. It represents a new way of reception from a Gen Z designer who always seeks to
+                        incorporate a
+                        simple part of childhood, preserving traditional values and bringing soul into fashion products.
+                    </p>
                 </div>
             </div>
         </div>
@@ -213,7 +223,7 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 import { mapGetters, mapActions } from "vuex"
 import Slider1 from "./slide1.vue"
@@ -1670,4 +1680,5 @@ export default {
             }
         }
     }
-}</style>
+}
+</style>

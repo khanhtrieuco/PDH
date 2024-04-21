@@ -119,7 +119,7 @@
               <img class="footer-icon" src="/images/inta.png" />
             </a>
           </div>
-          <div class="footer-copy">© 2016 - 2022 PHANDANGHOANG - All rights reserved</div>
+          <div class="footer-copy">© 2016 - 2024 PHANDANGHOANG - All rights reserved</div>
           <img class="footer-logo" src="/images/footer.png" />
 
         </div>

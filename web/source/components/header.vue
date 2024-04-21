@@ -88,8 +88,8 @@
           </div>
           <div v-if="mobileSubMenu && mobileSubMenu?.attributes.collections" class="menu-mobile-list-sub"
             v-for="(subMenu, idx) in mobileSubMenu?.attributes.collections?.data" :key="idx">
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title" @click="goPage(`/collection/${subMenu.attributes.slug}`,subMenu.attributes.view_detail)">
+            <div class="menu-mobile-sub-item d-flex justify-content-between" v-if="subMenu.attributes.state === 'active'">
+              <div class="menu-mobile-title"  @click="goPage(`/collection/${subMenu.attributes.slug}`,subMenu.attributes.view_detail)">
               {{ subMenu.attributes.name }}</div>
             </div>
           </div>
@@ -166,6 +166,7 @@
         <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[0].child" :key="idx">
           <div class="header-tab-menu-title">{{ _menu.attributes.name }}</div>
           <div class="header-tab-menu-text" v-for="(_coll, index) in _menu.attributes.collections.data" :key="index"
+            v-if="_coll?.attributes.state === 'active'"
             @click="goPage(`/collection/${_coll?.attributes.slug}`,_coll?.attributes.view_detail)">{{ _coll?.attributes.name }}</div>
         </div>
         <!-- <div class="header-tab-menu-col-1">
