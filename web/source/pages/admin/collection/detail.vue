@@ -102,7 +102,7 @@ export default {
         },
         listMenu: {
             type: Array,
-            default: []
+            default: () => []
         },
         modalType: {
             type: String,

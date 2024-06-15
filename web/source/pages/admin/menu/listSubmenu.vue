@@ -38,7 +38,7 @@ export default {
         },
         listItem: {
             type: Array,
-            default: []
+            default: () => []
         }
     },
     data() {

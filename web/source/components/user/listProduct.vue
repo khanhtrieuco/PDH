@@ -39,7 +39,7 @@ export default {
         },
         list_product: {
             type: Array,
-            default: []
+            default: () => []
         },
         isMobile: {
             type: Boolean,

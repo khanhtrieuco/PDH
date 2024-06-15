@@ -18,7 +18,7 @@ export default {
     props: {
         list_media: {
             type: Array,
-            default: []
+            default: () => []
         },
         onDeleteMedia: {
             type: Function,

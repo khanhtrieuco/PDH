@@ -22,7 +22,7 @@ export default {
     props: {
         listItem: {
             type: Array,
-            default: []
+            default: () => []
         },
         default: {
             type: String,
