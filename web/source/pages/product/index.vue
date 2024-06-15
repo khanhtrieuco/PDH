@@ -11,7 +11,7 @@
                 <div class="product-detail-size" @click="scrollToAdd">
                     <span class="size-text">Size:</span>
                     <div class="size-value" v-for="_size, index in listSize" :key="index">{{ _size.attributes.name
-                    }}</div>
+                        }}</div>
                 </div>
                 <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
                 <div class="product-detail-name">
@@ -24,17 +24,27 @@
                 </div>
             </div>
             <div class="d-flex" v-if="!isMobile">
-                <div class="product-detail-media" v-if="product.attributes?.media.data">
-                    <img class="product-detail-media-img" v-for="imgData, index in product.attributes?.media.data"
-                        :key="index" :src="imgData.attributes.url" />
-                </div>
+                <VueSlickCarousel class="product-detail-media" v-bind="settings" v-if="product.attributes?.media.data">
+                    <img v-for="(imgData, index) in product.attributes?.media.data" :key="index"
+                        class="product-detail-media-img-desktop" :src="imgData.attributes?.url" />
+                    <template slot="prevArrow" v-if="!isMobile">
+                        <div class="pre-arrow">
+                            <img src="/images/left-b.png" />
+                        </div>
+                    </template>
+                    <template slot="nextArrow" v-if="!isMobile">
+                        <div class="next-arrow">
+                            <img src="/images/right-b.png" />
+                        </div>
+                    </template>
+                </VueSlickCarousel>
                 <div class="product-detail-data">
                     <div class="product-detail-data-title">Product details</div>
                     <div class="product-detail-data-text"
                         v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.description : product.attributes?.description_en)">
                     </div>
                     <div class="product-detail-data-title">Product code: <span class="product-detail-data-text">{{
-                        product.attributes?.sku_code }}</span></div>
+                    product.attributes?.sku_code }}</span></div>
                     <div class="product-detail-data-title">Material:</div>
                     <div class="product-detail-data-text"
                         v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.material : product.attributes?.material_en)">
@@ -51,7 +61,8 @@
                     <div class="product-detail-data-color">
                         <span class="product-detail-data-color-text">Color:</span>
                         <div v-for="_color, index in listColor" @click="choiceColor(_color)" :key="index">
-                            <Color :color="_color.attributes.value" :selected="selectColor === _color.id" v-if="!isMobile">
+                            <Color :color="_color.attributes.value" :selected="selectColor === _color.id"
+                                v-if="!isMobile">
                             </Color>
                             <ColorMobile :color="_color.attributes.value" :selected="selectColor === _color.id" v-else>
                             </ColorMobile>
@@ -76,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <VueSlickCarousel v-bind="settings" class="product-detail-media"
+            <VueSlickCarousel v-bind="settings_m" class="product-detail-media"
                 v-if="isMobile && product.attributes?.media.data">
                 <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
                     <img class="product-detail-media-img" :src="imgData.attributes?.url" />
@@ -143,11 +154,11 @@
                 <!-- <div class="product-detail-list-btn">More items from collection</div> -->
             </div>
         </div>
-        <Size v-if="showSize" :isMobile="isMobile" @closeUpdate="showSize = false"/>
-        <Shipping v-if="showShiping" :isMobile="isMobile" @closeUpdate="showShiping = false"/>
-        <Help v-if="showHelp" :isMobile="isMobile" @closeUpdate="showHelp = false"/>
-        <Exchange v-if="showExchange" :isMobile="isMobile" @closeUpdate="showExchange = false"/>
-        
+        <Size v-if="showSize" :isMobile="isMobile" @closeUpdate="showSize = false" />
+        <Shipping v-if="showShiping" :isMobile="isMobile" @closeUpdate="showShiping = false" />
+        <Help v-if="showHelp" :isMobile="isMobile" @closeUpdate="showHelp = false" />
+        <Exchange v-if="showExchange" :isMobile="isMobile" @closeUpdate="showExchange = false" />
+
     </div>
 </template>
 
@@ -182,6 +193,15 @@ export default {
             showImage: false,
             isMobile: false,
             settings: {
+                "dots": true,
+                "arrows": true,
+                "edgeFriction": 0.35,
+                "infinite": true,
+                "speed": 500,
+                "slidesToShow": 1,
+                "slidesToScroll": 1
+            },
+            settings_m: {
                 "dots": true,
                 "arrows": false,
                 "edgeFriction": 0.35,
@@ -350,7 +370,7 @@ export default {
                 quantity: 1
             }
             this.addCartItem(_t)
-            this.updateCart({..._t})
+            this.updateCart({ ..._t })
             this.showNotification('success', `Product added to cart`)
         }
     }
@@ -480,6 +500,65 @@ export default {
     .product-detail-media {
         width: 50%;
         display: inline-block;
+        height: 750px;
+
+        .product-detail-media-img-desktop {
+            width: 100%;
+            height: 750px;
+            object-fit: cover;
+        }
+
+        .slick-dots {
+            top: 10px;
+            bottom: auto;
+
+            li {
+                margin: 0px 5px;
+                border-radius: 50%;
+                border: 1px solid #000;
+                width: 13px;
+                height: 13px;
+                overflow: hidden;
+
+                button:before {
+                    font-size: 0px;
+                    background-color: white;
+                }
+            }
+
+            .slick-active {
+                border: 1px solid #000;
+
+                button:before {
+                    font-size: 0px;
+                    background-color: #000;
+                }
+            }
+        }
+
+        .slick-prev {
+            z-index: 1;
+            left: calc(50% - 60px);
+            bottom: 15px;
+            width: 45px;
+            top: auto;
+
+            img {
+                width: 45px;
+            }
+        }
+
+        .slick-next {
+            z-index: 1;
+            right: calc(50% - 60px);
+            bottom: 15px;
+            width: 45px;
+            top: auto;
+
+            img {
+                width: 45px;
+            }
+        }
 
         .product-detail-media-img {
             width: calc(50% - 5px);

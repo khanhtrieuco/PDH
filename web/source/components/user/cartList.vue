@@ -69,7 +69,7 @@ export default {
         },
         listCart: {
             type: Array,
-            default: []
+            default: () => []
         },
         showListCart: {
             type: Boolean,
@@ -98,7 +98,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            setCartCheckoutItem: "cart/setCartCheckoutItem"
+            setCartCheckoutItem: "cart/setCartCheckoutItem",
+            updateCart: "cart/setUpdateCart"
         }),
         updateCartValue(variant_id, _v) {
             let _i = this.listCart.find(o => o.variant_id === variant_id)
@@ -111,6 +112,7 @@ export default {
             this.listItem = this.listItem.filter(o => o.variant_id !== variant_id)
             this.total_price = this.listItem.reduce((_sum, o) => _sum + o.price * o.quantity, 0);
             this.setCartCheckoutItem({ listCheckout: this.listItem })
+            this.updateCart(this.listItem)
         },
         // setCheckItem(_item) {
         //     for (let i = 0; i < this.listItem.length; i++) {

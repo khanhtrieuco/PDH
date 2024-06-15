@@ -213,12 +213,12 @@ blockquote::after {
 }
 
 .slick-dots {
-  bottom: -10px !important;
+  bottom: -10px;
 }
 
 .slick-dots li {
-  width: 8px !important;
-  height: 8px !important;
+  width: 8px;
+  height: 8px;
 }
 
 .slick-dots li button {

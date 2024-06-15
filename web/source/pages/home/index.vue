@@ -232,7 +232,8 @@ export default {
 <style lang="scss" scoped>
 .home-top-video {
   position: relative;
-  min-height: 700px;
+  min-height: 900px;
+  background-color: #000;
   .home-top-content {
     position: absolute;
     bottom: 160px;
