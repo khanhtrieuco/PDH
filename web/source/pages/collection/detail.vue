@@ -221,7 +221,7 @@ export default {
         .photo-img {
             width: 100%;
             display: inline-block;
-            padding: 5px;
+            padding: 3px;
 
             .photo-img-detail {
                 width: 100%;
