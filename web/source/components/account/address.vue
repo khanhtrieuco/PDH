@@ -212,7 +212,17 @@ export default {
         },
         async onAddNew() {
             if (!this.form.name || !this.form.phone || !this.form.email || !this.form.full_address) {
-                this.showNotification('warning', `Vui lòng nhập đủ thông tin địa chỉ`)
+                this.showNotification('warning', `Please enter complete address information`)
+                return
+            }
+            let checkEmail = this.validateEmail(this.form.email)
+            if(!checkEmail || checkEmail.length === 0) {
+                this.showNotification('warning', `Please enter the correct email address`)
+                return
+            }
+            let checkPhone = this.validatePhone(this.form.phone)
+            if(!checkPhone || checkPhone.length === 0) {
+                this.showNotification('warning', `Please enter the correct phone number`)
                 return
             }
             let _data = {
@@ -229,17 +239,17 @@ export default {
             let rs = await this.addNewAddress({ data: _data })
             if (rs) {
                 this.$emit('closeUpdate')
-                this.showNotification('success', `Tạo địa chỉ thành công`)
+                this.showNotification('success', `Address created successfully`)
                 this.setValueForm()
             } else {
-                this.showNotification('danger', `Tạo địa chỉ thất bại vui lòng thử lại`)
+                this.showNotification('danger', `Address creation failed, please try again`)
             }
         },
         async onUpdate() {
             if (!this.form.name || !this.form.phone || !this.form.email || !this.form.full_address
                 || !this.province || !this.district || !this.ward
             ) {
-                this.showNotification('warning', `Vui lòng nhập đủ thông tin địa chỉ`)
+                this.showNotification('warning', `Please enter complete address information`)
                 return
             }
             let _data = {
@@ -254,11 +264,11 @@ export default {
             let rs = await this.updateAddress({ id: this.item.id, data: _data })
             if (rs) {
                 this.$emit('closeUpdate')
-                this.showNotification('success', `Cập nhật địa chỉ thành công`)
+                this.showNotification('success', `Address updated successfully`)
                 this.setValueForm()
 
             } else {
-                this.showNotification('danger', `Cập nhật địa chỉ thất bại vui lòng thử lại`)
+                this.showNotification('danger', `Address update failed, please try again`)
             }
         },
     }

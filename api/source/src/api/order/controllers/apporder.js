@@ -42,7 +42,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			where: { user_id: user.id }
 		});
 
-		if (!address.name) {
+		if (!address) {
 			return { message: 'Không tìm thấy thông tin địa chỉ người nhận' };
 		}
 		if (listProductItem && listProductItem.length > 0) {
@@ -112,6 +112,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 				address_phone: address.phone,
 				address_full: address.full_address,
 				payment_type,
+				shippingType,
 				pick_date,
 				end_date,
 				discount_price: 0,

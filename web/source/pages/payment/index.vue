@@ -34,8 +34,8 @@
                             <div class="d-flex">
                                 <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
                                     @click="shiping_type = 1">Ship to home</div>
-                                <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
-                                    @click="shiping_type = 2">Pick up Store</div>
+                                <div style="cursor: not-allowed;" :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
+                                    >Pick up Store</div>
                             </div>
                             <div class="payment-step-address-info" v-if="shiping_type === 1">
                                 <div class="payment-step-address-update" @click="openAddressPopup"
@@ -115,8 +115,8 @@
                         <div class="d-flex">
                             <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
                                 @click="shiping_type = 1">Ship to home</div>
-                            <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
-                                @click="shiping_type = 2">Pick up Store</div>
+                            <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`">
+                                Pick up Store</div>
                         </div>
                     </div>
                     <div class="payment-step-address-info" v-if="shiping_type === 1">
@@ -380,7 +380,7 @@ export default {
             order: {},
             showUpdateAddress: false,
             user_address: null,
-            paymentType: null,
+            paymentType: 'paypal',
             current_payment: {},
             isPaymentAccept: false,
             order_id: null,
@@ -408,13 +408,19 @@ export default {
         this.user_address = this.userAddress
         await this.getPlace()
         if (this.listPayment.length > 0) {
-            let _paypal = this.listPayment.find((o)=>o.attributes.name == 'Paypal')
+            let _paypal = this.listPayment.find((o) => o.attributes.name == 'Paypal')
             console.log(_paypal)
             if (_paypal) {
                 loadScript({ 'client-id': _paypal.attributes.description }).then((paypal) => {
                     paypal
                         .Buttons({
-                            createOrder: async () => { return await this.createPaypalOrder() },
+                            createOrder: async () => {
+                                if(this.user_address.id) {
+                                    this.showNotification('warning', `Please enter address information`)
+                                    return
+                                }
+                                return await this.createPaypalOrder() 
+                            },
                             onApprove: async () => { await this.onPaypalApprove() },
                         })
                         .render('#paypal-button-container')
@@ -443,6 +449,7 @@ export default {
         }),
         async createPaypalOrder() {
             console.log('Creating order...')
+            
             let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
             let _order = {
                 code: `#${this.makeString(8)}`,
@@ -470,10 +477,10 @@ export default {
                 this.paymentDone = 'success'
                 this.resetUserCart()
                 window.scrollTo({ top: 0, behavior: 'smooth' })
-                this.showNotification('success', `Đã đặt đơn hàng thành công`)
+                this.showNotification('success', `Order placed successfully`)
                 this.payment_order = rs.order
             } else {
-                this.showNotification('danger', `Đặt đơn hàng thất bại`)
+                this.showNotification('danger', `Placed order failed`)
                 this.paymentDone = 'fail'
                 this.payment_order = rs.order
             }

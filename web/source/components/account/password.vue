@@ -88,13 +88,13 @@ export default {
         }),
         async onUpdate() {
             if (!this.form.currentPassword || !this.form.password || !this.form.passwordConfirmation) {
-                this.showNotification('warning', `Vui lòng nhập đủ thông tin`)
+                this.showNotification('warning', `Please enter complete information`)
                 return
             }
             let rs = await this.changePassword(this.form)
             if (rs.user) {
                 this.$emit('closeUpdate')
-                this.showNotification('success', `Cập nhật thành công`)
+                this.showNotification('success', `Update successful`)
                 this.form = {
                     currentPassword: null,
                     password: null,

@@ -12,7 +12,7 @@ import { mapGetters, mapActions } from "vuex"
         if (this.$route.query.access_token) {
             let res = this.callBackFacebook({ access_token: this.$route.query.access_token })
             if(res) {
-                this.showNotification('success', `Đăng nhập thành công`)
+                this.showNotification('success', `Logged in successfully`)
                 this.$router.push({ path: '/' })
             }
         }

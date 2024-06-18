@@ -185,17 +185,17 @@ export default {
             if (!this.username || !this.phone || !this.email || !this.fulladdress ||
                 !this.province || !this.ward || !this.district ) {
                 // || (!this.password && !this.loggedIn)) {
-                this.showNotification('warning', `Vui lòng nhập đầy đủ thông tin`)
+                this.showNotification('warning', `Please enter complete information`)
                 return
             }
             let checkEmail = this.validateEmail(this.email)
             if(!checkEmail || checkEmail.length === 0) {
-                this.showNotification('warning', `Vui lòng nhập đúng địa chỉ email`)
+                this.showNotification('warning', `Please enter the correct email address`)
                 return
             }
             let checkPhone = this.validatePhone(this.phone)
             if(!checkPhone || checkPhone.length === 0) {
-                this.showNotification('warning', `Vui lòng nhập đúng số điện thoại`)
+                this.showNotification('warning', `Please enter the correct phone number`)
                 return
             }
             if(this.password) {
@@ -207,9 +207,9 @@ export default {
                 })
                 if (rs) {
                     this.password = null
-                    this.showNotification('success', `Đăng ký thành công`)
+                    this.showNotification('success', `Update successful`)
                 } else {
-                    this.showNotification('danger', `Đăng ký thất bại vui lòng thử lại`)
+                    this.showNotification('danger', `Update failed, please try again`)
                     return
                 }
             }

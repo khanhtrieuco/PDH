@@ -114,7 +114,7 @@ export default {
     },
     async onLike(_product) {
       if (!this.loggedIn) {
-        this.showNotification('warning', `Đăng ký thành viên để lưu lại sản phẩm yêu thích của bạn`)
+        this.showNotification('warning', `Register as a member to save your favorite products`)
         return
       }
       if (this.isLike) {
@@ -122,9 +122,9 @@ export default {
         if (rs && rs.id) {
           this.isLike = false
           this.likeImage = '/images/heart.png'
-          this.showNotification('success', `Đã hủy sản phẩm yêu thích`)
+          this.showNotification('success', `Unlike`)
         } else {
-          this.showNotification('error', `Hủy sản phẩm yêu thích thất bại. Vui lòng thử lại.`)
+          this.showNotification('error', `Fail`)
         }
       } else {
         let rs = await this.createLike({
@@ -137,9 +137,9 @@ export default {
         if (rs && rs.id) {
           this.isLike = rs
           this.likeImage = '/images/liked.png'
-          this.showNotification('success', `Đã thêm sản phẩm yêu thích`)
+          this.showNotification('success', `Like`)
         } else {
-          this.showNotification('error', `Thêm sản phẩm yêu thích thất bại. Vui lòng thử lại.`)
+          this.showNotification('error', `Fail`)
         }
       }
     },
