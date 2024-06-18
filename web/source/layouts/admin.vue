@@ -47,11 +47,11 @@
           <a-icon type="bank" />
           <span>Quản lý chi nhánh</span>
         </a-menu-item>
-        <a-menu-item key="9" @click="goPage('/crm-admin/new-collections')"
+        <!-- <a-menu-item key="9" @click="goPage('/crm-admin/new-collections')"
           :class="$route.path === '/crm-admin/new-collections' ? 'ant-menu-item-selected' : ''">
           <a-icon type="bank" />
           <span>Chuyên mục tin tức</span>
-        </a-menu-item>
+        </a-menu-item> -->
         <a-menu-item key="10" @click="goPage('/crm-admin/news')"
           :class="$route.path === '/crm-admin/news' ? 'ant-menu-item-selected' : ''">
           <a-icon type="bank" />

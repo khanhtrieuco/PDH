@@ -1,37 +1,24 @@
 <template>
   <div class="container store-container">
     <img class="store-title-image" src="/images/store.png" />
-    <div class="d-flex justify-content-center">
-      <div class="store-content">
-        <!-- <div class="store-filter-item">
-          <div class="filter-title">{{ $t('Store_select_1') }}</div>
-          <Select :default="$i18n.locale === 'vn' ? 'Select Nation' : 'Select Nation'"
-            :listItem="$i18n.locale === 'vn' ? select_data_1 : select_data_1" />
-        </div>
-        <div class="store-filter-item">
-          <div class="filter-title">{{ $t('Store_select_2') }}</div>
-          <Select :default="$i18n.locale === 'vn' ? 'Select City' : 'Select City'"
-            :listItem="$i18n.locale === 'vn' ? select_data_2 : select_data_2" />
-        </div> -->
-        <!-- <div class="store-btn">{{ $t('Store_select_3') }}</div> -->
-        <img class="store-image" src="/images/ple.jpg" v-if="isMobile" />
 
-        <div class="store-item">
-          <img class="store-item-maker" src="/images/place-maker.png" />
-          <div class="store-item-text">106, C3 Hoang Ngoc Phach, Dong Da, Hanoi</div>
-          <div class="store-item-text">House today: 09AM - 9PM</div>
-          <div class="store-item-text">T: 0986375167</div>
-          <div class="store-btn">{{ $t('Store_select_4') }}</div>
+    <div class="d-flex justify-content-center">
+      <img class="store-image" :src="is_show" v-if="isMobile" />
+      <div class="list-store">
+        <div class="store-content" @click="choiceStore(_item)" v-for="(_item, idx) in list_data" :key="idx">
+          <div class="store-item">
+            <img class="store-item-maker" src="/images/place-maker.png" />
+            <div class="store-item-text">{{ _item.attributes.address }}</div>
+            <div class="store-item-text">House today: {{ _item.attributes.time }}</div>
+            <div class="store-item-text">T:
+              <a class="store-item-text" :href="`tel:${_item.attributes.phone}`">
+                {{ _item.attributes.phone }}</a>
+            </div>
+            <div class="store-btn">{{ $t('Store_select_4') }}</div>
+          </div>
         </div>
-        <!-- <div class="store-item">
-          <img class="store-item-maker" src="/images/place-maker.png" />
-          <div class="store-item-text">19/6b Nguyen Thi Minh Khai, District 1, Ho Chi Minh city</div>
-          <div class="store-item-text">House today: 10:00 AM - 9:00 PM</div>
-          <div class="store-item-text">T: 0868284222</div>
-          <div class="store-btn">{{ $t('Store_select_4') }}</div>
-        </div> -->
       </div>
-      <img class="store-image" src="/images/ple.jpg" v-if="!isMobile"/>
+      <img class="store-image" :src="is_show"v-if="!isMobile" />
     </div>
   </div>
 </template>
@@ -52,19 +39,8 @@ export default {
   },
   data() {
     return {
-      select_data_1: [
-        { item: 'vietnam', name: 'Vietnam' },
-        { item: 'canada', name: 'Canada' },
-        { item: 'italy', name: 'Italy' },
-        { item: 'france', name: 'France' }
-      ],
-      select_data_2: [
-        { item: 'honoi', name: 'Ha Noi' },
-        { item: 'hochiminh', name: 'Ho Chi Minh' },
-        { item: 'danang', name: 'Da Nanh' }
-      ],
-      cate2: {},
-      cate3: {},
+      list_data: [],
+      is_show: 'null'
     }
   },
   // computed: {
@@ -72,30 +48,36 @@ export default {
   //     listCategory: "category/getListCategory"
   //   }),
   // },
-  // async mounted() {
-  //   if (this.listCategory.length === 0) {
-  //     await this.getListCategory()
-  //   }
-  //   if (this.listCategory.length >= 3) {
-  //     this.cate1 = this.listCategory[0].attributes
-  //     this.cate2 = this.listCategory[1].attributes
-  //     this.cate3 = this.listCategory[2].attributes
-  //   }
-  // },
-  // methods: {
-  //   ...mapActions({
-  //     getListCategory: "category/getListCategory"
-  //   }),
-  // }
+  async mounted() {
+    let res = await this.getbyUrl({
+      url: '/api/places?populate[0]=thub'
+    })
+    if (res && res.data && res.data.length > 0) {
+      this.list_data = res.data
+      this.is_show = this.list_data[0].attributes.thub?.data.attributes.url
+    }
+  },
+  methods: {
+    ...mapActions({
+      getbyUrl: "common/getbyUrl"
+    }),
+    choiceStore(item){
+      if(item.id) {
+        this.is_show = item.attributes.thub?.data.attributes.url
+      }
+    }
+  }
 }
 </script>
 <style lang="scss">
 .store-container {
   text-align: center;
   padding: 100px 0px;
-
+  .list-store{
+    margin-top: 55px;
+  }
   .store-content {
-    margin-top: 75px;
+    margin-top: 20px;
     width: 360px;
     margin-right: 40px;
     text-align: left;
@@ -215,4 +197,5 @@ export default {
       object-fit: cover;
     }
   }
-}</style>
+}
+</style>

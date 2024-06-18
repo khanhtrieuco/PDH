@@ -1,5 +1,5 @@
 <template>
-    <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }"
+    <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 4 }" :wrapper-col="{ span: 19 }"
         labelAlign="left">
         <a-row>
             <a-col :span="12">
@@ -29,7 +29,7 @@
                     </a-form-model-item>
                 </a-col> -->
             </a-col>
-            <a-col :span="12">
+            <!-- <a-col :span="12">
                 <a-form-model-item label="Chuyên mục" prop="new_category">
                     <Select :default="form.new_category" placeholder="Chọn chuyên mục" :listItem="listCategory"
                         @onSelect="(e) => form.new_category = e" />
@@ -49,7 +49,7 @@
                         </a-select-option>
                     </a-select>
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="24">
                 <a-form-model-item ref="short_content" label="Nội dung rút gọn" prop="short_content">
                     <a-input v-model="form.short_content" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
@@ -214,15 +214,13 @@ export default {
                 this.$message.warning('Vui lòng chọn ảnh!');
                 return
             }
-            if (!this.form.new_category || !this.form.type) {
-                this.$message.warning('Vui lòng nhập đủ thông tin');
-                return
-            }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
                     this.form.title_en = this.form.title
                     this.form.short_content_en = this.form.short_content
                     this.form.content_en = this.form.content
+                    this.form.new_category = 1
+                    this.form.type = 'news'
                     let rs = await this.createItem({
                         data: {
                             ...this.form
@@ -246,15 +244,13 @@ export default {
                 this.$message.warning('Vui lòng chọn ảnh!');
                 return
             }
-            if (!this.form.new_category || !this.form.type) {
-                this.$message.warning('Vui lòng nhập đủ thông tin');
-                return
-            }
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
                     this.form.title_en = this.form.title
                     this.form.short_content_en = this.form.short_content
                     this.form.content_en = this.form.content
+                    this.form.new_category = 1
+                    this.form.type = 'news'
                     let rs = await this.updateItem({
                         id: this.item.id,
                         data: {

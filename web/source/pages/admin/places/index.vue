@@ -51,7 +51,7 @@
                 <a-button @click="activePlace(record.id)" class="admin-btn" ghost type="danger" v-else>Khôi phục</a-button>
             </span>
         </a-table>
-        <a-modal title="Thông tin địa điểm" :visible="modalOpen" :footer="null" width="1400px" @cancel="() => this.modalOpen = false">
+        <a-modal title="Thông tin chi nhánh" :visible="modalOpen" :footer="null" width="1400px" @cancel="() => this.modalOpen = false">
             <Detail :item="current" :modalType="modalType" @onCancel="() => this.modalOpen = false" @onReload="()=> this.onRefresh()"/>
         </a-modal>
     </div>

@@ -7,11 +7,11 @@
                     <a-input v-model="form.name" @blur="() => { $refs.name.onFieldBlur(); }" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="name_en" label="Tên tiếng anh" prop="name_en">
                     <a-input v-model="form.name_en" />
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item label="Vị trí hiển thị" prop="order">
                     <a-input v-model="form.order" type="number" />
@@ -110,6 +110,7 @@ export default {
             if (this.parent_id) {
                 this.$refs.ruleForm.validate(async valid => {
                     if (valid) {
+                        this.form.name_en = this.form.name
                         let rs = await this.createItem({
                             data: {
                                 ...this.form,
@@ -134,6 +135,7 @@ export default {
         async onSubmitUpdate() {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
+                    this.form.name_en = this.form.name
                     let rs = await this.updateItem({
                         id: this.item.id,
                         data: {

@@ -407,14 +407,20 @@ export default {
         await this.getAddressByUser(this.profile.id)
         this.user_address = this.userAddress
         await this.getPlace()
-        loadScript({ 'client-id': 'AT4-PxZueVDnzKNSqDwGGuu03TNfQJNFhJre1yzmzuVzKMefyasd1EHQxsKw3rnOxypFSJX7XPnx_yXB' }).then((paypal) => {
-            paypal
-                .Buttons({
-                    createOrder: async () => { return await this.createPaypalOrder() },
-                    onApprove: async () => { await this.onPaypalApprove() },
+        if (this.listPayment.length > 0) {
+            let _paypal = this.listPayment.find((o)=>o.attributes.name == 'Paypal')
+            console.log(_paypal)
+            if (_paypal) {
+                loadScript({ 'client-id': _paypal.attributes.description }).then((paypal) => {
+                    paypal
+                        .Buttons({
+                            createOrder: async () => { return await this.createPaypalOrder() },
+                            onApprove: async () => { await this.onPaypalApprove() },
+                        })
+                        .render('#paypal-button-container')
                 })
-                .render('#paypal-button-container')
-        })
+            }
+        }
     },
     watch: {
         stepShow: function (val) {

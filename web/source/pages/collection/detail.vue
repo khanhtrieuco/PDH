@@ -68,7 +68,7 @@ export default {
         }
         // await this.loadProducts()
         if (this.collection.attributes) {
-            this.collection.attributes.media.data.map(o => {
+            this.collection.attributes.media?.data?.map(o => {
                 this.imgDataArray.push({
                     src: o.attributes.url,  // for spotlight too
                     title: o.attributes.name,

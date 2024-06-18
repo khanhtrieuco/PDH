@@ -58,6 +58,9 @@ export default {
     watch: {
         modalType: function (val) {
             if (val && val === 'create') {
+                this.form = {
+                    name: undefined
+                }
                 this.$refs.ruleForm.resetFields();
             }
         },
@@ -123,6 +126,5 @@ export default {
     }
 }
 </script>
-  
+
 <style lang="scss" scoped></style>
-  

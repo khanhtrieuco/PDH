@@ -89,7 +89,6 @@ export default {
                     width: 150,
                     align: 'center',
                     // key: 'collection_cate',
-                    sorter: true
                 },{
                     title: 'Sắp xếp',
                     width: 120,
@@ -154,7 +153,8 @@ export default {
                 pagination: {
                     page: this.listItem.pagination ? this.listItem.pagination.page : 1,
                     pageSize: this.listItem.pagination ? this.listItem.pagination.pageSize : 10
-                }
+                },
+                sort: ['id:desc']
             })
             this.loading = false
         },
@@ -190,7 +190,7 @@ export default {
         },
         onRefresh: async function () {
             this.filter = {}
-            this.sort = []
+            this.sort = ['id:desc']
             this.onFilter()
         },
         onFilter: async function () {
@@ -215,7 +215,7 @@ export default {
         handleRefesh: async function (_p, _f, _s) {
             this.loading = true
             let filters = {}
-            let sort = []
+            let sort = ['id:desc']
             if (this.filter.name) {
                 filters['name'] = { $containsi: this.filter.name }
             }

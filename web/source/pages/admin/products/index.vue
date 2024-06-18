@@ -281,13 +281,13 @@ export default {
         },
         onRefresh: async function () {
             this.filter = {}
-            this.sort = []
+            this.sort = ['id:desc']
             this.handleRefesh()
         },
         handleRefesh: async function (_p, _f, _s) {
             this.loading = true
             let filters = {}
-            let sort = []
+            let sort = ['id:desc']
             if (this.filter.search) {
                 filters['name'] = { $containsi: this.filter.search }
             }

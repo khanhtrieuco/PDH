@@ -10,7 +10,7 @@
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <div class="collection-item d-flex justify-content-center align-items-center"
             :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes.url})`">
-            <div class="collection-item-content" v-if="collection.attributes.view_detail">
+            <div class="collection-item-content">
               <NuxtLink :to="`/collection/${collection.attributes.slug}`">
                 <div class="collection-item-title">{{ collection.attributes.name }}</div>
                 <!-- <div class="collection-item-des">{{ collection.attributes.description }}</div> -->
@@ -20,16 +20,15 @@
                 </div>
               </NuxtLink>
             </div>
-            <div class="collection-item-content" v-else>
+            <!-- <div class="collection-item-content"  v-if="collection.attributes.view_detail">
               <div>
                 <div class="collection-item-title">{{ collection.attributes.name }}</div>
-                <!-- <div class="collection-item-des">{{ collection.attributes.description }}</div> -->
                 <div class="shop-now-link">
                   <span class="shop-now-link-text">Read more</span>
                   <img class="shop-now-link-img" src="/images/more.png" />
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </template>
       </slide>
@@ -114,7 +113,6 @@ export default {
       getListHomeCollection: "collection/getListHomeCollection"
     }),
     onAfterSlideChange(index) {
-      console.log(index)
       this.current_coll = this.listCollection[index]
     }
   }
@@ -178,7 +176,7 @@ export default {
 }
 
 .shop-now-link {
-
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
