@@ -2,7 +2,7 @@
     <div class="backgroud-black" @click="closeUpdate">
         <div class="popup-content-shipping" @click.stop="">
             <img class="size-close" src="/images/close.svg" @click="$emit('closeUpdate')" />
-            <img class="popup-logo" src="/images/logo-p.svg" />
+            <img class="popup-logo" src="/images/logo.png" />
             <div class="shipping-title">SHIPPING POLICY</div>
             <div class="shipping-sub">International shipping is offered to the majority of the world's areas.</div>
 

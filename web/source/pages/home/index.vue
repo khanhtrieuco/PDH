@@ -67,7 +67,7 @@
       </div>
     </div>
     <News :isMobile="isMobile" />
-    <Store :isMobile="isMobile" />
+    <!-- <Store :isMobile="isMobile" /> -->
   </div>
 </template>
 
@@ -358,7 +358,7 @@ export default {
 @media (max-width: 520px) {
   .home-top-video {
     position: relative;
-
+    min-height: 600px;
     .home-top-content {
       position: absolute;
       bottom: 120px;

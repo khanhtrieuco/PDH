@@ -1,8 +1,8 @@
 <template>
     <div class="detail-show" v-if="show && show.attributes">
         <div class="detail-show-image">
-            <ThumbImage ratio="16-9" :src="show.attributes.banner.data?.attributes.url" v-if="!isMobile"></ThumbImage>
-            <ThumbImage ratio="9-21" :src="show.attributes.banner_mobile.data?.attributes.url" v-if="isMobile"></ThumbImage>
+            <img :src="show.attributes.banner.data?.attributes.url" v-if="!isMobile"></img>
+            <img :src="show.attributes.banner_mobile.data?.attributes.url" v-if="isMobile"></img>
             <!-- <div class="detail-show-info">
                 <h1 class="detail-show-title">{{ show.attributes?.name }}</h1>
                 <div class="detail-show-des">{{ show.attributes?.content }}</div>
@@ -137,6 +137,9 @@ export default {
 .detail-show {
     .detail-show-image {
         position: relative;
+        img{
+            width: 100%;
+        }
 
         .detail-show-info {
             position: absolute;
@@ -185,7 +188,7 @@ export default {
             }
 
             .detail-show-content-img-data {
-                width: 380px;
+                width: 65%;
                 margin: 10px 0px;
             }
 

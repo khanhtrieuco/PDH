@@ -27,6 +27,7 @@ const SaveItem = () => interopDefault(import('./pages/saveItem/index.vue'))
 const MyOrder = () => interopDefault(import('./pages/myorder/index.vue'))
 const BlogDetail = () => interopDefault(import('./pages/blog/index.vue'))
 const Login = () => interopDefault(import('./pages/login/index.vue'))
+const LoginAdmin = () => interopDefault(import('./pages/login/admin.vue'))
 const CallBackGoogle = () => interopDefault(import('./pages/login/google.vue'))
 const CallBackFacebook = () => interopDefault(import('./pages/login/facebook.vue'))
 const DashboardCrm = () => interopDefault(import('./pages/admin/index.vue'))
@@ -57,6 +58,10 @@ export function createRouter() {
             {
                 path: '/dang-nhap',
                 component: Login
+            },
+            {
+                path: '/login-crm',
+                component: LoginAdmin
             },
             {
                 path: '/connect/google/redirect',

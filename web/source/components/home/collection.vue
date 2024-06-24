@@ -201,6 +201,7 @@ export default {
   .collection-container {
     text-align: center;
     padding: 60px 0px;
+    min-height: 600px;
 
     .collection-title-image {
       margin-bottom: 40px;

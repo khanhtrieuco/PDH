@@ -2,7 +2,7 @@
     <div class="backgroud-black" @click="closeUpdate">
         <div class="popup-content-exchange" @click.stop="">
             <img class="size-close" src="/images/close.svg" @click="$emit('closeUpdate')" />
-            <img class="popup-logo" src="/images/logo-p.svg" />
+            <img class="popup-logo" src="/images/logo.png" />
             <div class="exchange-title">EXCHANGE AND RETURN</div>
             <div class="exchange-scrool-content">
                 <div class="exchange-haft-content">

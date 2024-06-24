@@ -24,10 +24,11 @@
                 </div>
             </div>
             <div class="d-flex" v-if="!isMobile">
-                <VueSlickCarousel class="product-detail-media" v-bind="settings" v-if="product.attributes?.media.data">
+                <VueSlickCarousel class="product-detail-media" v-bind="settings"
+                    v-if="product.attributes?.media.data">
                     <img v-for="(imgData, index) in product.attributes?.media.data" :key="index"
                         class="product-detail-media-img-desktop" :src="imgData.attributes?.url" />
-                    <template slot="prevArrow" v-if="!isMobile">
+                    <!-- <template slot="prevArrow" v-if="!isMobile">
                         <div class="pre-arrow">
                             <img src="/images/left-b.png" />
                         </div>
@@ -36,7 +37,7 @@
                         <div class="next-arrow">
                             <img src="/images/right-b.png" />
                         </div>
-                    </template>
+                    </template> -->
                 </VueSlickCarousel>
                 <div class="product-detail-data">
                     <div class="product-detail-data-title">Product details</div>
@@ -194,12 +195,25 @@ export default {
             isMobile: false,
             settings: {
                 "dots": true,
-                "arrows": true,
-                "edgeFriction": 0.35,
-                "infinite": true,
-                "speed": 500,
-                "slidesToShow": 1,
-                "slidesToScroll": 1
+                // "arrows": true,
+                // "edgeFriction": 0.35,
+                // "infinite": true,
+                // "speed": 500,
+                // "slidesToShow": 1,
+                // "slidesToScroll": 1,
+                vertical:true,
+                verticalSwiping:true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 0,
+                speed: 500,
+                cssEase: 'linear',
+                infinite: true,
+                arrows:false,
+                touchMove:true,
+                swipeToSlide:true,
+                swipe:true
             },
             settings_m: {
                 "dots": true,
@@ -500,17 +514,20 @@ export default {
     .product-detail-media {
         width: 50%;
         display: inline-block;
-        height: 750px;
+        height: 800px;
+        overflow: hidden;
 
         .product-detail-media-img-desktop {
             width: 100%;
-            height: 750px;
+            height: 800px;
             object-fit: cover;
         }
 
         .slick-dots {
-            top: 10px;
-            bottom: auto;
+            top: auto;
+            bottom: 20px;
+            width: 20px;
+            left: 20px;
 
             li {
                 margin: 0px 5px;
@@ -818,12 +835,41 @@ export default {
             width: 100%;
             display: inline-block;
             margin-bottom: 50px;
+            height: 380px;
 
             .product-detail-media-img {
                 width: 100%;
 
                 &:nth-child(even) {
                     margin-left: 10px;
+                }
+            }
+
+            .slick-dots {
+                top: auto;
+                bottom: 20px;
+
+                li {
+                    margin: 0px 5px;
+                    border-radius: 50%;
+                    border: 1px solid #000;
+                    width: 13px;
+                    height: 13px;
+                    overflow: hidden;
+
+                    button:before {
+                        font-size: 0px;
+                        background-color: white;
+                    }
+                }
+
+                .slick-active {
+                    border: 1px solid #000;
+
+                    button:before {
+                        font-size: 0px;
+                        background-color: #000;
+                    }
                 }
             }
         }

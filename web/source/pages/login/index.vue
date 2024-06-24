@@ -80,17 +80,6 @@ export default {
         this.isMobile = this.checkMobile()
     },
     methods: {
-        checkMobile() {
-            if (!process.server) {
-                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                    return true
-                } else {
-                    return false
-                }
-            }
-        }
-    },
-    methods: {
         ...mapActions({
             loginEmail: "auth/loginEmail",
             registerByEmail: "auth/registerByEmail",

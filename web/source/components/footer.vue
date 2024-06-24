@@ -5,7 +5,7 @@
         <div class="col-3">
           <div class="footer-title">{{ $t('Footer_title_1') }}</div>
           <div class="footer-text">{{ $t('Footer_text_1') }}</div>
-          <div class="footer-text">{{ $t('Footer_text_2') }}</div>
+          <a href="/account"><div class="footer-text">{{ $t('Footer_text_2') }}</div></a>
           <div class="footer-text">{{ $t('Footer_text_3') }}</div>
           <div class="footer-text">{{ $t('Footer_text_4') }}</div>
           <div class="footer-text footer-break">{{ $t('Footer_text_5') }}</div>
@@ -16,10 +16,10 @@
         </div>
         <div class="col-3">
           <div class="footer-title">{{ $t('Footer_title_3') }}</div>
-          <div class="footer-text">{{ $t('Footer_text_9') }}</div>
-          <div class="footer-text">{{ $t('Footer_text_10') }}</div>
-          <div class="footer-text">{{ $t('Footer_text_11') }}</div>
-          <div class="footer-text">{{ $t('Footer_text_12') }}</div>
+          <a href="/house-of-pdh"><div class="footer-text">{{ $t('Footer_text_9') }}</div></a>
+          <a href="/house-of-pdh"><div class="footer-text">{{ $t('Footer_text_10') }}</div></a>
+          <a href="/house-of-pdh"><div class="footer-text">{{ $t('Footer_text_11') }}</div></a>
+          <a href="/house-of-pdh"><div class="footer-text">{{ $t('Footer_text_12') }}</div></a>
           <div class="footer-text">{{ $t('Footer_text_13') }}</div>
           <div class="footer-text">{{ $t('Footer_text_14') }}</div>
           <div class="footer-text">{{ $t('Footer_text_15') }}</div>
@@ -46,7 +46,7 @@
             </label>
           </div>
           <div class="footer-des my-4">{{ $t('Footer_text_22') }}</div>
-          <div class="footer-btn-login">{{ $t('Footer_text_23') }}</div>
+          <a href="/dang-nhap"><div class="footer-btn-login">{{ $t('Footer_text_23') }}</div></a>
           <div class="d-inline-flex justify-content-between">
             <img class="footer-icon" src="/images/you.png" />
             <a target="_blank" href="https://www.facebook.com/PhanDangHoangg">
@@ -185,6 +185,7 @@ export default {
     text-decoration-line: underline;
     cursor: pointer;
     margin-bottom: 15px;
+    color: #fff;
   }
 
   .footer-des {

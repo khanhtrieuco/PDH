@@ -162,49 +162,13 @@
       </div>
     </div>
     <div v-if="tab === 1" class="header-tab-menu" v-click-outside="closeTab">
-      <div class="container header-tab-menu-container d-flex justify-content-start">
+      <div class="container header-tab-menu-container d-flex justify-content-between">
         <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[0].child" :key="idx">
           <div class="header-tab-menu-title">{{ _menu.attributes.name }}</div>
           <div class="header-tab-menu-text" v-for="(_coll, index) in _menu.attributes.collections.data" :key="index"
             v-if="_coll?.attributes.state === 'active'"
             @click="goPage(`/collection/${_coll?.attributes.slug}`,_coll?.attributes.view_detail)">{{ _coll?.attributes.name }}</div>
         </div>
-        <!-- <div class="header-tab-menu-col-1">
-          <div class="header-tab-menu-title">READY TO WEAR</div>
-          <div class="header-tab-menu-text">View all</div>
-          <div class="header-tab-menu-text">Tailoring</div>
-          <div class="header-tab-menu-text">Coats and Outerwear</div>
-          <div class="header-tab-menu-text">Jackets and Blazes</div>
-          <div class="header-tab-menu-text">Dresses</div>
-          <div class="header-tab-menu-text">Top and Shirts</div>
-        </div>
-        <div class="header-tab-menu-col-1">
-          <div class="header-tab-menu-text"> </div>
-          <div class="header-tab-menu-text">T-Shirts and Sweatshirts</div>
-          <div class="header-tab-menu-text">Skirts</div>
-          <div class="header-tab-menu-text">Trousers</div>
-          <div class="header-tab-menu-text">Knitwear</div>
-          <div class="header-tab-menu-text">Denim</div>
-        </div>
-        <div class="header-tab-menu-col-1">
-          <div class="header-tab-menu-title">HAND BAGS</div>
-          <div class="header-tab-menu-text">View all</div>
-          <div class="header-tab-menu-text">Shoulder Bags</div>
-          <div class="header-tab-menu-text">Crossbody Bags</div>
-          <div class="header-tab-menu-text">Top Handles</div>
-          <div class="header-tab-menu-text">Mini Bags</div>
-          <div class="header-tab-menu-text">Clutches</div>
-          <div class="header-tab-menu-text">Tote Bags (or Totes)</div>
-        </div>
-        <div class="header-tab-menu-col-1">
-          <div class="header-tab-menu-title">SHOES</div>
-          <div class="header-tab-menu-text">View all</div>
-          <div class="header-tab-menu-text">Boots</div>
-          <div class="header-tab-menu-text">Pumps</div>
-          <div class="header-tab-menu-text">Sanddals and Slides</div>
-          <div class="header-tab-menu-text">Flat Shoes</div>
-          <div class="header-tab-menu-text">Sneakers</div>
-        </div> -->
       </div>
     </div>
     <div v-if="tab === 4" class="header-tab-menu-about" v-click-outside="closeTab">
@@ -380,9 +344,9 @@ export default {
       }
       let listColl = this.listCategory[i].attributes.child.data
       for (let j = 0; j < listColl.length; j++) {
-        if (listColl[j].attributes.collections.data.length > 6 && !this.isMobile) {
-          let listTemp = listColl[j].attributes.collections.data.slice(6)
-          listColl[j].attributes.collections.data = listColl[j].attributes.collections.data.slice(0, 6)
+        if (listColl[j].attributes.collections.data.length > 8 && !this.isMobile) {
+          let listTemp = listColl[j].attributes.collections.data.slice(8)
+          listColl[j].attributes.collections.data = listColl[j].attributes.collections.data.slice(0, 8)
           let sTemp = {
             attributes: {
               name: ' ',

@@ -2,11 +2,10 @@
     <div class="backgroud-black" @click="closeUpdate">
         <div class="popup-content-help" @click.stop="">
             <img class="size-close" src="/images/close.svg" @click="$emit('closeUpdate')" />
-            <img class="popup-logo" src="/images/logo-p.svg" />
+            <img class="popup-logo" src="/images/logo.png" />
             <div class="help-title">NEED HELP</div>
             <div class="help-text">We only allow orders to be changed once, for free. Please call & email to assist with any
-                adjustments you
-                would like to make to your order.</div>
+                adjustments you would like to make to your order.</div>
             <div class="help-bold">Call us: 0986375167</div>
             <div class="help-bold">Mail us: p.d.h.brand@gmail.com </div>
         </div>

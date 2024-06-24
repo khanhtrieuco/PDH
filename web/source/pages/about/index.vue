@@ -18,10 +18,10 @@
                 </div>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <img class="w-100" src="/images/about-top.jpg" v-if="!isMobile" />
             <img class="w-100" src="/images/about-top-mobile.jpg" v-if="isMobile" />
-        </div>
+        </div> -->
         <VueSlickCarousel v-bind="settings" class="about-list-banner" :arrows="isMobile ? false : true">
             <div class="about-list-item">
                 <div class="about-info">
@@ -105,6 +105,7 @@
                     </p>
                 </div>
             </div>
+            <div class="mark-down"></div>
         </div>
         <!-- <div class="container about-list">
             <div class="about-item">
@@ -558,7 +559,15 @@ export default {
 
     .about-mid {
         position: relative;
-
+        .mark-down{
+            position: absolute;
+            z-index: 8;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            top: 0px;
+            opacity: 0.6;
+        }
         .about-mid-content {
             position: absolute;
             width: 100%;
@@ -568,7 +577,7 @@ export default {
             display: flex;
             align-items: center;
             text-align: center;
-
+            z-index: 10;
             .about-mid-des {
                 color: #FFF;
                 text-align: center;

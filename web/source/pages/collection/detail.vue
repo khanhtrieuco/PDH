@@ -17,30 +17,23 @@
                 ullamcor
             </div> -->
         </div>
-        <div class="container">
-            <!-- <div class="photo-wrap" v-if="isMobile">
-                <div class="photo" v-for="imgData, index in imgDataArray" :key="index"
-                    :style="{ 'width': imgData.size.width * 800 / imgData.size.height + 'px', 'flex-grow': imgData.size.width * 800 / imgData.size.height }">
-                    <i :style="{ 'padding-bottom': imgData.size.height / imgData.size.width * 100 + '%' }"></i>
-                    <img class="collection-detail-image" :src="imgData.src" :alt="imgData.title" @load="loaded(index)"
-                        crossorigin="Anonymous" />
-                </div>
-            </div> -->
-            <div class="photo-list-mobile" v-if="isMobile">
-                <div :class="index%6 < 2 ? 'photo-img' : 'photo-img-half'" v-for="imgData, index in imgDataArray" :key="index">
-                    <img class="photo-img-detail" :src="imgData.src" :alt="imgData.title" />
-                </div>
-            </div>
-            <div class="photo-list" v-if="!isMobile">
+        <div class="container" v-if="!isMobile">
+            <div class="photo-list">
                 <div class="photo-img" v-for="imgData, index in imgDataArray" :key="index">
                     <img class="photo-img-detail" :src="imgData.src" :alt="imgData.title" />
                 </div>
             </div>
-            <!-- <div class="btn-collection-top" @click="$router.go(-1)">SHOP NOW</div> -->
+        </div>
+        <div class="" v-else>
+            <div class="photo-list">
+                <div class="photo-img" v-for="imgData, index in imgDataArray" :key="index">
+                    <img class="photo-img-detail" :src="imgData.src" :alt="imgData.title" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
-  
+
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
@@ -161,24 +154,25 @@ export default {
 
     .photo-list {
         width: 100%;
-        margin-top: 5px;
+        margin-top: 50px;
 
         .photo-img {
             width: calc(100% / 3);
             display: inline-block;
-            padding: 5px;
+            padding: 8px;
 
             .photo-img-detail {
                 width: 100%;
                 min-width: 100%;
                 max-width: 100%;
-                height: 500px;
+                height: 600px;
                 object-fit: cover;
                 vertical-align: bottom;
                 // border-radius: 3px;
                 // box-sizing: border-box;
                 // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
             }
+
             .photo-img-detail-half {
                 width: calc(50% - 5px);
                 min-width: calc(50% - 5px);
@@ -208,49 +202,55 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .customer-des {
-        font-size: 12px;
-        padding: 20px 25px;
-        font-family: 'Aeroport-light';
-        text-align: center;
-    }
-    .photo-list-mobile {
-        width: 100%;
-        margin-top: 5px;
+    .collection-content {
+        .customer-des {
+            font-size: 12px;
+            padding: 20px 25px;
+            font-family: 'Aeroport-light';
+            text-align: center;
+        }
 
-        .photo-img {
+        .photo-list {
             width: 100%;
-            display: inline-block;
-            padding: 3px;
+            margin-top: 40px;
+            margin-left: 2px;
+            margin-right: 2px;
+            .photo-img {
+                width: calc(100% / 3 - 1px);
+                display: inline-block;
+                padding: 2px;
 
-            .photo-img-detail {
-                width: 100%;
-                min-width: 100%;
-                max-width: 100%;
-                height: 500px;
-                object-fit: cover;
-                vertical-align: bottom;
-                // border-radius: 3px;
-                // box-sizing: border-box;
-                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+                .photo-img-detail {
+                    width: 100%;
+                    min-width: 100%;
+                    max-width: 100%;
+                    height: 270px;
+                    object-fit: cover;
+                    vertical-align: bottom;
+                    // border-radius: 3px;
+                    // box-sizing: border-box;
+                    // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+                }
             }
-        }
-        .photo-img-half {
-            width: calc(100% / 2);
-            display: inline-block;
-            padding: 3px;
 
-            .photo-img-detail {
-                width: 100%;
-                min-width: 100%;
-                max-width: 100%;
-                height: 250px;
-                object-fit: cover;
-                vertical-align: bottom;
-                // border-radius: 3px;
-                // box-sizing: border-box;
-                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+            .photo-img-half {
+                width: calc(100% / 2);
+                display: inline-block;
+                padding: 3px;
+
+                .photo-img-detail {
+                    width: 100%;
+                    min-width: 100%;
+                    max-width: 100%;
+                    height: 250px;
+                    object-fit: cover;
+                    vertical-align: bottom;
+                    // border-radius: 3px;
+                    // box-sizing: border-box;
+                    // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+                }
             }
         }
     }
-}</style>
+}
+</style>

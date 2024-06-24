@@ -1,10 +1,10 @@
 <template>
     <div class="collection-content">
         <div class="collection-banner">
-            <ThumbImage class="customer-image" ratio="21-9" v-if="!isMobile"
-                :src="collection.attributes?.main_thub?.data?.attributes.url"></ThumbImage>
-            <ThumbImage class="customer-image" ratio="9-21" v-if="isMobile"
-                :src="collection.attributes?.main_thub_mobile?.data?.attributes.url"></ThumbImage>
+            <img class="customer-image" ratio="21-9" v-if="!isMobile"
+                :src="collection.attributes?.main_thub?.data?.attributes.url"></img>
+            <img class="customer-image" ratio="9-21" v-if="isMobile"
+                :src="collection.attributes?.main_thub_mobile?.data?.attributes.url"></img>
         </div>
         <div class="container">
             <h1 class="collection-title">
@@ -106,7 +106,9 @@ export default {
 <style lang="scss">
 .collection-content {
     padding-bottom: 100px;
-
+    .customer-image{
+        width: 100%;
+    }
     .collection-title {
         color: #000;
         text-align: center;

@@ -204,7 +204,7 @@ export default {
     text-align: center;
     padding-top: 60px;
     padding-bottom: 0px;
-
+    margin-bottom: 50px;
     .all-news {
       position: absolute;
       cursor: pointer;
