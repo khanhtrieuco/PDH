@@ -7,12 +7,12 @@
                     <a-input v-model="form.name" @blur="() => { $refs.name.onFieldBlur(); }" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="name_en" label="Tiêu đề tiếng anh" prop="name_en">
                     <a-input v-model="form.name_en" />
                 </a-form-model-item>
-            </a-col>
-            <a-col :span="12">
+            </a-col> -->
+            <!-- <a-col :span="12">
                 <a-form-model-item ref="short_content" label="Nội dung rút gọn" prop="short_content">
                     <a-input v-model="form.short_content" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
                         @blur="() => { $refs.short_content.onFieldBlur(); }" />
@@ -22,8 +22,8 @@
                 <a-form-model-item ref="short_content_en" label="Nd rút ngọn tiếng anh" prop="short_content_en">
                     <a-input v-model="form.short_content_en" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }" />
                 </a-form-model-item>
-            </a-col>
-            <a-col :span="12">
+            </a-col> -->
+            <!-- <a-col :span="12">
                 <a-form-model-item ref="content" label="Nội dung" prop="content">
                     <a-input v-model="form.content" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
                         @blur="() => { $refs.content.onFieldBlur(); }" />
@@ -33,15 +33,15 @@
                 <a-form-model-item ref="content_en" label="Nội dung tiếng anh" prop="content_en">
                     <a-input v-model="form.content_en" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }" />
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="24">
                 <a-col :span="12">
-                    <a-form-model-item label="Hình banner">
+                    <a-form-model-item label="Hình đại diện">
                         <upload-image :thub.sync="form.thub" :thubLink="item?.attributes?.thub.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
                 <a-col :span="12">
-                    <a-form-model-item label="Hình banner mobile ">
+                    <a-form-model-item label="Hình đại diện mobile ">
                         <upload-image :thub.sync="form.thub_mobile"
                             :thubLink="item?.attributes?.thub_mobile.data?.attributes.url" />
                     </a-form-model-item>
@@ -49,32 +49,51 @@
             </a-col>
             <a-col :span="24">
                 <a-col :span="12">
+                    <a-form-model-item label="Hình banner">
+                        <upload-image :thub.sync="form.banner"
+                            :thubLink="item?.attributes?.banner.data?.attributes.url" />
+                    </a-form-model-item>
+                </a-col>
+                <a-col :span="12">
+                    <a-form-model-item label="Hình banner mobile ">
+                        <upload-image :thub.sync="form.banner_mobile"
+                            :thubLink="item?.attributes?.banner_mobile.data?.attributes.url" />
+                    </a-form-model-item>
+                </a-col>
+            </a-col>
+            <a-col :span="24">
+                <a-col :span="12">
                     <a-form-model-item label="Hình 1">
-                        <upload-image :thub.sync="form.media1" :thubLink="item?.attributes?.media1.data?.attributes.url" />
+                        <upload-image :thub.sync="form.media1"
+                            :thubLink="item?.attributes?.media1.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
                 <a-col :span="12">
                     <a-form-model-item label="Hình 2 ">
-                        <upload-image :thub.sync="form.media2" :thubLink="item?.attributes?.media2.data?.attributes.url" />
+                        <upload-image :thub.sync="form.media2"
+                            :thubLink="item?.attributes?.media2.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
             </a-col>
             <a-col :span="24">
                 <a-col :span="12">
                     <a-form-model-item label="Hình 3">
-                        <upload-image :thub.sync="form.media3" :thubLink="item?.attributes?.media3.data?.attributes.url" />
+                        <upload-image :thub.sync="form.media3"
+                            :thubLink="item?.attributes?.media3.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
                 <a-col :span="12">
                     <a-form-model-item label="Hình 4 ">
-                        <upload-image :thub.sync="form.media4" :thubLink="item?.attributes?.media4.data?.attributes.url" />
+                        <upload-image :thub.sync="form.media4"
+                            :thubLink="item?.attributes?.media4.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
             </a-col>
             <a-col :span="24">
                 <a-col :span="12">
                     <a-form-model-item label="Video">
-                        <upload-image :thub.sync="form.video" :thubLink="item?.attributes?.video.data?.attributes.url" />
+                        <upload-image :thub.sync="form.video"
+                            :thubLink="item?.attributes?.video.data?.attributes.url" />
                     </a-form-model-item>
                 </a-col>
                 <a-col :span="12">
@@ -162,6 +181,22 @@ export default {
     watch: {
         modalType: function (val) {
             if (val && val === 'create') {
+                this.form = {
+                    name: undefined,
+                    name_en: undefined,
+                    short_content: undefined,
+                    short_content_en: undefined,
+                    content: undefined,
+                    content_en: undefined,
+                    thub: undefined,
+                    thub_mobile: undefined,
+                    media1: undefined,
+                    media2: undefined,
+                    media3: undefined,
+                    media4: undefined,
+                    order: 0,
+                    video: undefined
+                }
                 this.$refs.ruleForm.resetFields();
             }
         },
@@ -248,6 +283,5 @@ export default {
     }
 }
 </script>
-  
+
 <style lang="scss" scoped></style>
-  

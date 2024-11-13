@@ -133,7 +133,7 @@ export default {
         },
         list_order: {
             type: Array,
-            default: []
+            default: () => []
         },
         isMobile: {
             type: Boolean,

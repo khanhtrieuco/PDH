@@ -1,9 +1,9 @@
 <template>
   <div class="banner-about">
+    <img class="banner-about-img-top" src="/images/about-banner-black.png" />
     <VueSlickCarousel v-bind="settings" class="list-banner-about" v-if="!isMobile && listBanner && listBanner.length">
       <div v-for="(item, index) in listBanner" :key="index">
         <div class="banner-about-item">
-          <img class="banner-about-img-top" src="/images/about-banner.png" />
           <img class="banner-about-img" :src="item.attributes?.imagelink.data?.attributes.url" />
           <!-- <div class="banner-about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla urna, rutrum
             ut est quis, imperdiet auctor ipsum.</div> -->
@@ -74,21 +74,19 @@ export default {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  text-align: center;
+
+  .banner-about-img-top {
+    width: 470px;
+    margin-bottom: 80px;
+  }
 
   .banner-about-item {
     position: relative;
 
-    .banner-about-img-top {
-      position: absolute;
-      width: 550px;
-      left: 50%;
-      transform: translate(-50%);
-      top: 110px;
-    }
-
     .banner-about-img {
       width: 100%;
-      height: 100vh;
+      // height: 100vh;
       object-fit: cover;
     }
 
@@ -131,4 +129,33 @@ export default {
       }
     }
   }
-}</style>
+}
+
+@media (max-width: 820px) {
+  .banner-about {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    text-align: center;
+
+    .banner-about-img-top {
+      width: 80%;
+      margin-bottom: 60px;
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .banner-about {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    text-align: center;
+
+    .banner-about-img-top {
+      width: 80%;
+      margin-bottom: 60px;
+    }
+  }
+}
+</style>

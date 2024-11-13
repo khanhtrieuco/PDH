@@ -47,13 +47,22 @@ export default {
         })
         return res.data
     },
-    updateItem: async function ({
-        commit
-    }, data) {
+    updateItem: async function ({ commit }, data) {
         let res = await ApiService.request({
             method: "put",
             url: `/api/collection-cates/${data.id}`,
             data: { data : data.data }
+        });
+        if (res && res.data) {
+            return res.data
+        }
+        return false
+    },
+    deleteItem: async function ({ commit }, data) {
+        console.log(data)
+        let res = await ApiService.request({
+            method: "delete",
+            url: `/api/collection-cates/${data.id}`
         });
         if (res && res.data) {
             return res.data

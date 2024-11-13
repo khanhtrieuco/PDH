@@ -143,7 +143,6 @@ export default {
             }
         },
         updateCartValue(variant_id, _v) {
-            console.log(variant_id)
             let _i = this.listCart.find(o => o.variant_id === variant_id)
             if (_i) {
                 _i.quantity = _v

@@ -8,4 +8,7 @@ export default {
     set_data(state, payload) {
         state[payload.name] = payload.data;
     },
+    set_news(state, payload) {
+        state.news = payload.news;
+    },
 };

@@ -1,12 +1,12 @@
 <template>
     <div class="detail-show" v-if="show && show.attributes">
         <div class="detail-show-image">
-            <ThumbImage ratio="16-9" :src="show.attributes.banner.data?.attributes.url" v-if="!isMobile"></ThumbImage>
-            <ThumbImage ratio="9-21" :src="show.attributes.banner_mobile.data?.attributes.url" v-if="isMobile"></ThumbImage>
-            <div class="detail-show-info">
+            <img :src="show.attributes.banner.data?.attributes.url" v-if="!isMobile"></img>
+            <img :src="show.attributes.banner_mobile.data?.attributes.url" v-if="isMobile"></img>
+            <!-- <div class="detail-show-info">
                 <h1 class="detail-show-title">{{ show.attributes?.name }}</h1>
                 <div class="detail-show-des">{{ show.attributes?.content }}</div>
-            </div>
+            </div> -->
         </div>
         <div class="detail-show-content" v-if="!isMobile">
             <div class="d-flex align-items-center">
@@ -38,7 +38,8 @@
         </div>
         <div class="detail-show-video">
             <img class="detail-show-img-video" src="/images/PDH.png" />
-            <video id="videoRef-id" ref="videoRef" preload="auto" class="detail-show-video-inner" @click="onStopVideo">
+            <video id="videoRef-id" ref="videoRef" class="detail-show-video-inner" 
+            :muted="true" autoplay playsinline preload="auto" loop @click="onStopVideo">
                 <source :src="show.attributes.video.data?.attributes.url" type="video/mp4" />
             </video>
             <img class="detail-show-img-play" src="/images/play.png" @click="onPlayVideo" />
@@ -87,7 +88,6 @@ export default {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
         await this.loadData()
-        console.log(this.show)
     },
     methods: {
         ...mapActions({
@@ -103,7 +103,6 @@ export default {
             }
         },
         onPlayVideo() {
-            console.log(this.$refs.videoRef)
             var elem = document.getElementById("videoRef-id");
             if (this.$refs && this.$refs.videoRef) {
                 this.$refs.videoRef.play()
@@ -138,6 +137,9 @@ export default {
 .detail-show {
     .detail-show-image {
         position: relative;
+        img{
+            width: 100%;
+        }
 
         .detail-show-info {
             position: absolute;
@@ -186,7 +188,7 @@ export default {
             }
 
             .detail-show-content-img-data {
-                width: 380px;
+                width: 65%;
                 margin: 10px 0px;
             }
 
@@ -206,7 +208,7 @@ export default {
 
         .detail-show-img-video {
             width: 100%;
-            margin: 100px 0px;
+            margin: 75px 0px;
             position: relative;
             z-index: 2;
         }
@@ -225,7 +227,7 @@ export default {
             width: 70px;
             transform: translate(calc(-50% + 30px), calc(-50% - 20px));
             left: 50%;
-            top: 50%;
+            top: 51%;
             z-index: 2;
             cursor: pointer;
         }

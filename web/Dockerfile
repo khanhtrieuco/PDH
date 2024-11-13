@@ -1,4 +1,4 @@
-FROM node:14.18.1
+FROM node:18.16.0
 WORKDIR /app/node
 COPY ./source .
 RUN pwd && ls

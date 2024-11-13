@@ -66,7 +66,7 @@ export default {
         },
         async onLogin() {
             if (!this.username || !this.password) {
-                this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
+                this.showNotification('warning', `Please enter complete login information`)
                 return
             }
             let rs = await this.loginEmail({
@@ -74,10 +74,10 @@ export default {
                 password: this.password
             })
             if (rs) {
-                this.showNotification('success', `Đăng nhập thành công`)
+                this.showNotification('success', `Logged in successfully`)
                 this.$router.push({ path: '/' })
             } else {
-                this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
+                this.showNotification('danger', `Login failed, please try again`)
             }
         },
         async onGoogleLogin() {

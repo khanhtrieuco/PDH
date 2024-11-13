@@ -17,7 +17,7 @@ export default {
     props: {
         listMedia: {
             type: Array,
-            default: [],
+            default: () => []
         },
     },
     data() {

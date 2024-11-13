@@ -1,7 +1,26 @@
 const { createCoreController } = require('@strapi/strapi').factories;
+const axios = require('axios');
+const qs = require('qs');
 const moment = require('moment');
-
+const paypalHost = "https://api-m.sandbox.paypal.com";
+const PAYPAL_CLIENT_ID = 'AT4-PxZueVDnzKNSqDwGGuu03TNfQJNFhJre1yzmzuVzKMefyasd1EHQxsKw3rnOxypFSJX7XPnx_yXB'
+const PAYPAL_CLIENT_SECRET = 'EKbbuQaiDqeQN1vwiBLJ7V2NpkRZKhrGNQPmXyfc-qG3wUwjXs_LVXLym_ckt6ilWwxTwOaCqG0vFUac'
 module.exports = createCoreController('api::order.order', ({ strapi }) => ({
+	async test(ctx) {
+		let order =  await strapi.db.query('api::order.order').findOne({
+			select: ['*'],
+			populate: {
+				cartitems: {
+					populate: {
+						product: { populate: ['thub']},
+						variant: {}
+					}
+				}
+			},
+			where: { id: 22 }
+		});
+		return order
+	},
 	async create(ctx) {
 		const { user } = ctx.state
 		let { shippingType, listProductItem, code, payment_type } = ctx.request.body;
@@ -23,11 +42,12 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			where: { user_id: user.id }
 		});
 
-		if (!address.name) {
+		if (!address) {
 			return { message: 'Không tìm thấy thông tin địa chỉ người nhận' };
 		}
 		if (listProductItem && listProductItem.length > 0) {
 			let listCartId = []
+			let listCartValue = []
 			let listProductId = []
 			let listVariantId = []
 			let listCartAdd = []
@@ -48,6 +68,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 					productName += product.name + ', '
 				}
 				total_price += listProductItem[i].quantity * product.price
+				listCartValue.push(listProductItem[i].quantity * product.price)
 
 				if (listProductItem[i].quantity <= 0) {
 					checkCart = false
@@ -91,6 +112,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 				address_phone: address.phone,
 				address_full: address.full_address,
 				payment_type,
+				shippingType,
 				pick_date,
 				end_date,
 				discount_price: 0,
@@ -100,16 +122,61 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 				variants: listVariantId,
 				user: user?.id
 			}
-			let res = await strapi.entityService.create('api::order.order', { data: _order });
-
-			ctx.send({ data: { ...res, productName } });
+			let rorder = await strapi.entityService.create('api::order.order', { data: _order });
+			let res_order = await createOrder(listCartValue);
+			if(res_order.id) {
+				await strapi.db.query('api::order.order').update({
+					where: { id: rorder.id },
+					data: {
+						state: 'confirm',
+						order_paypal_id :res_order.id
+					},
+				})
+			}
+			return res_order
 		}
 		return { message: 'Không tìm thấy thông tin giỏ hàng' };
 	},
 
+	async capture(ctx) {
+		let { order_id } = ctx.request.body;
+		if(!order_id) {
+			return false
+		}
+		try {
+			let order =  await strapi.db.query('api::order.order').findOne({
+				select: ['*'],
+				populate: {
+					cartitems: {
+						populate: {
+							product: { populate: ['thub'] },
+							variant: { populate: ['color','size'] }
+						}
+					}
+				},
+				where: { order_paypal_id: order_id }
+			});
+			if(!order) return false
+			await strapi.db.query('api::order.order').update({
+				where: { id: order.id },
+				data: {
+					state: 'payment'
+				},
+			})
+			let res = await captureOrder(order_id);
+			return {
+				...res,
+				order: order
+			}
+		} catch (error) {
+			console.error("Failed to create order:", error);
+			return false
+		}
+	},
+
 	async approveOrder(ctx) {
 		const { user } = ctx.state
-		let { order_id} = ctx.request.body;
+		let { order_id } = ctx.request.body;
 		// let { order_id } = ctx.query;
 
 
@@ -253,7 +320,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			return { data: rs[0] }
 		return { data: [] }
 	},
-
 	async chartorder(ctx) {
 		let _time = moment()
 		let rs = await strapi.db.connection.raw(
@@ -261,6 +327,92 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 		if (rs && rs.length > 0)
 			return { data: rs[0] }
 		return { data: [] }
+	},
+
+	async getemail(ctx) {
+		let { email } = ctx.query;
+		let check = await strapi.db.query("plugin::users-permissions.user").findOne({
+			select: ['*'],
+			where: { email: email }
+		});
+		return check ? { data: true } : {}
 	}
 
 }));
+
+const generateAccessToken = async () => {
+	try {
+		if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+			throw new Error("MISSING_API_CREDENTIALS");
+		}
+
+		const response = await axios.request({
+			method: 'post',
+			url: 'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Authorization': 'Basic QVQ0LVB4WnVlVkRuektOU3FEd0dHdXUwM1ROZlFKTkZoSnJlMXl6bXp1VnpLTWVmeWFzZDFFSFF4c0t3M3JuT3h5cEZTSlg3WFBueF95WEI6RUtiYnVRYWlEcWVRTjF2d2lCTEo3VjJOcGtSWktockdOUVBtWHlmYy1xRzN3VXdqWHNfTFZYTHltX2NrdDZpbFd3eFR3T2FDcUcwdkZVYWM='
+			},
+			data: qs.stringify({
+				'grant_type': 'client_credentials'
+			})
+		})
+		const data = await response.data;
+		return data.access_token;
+	} catch (error) {
+		console.error("Failed to generate Access Token:", error);
+	}
+};
+
+const createOrder = async (cart) => {
+	let listUnit = []
+	for (let i = 0; i < cart.length; i++) {
+		listUnit.push({
+			amount: {
+				currency_code: "USD",
+				value: cart[i]
+			}
+		})
+	}
+
+	const accessToken = await generateAccessToken();
+	const url = `${paypalHost}/v2/checkout/orders`;
+	const payload = {
+		intent: "CAPTURE",
+		purchase_units: listUnit
+	};
+
+	const response = await axios.request({
+		method: 'post',
+		url: url,
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${accessToken}`
+		},
+		data: JSON.stringify(payload)
+	})
+
+	return response.data;
+};
+
+/**
+* Capture payment for the created order to complete the transaction.
+* @see https://developer.paypal.com/docs/api/orders/v2/#orders_capture
+*/
+const captureOrder = async (orderID) => {
+	const accessToken = await generateAccessToken();
+	const url = `${paypalHost}/v2/checkout/orders/${orderID}/capture`;
+
+	const response = await axios.request({
+		method: 'post',
+		url: url,
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${accessToken}`
+		}
+	})
+
+	console.log(response.data)
+
+	return response.data;
+};

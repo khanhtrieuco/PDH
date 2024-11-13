@@ -10,9 +10,10 @@ export default {
     },
     set_product_view(state, payload) {
         let list = state.list_product_view
-        let _c = state.list_product_view.find(o=> o.id === payload.product.id)
+        let _c = list.find(o=> o.id === payload.product.id)
         if(!_c) {
             state.list_product_view.push(payload.product);
         }
+
     },
 };

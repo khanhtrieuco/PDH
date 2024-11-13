@@ -9,11 +9,17 @@
                             <a-input v-model="form.name" @blur="() => { $refs.name.onFieldBlur(); }" />
                         </a-form-model-item>
                     </a-col>
-                    <a-col :span="12" style="padding-left: 10px;">
+                    <a-col :span="12">
+                        <a-form-model-item ref="description" label="Mô tả" prop="description">
+                            <a-input v-model="form.description" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
+                                @blur="() => { $refs.description.onFieldBlur(); }" />
+                        </a-form-model-item>
+                    </a-col>
+                    <!-- <a-col :span="12" style="padding-left: 10px;">
                         <a-form-model-item ref="name_en" label="Tên tiếng anh" prop="name_en">
                             <a-input v-model="form.name_en" />
                         </a-form-model-item>
-                    </a-col>
+                    </a-col> -->
                     <a-col :span="12">
                         <a-form-model-item label="Sku code" prop="sku_code">
                             <a-input v-model="form.sku_code" />
@@ -36,40 +42,35 @@
                                 :thubLink="item?.attributes?.thub_main.data?.attributes.url" />
                         </a-form-model-item>
                     </a-col>
-                    <a-col :span="12">
-                        <a-form-model-item ref="description" label="Mô tả" prop="description">
-                            <a-input v-model="form.description" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
-                                @blur="() => { $refs.description.onFieldBlur(); }" />
-                        </a-form-model-item>
-                    </a-col>
-                    <a-col :span="12" style="padding-left: 10px;">
+                   
+                    <!-- <a-col :span="12" style="padding-left: 10px;">
                         <a-form-model-item ref="description_en" label="Mô tả tiếng anh" prop="description_en">
                             <a-input v-model="form.description_en" type="textarea"
                                 :auto-size="{ minRows: 3, maxRows: 5 }" />
                         </a-form-model-item>
-                    </a-col>
+                    </a-col> -->
                     <a-col :span="12">
                         <a-form-model-item ref="material" label="Nguyên liệu" prop="material">
                             <a-input v-model="form.material" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
                                 @blur="() => { $refs.material.onFieldBlur(); }" />
                         </a-form-model-item>
                     </a-col>
-                    <a-col :span="12" style="padding-left: 10px;">
+                    <!-- <a-col :span="12" style="padding-left: 10px;">
                         <a-form-model-item ref="material_en" label="Nguyên liệu tiếng anh" prop="material_en">
                             <a-input v-model="form.material_en" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }" />
                         </a-form-model-item>
-                    </a-col>
+                    </a-col> -->
                     <a-col :span="12">
                         <a-form-model-item ref="care" label="Chăm sóc" prop="care">
                             <a-input v-model="form.care" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }"
                                 @blur="() => { $refs.care.onFieldBlur(); }" />
                         </a-form-model-item>
                     </a-col>
-                    <a-col :span="12" style="padding-left: 10px;">
+                    <!-- <a-col :span="12" style="padding-left: 10px;">
                         <a-form-model-item ref="care_en" label="Chăm sóc tiếng anh" prop="care_en">
                             <a-input v-model="form.care_en" type="textarea" :auto-size="{ minRows: 3, maxRows: 5 }" />
                         </a-form-model-item>
-                    </a-col>
+                    </a-col> -->
                     <a-col :span="12">
                         <a-form-model-item label="Giá" prop="price">
                             <a-input v-model="form.price" type="number" />
@@ -251,6 +252,10 @@ export default {
         async onSubmitAdd() {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
+                    this.form.name_en = this.form.name
+                    this.form.description_en = this.form.description
+                    this.form.material_en = this.form.material
+                    this.form.care_en = this.form.care
                     let rs = await this.createProduct({
                         data: {
                             ...this.form,
@@ -275,6 +280,10 @@ export default {
         async onSubmitUpdate() {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
+                    this.form.name_en = this.form.name
+                    this.form.description_en = this.form.description
+                    this.form.material_en = this.form.material
+                    this.form.care_en = this.form.care
                     let rs = await this.updateProduct({
                         id: this.item.id,
                         data: {

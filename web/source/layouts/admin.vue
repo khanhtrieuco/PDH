@@ -118,7 +118,7 @@ export default {
     if (rs && rs.role && rs.role.type === 'admin') {
       this.allow = true
     } else {
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/login-crm' })
     }
   },
   methods: {

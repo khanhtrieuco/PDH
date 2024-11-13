@@ -10,7 +10,6 @@ class ApiService {
             options.header['Authorization'] = `Bearer ${jwt}`
         }
         const header = options.header || {}
-        // const url = 'http://nasdemo-website.click' + options.url
         const url = options.url
         try {
             const data = {
@@ -62,6 +61,12 @@ class ApiService {
             // }
             response = response.data
         } catch (e) {
+            if (e.response && e.response.status === 401) {
+                //call logout
+                window.localStorage.removeItem('token');
+                window.localStorage.removeItem('profile');
+                location.reload();
+            }
             error = e
         }
         if (error) {

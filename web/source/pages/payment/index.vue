@@ -12,7 +12,7 @@
                         <div class="payment-step-title">1. {{ $t('Payment_title_1') }}</div>
                         <div class="payment-step-content" v-if="loggedIn">
                             <div class="payment-step-content-title">Email Address</div>
-                            <div class="payment-step-content-text">lmydu99@gmail.com</div>
+                            <div class="payment-step-content-text">{{ profile.email }}</div>
                         </div>
                         <div class="payment-step-content" v-if="!loggedIn">
                             <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
@@ -34,29 +34,34 @@
                             <div class="d-flex">
                                 <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
                                     @click="shiping_type = 1">Ship to home</div>
-                                <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
-                                    @click="shiping_type = 2">Pick up Store</div>
+                                <div style="cursor: not-allowed;" :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
+                                    >Pick up Store</div>
                             </div>
                             <div class="payment-step-address-info" v-if="shiping_type === 1">
-                                <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
-                                    Bạn chưa có địa chỉ. Bấm vào đây để cập nhật địa chỉ.</div>
+                                <div class="payment-step-address-update" @click="openAddressPopup"
+                                    v-if="!user_address?.id">
+                                    You don't have an address yet. Click here to update the address.</div>
                                 <div v-else>
                                     <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
-                                    <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
+                                    <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}
+                                    </div>
                                     <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                     </div>
-                                    <div class="payment-step-address-update mt-1" @click="openAddressPopup">Cập nhật</div>
+                                    <div class="payment-step-address-update mt-1" @click="openAddressPopup">Save</div>
                                 </div>
                                 <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
                                     @closeUpdate="closeUpdateAddress"></Address>
                             </div>
                             <div class="payment-step-address-info" v-if="shiping_type === 2">
-                                <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name :
-                                    place.attributes?.name_en }}</div>
-                                <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ? place.attributes?.address :
-                                    place.attributes?.address_en }}</div>
+                                <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name
+            :
+            place.attributes?.name_en }}</div>
                                 <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
-                                    `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}` }}
+            place.attributes?.address :
+            place.attributes?.address_en }}</div>
+                                <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
+            `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}`
+                                    }}
                                 </div>
                                 <div class="payment-step-address-des">{{ `Hotline ${place.attributes?.phone}` }}</div>
                             </div>
@@ -67,25 +72,13 @@
                         <div class="payment-step-content">
                             <div class="payment-step-type-name">Payment method</div>
                             <div class="payment-step-type-check">
-                                <Check :checked="paymentType === 'cod'" @choice="onChoicePayment('cod')"></Check>
-                                <div class="payment-step-type-text">COD</div>
+                                <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
+                                <div class="payment-step-type-text">Paypal</div>
                             </div>
-                            <div class="payment-step-type-check">
-                                <Check :checked="paymentType && paymentType !== 'cod'" @choice="onChoicePayment('online')">
-                                </Check>
-                                <div class="payment-step-type-text">Payment Online {{ current_payment.id ? ` -
-                                    ${current_payment.attributes.name}` : `` }}</div>
+                            <div id="paypal-button-container"></div>
+                            <!-- <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
                             </div>
-                            <div class="user-payment-menthod-list" v-if="paymentType && paymentType !== 'cod'">
-                                <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
-                                    v-for="(_pay, index) in listPayment " :key="index">
-                                    <img :src="_pay.attributes.thub.data.attributes.url" @click="onChoicePaymentType(_pay)"
-                                        class="user-payment-icon" />
-                                </div>
-                            </div>
-                            <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
-                            </div>
-                            <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
+                            <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
                         </div>
                     </div>
                 </div>
@@ -100,7 +93,7 @@
                     <div class="payment-step-title">1. {{ $t('Payment_title_1') }}</div>
                     <div class="payment-step-content" v-if="loggedIn">
                         <div class="payment-step-content-title">Email Address</div>
-                        <div class="payment-step-content-text">lmydu99@gmail.com</div>
+                        <div class="payment-step-content-text">{{ profile.email }}</div>
                     </div>
                     <div class="payment-step-content" v-if="!loggedIn">
                         <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
@@ -122,30 +115,30 @@
                         <div class="d-flex">
                             <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
                                 @click="shiping_type = 1">Ship to home</div>
-                            <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
-                                @click="shiping_type = 2">Pick up Store</div>
+                            <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`">
+                                Pick up Store</div>
                         </div>
                     </div>
                     <div class="payment-step-address-info" v-if="shiping_type === 1">
                         <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
-                            Bạn chưa có địa chỉ. Bấm vào đây để cập nhật địa chỉ.</div>
+                            You don't have an address yet. Click here to update the address.</div>
                         <div v-else>
                             <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
                             <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
                             <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                             </div>
-                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Cập nhật</div>
+                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
                         </div>
                         <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
                             @closeUpdate="closeUpdateAddress"></Address>
                     </div>
                     <div class="payment-step-address-info" v-if="shiping_type === 2">
                         <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name :
-                            place.attributes?.name_en }}</div>
+            place.attributes?.name_en }}</div>
                         <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ? place.attributes?.address :
-                            place.attributes?.address_en }}</div>
+            place.attributes?.address_en }}</div>
                         <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
-                            `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}` }}
+            `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}` }}
                         </div>
                         <div class="payment-step-address-des">{{ `Hotline ${place.attributes?.phone}` }}</div>
                     </div>
@@ -154,24 +147,13 @@
                     <div class="payment-step-title">3. {{ $t('Payment') }}</div>
                     <div class="payment-step-content">
                         <div class="payment-step-type-check">
-                            <Check :checked="paymentType === 'cod'" @choice="onChoicePayment('cod')"></Check>
-                            <div class="payment-step-type-text">COD</div>
+                            <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
+                            <div class="payment-step-type-text">Paypal</div>
                         </div>
-                        <div class="payment-step-type-check">
-                            <Check :checked="paymentType && paymentType !== 'cod'" @choice="onChoicePayment('online')">
-                            </Check>
-                            <div class="payment-step-type-text">Payment Online</div>
+                        <div id="paypal-button-container"></div>
+                        <!-- <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
                         </div>
-                        <div class="user-payment-menthod-list" v-if="paymentType && paymentType !== 'cod'">
-                            <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
-                                v-for="(_pay, index) in listPayment " :key="index">
-                                <img :src="_pay.attributes.thub.data.attributes.url" @click="onChoicePaymentType(_pay)"
-                                    class="user-payment-icon" />
-                            </div>
-                        </div>
-                        <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
-                        </div>
-                        <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
+                        <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
                     </div>
                 </div>
                 <UserCart :listItem="listCart" :isMobile="isMobile" :priceShip="priceShip" />
@@ -180,10 +162,9 @@
         <div class="payment-success-info" v-if="paymentDone === 'success'">
             <div class="payment-order-top">
                 <div class="payment-order-top-title">ORDERED SUCCESSFULLY</div>
-                <div class="payment-order-top-code">#CH0220</div>
+                <div class="payment-order-top-code">{{ payment_order.code }}</div>
                 <div class="payment-order-top-des">Your order is placed successfully, to track the order status, please
-                    click
-                    “My order” or add more products in the shopping cart </div>
+                    click “My order” or add more products in the shopping cart </div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
                     <div class="payment-order-btn" @click="goPage('/account')">my order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>
@@ -199,14 +180,13 @@
                     <div class="d-flex justify-content-between">
                         <div class="w-50">
                             <div class="payment-step-success-title">Contact</div>
-                            <div class="payment-step-success-text">Email: lmydu99@gmail.com</div>
-                            <div class="payment-step-success-text">Phone: +66 785 5533</div>
+                            <div class="payment-step-success-text">Email: {{ profile.email }}</div>
+                            <div class="payment-step-success-text">Phone: {{ profile.phone }}</div>
                         </div>
                         <div class="w-50">
                             <div class="payment-step-success-title">Billing Address</div>
-                            <div class="payment-step-success-text">Thuy Ninh Solngam Dulphi Lalalal</div>
-                            <div class="payment-step-success-text">Salthom bangkok TH-36</div>
-                            <div class="payment-step-success-text">+66 785 5533</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
                     </div>
                 </div>
@@ -214,27 +194,24 @@
             <div class="payment-step-card">
                 <div class="payment-step-title">2. Products</div>
                 <div class="payment-step-content">
-                    <div class="payment-product-item" v-for="(item, index) in listCart" :key="index">
+                    <div class="payment-product-item" v-for="(_items, index) in payment_order.cartitems" :key="index">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="payment-product-img">
-                                <img class="payment-product-image" :src="item.imagelink" />
+                                <img class="payment-product-image" :src="_items.product?.thub?.url" />
                             </div>
                             <div class="payment-product-info">
-                                <div class="payment-product-name">{{ item.name }}</div>
+                                <div class="payment-product-name">{{ _items.product?.name }}</div>
                                 <div class="payment-product-des">Color:
-                                    <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                                    <span>{{ _items.variant?.color?.name }}</span>
                                 </div>
                                 <div class="payment-product-des">Size:
                                     <span>
-                                        {{ item.variant.attributes.size.data.attributes.name }}
+                                        {{ _items.variant?.size?.name }}
                                     </span>
                                 </div>
-                                <div class="payment-product-des">Quantity
-                                    <CartButton :inumber="item.quantity"
-                                        @updateValue="(e) => updateCartValue(item.variant_id, e)" />
-                                </div>
+                                <div class="payment-product-des">Quantity : {{ _items.quantity }}</div>
                                 <div class="payment-product-price">
-                                    {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                                    {{ _items.total_price | numberWithCommas }}{{ ' ' }}$
                                 </div>
                             </div>
                         </div>
@@ -246,11 +223,11 @@
                 <div class="payment-step-content">
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Order number</div>
-                        <div>#62936</div>
+                        <div>{{ payment_order.code }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Date</div>
-                        <div>July 27, 2023</div>
+                        <div>{{ payment_order.pick_date }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Payment method</div>
@@ -261,15 +238,15 @@
                     <div class="payment-step-extra-content">
                         <div class="payment-info-text d-flex justify-content-between">
                             <div>Subtotal</div>
-                            <div>{{ 500000 | numberWithCommas }}{{ ' ' }}đ</div>
+                            <div>{{ payment_order.price | numberWithCommas }}{{ ' ' }}$</div>
                         </div>
-                        <div class="payment-info-text d-flex justify-content-between">
+                        <!-- <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
                             <div>{{ 0 | numberWithCommas }}{{ ' ' }}đ</div>
-                        </div>
+                        </div> -->
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
-                            <div><b>{{ 500000 + 0 | numberWithCommas }}{{ ' ' }}đ</b></div>
+                            <div><b>{{ payment_order.price + 0 | numberWithCommas }}{{ ' ' }}$</b></div>
                         </div>
                     </div>
                 </div>
@@ -277,9 +254,10 @@
         </div>
         <div class="payment-success-info" v-if="paymentDone === 'fail'">
             <div class="payment-order-top">
-                <div class="payment-order-top-title">ORDERED UUSUCCESSFULLY</div>
-                <div class="payment-order-top-code">#CH0220</div>
-                <div class="payment-order-top-des">Your order is unsuccessful in payment. Please re-order and check again your payment method to continue the shopping experiences</div>
+                <div class="payment-order-top-title">ORDERED UNSUCCESSFULLY</div>
+                <div class="payment-order-top-code">{{ payment_order.code }}</div>
+                <div class="payment-order-top-des">Your order is unsuccessful in payment. Please re-order and check
+                    again your payment method to continue the shopping experiences</div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
                     <div class="payment-order-btn" @click="goPage('/gio-hang')">Re-Order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">HomePage</div>
@@ -295,14 +273,13 @@
                     <div class="d-flex justify-content-between">
                         <div class="w-50">
                             <div class="payment-step-success-title">Contact</div>
-                            <div class="payment-step-success-text">Email: lmydu99@gmail.com</div>
-                            <div class="payment-step-success-text">Phone: +66 785 5533</div>
+                            <div class="payment-step-success-text">Email: {{ profile.email }}</div>
+                            <div class="payment-step-success-text">Phone: {{ profile.phone }}</div>
                         </div>
                         <div class="w-50">
                             <div class="payment-step-success-title">Billing Address</div>
-                            <div class="payment-step-success-text">Thuy Ninh Solngam Dulphi Lalalal</div>
-                            <div class="payment-step-success-text">Salthom bangkok TH-36</div>
-                            <div class="payment-step-success-text">+66 785 5533</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
+                            <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
                     </div>
                 </div>
@@ -310,27 +287,24 @@
             <div class="payment-step-card">
                 <div class="payment-step-title">2. Products</div>
                 <div class="payment-step-content">
-                    <div class="payment-product-item" v-for="(item, index) in listCart" :key="index">
+                    <div class="payment-product-item" v-for="(_items, index) in payment_order.cartitems" :key="index">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="payment-product-img">
-                                <img class="payment-product-image" :src="item.imagelink" />
+                                <img class="payment-product-image" :src="_items.product?.thub?.url" />
                             </div>
                             <div class="payment-product-info">
-                                <div class="payment-product-name">{{ item.name }}</div>
+                                <div class="payment-product-name">{{ _items.product?.name }}</div>
                                 <div class="payment-product-des">Color:
-                                    <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                                    <span>{{ _items.variant?.color?.name }}</span>
                                 </div>
                                 <div class="payment-product-des">Size:
                                     <span>
-                                        {{ item.variant.attributes.size.data.attributes.name }}
+                                        {{ _items.variant?.size?.name }}
                                     </span>
                                 </div>
-                                <div class="payment-product-des">Quantity
-                                    <CartButton :inumber="item.quantity"
-                                        @updateValue="(e) => updateCartValue(item.variant_id, e)" />
-                                </div>
+                                <div class="payment-product-des">Quantity : {{ _items.quantity }}</div>
                                 <div class="payment-product-price">
-                                    {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                                    {{ _items.total_price | numberWithCommas }}{{ ' ' }}$
                                 </div>
                             </div>
                         </div>
@@ -342,11 +316,11 @@
                 <div class="payment-step-content">
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Order number</div>
-                        <div>#62936</div>
+                        <div>{{ payment_order.code }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Date</div>
-                        <div>July 27, 2023</div>
+                        <div>{{ payment_order.pick_date }}</div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Payment method</div>
@@ -357,35 +331,31 @@
                     <div class="payment-step-extra-content">
                         <div class="payment-info-text d-flex justify-content-between">
                             <div>Subtotal</div>
-                            <div>{{ 500000 | numberWithCommas }}{{ ' ' }}đ</div>
+                            <div>{{ payment_order.price | numberWithCommas }}{{ ' ' }}$</div>
                         </div>
-                        <div class="payment-info-text d-flex justify-content-between">
+                        <!-- <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
                             <div>{{ 0 | numberWithCommas }}{{ ' ' }}đ</div>
-                        </div>
+                        </div> -->
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
-                            <div><b>{{ 500000 + 0 | numberWithCommas }}{{ ' ' }}đ</b></div>
+                            <div><b>{{ payment_order.price + 0 | numberWithCommas }}{{ ' ' }}$</b></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <a-modal title="Thông tin thanh toán" :visible="modalQrOpen" :destroyOnClose="true" :closable="false"
-            :maskClosable="false" :footer="null" width="800px" @cancel="() => this.modalQrOpen = false">
-            <Qrcode :isMobile="isMobile" :payment="current_payment" :qrcode="qrcode_info" @onDonePayment="onDonePayment" />
-        </a-modal>
         <HelpPayment :isMobile="isMobile" />
     </div>
 </template>
-  
+
 <script>
 import { mapGetters, mapActions } from "vuex"
+import { loadScript } from '@paypal/paypal-js'
 import general from "~/mixins/general"
 import HelpPayment from "~/components/payment/helpInfo.vue"
 import UserCart from "~/components/payment/myCart.vue"
 import Address from "~/components/account/address.vue"
-import Qrcode from "~/components/payment/paymentQrcode.vue"
 
 export default {
     name: 'IndexPage',
@@ -393,8 +363,7 @@ export default {
     components: {
         UserCart,
         HelpPayment,
-        Address,
-        Qrcode
+        Address
     },
     data() {
         return {
@@ -411,11 +380,11 @@ export default {
             order: {},
             showUpdateAddress: false,
             user_address: null,
-            paymentType: null,
+            paymentType: 'paypal',
             current_payment: {},
             isPaymentAccept: false,
-            modalQrOpen: false,
-            qrcode_info: {}
+            order_id: null,
+            payment_order: {}
         }
     },
     computed: {
@@ -429,12 +398,35 @@ export default {
         }),
     },
     async mounted() {
+        if (!this.$route.hash) {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
         this.isMobile = this.checkMobile()
         await this.getListCartUser()
         await this.getListPayment()
         await this.getAddressByUser(this.profile.id)
         this.user_address = this.userAddress
         await this.getPlace()
+        if (this.listPayment.length > 0) {
+            let _paypal = this.listPayment.find((o) => o.attributes.name == 'Paypal')
+            console.log(_paypal)
+            if (_paypal) {
+                loadScript({ 'client-id': _paypal.attributes.description }).then((paypal) => {
+                    paypal
+                        .Buttons({
+                            createOrder: async () => {
+                                if(this.user_address.id) {
+                                    this.showNotification('warning', `Please enter address information`)
+                                    return
+                                }
+                                return await this.createPaypalOrder() 
+                            },
+                            onApprove: async () => { await this.onPaypalApprove() },
+                        })
+                        .render('#paypal-button-container')
+                })
+            }
+        }
     },
     watch: {
         stepShow: function (val) {
@@ -447,6 +439,7 @@ export default {
         ...mapActions({
             loginEmail: "auth/loginEmail",
             createOrder: "order/createOrder",
+            captureOrder: "order/captureOrder",
             resetUserCart: "cart/resetUserCart",
             getListCartUser: "cart/getListCartUser",
             createCart: "cart/createCart",
@@ -454,6 +447,46 @@ export default {
             getPlace: 'place/getPlace',
             getAddressByUser: 'auth/getAddressByUser'
         }),
+        async createPaypalOrder() {
+            console.log('Creating order...')
+            
+            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
+            let _order = {
+                code: `#${this.makeString(8)}`,
+                state: 'new',
+                payment_type: this.paymentType,
+                shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
+                totalPrice: priceTotal,
+                listProductItem: this.listCart.map(o => {
+                    return {
+                        id: o.id,
+                        variant_id: o.variant_id,
+                        name: o.name,
+                        quantity: o.quantity,
+                        price: o.price
+                    }
+                })
+            }
+            let rs = await this.createOrder(_order)
+            this.order_id = rs.id
+            return rs.id;
+        },
+        async onPaypalApprove() {
+            let rs = await this.captureOrder({ order_id: this.order_id })
+            if (rs.status === 'COMPLETED') {
+                this.paymentDone = 'success'
+                this.resetUserCart()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                this.showNotification('success', `Order placed successfully`)
+                this.payment_order = rs.order
+            } else {
+                this.showNotification('danger', `Placed order failed`)
+                this.paymentDone = 'fail'
+                this.payment_order = rs.order
+            }
+
+
+        },
         checkMobile() {
             if (!process.server) {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -497,11 +530,8 @@ export default {
             }
         },
         onChoicePayment(_payment) {
-            if (_payment && _payment === 'cod') {
+            if (_payment && _payment === 'paypal') {
                 this.isPaymentAccept = true
-                this.paymentType = _payment
-            } else {
-                this.isPaymentAccept = false
                 this.paymentType = _payment
             }
         },
@@ -1165,7 +1195,7 @@ export default {
                 }
 
                 .payment-step-shipping-choice {
-                    background-color: #D9D9D9;
+                    background-color: #fff;
                     height: 40px;
                     width: 50%;
                     line-height: 40px;
@@ -1179,7 +1209,8 @@ export default {
 
                 .shiping-active {
                     font-family: 'Aeroport';
-                    background-color: #fff;
+                    background-color: #D9D9D9;
+                    font-weight: bolder;
 
                 }
 

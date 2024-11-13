@@ -62,7 +62,8 @@
                     </a-step>
                 </a-steps>
             </a-card>
-            <a-button v-if="order?.attributes.state === 'new'" slot="extra" class="admin-btn" type="primary" @click="onApproveOrder">Xác nhận đơn</a-button>
+            <a-button v-if="order?.attributes.state === 'new'" slot="extra" class="admin-btn" type="primary"
+                @click="onApproveOrder">Xác nhận đơn</a-button>
         </a-card>
         <div style="width: calc(30% - 10px); margin-left: 10px;">
             <a-card title="Ghi chú đơn hàng" style="margin-bottom: 10px;">
@@ -79,7 +80,8 @@
                     </template> -->
                         <img slot="extra" style="max-width: 200px;max-height: 100px;object-fit: cover;" alt="logo"
                             :src="cart.attributes.product.data?.attributes.thub.data?.attributes.url" />
-                        <div>{{ `${cart.attributes.product.data?.attributes.name} x ${cart.attributes.quantity}` }}</div>
+                        <div>{{ `${cart.attributes.product.data?.attributes.name} x ${cart.attributes.quantity}` }}
+                        </div>
                         <div>{{ formatPrice(cart.attributes.total_price) }} đ</div>
                     </a-list-item>
                 </a-list>
@@ -205,12 +207,72 @@ export default {
                         status: 'wait'
                     }]
                     break
-                // case 'confirm':
-                //     stringState = 'Chờ thanh toán'
-                //     break
-                // case 'payment':
-                //     stringState = 'Đã thanh toán'
-                //     break
+                case 'confirm':
+                    this.state = [{
+                        value: 'new',
+                        title: 'Chờ thanh toán',
+                        description: 'Đơn vừa tạo',
+                        icon: 'shopping-cart',
+                        status: 'process'
+                    }, {
+                        value: 'pickitem',
+                        title: 'Đang đóng gói',
+                        description: 'Chờ vận chuyển',
+                        icon: 'appstore',
+                        status: 'wait'
+                    }, {
+                        value: 'delivery',
+                        title: 'Đang vận chuyển',
+                        description: 'Hàng đang vận chuyển',
+                        icon: 'car',
+                        status: 'wait'
+                    }, {
+                        value: 'complete',
+                        title: 'Đã giao',
+                        description: 'Khách đã nhận sản phẩm',
+                        icon: 'smile-o',
+                        status: 'wait'
+                    }, {
+                        value: 'cancel',
+                        title: 'Hủy',
+                        description: 'Đơn đã hủy',
+                        icon: 'close-circle',
+                        status: 'wait'
+                    }]
+                    break
+                case 'payment':
+                    this.state = [{
+                        value: 'payment',
+                        title: 'Đã thanh toán',
+                        description: 'Đơn vừa thanh toán',
+                        icon: 'shopping-cart',
+                        status: 'finish'
+                    }, {
+                        value: 'pickitem',
+                        title: 'Đang đóng gói',
+                        description: 'Chờ vận chuyển',
+                        icon: 'appstore',
+                        status: 'wait'
+                    }, {
+                        value: 'delivery',
+                        title: 'Đang vận chuyển',
+                        description: 'Hàng đang vận chuyển',
+                        icon: 'car',
+                        status: 'wait'
+                    }, {
+                        value: 'complete',
+                        title: 'Đã giao',
+                        description: 'Khách đã nhận sản phẩm',
+                        icon: 'smile-o',
+                        status: 'wait'
+                    }, {
+                        value: 'cancel',
+                        title: 'Hủy',
+                        description: 'Đơn đã hủy',
+                        icon: 'close-circle',
+                        status: 'wait'
+                    }]
+                    break
                 case 'pickitem':
                     this.state = [{
                         value: 'new',

@@ -56,7 +56,6 @@ export default {
   // },
   methods: {
     onPlayerLoadeddata () {
-      console.log('onPlayerLoadeddata')
       this.player.autoplay('muted')
     }
   },

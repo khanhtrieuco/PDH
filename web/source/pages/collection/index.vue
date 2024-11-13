@@ -1,10 +1,10 @@
 <template>
     <div class="collection-content">
         <div class="collection-banner">
-            <ThumbImage class="customer-image" ratio="21-9" v-if="!isMobile"
-                :src="collection.attributes?.main_thub?.data?.attributes.url"></ThumbImage>
-            <ThumbImage class="customer-image" ratio="9-21" v-if="isMobile"
-                :src="collection.attributes?.main_thub?.data?.attributes.url"></ThumbImage>
+            <img class="customer-image" ratio="21-9" v-if="!isMobile"
+                :src="collection.attributes?.main_thub?.data?.attributes.url"></img>
+            <img class="customer-image" ratio="9-21" v-if="isMobile"
+                :src="collection.attributes?.main_thub_mobile?.data?.attributes.url"></img>
         </div>
         <div class="container">
             <h1 class="collection-title">
@@ -15,21 +15,22 @@
                 {{ $i18n.locale === 'vn' ? collection.attributes?.description : collection.attributes?.description_en ??
                     collection.attributes?.description }}
             </div>
-            <NuxtLink to="/collection/detail/dd-of">
+            <NuxtLink :to="`/collection/detail/${$route.params.id}`">
                 <div class="shop-now-link-black">
                     <span class="shop-now-link-black-text">READ MORE</span>
                     <img class="shop-now-link-black-img" src="/images/moreb.png" />
                 </div>
             </NuxtLink>
             <div class="collection-products">
-                <b-row v-if="listProduct">
-                    <b-col class="mb-3" cols="6" lg="4" v-for="_pro,index in listProduct" :key="index">
+                <b-row v-if="listProduct && listProduct.length > 0">
+                    <b-col class="collection-product-item mb-3" cols="6" lg="4" v-for="_pro, index in listProduct"
+                        :key="index">
                         <ProductItem :item="_pro" :isMobile="isMobile" :height="isMobile ? '215px' : '600px'" />
                     </b-col>
                 </b-row>
-                <!-- <div v-else>
+                <div v-else>
                     <div class="collection-empty">{{ $t('Catogory_empty_product') }}</div>
-                </div> -->
+                </div>
             </div>
             <div class="btn-collection-top" @click="goTop()">Back to top</div>
         </div>
@@ -105,7 +106,9 @@ export default {
 <style lang="scss">
 .collection-content {
     padding-bottom: 100px;
-
+    .customer-image{
+        width: 100%;
+    }
     .collection-title {
         color: #000;
         text-align: center;
@@ -128,6 +131,11 @@ export default {
     .collection-products {
         margin-top: 60px;
         margin-bottom: 60px;
+
+        .collection-product-item {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     }
 
     .btn-collection-top {
@@ -164,6 +172,10 @@ export default {
     }
 }
 
+.collection-empty {
+    text-align: center;
+}
+
 @media (max-width: 520px) {
     .collection-content {
         padding-bottom: 100px;
@@ -189,6 +201,11 @@ export default {
         .collection-products {
             margin-top: 60px;
             margin-bottom: 60px;
+
+            .collection-product-item {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
         }
 
         .btn-collection-top {
@@ -224,5 +241,4 @@ export default {
             width: 12px;
         }
     }
-}
-</style>
+}</style>

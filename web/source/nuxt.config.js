@@ -15,8 +15,6 @@ const messages = __importDefault(require("./lang/index.js"));
 const hostapi = 'http://163.44.206.244:1338'
 // const hostapi = 'http://127.0.0.1:1338'
 
-// const hostapi = env === 'local' ? 'https://nasbeauty.com.vn' : 'http://172.17.0.1:1337'
-
 // const getSitemapsConfigurations = () => {
 //     let list = [{
 //             path: '/sitemap-work.xml',
@@ -115,28 +113,17 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Phan Dang Hoang' },
-      { hid: 'og:image', name: 'og:image', content: '/logo.png' },
+      { hid: 'og:image', name: 'og:image', content: '/share.jpg' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // {
-      //   rel: 'preload',
-      //   as: 'video',
-      //   type: 'video/mp4',
-      //   href: '/images/atv.mp4'
-      // },
-      // {
-      //   rel: 'preload',
-      //   as: 'video',
-      //   type: 'video/mp4',
-      //   href: '/images/video_atv_cut.mp4'
-      // }
-      // { rel: 'stylesheet', href: '/css/style.css' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon-light.ico', id:"light-scheme-icon" },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', id:"dark-scheme-icon" }
+    ],
+    script: [{
+      src: 'https://www.paypal.com/sdk/js?client-id=AT4-PxZueVDnzKNSqDwGGuu03TNfQJNFhJre1yzmzuVzKMefyasd1EHQxsKw3rnOxypFSJX7XPnx_yXB'
+    }]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/static/css/style.css'
   ],

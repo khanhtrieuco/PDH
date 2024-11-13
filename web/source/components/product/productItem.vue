@@ -14,12 +14,13 @@
       <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
         <div class="product-name">{{ $i18n.locale === 'vn' ? item.attributes.name : item.attributes.name_en }}</div>
       </NuxtLink>
-      <div class="product-price">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
+      <div class="product-price">${{ ' ' }}{{ item.attributes.price | numberWithCommas }}</div>
     </div>
-    <div class="product-item-color">
+    <!-- <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
-      <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ?  listColor.length - 1 : 1 }}</div>
-    </div>
+      <ColorMobile v-if="isMobile"></ColorMobile>
+      <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ? listColor.length - 1 : 1 }}</div>
+    </div> -->
   </div>
 </template>
 
@@ -75,22 +76,22 @@ export default {
       this.likeImage = '/images/liked.png'
     }
     this.product_image = this.item.attributes.thub_main?.data.attributes.url
-    if (this.item.attributes && this.item.attributes.variants?.data) {
-      this.item.attributes.variants.data.forEach(v => {
-        if(v.attributes.color?.data && v.attributes.size?.data) {
-          let color = v.attributes.color?.data
-          let size = v.attributes.size?.data
-          let _cc = this.listColor.find(o => o.id === color.id)
-          if (!_cc) {
-            this.listColor.push(color)
-          }
-          let _cs = this.listSize.find(o => o.id === size.id)
-          if (!_cs) {
-            this.listSize.push(size)
-          }
-        }
-      });
-    }
+    // if (this.item.attributes && this.item.attributes.variants?.data) {
+    //   this.item.attributes.variants.data.forEach(v => {
+    //     if(v.attributes.color?.data && v.attributes.size?.data) {
+    //       let color = v.attributes.color?.data
+    //       let size = v.attributes.size?.data
+    //       let _cc = this.listColor.find(o => o.id === color.id)
+    //       if (!_cc) {
+    //         this.listColor.push(color)
+    //       }
+    //       let _cs = this.listSize.find(o => o.id === size.id)
+    //       if (!_cs) {
+    //         this.listSize.push(size)
+    //       }
+    //     }
+    //   });
+    // }
   },
   methods: {
     ...mapActions({
@@ -113,7 +114,7 @@ export default {
     },
     async onLike(_product) {
       if (!this.loggedIn) {
-        this.showNotification('warning', `Đăng ký thành viên để lưu lại sản phẩm yêu thích của bạn`)
+        this.showNotification('warning', `Register as a member to save your favorite products`)
         return
       }
       if (this.isLike) {
@@ -121,9 +122,9 @@ export default {
         if (rs && rs.id) {
           this.isLike = false
           this.likeImage = '/images/heart.png'
-          this.showNotification('success', `Đã hủy sản phẩm yêu thích`)
+          this.showNotification('success', `Unlike`)
         } else {
-          this.showNotification('error', `Hủy sản phẩm yêu thích thất bại. Vui lòng thử lại.`)
+          this.showNotification('error', `Fail`)
         }
       } else {
         let rs = await this.createLike({
@@ -136,14 +137,14 @@ export default {
         if (rs && rs.id) {
           this.isLike = rs
           this.likeImage = '/images/liked.png'
-          this.showNotification('success', `Đã thêm sản phẩm yêu thích`)
+          this.showNotification('success', `Like`)
         } else {
-          this.showNotification('error', `Thêm sản phẩm yêu thích thất bại. Vui lòng thử lại.`)
+          this.showNotification('error', `Fail`)
         }
       }
     },
     checkIsLiked(listLike) {
-      if(listLike) {
+      if (listLike) {
         let rs = null
         let _c = listLike.find(o => o.attributes.user_id === this.profile.id)
         if (_c) rs = _c
@@ -159,7 +160,7 @@ export default {
         price: this.item.attributes.price
       }
       this.addCartItem(_t)
-      this.showNotification('success', `Đã thêm sản phẩm vào giỏ hàng`)
+      this.showNotification('success', `Product added to cart`)
     }
   }
   // mounted() {
@@ -178,7 +179,7 @@ export default {
 </script>
 <style lang="scss">
 .product-item {
-  padding: 5px;
+  padding: 0px;
 
   .product-img {
     position: relative;
@@ -209,8 +210,9 @@ export default {
 
   .product-price {
     color: #000;
-    font-family: 'Aeroport-light';
+    font-family: 'Aeroport';
     font-size: 20px;
+    font-weight: 300;
   }
 
   .img-heart {
@@ -219,6 +221,16 @@ export default {
     right: 14px;
     cursor: pointer;
     width: 32px;
+  }
+
+  .product-item-color {
+    margin-left: -5px;
+
+    .product-item-color-value {
+      color: #717171;
+      font-family: "Aeroport";
+      font-size: 15px;
+    }
   }
 }
 
@@ -253,8 +265,9 @@ export default {
 
     .product-price {
       color: #000;
-      font-family: 'Aeroport-light';
+      font-family: 'Aeroport';
       font-size: 10px;
+      font-weight: 300;
     }
 
     .img-heart {
@@ -263,6 +276,16 @@ export default {
       right: 7px;
       cursor: pointer;
       width: 16px;
+    }
+
+    .product-item-color {
+      margin-left: -5px;
+
+      .product-item-color-value {
+        color: #717171;
+        font-family: "Aeroport";
+        font-size: 12px;
+      }
     }
   }
 }
@@ -298,8 +321,9 @@ export default {
 
     .product-price {
       color: #000;
-      font-family: 'Aeroport-light';
+      font-family: 'Aeroport';
       font-size: 10px;
+      font-weight: 300;
     }
 
     .img-heart {
@@ -308,6 +332,15 @@ export default {
       right: 7px;
       cursor: pointer;
       width: 16px;
+    }
+
+    .product-item-color {
+      margin-left: -5px;
+      .product-item-color-value {
+        color: #717171;
+        font-family: "Aeroport";
+        font-size: 10px;
+      }
     }
   }
 }

@@ -1,8 +1,8 @@
 <template>
     <div class="news-item">
-        <NuxtLink :to="`/news/${item.slug}`">
+        <a target="_blank" :href="item.attributes?.slug">
             <div class="news-img">
-                <ThumbImage ratio="3-4" :src="`images/news.jpg`"></ThumbImage>
+                <ThumbImage ratio="3-4" :src="item.attributes?.thub.data.attributes.url"></ThumbImage>
                 <div class="news-dot news-dot1">
                     <div></div>
                 </div>
@@ -16,10 +16,11 @@
                     <div></div>
                 </div>
             </div>
-        </NuxtLink>
-        <div class="news-title"> {{ item.title }}</div>
-        <div class="news-des"> {{ get_excerpt(item.description, 37) }} </div>
-
+        </a>
+        <a target="_blank" :href="item.attributes?.slug">
+            <div class="news-title"> {{ get_excerpt(item.attributes?.title, 100) }}</div>
+        </a>
+        <!-- <div class="news-des"> {{ get_excerpt(item.attributes?.short_content, 37) }} </div> -->
     </div>
 </template>
   
@@ -133,8 +134,8 @@ export default {
         text-align: left;
 
         .news-img {
-            border: 1px solid #000;
-            padding: 2px;
+            border: 0.7px solid #000;
+            padding: 3px;
             margin: 4px;
             position: relative;
         }
@@ -145,17 +146,19 @@ export default {
             font-size: 10px;
             font-weight: 600;
             margin-top: 10px;
+            margin-left: -10px;
         }
 
         .news-des {
             color: #717171;
             font-family: 'Aeroport-light';
             font-size: 10px;
+            margin-left: -10px;
         }
 
         .news-dot {
-            width: 13px;
-            height: 9px;
+            width: 9.5px;
+            height: 8px;
             border-radius: 50%;
             position: absolute;
             background-color: #fff;
@@ -171,12 +174,12 @@ export default {
 
         .news-dot1 {
             left: -5.5px;
-            top: -6px;
+            top: -5px;
         }
 
         .news-dot2 {
-            right: -7px;
-            top: -6px;
+            right: -4.5px;
+            top: -5px;
         }
 
         .news-dot3 {
@@ -185,7 +188,7 @@ export default {
         }
 
         .news-dot4 {
-            right: -7px;
+            right: -4px;
             bottom: -4px;
         }
     }

@@ -11,12 +11,12 @@
                 <div class="product-detail-size" @click="scrollToAdd">
                     <span class="size-text">Size:</span>
                     <div class="size-value" v-for="_size, index in listSize" :key="index">{{ _size.attributes.name
-                    }}</div>
+                        }}</div>
                 </div>
                 <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
                 <div class="product-detail-name">
                     <div class="product-detail-name-title">{{ product.attributes?.name }}</div>
-                    <div class="product-detail-name-price">{{ product.attributes?.price | numberWithCommas }}{{ ' ' }}đ
+                    <div class="product-detail-name-price">${{ ' ' }}{{ product.attributes?.price | numberWithCommas }}
                     </div>
                 </div>
                 <div class="product-detail-btn" @click="scrollToAdd">
@@ -24,17 +24,28 @@
                 </div>
             </div>
             <div class="d-flex" v-if="!isMobile">
-                <div class="product-detail-media" v-if="product.attributes?.media.data">
-                    <img class="product-detail-media-img" v-for="imgData, index in product.attributes?.media.data"
-                        :key="index" :src="imgData.attributes.url" />
-                </div>
+                <VueSlickCarousel class="product-detail-media" v-bind="settings"
+                    v-if="product.attributes?.media.data">
+                    <img v-for="(imgData, index) in product.attributes?.media.data" :key="index"
+                        class="product-detail-media-img-desktop" :src="imgData.attributes?.url" />
+                    <!-- <template slot="prevArrow" v-if="!isMobile">
+                        <div class="pre-arrow">
+                            <img src="/images/left-b.png" />
+                        </div>
+                    </template>
+                    <template slot="nextArrow" v-if="!isMobile">
+                        <div class="next-arrow">
+                            <img src="/images/right-b.png" />
+                        </div>
+                    </template> -->
+                </VueSlickCarousel>
                 <div class="product-detail-data">
                     <div class="product-detail-data-title">Product details</div>
                     <div class="product-detail-data-text"
                         v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.description : product.attributes?.description_en)">
                     </div>
                     <div class="product-detail-data-title">Product code: <span class="product-detail-data-text">{{
-                        product.attributes?.sku_code }}</span></div>
+                    product.attributes?.sku_code }}</span></div>
                     <div class="product-detail-data-title">Material:</div>
                     <div class="product-detail-data-text"
                         v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.material : product.attributes?.material_en)">
@@ -44,24 +55,27 @@
                         v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
                     </div>
                     <div class="product-detail-help-box">
-                        <div class="product-detail-help-item">Shipping and packaging</div>
-                        <div class="product-detail-help-item">Exchange and return</div>
-                        <div class="product-detail-help-item">Need help</div>
+                        <div class="product-detail-help-item" @click="showShiping = true">Shipping and packaging</div>
+                        <div class="product-detail-help-item" @click="showExchange = true">Exchange and return</div>
+                        <div class="product-detail-help-item" @click="showHelp = true">Need help</div>
                     </div>
                     <div class="product-detail-data-color">
                         <span class="product-detail-data-color-text">Color:</span>
                         <div v-for="_color, index in listColor" @click="choiceColor(_color)" :key="index">
-                            <Color :color="_color.attributes.value" :selected="selectColor === _color.id" v-if="!isMobile">
+                            <Color :color="_color.attributes.value" :selected="selectColor === _color.id"
+                                v-if="!isMobile">
                             </Color>
                             <ColorMobile :color="_color.attributes.value" :selected="selectColor === _color.id" v-else>
                             </ColorMobile>
                         </div>
-                        <!-- <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
-                            :style="`background-color: ${_color.attributes.value};`"></div> -->
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="product-detail-data-size-text">Size:</div>
-                        <div class="product-detail-data-size-des">Size guide</div>
+                        <div>
+                            <span class="product-detail-data-size-des" @click="showSize = true">Size guide</span>
+                            <span class="product-detail-data-size-des" v-if="selectSize" @click="clearChoice">Clear
+                                choice</span>
+                        </div>
                     </div>
                     <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
                         @onChange="choiceSize"></Select>
@@ -74,7 +88,8 @@
                     </div>
                 </div>
             </div>
-            <VueSlickCarousel v-bind="settings" class="product-detail-media" v-if="isMobile && product.attributes?.media.data">
+            <VueSlickCarousel v-bind="settings_m" class="product-detail-media"
+                v-if="isMobile && product.attributes?.media.data">
                 <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
                     <img class="product-detail-media-img" :src="imgData.attributes?.url" />
                 </div>
@@ -95,9 +110,9 @@
                     v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
                 </div>
                 <div class="product-detail-help-box">
-                    <div class="product-detail-help-item">Shipping and packaging</div>
-                    <div class="product-detail-help-item">Exchange and return</div>
-                    <div class="product-detail-help-item">Need help</div>
+                    <div class="product-detail-help-item" @click="showShiping = true">Shipping and packaging</div>
+                    <div class="product-detail-help-item" @click="showExchange = true">Exchange and return</div>
+                    <div class="product-detail-help-item" @click="showHelp = true">Need help</div>
                 </div>
                 <div class="product-detail-data-color">
                     <span class="product-detail-data-color-text">Color:</span>
@@ -107,12 +122,10 @@
                         <ColorMobile :color="_color.attributes.value" :selected="selectColor === _color.id" v-else>
                         </ColorMobile>
                     </div>
-                    <!-- <div class="product-detail-data-color-elip" v-for="_color, index in listColor" :key="index"
-                            :style="`background-color: ${_color.attributes.value};`"></div> -->
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="product-detail-data-size-text">Size:</div>
-                    <div class="product-detail-data-size-des">Size guide</div>
+                    <div class="product-detail-data-size-des" @click="showSize = true">Size guide</div>
                 </div>
                 <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
                     @onChange="choiceSize"></Select>
@@ -126,22 +139,27 @@
             </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recommend</div>
-                <b-row v-if="listRelated">
-                    <b-col class="mb-4" cols="6" lg="3" v-for="index in 4" :key="index">
-                        <ProductItem :isMobile="isMobile" height="290px" />
+                <b-row v-if="listRelated && listRelated.length > 0">
+                    <b-col class="mb-4" cols="6" lg="3" v-for="_item, index in listRelated" :key="index">
+                        <ProductItem :item="_item" :isMobile="isMobile" height="290px" />
                     </b-col>
                 </b-row>
             </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recently viewed</div>
-                <b-row v-if="listRelated">
-                    <b-col class="mb-4" cols="6" lg="3" v-for="index in 3" :key="index">
-                        <ProductItem :isMobile="isMobile" height="290px" />
+                <b-row v-if="listView && listView.length > 0">
+                    <b-col class="mb-4" cols="6" lg="3" v-for="_item, index in listView" :key="index">
+                        <ProductItem :item="_item" :isMobile="isMobile" height="290px" />
                     </b-col>
                 </b-row>
-                <div class="product-detail-list-btn">More items from collection</div>
+                <!-- <div class="product-detail-list-btn">More items from collection</div> -->
             </div>
         </div>
+        <Size v-if="showSize" :isMobile="isMobile" @closeUpdate="showSize = false" />
+        <Shipping v-if="showShiping" :isMobile="isMobile" @closeUpdate="showShiping = false" />
+        <Help v-if="showHelp" :isMobile="isMobile" @closeUpdate="showHelp = false" />
+        <Exchange v-if="showExchange" :isMobile="isMobile" @closeUpdate="showExchange = false" />
+
     </div>
 </template>
 
@@ -150,6 +168,10 @@ import { mapGetters, mapActions } from "vuex"
 import Select from "~/components/common/select.vue"
 import Color from "~/components/common/color.vue"
 import ProductItem from "~/components/product/productItem.vue"
+import Size from "~/components/product/size.vue"
+import Shipping from "~/components/product/shipping.vue"
+import Exchange from "~/components/product/exchange.vue"
+import Help from "~/components/product/help.vue"
 // import ListMedia from "~/components/product/mediaList.vue"
 import general from "~/mixins/general"
 import ColorMobile from "~/components/common/colorMobile.vue"
@@ -160,7 +182,11 @@ export default {
         ProductItem,
         Select,
         Color,
-        ColorMobile
+        ColorMobile,
+        Size,
+        Shipping,
+        Help,
+        Exchange
     },
     mixins: [general],
     data() {
@@ -168,6 +194,28 @@ export default {
             showImage: false,
             isMobile: false,
             settings: {
+                "dots": true,
+                // "arrows": true,
+                // "edgeFriction": 0.35,
+                // "infinite": true,
+                // "speed": 500,
+                // "slidesToShow": 1,
+                // "slidesToScroll": 1,
+                vertical:true,
+                verticalSwiping:true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 0,
+                speed: 500,
+                cssEase: 'linear',
+                infinite: true,
+                arrows:false,
+                touchMove:true,
+                swipeToSlide:true,
+                swipe:true
+            },
+            settings_m: {
                 "dots": true,
                 "arrows": false,
                 "edgeFriction": 0.35,
@@ -182,12 +230,17 @@ export default {
             listSizeChoice: [],
             selectColor: null,
             selectSize: null,
-            variant: null
+            variant: null,
+            showSize: false,
+            showShiping: false,
+            showExchange: false,
+            showHelp: false,
         }
     },
     computed: {
         ...mapGetters({
-            product: "product/getProduct"
+            product: "product/getProduct",
+            listView: "product/getListProductView"
         }),
     },
     async mounted() {
@@ -208,13 +261,16 @@ export default {
                 }
             });
         }
+
         this.listSizeChoice = this.listSize.map(o => {
             return {
                 item: o.id,
                 name: o.attributes.name
             }
         })
-        // this.listRelated = this.product.attributes?.related.data
+
+        this.listRelated = this.product.attributes?.related.data
+
         // if (this.isMobile) {
         //     this.menuTab = ''
         // }
@@ -225,6 +281,7 @@ export default {
             getProductBySlug: "product/getProductBySlug",
             addCartItem: "cart/addCartItemDirect",
             addView: "product/addView",
+            updateCart: "cart/setUpdateCart"
         }),
         checkMobile() {
             if (!process.server) {
@@ -241,6 +298,7 @@ export default {
         async loadData() {
             if (this.$route.params.id) {
                 await this.getProductBySlug(this.$route.params.id)
+                this.listRelated = this.product.attributes?.related.data ?? []
             }
         },
         updateValue(_v) {
@@ -285,13 +343,34 @@ export default {
                 this.variant = listFilter.find(o => o.attributes.color.data.id === this.selectColor)
             }
         },
+        clearChoice() {
+            this.selectSize = null
+            this.selectColor = null
+            let listFilter = this.product.attributes.variants.data
+            this.listColor = []
+            listFilter.forEach(v => {
+                let color = v.attributes.color.data
+                let _cc = this.listColor.find(o => o.id === color.id)
+                if (!_cc) {
+                    this.listColor.push(color)
+                }
+            });
+            this.listSize = []
+            listFilter.forEach(v => {
+                let size = v.attributes.size.data
+                let _cs = this.listSize.find(o => o.id === size.id)
+                if (!_cs) {
+                    this.listSize.push(size)
+                }
+            });
+        },
         addProductToCart() {
             if (!this.selectSize) {
-                this.$message.warning('Vui lòng chọn size');
+                this.$message.warning('Please choose size');
                 return
             }
             if (!this.selectColor) {
-                this.$message.warning('Vui lòng chọn màu');
+                this.$message.warning('Please select color');
                 return
             }
             let _t = {
@@ -305,7 +384,8 @@ export default {
                 quantity: 1
             }
             this.addCartItem(_t)
-            this.showNotification('success', `Đã thêm sản phẩm vào giỏ hàng`)
+            this.updateCart({ ..._t })
+            this.showNotification('success', `Product added to cart`)
         }
     }
 }
@@ -330,6 +410,7 @@ export default {
             gap: 8px;
             height: 40px;
             cursor: pointer;
+
             .color-text {
                 color: #000;
                 font-family: 'Aeroport';
@@ -361,6 +442,7 @@ export default {
             align-items: center;
             gap: 8px;
             cursor: pointer;
+
             .size-text {
                 font-size: 20px;
                 font-family: 'Aeroport';
@@ -380,6 +462,10 @@ export default {
             }
         }
 
+        .product-detail-img {
+            max-width: 38%;
+        }
+
         .product-detail-name {
             position: absolute;
             bottom: 0px;
@@ -389,8 +475,8 @@ export default {
                 width: 360px;
                 color: #000;
                 font-family: 'Aeroport';
-                font-size: 40px;
-                line-height: 40px;
+                font-size: 28px;
+                line-height: 28px;
             }
 
             .product-detail-name-price {
@@ -398,6 +484,7 @@ export default {
                 font-family: 'Aeroport-light';
                 font-size: 25px;
                 margin-top: 20px;
+                letter-spacing: -0.7px;
             }
         }
 
@@ -405,9 +492,9 @@ export default {
             position: absolute;
             bottom: 0px;
             right: 0px;
-            width: 310px;
-            height: 55px;
-            line-height: 55px;
+            width: 280px;
+            height: 50px;
+            line-height: 48px;
             text-align: center;
             cursor: pointer;
             color: #000;
@@ -415,6 +502,11 @@ export default {
             font-size: 20px;
             border: 1px solid;
             text-transform: uppercase;
+
+            &:hover {
+                color: #fff;
+                background-color: #000;
+            }
         }
 
     }
@@ -422,10 +514,74 @@ export default {
     .product-detail-media {
         width: 50%;
         display: inline-block;
+        height: 800px;
+        overflow: hidden;
+
+        .product-detail-media-img-desktop {
+            width: 100%;
+            height: 800px;
+            object-fit: cover;
+        }
+
+        .slick-dots {
+            top: auto;
+            bottom: 20px;
+            width: 20px;
+            left: 20px;
+
+            li {
+                margin: 0px 5px;
+                border-radius: 50%;
+                border: 1px solid #000;
+                width: 13px;
+                height: 13px;
+                overflow: hidden;
+
+                button:before {
+                    font-size: 0px;
+                    background-color: white;
+                }
+            }
+
+            .slick-active {
+                border: 1px solid #000;
+
+                button:before {
+                    font-size: 0px;
+                    background-color: #000;
+                }
+            }
+        }
+
+        .slick-prev {
+            z-index: 1;
+            left: calc(50% - 60px);
+            bottom: 15px;
+            width: 45px;
+            top: auto;
+
+            img {
+                width: 45px;
+            }
+        }
+
+        .slick-next {
+            z-index: 1;
+            right: calc(50% - 60px);
+            bottom: 15px;
+            width: 45px;
+            top: auto;
+
+            img {
+                width: 45px;
+            }
+        }
 
         .product-detail-media-img {
             width: calc(50% - 5px);
+            height: 380px;
             margin-bottom: 10px;
+            object-fit: cover;
 
             &:nth-child(even) {
                 margin-left: 10px;
@@ -465,6 +621,7 @@ export default {
                 margin: 6px 0px;
                 text-decoration-line: underline;
                 text-transform: uppercase;
+                cursor: pointer;
             }
         }
 
@@ -494,6 +651,8 @@ export default {
             font-family: 'Aeroport-light';
             font-size: 16px;
             text-decoration-line: underline;
+            margin-left: 10px;
+            cursor: pointer;
         }
 
         .product-detail-data-inventory {
@@ -529,12 +688,18 @@ export default {
             font-size: 20px;
             border: 1px solid;
             text-transform: uppercase;
+
+            &:hover {
+                color: #fff;
+                background-color: #000;
+            }
         }
     }
 
     .product-detail-list-related {
-        margin-top: 120px;
-        padding: 120px 0px;
+        margin-top: 50px;
+        padding-top: 50px;
+        padding-bottom: 0px;
         border-top: 1px solid #717171;
 
         .product-detail-list-title {
@@ -561,6 +726,7 @@ export default {
         }
     }
 }
+
 @media (max-width: 820px) {
     .product-detail-content {
         padding-bottom: 30px;
@@ -612,6 +778,7 @@ export default {
                     font-size: 12px;
                     font-family: 'Aeroport-light';
                     height: 16px;
+
                     &:not(:last-child):after {
                         content: '';
                         display: inline-block;
@@ -632,10 +799,11 @@ export default {
                 text-align: left;
 
                 .product-detail-name-title {
-                    width: 240px;
+                    width: 100%;
                     color: #000;
                     font-family: 'Aeroport';
                     font-size: 20px;
+                    margin-top: 10px;
                 }
 
                 .product-detail-name-price {
@@ -644,6 +812,7 @@ export default {
                     font-size: 12px;
                     margin-top: 10px;
                     margin-bottom: 10px;
+
                 }
             }
 
@@ -666,12 +835,41 @@ export default {
             width: 100%;
             display: inline-block;
             margin-bottom: 50px;
+            height: 380px;
 
             .product-detail-media-img {
                 width: 100%;
 
                 &:nth-child(even) {
                     margin-left: 10px;
+                }
+            }
+
+            .slick-dots {
+                top: auto;
+                bottom: 20px;
+
+                li {
+                    margin: 0px 5px;
+                    border-radius: 50%;
+                    border: 1px solid #000;
+                    width: 13px;
+                    height: 13px;
+                    overflow: hidden;
+
+                    button:before {
+                        font-size: 0px;
+                        background-color: white;
+                    }
+                }
+
+                .slick-active {
+                    border: 1px solid #000;
+
+                    button:before {
+                        font-size: 0px;
+                        background-color: #000;
+                    }
                 }
             }
         }
@@ -806,6 +1004,7 @@ export default {
         }
     }
 }
+
 @media (max-width: 520px) {
     .product-detail-content {
         padding-bottom: 30px;
@@ -857,6 +1056,7 @@ export default {
                     font-size: 12px;
                     font-family: 'Aeroport-light';
                     height: 16px;
+
                     &:not(:last-child):after {
                         content: '';
                         display: inline-block;
@@ -877,10 +1077,11 @@ export default {
                 text-align: left;
 
                 .product-detail-name-title {
-                    width: 240px;
+                    width: 100%;
                     color: #000;
                     font-family: 'Aeroport';
                     font-size: 20px;
+                    margin-top: 50x;
                 }
 
                 .product-detail-name-price {

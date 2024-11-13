@@ -104,7 +104,7 @@ export default {
         }),
         async onLogin() {
             if (!this.username || !this.password) {
-                this.showNotification('warning', `Vui lòng nhập đử thông tin đăng nhập`)
+                this.showNotification('warning', `Please enter your login information`)
                 return
             }
             let rs = await this.loginEmail({
@@ -113,9 +113,9 @@ export default {
             })
             if (rs) {
                 this.$emit('closeUpdate')
-                this.showNotification('success', `Đăng nhập thành công`)
+                this.showNotification('success', `Logged in successfully`)
             } else {
-                this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
+                this.showNotification('danger', `Login failed, please try again`)
             }
         },
         async onGoogleLogin() {

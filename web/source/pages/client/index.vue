@@ -11,17 +11,16 @@
 			<div :class="isMobile ? 'client-service-item-content' : 'client-service-item-content d-flex'">
 				<div class="client-service-item">
 					<div class="client-service-item-title">LIVE CHAT</div>
-					<div class="client-service-item-des">Mon to Sat: 10am-8pm</div>
+					<div class="client-service-item-des">Mon to Sat: 09am - 09pm</div>
 				</div>
 				<div class="client-service-item">
-					<div class="client-service-item-title">CAll us</div>
-					<div class="client-service-item-des">+66 2459 0250</div>
-					<div class="client-service-item-des">Mon to Sat: 10am-8pm</div>
+					<div class="client-service-item-title">Mail us</div>
+					<a href="mailto:phanhoangg0305@gmail.com"><div class="client-service-item-des">phanhoangg0305@gmail.com</div></a>
+					<div class="client-service-item-des">Mon to Sat: 09am - 09pm</div>
 				</div>
 				<div class="client-service-item">
 					<div class="client-service-item-title">contact us</div>
-					<div class="client-service-item-des">Send a message</div>
-					<div class="client-service-item-des">We’ll reply within 48 hours</div>
+					<a href="mailto:phanhoangg0305@gmail.com"><div class="client-service-item-des">phanhoangg0305@gmail.com</div></a>
 				</div>
 				<div class="client-service-item">
 					<div class="client-service-item-title">store appointment</div>
@@ -76,6 +75,7 @@ export default {
 		font-family: 'Aeroport';
 		font-size: 35px;
 		margin-bottom: 30px;
+		text-transform: uppercase;
 	}
 
 	.client-service-des {
@@ -152,13 +152,13 @@ export default {
 		}
 
 		.client-service-item-content {
-			margin-top: 60px;
+			margin-top: 30px;
 
 			.client-service-item {
 				width: 200px;
 				margin: auto;
 				position: relative;
-				margin-top: 30px;
+				margin-top: 20px;
 				padding-bottom: 20px;
 
 				.client-service-item-title {
@@ -166,7 +166,7 @@ export default {
 					text-align: center;
 					font-family: 'Aeroport';
 					font-size: 17px;
-					margin-bottom: 20px;
+					margin-bottom: 15px;
 					text-transform: uppercase;
 				}
 
@@ -221,13 +221,13 @@ export default {
 		}
 
 		.client-service-item-content {
-			margin-top: 60px;
+			margin-top: 30px;
 
 			.client-service-item {
 				width: 200px;
 				margin: auto;
 				position: relative;
-				margin-top: 30px;
+				margin-top: 20px;
 				padding-bottom: 20px;
 
 				.client-service-item-title {
@@ -235,7 +235,7 @@ export default {
 					text-align: center;
 					font-family: 'Aeroport';
 					font-size: 17px;
-					margin-bottom: 20px;
+					margin-bottom: 15px;
 					text-transform: uppercase;
 				}
 

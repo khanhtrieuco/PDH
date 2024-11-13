@@ -7,6 +7,11 @@ module.exports = {
     },
     {
       method: 'POST',
+      path: '/app/captureorder', 
+      handler: 'apporder.capture'
+    },
+    {
+      method: 'POST',
       path: '/app/deletelike', 
       handler: 'apporder.deletelike'
     },
@@ -39,6 +44,16 @@ module.exports = {
       method: 'GET',
       path: '/app/chartorder', 
       handler: 'apporder.chartorder'
+    },
+    {
+      method: 'GET',
+      path: '/app/getemail', 
+      handler: 'apporder.getemail'
+    },
+    {
+      method: 'GET',
+      path: '/app/test', 
+      handler: 'apporder.test'
     }
   ]
 }

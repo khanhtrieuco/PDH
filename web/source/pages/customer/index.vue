@@ -211,7 +211,7 @@ export default {
         },
         async onClickAdd() {
             if (!this.name || !this.phone || !this.email || !this.reason || !this.content) {
-                this.showNotification('warning', `Vui lòng nhập đầy đủ thông tin`)
+                this.showNotification('warning', `Please enter complete information`)
                 return
             }
             let _data = {
@@ -224,7 +224,7 @@ export default {
                 state: 'new'
             }
             await this.createItem({ data: _data })
-            this.showNotification('success', `Tin nhắn đã được ghi nhận chúng tôi sẽ liên lạc với bạn sớm nhất!`)
+            this.showNotification('success', `Your message has been received and we will contact you as soon as possible!`)
             this.name = null
             this.phone = null
             this.email = null

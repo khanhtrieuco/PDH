@@ -8,11 +8,11 @@
                         <a-input v-model="form.name" @blur="() => { $refs.name.onFieldBlur(); }" />
                     </a-form-model-item>
                 </a-col>
-                <a-col :span="24">
+                <!-- <a-col :span="24">
                     <a-form-model-item ref="name_en" label="Tên tiếng anh" prop="name_en">
                         <a-input v-model="form.name_en" />
                     </a-form-model-item>
-                </a-col>
+                </a-col> -->
                 <a-col :span="24">
                     <a-form-model-item label="Vị trí hiển thị" prop="order">
                         <a-input v-model="form.order" type="number" />
@@ -71,7 +71,7 @@ export default {
             },
             rules: {
                 name: [{ required: true, message: 'Tên không thể để trống', trigger: 'blur' }],
-                name_en: [{ required: true, message: 'Tên không thể để trống', trigger: 'blur' }],
+                // name_en: [{ required: true, message: 'Tên không thể để trống', trigger: 'blur' }],
             },
             loading: false,
             listItemSub: []
@@ -82,7 +82,7 @@ export default {
             this.$refs.ruleForm.resetFields();
             this.form = {
                 name: this.item.attributes.name,
-                name_en: this.item.attributes.name_en,
+                // name_en: this.item.attributes.name_en,
                 order: this.item.attributes.order,
             }
             this.loadSubItem()
@@ -102,7 +102,7 @@ export default {
                 this.$refs.ruleForm.resetFields();
                 this.form = {
                     name: val.attributes.name,
-                    name_en: val.attributes.name_en,
+                    name_en: val.attributes.name,
                     order: val.attributes.order,
                 }
             }
@@ -123,6 +123,7 @@ export default {
         async onSubmitAdd() {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
+                    this.form.name_en = this.form.name
                     let rs = await this.createPlace({
                         data: {
                             ...this.form,
@@ -130,11 +131,11 @@ export default {
                         }
                     })
                     if (rs && rs.id) {
-                        this.$message.success('Tạo mới chuyên mục thành công');
+                        this.$message.success('Tạo mới menu thành công');
                         this.$emit('onReload')
                         this.$emit('onCancel')
                     } else {
-                        this.$message.error('Tạo mới chuyên mục không thành công! Xin thử lại sau!');
+                        this.$message.error('Tạo mới menu không thành công! Xin thử lại sau!');
                     }
                 } else {
                     console.log('error submit!!');
@@ -145,6 +146,7 @@ export default {
         async onSubmitUpdate() {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
+                    this.form.name_en = this.form.name
                     let rs = await this.updateItem({
                         id: this.item.id,
                         data: {
@@ -152,11 +154,11 @@ export default {
                         }
                     })
                     if (rs && rs.id) {
-                        this.$message.success('Cập nhật chuyên mục thành công');
+                        this.$message.success('Cập nhật menu thành công');
                         this.$emit('onReload')
                         this.$emit('onCancel')
                     } else {
-                        this.$message.error('Cập nhật chuyên mục không thành công! Xin thử lại sau!');
+                        this.$message.error('Cập nhật menu không thành công! Xin thử lại sau!');
                     }
                 } else {
                     console.log('error submit!!');

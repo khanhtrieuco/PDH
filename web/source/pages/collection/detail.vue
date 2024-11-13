@@ -2,7 +2,7 @@
     <div class="collection-content">
         <div class="collection-banner">
             <img class="customer-image" ratio="21-9" v-if="!isMobile"
-                :src="collection.attributes?.detail_thub?.data?.attributes.url"/>
+                :src="collection.attributes?.detail_thub?.data?.attributes.url" />
             <img class="customer-image" ratio="9-21" v-if="isMobile"
                 :src="collection.attributes?.detail_thub_mobile?.data?.attributes.url" />
             <!-- <div class="container customer-des" v-if="isMobile">
@@ -17,25 +17,23 @@
                 ullamcor
             </div> -->
         </div>
-        <div class="container">
-            <div class="photo-wrap" v-if="isMobile">
-                <div class="photo" v-for="imgData, index in imgDataArray" :key="index"
-                    :style="{ 'width': imgData.size.width * 800 / imgData.size.height + 'px', 'flex-grow': imgData.size.width * 800 / imgData.size.height }">
-                    <i :style="{ 'padding-bottom': imgData.size.height / imgData.size.width * 100 + '%' }"></i>
-                    <img class="collection-detail-image" :src="imgData.src" :alt="imgData.title" @load="loaded(index)"
-                        crossorigin="Anonymous" />
-                </div>
-            </div>
-            <div class="photo-list" v-if="!isMobile">
+        <div class="container" v-if="!isMobile">
+            <div class="photo-list">
                 <div class="photo-img" v-for="imgData, index in imgDataArray" :key="index">
                     <img class="photo-img-detail" :src="imgData.src" :alt="imgData.title" />
                 </div>
             </div>
-            <!-- <div class="btn-collection-top" @click="$router.go(-1)">SHOP NOW</div> -->
+        </div>
+        <div class="" v-else>
+            <div class="photo-list">
+                <div class="photo-img" v-for="imgData, index in imgDataArray" :key="index">
+                    <img class="photo-img-detail" :src="imgData.src" :alt="imgData.title" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
-  
+
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
@@ -62,16 +60,18 @@ export default {
             await this.getCollectionBySlug(this.$route.params.id) //(this.$route.params.id)
         }
         // await this.loadProducts()
-        this.collection.attributes.media.data.map(o => {
-            this.imgDataArray.push({
-                src: o.attributes.url,  // for spotlight too
-                title: o.attributes.name,
-                size: {
-                    width: o.attributes.width,
-                    height: o.attributes.height,
-                }
-            });
-        })
+        if (this.collection.attributes) {
+            this.collection.attributes.media?.data?.map(o => {
+                this.imgDataArray.push({
+                    src: o.attributes.url,  // for spotlight too
+                    title: o.attributes.name,
+                    size: {
+                        width: o.attributes.width,
+                        height: o.attributes.height,
+                    }
+                });
+            })
+        }
     },
     methods: {
         ...mapActions({
@@ -115,7 +115,7 @@ export default {
 .collection-content {
     padding-bottom: 100px;
 
-    .customer-image{
+    .customer-image {
         width: 100%;
     }
 
@@ -147,28 +147,42 @@ export default {
         flex-grow: 1;
         object-fit: cover;
         vertical-align: bottom;
-        border-radius: 3px;
-        box-sizing: border-box;
-        box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+        // border-radius: 3px;
+        // box-sizing: border-box;
+        // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
     }
 
     .photo-list {
         width: 100%;
-        margin-top: 5px;
+        margin-top: 50px;
+
         .photo-img {
-            width: 50%;
+            width: calc(100% / 3);
             display: inline-block;
-            padding: 5px;
+            padding: 8px;
+
             .photo-img-detail {
                 width: 100%;
                 min-width: 100%;
                 max-width: 100%;
-                height: 800px;
+                height: 600px;
                 object-fit: cover;
                 vertical-align: bottom;
-                border-radius: 3px;
-                box-sizing: border-box;
-                box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+                // border-radius: 3px;
+                // box-sizing: border-box;
+                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+            }
+
+            .photo-img-detail-half {
+                width: calc(50% - 5px);
+                min-width: calc(50% - 5px);
+                max-width: calc(50% - 5px);
+                height: 250px;
+                object-fit: cover;
+                vertical-align: bottom;
+                // border-radius: 3px;
+                // box-sizing: border-box;
+                // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
             }
         }
     }
@@ -188,10 +202,55 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .customer-des {
-        font-size: 12px;
-        padding: 20px 25px;
-        font-family: 'Aeroport-light';
-        text-align: center;
+    .collection-content {
+        .customer-des {
+            font-size: 12px;
+            padding: 20px 25px;
+            font-family: 'Aeroport-light';
+            text-align: center;
+        }
+
+        .photo-list {
+            width: 100%;
+            margin-top: 40px;
+            margin-left: 2px;
+            margin-right: 2px;
+            .photo-img {
+                width: calc(100% / 3 - 1px);
+                display: inline-block;
+                padding: 2px;
+
+                .photo-img-detail {
+                    width: 100%;
+                    min-width: 100%;
+                    max-width: 100%;
+                    height: 270px;
+                    object-fit: cover;
+                    vertical-align: bottom;
+                    // border-radius: 3px;
+                    // box-sizing: border-box;
+                    // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+                }
+            }
+
+            .photo-img-half {
+                width: calc(100% / 2);
+                display: inline-block;
+                padding: 3px;
+
+                .photo-img-detail {
+                    width: 100%;
+                    min-width: 100%;
+                    max-width: 100%;
+                    height: 250px;
+                    object-fit: cover;
+                    vertical-align: bottom;
+                    // border-radius: 3px;
+                    // box-sizing: border-box;
+                    // box-shadow: 1px 1px 2px 0px rgb(13 13 13 / 31%);
+                }
+            }
+        }
     }
-}</style>
+}
+</style>

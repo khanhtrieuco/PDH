@@ -34,6 +34,15 @@ export default {
         return res
     },
 
+    captureOrder: async function ({ commit }, data) {
+        let res = await ApiService.request({
+            method: "post",
+            url: "/api/app/captureorder",
+            data: data
+        });
+        return res
+    },
+
     updateOrder: async function ({
         commit
     }, data) {

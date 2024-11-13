@@ -9,7 +9,7 @@
                             <a-col :span="17"><a-input placeholder="Nhập tiêu đề bài viết" v-model="filter.title" /></a-col>
                         </a-row>
                     </a-col>
-                    <a-col :span="8" style="margin-bottom: 10px;">
+                    <!-- <a-col :span="8" style="margin-bottom: 10px;">
                         <a-row>
                             <a-col :span="6">Chuyên mục</a-col>
                             <a-col :span="17">
@@ -35,7 +35,7 @@
                                 </a-select>
                             </a-col>
                         </a-row>
-                    </a-col>
+                    </a-col> -->
                     <a-col :span="24" style="float: right;">
                         <a-button style="float: right;" class="admin-btn" type="danger" @click="onRefresh">Huỷ</a-button>
                         <a-button style="float: right;margin-right: 10px;" class="admin-btn" type="primary"
@@ -61,7 +61,7 @@
         </a-table>
         <a-modal title="Thông tin tin tức" :visible="modalOpen" :footer="null" width="1400px"
             @cancel="() => this.modalOpen = false">
-            <Detail :item="current" :modalType="modalType" :listCategory="listCategory"
+            <Detail :item="current" :modalType="modalType" :modalOpen="modalOpen" :listCategory="listCategory"
                 @onCancel="() => this.modalOpen = false" @onReload="() => this.onRefresh()" />
         </a-modal>
     </div>
@@ -94,25 +94,28 @@ export default {
                     key: 'title',
                     title: 'Tiêu đề',
                     sorter: true
-                }, {
-                    title: 'Chuyên mục',
-                    dataIndex: 'attributes.new_category',
-                    width: 150,
-                    align: 'center',
-                    key: 'new_category',
-                    scopedSlots: { customRender: 'new_category' },
-                }, {
-                    title: 'Loại',
-                    dataIndex: 'attributes.type',
-                    width: 150,
-                    align: 'center',
-                    key: 'type',
-                    sorter: true
-                }, {
-                    title: 'Nội dung',
-                    dataIndex: 'attributes.short_content',
-                    key: 'short_content',
-                }, {
+                }, 
+                // {
+                //     title: 'Chuyên mục',
+                //     dataIndex: 'attributes.new_category',
+                //     width: 150,
+                //     align: 'center',
+                //     key: 'new_category',
+                //     scopedSlots: { customRender: 'new_category' },
+                // }, {
+                //     title: 'Loại',
+                //     dataIndex: 'attributes.type',
+                //     width: 150,
+                //     align: 'center',
+                //     key: 'type',
+                //     sorter: true
+                // }, 
+                // {
+                //     title: 'Nội dung',
+                //     dataIndex: 'attributes.short_content',
+                //     key: 'short_content',
+                // },
+                {
                     title: 'Sắp xếp',
                     width: 120,
                     align: 'center',
@@ -163,7 +166,8 @@ export default {
                 pagination: {
                     page: this.listItem.pagination ? this.listItem.pagination.page : 1,
                     pageSize: this.listItem.pagination ? this.listItem.pagination.pageSize : 10
-                }
+                },
+                sort: ['id:desc']
             })
             this.loading = false
         },
@@ -184,13 +188,13 @@ export default {
         },
         onRefresh: async function () {
             this.filter = {}
-            this.sort = []
+            this.sort = ['id:desc']
             this.handleRefesh()
         },
         handleRefesh: async function (_p, _f, _s) {
             this.loading = true
             let filters = {}
-            let sort = []
+            let sort = ['id:desc']
             if (this.filter.title) {
                 filters['title'] = { $containsi: this.filter.title }
             }

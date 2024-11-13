@@ -14,12 +14,12 @@
       <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
         <div class="product-name">{{ $i18n.locale === 'vn' ? item.attributes.name : item.attributes.name_en }}</div>
       </NuxtLink>
-      <div class="product-price">{{ item.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
+      <div class="product-price">${{ ' ' }}{{ item.attributes.price | numberWithCommas }}</div>
     </div>
-    <div class="product-item-color">
+    <!-- <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
       <div class="product-item-color-value d-inline-block">+{{ listColor.length > 1 ? listColor.length - 1 : 1 }}</div>
-    </div>
+    </div> -->
     <NuxtLink style="width: 100%;" :to="`/san-pham/${item.attributes.slug}`">
       <div class="product-item-add">ADD TO CART</div>
     </NuxtLink>
@@ -117,7 +117,7 @@ export default {
     },
     async onLike(_product) {
       if (!this.loggedIn) {
-        this.showNotification('warning', `Đăng ký thành viên để lưu lại sản phẩm yêu thích của bạn`)
+        this.showNotification('warning', `Register as a member to save your favorite products`)
         return
       }
       if (this.isLike) {
@@ -125,9 +125,9 @@ export default {
         if (rs && rs.id) {
           this.isLike = false
           this.likeImage = '/images/heart.png'
-          this.showNotification('success', `Đã hủy sản phẩm yêu thích`)
+          this.showNotification('success', `Unlike`)
         } else {
-          this.showNotification('error', `Hủy sản phẩm yêu thích thất bại. Vui lòng thử lại.`)
+          this.showNotification('error', `Fail.`)
         }
       } else {
         let rs = await this.createLike({
@@ -140,9 +140,9 @@ export default {
         if (rs && rs.id) {
           this.isLike = rs
           this.likeImage = '/images/liked.png'
-          this.showNotification('success', `Đã thêm sản phẩm yêu thích`)
+          this.showNotification('success', `Like`)
         } else {
-          this.showNotification('error', `Thêm sản phẩm yêu thích thất bại. Vui lòng thử lại.`)
+          this.showNotification('error', `Fail`)
         }
       }
     },
@@ -163,7 +163,7 @@ export default {
         price: this.item.attributes.price
       }
       this.addCartItem(_t)
-      this.showNotification('success', `Đã thêm sản phẩm vào giỏ hàng`)
+      this.showNotification('success', `Product added to cart`)
     }
   }
   // mounted() {
@@ -182,7 +182,7 @@ export default {
 </script>
 <style lang="scss">
 .product-item {
-  padding: 5px;
+  padding: 0px;
 
   .product-img-like {
     position: relative;
@@ -213,8 +213,9 @@ export default {
 
   .product-price {
     color: #000;
-    font-family: 'Aeroport-light';
+    font-family: 'Aeroport';
     font-size: 16px;
+    font-weight: 300;
   }
 
   .img-heart {
@@ -271,8 +272,9 @@ export default {
 
     .product-price {
       color: #000;
-      font-family: 'Aeroport-light';
+      font-family: 'Aeroport';
       font-size: 10px;
+      font-weight: 300;
     }
 
     .img-heart {

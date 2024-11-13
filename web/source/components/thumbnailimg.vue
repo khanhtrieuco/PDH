@@ -80,7 +80,6 @@ export default {
   mounted() {
     if (this.video) {
       setTimeout(() => {
-        console.log(this.$refs.videoRef)
         if (this.$refs && this.$refs.videoRef) {
           this.$refs.videoRef.play()
         }

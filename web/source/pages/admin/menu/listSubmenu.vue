@@ -8,7 +8,9 @@
             </span>
             <span slot="action" slot-scope="text, record">
                 <a-button class="admin-btn" type="primary" @click="onEdit(record)">Cập nhật</a-button>
-                <a-button @click="deletedItem(record.id)" class="admin-btn" type="danger">Xoá</a-button>
+                <a-popconfirm title="Bạn chắc có muốn xóa không?" ok-text="Yes" cancel-text="No" @confirm="deletedItem(record.id)">
+                    <a-button class="admin-btn" type="danger">Xoá</a-button>
+                </a-popconfirm>
             </span>
         </a-table>
         <a-modal title="Thông tin sub menu" :visible="modalOpen" :footer="null" width="1400px"
@@ -38,7 +40,7 @@ export default {
         },
         listItem: {
             type: Array,
-            default: []
+            default: () => []
         }
     },
     data() {
@@ -82,7 +84,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            updateItem: "collectionCate/updateItem"
+            updateItem: "collectionCate/updateItem",
+            deleteItem: "collectionCate/deleteItem"
         }),
         onAddNew: function () {
             this.current = {}
@@ -93,6 +96,16 @@ export default {
             this.current = item
             this.modalOpen = true
             this.modalType = 'edit'
+        },
+        deletedItem: async function (id) {
+            let rs = await this.deleteItem({ id })
+            if (rs) {
+                this.$message.success('Cập nhật menu thành công');
+                this.$emit('onReload')
+                this.$emit('onCancel')
+            } else {
+                this.$message.error('Cập nhật menu không thành công! Xin thử lại sau!');
+            }
         }
     }
 };

@@ -27,6 +27,17 @@ export default {
         return false
     },
 
+    checkEmail: async function ({ }, data) {
+        let res = await ApiService.request({
+            method: "get",
+            url: `api/app/getemail?email=${data.email}`
+        });
+        if (res && res.data) {
+            return true
+        }
+        return false
+    },
+
     logout: async function ({
         commit
     }, data) {

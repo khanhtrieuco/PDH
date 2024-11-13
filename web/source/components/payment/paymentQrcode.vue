@@ -92,7 +92,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.payment)
         let _t = setInterval(() => {
             this.time--
             if (this.time <= 0) {

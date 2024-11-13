@@ -2196,6 +2196,13 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
+"@paypal/paypal-js@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@paypal/paypal-js/-/paypal-js-8.0.2.tgz#5bd400b286418c1e7a8c129be2c99bedc861a11f"
+  integrity sha512-JbWXxMsTDUE4j+JXAu04qBacjkP6/38lgGC5YKW/FBfU1v3S5EgjfF1cMCGFehcpmsU5T88rkpKDsuftrCkyCA==
+  dependencies:
+    promise-polyfill "^8.3.0"
+
 "@polka/url@^1.0.0-next.20":
   version "1.0.0-next.21"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
@@ -9008,6 +9015,11 @@ promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/promise-inflight/-/promise-inflight-1.0.1.tgz"
   integrity sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==
+
+promise-polyfill@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.3.0.tgz#9284810268138d103807b11f4e23d5e945a4db63"
+  integrity sha512-H5oELycFml5yto/atYqmjyigJoAo3+OXwolYiH7OfQuYlAqhxNvTfiNMbV9hsC6Yp83yE5r2KTVmtrG6R9i6Pg==
 
 proper-lockfile@^4.1.2:
   version "4.1.2"

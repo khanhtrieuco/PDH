@@ -1,49 +1,60 @@
 <template>
-    <div class="backgroud-black">
-        <div class="prodile-content">
-            <img class="prodile-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" />
-            <div class="prodile-title">Edit Profile</div>
-            <div class="input-form-des-text">*required field</div>
-            <b-row v-if="!isMobile" class="mt-3">
-                <b-col cols="12">
-                    <div class="input-form-des">*Full name</div>
-                    <b-form-input class="input-form-prodile" v-model="form.username"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Phone</div>
-                    <b-form-input class="input-form-prodile" v-model="form.phone"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Email</div>
-                    <div>{{ profile.email }}</div>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Brithday</div>
-                    <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
-                        :locale="'vi'"></b-form-datepicker>
-                </b-col>
-            </b-row>
-            <b-row v-else>
-                <b-col cols="12">
-                    <div class="input-form-des">*Full name</div>
-                    <b-form-input class="input-form-prodile" v-model="form.username"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Phone</div>
-                    <b-form-input class="input-form-prodile" v-model="form.phone"></b-form-input>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Email</div>
-                    <div>{{ profile.email }}</div>
-                </b-col>
-                <b-col cols="12">
-                    <div class="input-form-des">*Brithday</div>
-                    <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
-                        :locale="'vi'"></b-form-datepicker>
-                </b-col>
-            </b-row>
-            <div class="up-add-btn" @click="onUpdate()">Cập nhật
+    <div class="backgroud-black" @click="$emit('closeUpdate')">
+        <div class="popup-content" @click.stop="">
+            <div class="prodile-content">
+                <!-- <img class="prodile-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
+                <div class="prodile-title">Edit Profile</div>
+                <div class="input-form-des-text">*required field</div>
+                <b-row v-if="!isMobile" class="mt-3">
+                    <b-col cols="12">
+                        <div class="input-form-des">*Full name</div>
+                        <b-form-input class="input-form-prodile" v-model="form.username"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Phone</div>
+                        <b-form-input class="input-form-prodile" v-model="form.phone"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Email</div>
+                        <div>{{ profile.email }}</div>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Brithday</div>
+                        <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
+                            :locale="'en'"></b-form-datepicker>
+                    </b-col>
+                </b-row>
+                <b-row v-else>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Full name</div>
+                        <b-form-input class="input-form-prodile" v-model="form.username"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Phone</div>
+                        <b-form-input class="input-form-prodile" v-model="form.phone"></b-form-input>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Email</div>
+                        <div>{{ profile.email }}</div>
+                    </b-col>
+                    <b-col cols="12">
+                        <div class="input-form-des">*Brithday</div>
+                        <!-- <b-form-datepicker id="example-datepicker" v-model="form.brithday" placeholder="Nhập ngày sinh"
+                            :locale="'en'"></b-form-datepicker> -->
+                        <b-input-group class="mb-3">
+                            <b-form-input class="input-form-prodile" id="example-input" v-model="form.brithday" type="text" placeholder="YYYY-MM-DD"
+                                autocomplete="off"></b-form-input>
+                            <b-input-group-append>
+                                <b-form-datepicker v-model="form.brithday" button-only right locale="en-US"
+                                    aria-controls="example-input"></b-form-datepicker>
+                            </b-input-group-append>
+                        </b-input-group>
+                    </b-col>
+                </b-row>
+                <div class="up-add-btn" @click="onUpdate()">Save
+                </div>
             </div>
+            <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>
         </div>
     </div>
 </template>
@@ -114,16 +125,32 @@ export default {
     position: fixed;
     left: 0px;
     top: 0px;
-    background-color: #000000b3;
+    background-color: #FAFAFA;
     z-index: 15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .popup-content {
+        position: relative;
+    }
+
+    .back-close-popup {
+        font-family: 'Aeroport-light';
+        text-align: center;
+        font-size: 16px;
+        text-decoration-line: underline;
+        text-transform: uppercase;
+        color: #000;
+        cursor: pointer;
+        margin-top: 30px;
+    }
 }
 
 .prodile-content {
     position: relative;
-    top: calc(50% - 630px/2);
     margin: auto;
     width: 550px;
-    height: 630px;
     background-color: #ffffff;
     padding: 30px;
 
@@ -164,6 +191,10 @@ export default {
         border-radius: 0px;
     }
 
+    .btn-secondary{
+        padding: 4px 8px;
+    }
+
     .up-add-btn {
         width: 100%;
         height: 55px;
@@ -181,7 +212,6 @@ export default {
         margin-top: 30px;
         position: relative;
     }
-
 }
 
 @media (max-width: 520px) {
@@ -245,7 +275,7 @@ export default {
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            margin-top: 60px;
+            margin-top: 30px;
             position: relative;
         }
 

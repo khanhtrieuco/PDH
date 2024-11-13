@@ -1,43 +1,40 @@
 <template>
-    <div class="detail-club-content">
-        <b-container style="position: relative" v-if="!isMobile">
-            <b-breadcrumb class="breadcrumb" :items="breadcrumb"></b-breadcrumb>
-        </b-container>
-        <div class="detail-club-image">
-            <ThumbImage ratio="21-9" :src="club.attributes?.thub.data?.attributes.url"></ThumbImage>
+    <div class="detail-news-content">
+        <div class="detail-news-image">
+            <ThumbImage ratio="21-9" :src="news.attributes?.thub.data?.attributes.url"></ThumbImage>
         </div>
         <b-container class="d-flex justify-content-between" v-if="!isMobile">
             <div class="detail-left-info">
-                <h1 class="detail-club-title">{{ $i18n.locale === 'vn' ? club.attributes?.title : club.attributes?.title_en
+                <h1 class="detail-news-title">{{ $i18n.locale === 'vn' ? news.attributes?.title : news.attributes?.title_en
                 }}</h1>
-                <div class="detail-club-des">{{ $i18n.locale === 'vn' ? club.attributes?.short_content :
-                    club.attributes?.short_content_en }}</div>
-                <div class="club-social-panel d-flex justify-content-start">
-                    <img class="club-social-icon" src="/images/tiktok1.png " />
-                    <img class="club-social-icon" src="/images/face.png " />
-                    <img class="club-social-icon" src="/images/insta.png " />
+                <div class="detail-news-des">{{ $i18n.locale === 'vn' ? news.attributes?.short_content :
+                    news.attributes?.short_content_en }}</div>
+                <div class="news-social-panel d-flex justify-content-start">
+                    <img class="news-social-icon" src="/images/tiktok1.png " />
+                    <img class="news-social-icon" src="/images/face.png " />
+                    <img class="news-social-icon" src="/images/insta.png " />
                 </div>
             </div>
             <div class="detail-right-info">
-                <!-- <div class="detail-club-text" v-html="$md.render(club?.attributes?.content ?? '')"></div> -->
-                <div class="detail-club-text"
-                    v-html="showHtmlText($i18n.locale === 'vn' ? club?.attributes?.content : club?.attributes?.content_en)">
+                <!-- <div class="detail-news-text" v-html="$md.render(news?.attributes?.content ?? '')"></div> -->
+                <div class="detail-news-text"
+                    v-html="showHtmlText($i18n.locale === 'vn' ? news?.attributes?.content : news?.attributes?.content_en)">
                 </div>
             </div>
         </b-container>
         <b-container v-if="isMobile">
-            <div class="detail-club-category">{{ club.attributes?.category }}</div>
-            <h1 class="detail-club-title">{{ $i18n.locale === 'vn' ? club.attributes?.title : club.attributes?.title_en }}
+            <div class="detail-news-category">{{ news.attributes?.category }}</div>
+            <h1 class="detail-news-title">{{ $i18n.locale === 'vn' ? news.attributes?.title : news.attributes?.title_en }}
             </h1>
-            <div class="detail-club-des">{{ $i18n.locale === 'vn' ? club.attributes?.short_content :
-                club.attributes?.short_content_en }}</div>
-            <div class="club-social-panel d-flex justify-content-start">
-                <img class="club-social-icon" src="/images/tiktok1.png " />
-                <img class="club-social-icon" src="/images/face.png " />
-                <img class="club-social-icon" src="/images/insta.png " />
+            <div class="detail-news-des">{{ $i18n.locale === 'vn' ? news.attributes?.short_content :
+                news.attributes?.short_content_en }}</div>
+            <div class="news-social-panel d-flex justify-content-start">
+                <img class="news-social-icon" src="/images/tiktok1.png " />
+                <img class="news-social-icon" src="/images/face.png " />
+                <img class="news-social-icon" src="/images/insta.png " />
             </div>
-            <div class="detail-club-text"
-                v-html="showHtmlText($i18n.locale === 'vn' ? club?.attributes?.content : club?.attributes?.content_en)">
+            <div class="detail-news-text"
+                v-html="showHtmlText($i18n.locale === 'vn' ? news?.attributes?.content : news?.attributes?.content_en)">
             </div>
         </b-container>
     </div>
@@ -52,48 +49,34 @@ export default {
     mixins: [general],
     data() {
         return {
-            breadcrumb: [
-                {
-                    text: this.$t('Home'),
-                    href: '/'
-                },
-                {
-                    text: 'Aura Club',
-                    href: '/aura-club'
-                },
-                {
-                    text: this.club?.attributes?.name,
-                    active: true
-                }
-            ],
             isMobile: false
         }
     },
     computed: {
         ...mapGetters({
-            club: "club/getClub"
+            news: "news/getNews"
         }),
     },
-    watch: {
-        '$i18n.locale': function (val) {
-            if (val) {
-                this.breadcrumb = [
-                    {
-                        text: this.$t('Home'),
-                        href: '/'
-                    },
-                    {
-                        text: 'Aura Club',
-                        href: '/aura-club'
-                    },
-                    {
-                        text: this.$i18n.locale === 'vn' ? this.club?.attributes?.title : this.club?.attributes?.title_en,
-                        active: true
-                    }
-                ]
-            }
-        },
-    },
+    // watch: {
+    //     '$i18n.locale': function (val) {
+    //         if (val) {
+    //             this.breadcrumb = [
+    //                 {
+    //                     text: this.$t('Home'),
+    //                     href: '/'
+    //                 },
+    //                 {
+    //                     text: 'Aura news',
+    //                     href: '/aura-news'
+    //                 },
+    //                 {
+    //                     text: this.$i18n.locale === 'vn' ? this.news?.attributes?.title : this.news?.attributes?.title_en,
+    //                     active: true
+    //                 }
+    //             ]
+    //         }
+    //     },
+    // },
     async mounted() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
@@ -101,7 +84,7 @@ export default {
     },
     methods: {
         ...mapActions({
-            getClubBySlug: "club/getClubBySlug"
+            getNewsBySlug: "news/getNewsBySlug"
         }),
         checkMobile() {
             if (!process.server) {
@@ -114,16 +97,15 @@ export default {
         },
         async loadData() {
             if (this.$route.params.id) {
-                await this.getClubBySlug(this.$route.params.id)
-                this.breadcrumb[2].text = this.$i18n.locale === 'vn' ? this.club?.attributes?.title : this.club?.attributes?.title_en
+                await this.getNewsBySlug(this.$route.params.id)
             }
         }
     }
 }
 </script>
 <style lang="scss">
-.detail-club-content {
-    margin-top: 180px;
+.detail-news-content {
+    margin-top: 0px;
     margin-bottom: 160px;
 }
 
@@ -132,7 +114,7 @@ export default {
     padding-left: 0px;
 }
 
-.detail-club-img {
+.detail-news-img {
     max-height: 600px;
     object-fit: cover;
 }
@@ -146,21 +128,21 @@ export default {
     padding-left: 10px;
 }
 
-.detail-club-title {
+.detail-news-title {
     color: #2F3036;
     font-size: 36px;
     margin-top: 40px;
 }
 
-.club-social-panel {
+.news-social-panel {
     margin-top: 20px;
 
-    .club-social-icon {
+    .news-social-icon {
         margin-right: 10px;
     }
 }
 
-.detail-club-des {
+.detail-news-des {
     color: #9C9C9C;
     font-size: 16px;
     font-family: 'inter-light';
@@ -169,7 +151,7 @@ export default {
     padding-right: 10px;
 }
 
-.detail-club-text {
+.detail-news-text {
     color: #2F3036;
     font-size: 13px;
     font-family: 'inter-light';
@@ -183,11 +165,11 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .detail-club-content {
+    .detail-news-content {
         margin-top: 50px;
     }
 
-    .detail-club-category {
+    .detail-news-category {
         color: #777;
         font-size: 10px;
         font-family: 'inter';
@@ -195,13 +177,13 @@ export default {
         margin-top: 20px;
     }
 
-    .detail-club-title {
+    .detail-news-title {
         color: #2F3036;
         font-size: 20px;
         margin-top: 16px;
     }
 
-    .detail-club-des {
+    .detail-news-des {
         text-transform: uppercase;
         font-family: 'inter-light';
         margin-top: 16px;
@@ -209,7 +191,7 @@ export default {
         font-size: 10px;
     }
 
-    .detail-club-text {
+    .detail-news-text {
         color: #2F3036;
         font-size: 10px;
         font-family: 'inter-light';
@@ -222,10 +204,10 @@ export default {
         }
     }
 
-    .club-social-panel {
+    .news-social-panel {
         margin-top: 10px;
 
-        .club-social-icon {
+        .news-social-icon {
             margin-right: 10px;
             width: 20px;
         }

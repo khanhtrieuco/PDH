@@ -22,7 +22,7 @@
                         </div>
                         <div class="my-cart-product-des">Quantity: <span>{{ item.quantity }}</span></div>
                         <div class="my-card-div-price">
-                            {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                            ${{ ' ' }}{{ item.price * item.quantity | numberWithCommas }}
                         </div>
                     </div>
                 </div>
@@ -31,15 +31,15 @@
         <div class="my-cart-info">
             <div class="my-cart-info-text d-flex justify-content-between">
                 <div>Subtotal</div>
-                <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
+                <div>${{ ' ' }}{{ total_price | numberWithCommas }}</div>
             </div>
             <div class="my-cart-info-text d-flex justify-content-between">
                 <div>priceShip</div>
-                <div>{{ priceShip | numberWithCommas }}{{ ' ' }}đ</div>
+                <div>${{ ' ' }}{{ priceShip | numberWithCommas }}</div>
             </div>
             <div class="my-cart-info-total d-flex justify-content-between">
                 <div class="">{{ $t('Cart_text_4') }}</div>
-                <div><b>{{ total_price + priceShip | numberWithCommas }}{{ ' ' }}đ</b></div>
+                <div><b>${{ ' ' }}{{ total_price + priceShip | numberWithCommas }}</b></div>
             </div>
         </div>
     </div>
@@ -100,7 +100,7 @@ export default {
     props: {
         listItem: {
             type: Array,
-            default: [],
+            default: () => []
         },
         priceShip: {
             type: Number,
@@ -156,7 +156,7 @@ export default {
         height: 50px;
         line-height: 50px;
         padding: 0px 25px;
-        border-bottom: 1px solid #000;
+        border-bottom: 0.5px solid #D9D9D9;
 
         .my-cart-head-title {
             color: #000;
@@ -234,7 +234,7 @@ export default {
 
         .my-cart-info-total {
             padding-top: 15px;
-            border-top: 1px solid #000;
+            border-top: 1px solid #D9D9D9;
             color: #000;
             font-family: 'Aeroport';
             font-size: 16px;

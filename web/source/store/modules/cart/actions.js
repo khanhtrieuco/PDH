@@ -39,6 +39,12 @@ export default {
         }
     },
 
+    setUpdateCart: async ({ commit, rootState }, data = {}) => {
+        commit('set_update_cart', {
+            update_cart: data
+        })
+    },
+
     createCart: async function ({ commit }, data) {
         let res = await ApiService.request({
             method: "post",
@@ -103,7 +109,7 @@ export default {
 
     setCartCheckoutItem: ({ commit, rootState }, data = {}) => {
         commit('set_list_user_cart', {
-            list_cart: data.listCheckout
+            list_user_cart: data.listCheckout
         })
         if (window.localStorage) {
             window.localStorage.setItem('listCartCheckout', JSON.stringify(data.listCheckout));

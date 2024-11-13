@@ -1,5 +1,5 @@
 <template>
-    <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }"
+    <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 17 }"
         labelAlign="left">
         <a-row>
             <a-col :span="12">
@@ -7,31 +7,31 @@
                     <a-input v-model="form.name" @blur="() => { $refs.name.onFieldBlur(); }" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="name_en" label="Tên tiếng anh" prop="name_en">
                     <a-input v-model="form.name_en" />
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="12">
                 <a-form-model-item ref="address" label="Địa chỉ" prop="address">
                     <a-input v-model="form.address" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="address_en" label="Địa chỉ tiếng anh" prop="address_en">
                     <a-input v-model="form.address_en" />
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="12">
                 <a-form-model-item label="Vị trí hiển thị" prop="order">
                     <a-input v-model="form.order" type="number" />
                 </a-form-model-item>
             </a-col>
-            <a-col :span="12" style="padding-left: 10px;">
+            <!-- <a-col :span="12" style="padding-left: 10px;">
                 <a-form-model-item ref="link" label="Link google map" prop="link">
                     <a-input v-model="form.link" />
                 </a-form-model-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="12">
                 <a-form-model-item label="Số điện thoại" prop="order">
                     <a-input v-model="form.phone" />
@@ -49,7 +49,7 @@
                     </a-form-model-item>
                 </a-col>
             </a-col>
-            
+
         </a-row>
         <a-form-model-item :wrapper-col="{ span: 4, offset: 20 }">
             <a-button v-if="modalType === 'create'" type="primary" @click="onSubmitAdd">
@@ -121,6 +121,17 @@ export default {
         modalType: function (val) {
             if (val && val === 'create') {
                 this.$refs.ruleForm.resetFields();
+                this.form = {
+                    name: undefined,
+                    name_en: undefined,
+                    address: undefined,
+                    address_en: undefined,
+                    thub: undefined,
+                    phone: undefined,
+                    time: undefined,
+                    link: undefined,
+                    order: 0
+                };
                 this.imageUrl = undefined
             }
         },
@@ -202,6 +213,5 @@ export default {
     }
 }
 </script>
-  
+
 <style lang="scss" scoped></style>
-  
