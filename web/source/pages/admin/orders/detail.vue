@@ -20,16 +20,16 @@
             </a-descriptions>
             <a-descriptions title="Thông tin giá">
                 <a-descriptions-item label="Giá đơn hàng">
-                    {{ formatPrice(order?.attributes.price) }} đ
+                    $ {{ formatPrice(order?.attributes.price) }}
                 </a-descriptions-item>
                 <a-descriptions-item label="Phí ship">
-                    {{ formatPrice(order?.attributes.price_ship) }} đ
+                    $ {{ formatPrice(order?.attributes.price_ship) }}
                 </a-descriptions-item>
                 <a-descriptions-item label="Khuyến mãi">
-                    {{ formatPrice(order?.attributes.discount_price) }} đ
+                    $ {{ formatPrice(order?.attributes.discount_price) }}
                 </a-descriptions-item>
                 <a-descriptions-item label="Tồng cộng">
-                    <b>{{ formatPrice(order?.attributes.price + order?.attributes.price_ship) }} đ</b>
+                    <b>$ {{ formatPrice(order?.attributes.price + order?.attributes.price_ship) }}</b>
                 </a-descriptions-item>
             </a-descriptions>
             <a-descriptions title="Thông tin giao hàng">

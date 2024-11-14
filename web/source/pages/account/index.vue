@@ -98,7 +98,7 @@
                                         <div class="account-content-order-item-info-des">Quantity: <span>{{
                                             _order.cart.quantity }}</span></div>
                                         <div class="account-content-order-item-info-price">
-                                            {{ _order.attributes.price | numberWithCommas }}{{ ' ' }}đ
+                                            $ {{ _order.attributes.price | numberWithCommas }}
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                     <div class="account-content-order-item-info-des">Quantity: <span>{{
                                         _order.cart.quantity }}</span></div>
                                     <div class="account-content-order-item-info-price">
-                                        {{ _order.attributes.price | numberWithCommas }}{{ ' ' }}đ
+                                        $ {{ _order.attributes.price | numberWithCommas }}
                                     </div>
                                 </div>
                             </div>

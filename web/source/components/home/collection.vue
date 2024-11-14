@@ -41,14 +41,14 @@
       :controls-width="45" @after-slide-change="onAfterSlideChange">
       <slide v-for="(collection, i) in listCollection" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
-          <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`" v-if="collection.attributes.view_detail">
+          <NuxtLink :to="`/collection/${current_coll?.attributes?.slug}`">
             <div class="collection-item d-flex justify-content-center align-items-center"
               :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes?.url})`">
             </div>
           </NuxtLink>
-          <div v-else class="collection-item d-flex justify-content-center align-items-center"
+          <!-- <div v-else class="collection-item d-flex justify-content-center align-items-center"
             :style="`background-image: url(${collection.attributes.slider_thub?.data?.attributes?.url})`">
-          </div>
+          </div> -->
         </template>
       </slide>
     </carousel-3d>

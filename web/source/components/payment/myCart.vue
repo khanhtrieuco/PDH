@@ -22,7 +22,7 @@
                         </div>
                         <div class="my-cart-product-des">Quantity: <span>{{ item.quantity }}</span></div>
                         <div class="my-card-div-price">
-                            ${{ ' ' }}{{ item.price * item.quantity | numberWithCommas }}
+                            $ {{ item.price * item.quantity | numberWithCommas }}
                         </div>
                     </div>
                 </div>
@@ -31,15 +31,15 @@
         <div class="my-cart-info">
             <div class="my-cart-info-text d-flex justify-content-between">
                 <div>Subtotal</div>
-                <div>${{ ' ' }}{{ total_price | numberWithCommas }}</div>
+                <div>$ {{ total_price | numberWithCommas }}</div>
             </div>
             <div class="my-cart-info-text d-flex justify-content-between">
-                <div>priceShip</div>
-                <div>${{ ' ' }}{{ priceShip | numberWithCommas }}</div>
+                <div>SHIPPING COST</div>
+                <div>$ {{ priceShip | numberWithCommas }}</div>
             </div>
             <div class="my-cart-info-total d-flex justify-content-between">
                 <div class="">{{ $t('Cart_text_4') }}</div>
-                <div><b>${{ ' ' }}{{ total_price + priceShip | numberWithCommas }}</b></div>
+                <div><b>$ {{ total_price + priceShip | numberWithCommas }}</b></div>
             </div>
         </div>
     </div>

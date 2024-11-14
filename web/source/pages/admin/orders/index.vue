@@ -90,7 +90,7 @@
                 <div>Ngày giao hàng: {{ record?.attributes.end_date }}</div>
             </span>
             <span slot="price" slot-scope="price">
-                {{ price | numberWithCommas }}{{ ' ' }}đ
+                $ {{ price | numberWithCommas }}
             </span>
             <span slot="state" slot-scope="state">
                 <a-tag :color="getStateOrderColor(state)">{{ getStateOrder(state) }}</a-tag>

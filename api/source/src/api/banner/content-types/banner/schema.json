@@ -67,14 +67,23 @@
       "type": "text"
     },
     "name": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
+      ]
+    },
+    "type_source": {
+      "type": "enumeration",
+      "enum": [
+        "image",
+        "video"
       ],
-      "type": "media",
-      "multiple": false
+      "default": "video"
     }
   }
 }

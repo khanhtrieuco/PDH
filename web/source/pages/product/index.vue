@@ -4,9 +4,9 @@
             <div class="product-detail-info">
                 <div class="product-detail-color" @click="scrollToAdd">
                     <span class="color-text">Color:</span>
-                    <Color v-if="!isMobile"></Color>
-                    <ColorMobile v-else></ColorMobile>
-                    <div class="color-value">+{{ listColor.length - 1 }}</div>
+                    <Color :color="listColor[0].attributes.value" v-if="listColor.length > 0 && !isMobile"></Color>
+                    <ColorMobile :color="listColor[0].attributes.value" v-if="listColor.length > 0 && isMobile"></ColorMobile>
+                    <div class="color-value" v-if="listColor.length > 1">+{{ listColor.length - 1 }}</div>
                 </div>
                 <div class="product-detail-size" @click="scrollToAdd">
                     <span class="size-text">Size:</span>
@@ -16,7 +16,7 @@
                 <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
                 <div class="product-detail-name">
                     <div class="product-detail-name-title">{{ product.attributes?.name }}</div>
-                    <div class="product-detail-name-price">${{ ' ' }}{{ product.attributes?.price | numberWithCommas }}
+                    <div class="product-detail-name-price">$ {{ product.attributes?.price | numberWithCommas }}
                     </div>
                 </div>
                 <div class="product-detail-btn" @click="scrollToAdd">

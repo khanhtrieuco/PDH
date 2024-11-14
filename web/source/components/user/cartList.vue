@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="list-card-div-price">
-                            ${{ ' ' }}{{ item.price * item.quantity | numberWithCommas }}
+                            $ {{ item.price * item.quantity | numberWithCommas }}
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
         <div class="list-cart-footer">
             <div class="d-flex justify-content-between">
                 <div class="list-cart-total">{{ $t('Cart_text_4') }}</div>
-                <div class="list-cart-number">${{ ' ' }}{{ total_price | numberWithCommas }}{{ ' ' }}</div>
+                <div class="list-cart-number">$ {{ total_price | numberWithCommas }} </div>
             </div>
             <div class="list-cart-checkout-btn" @click="onGoPaymentPage">{{ $t('Cart_text_6') }}</div>
             <div class="list-cart-btn" @click="onGoCheckoutPage">{{ $t('Cart_text_66') }}</div>

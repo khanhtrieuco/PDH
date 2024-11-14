@@ -81,8 +81,7 @@
               <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
           </div>
-          <div class="menu-mobile-item d-flex justify-content-between" v-if="mobileSubMenu"
-            @click="mobileSubMenu = null">
+          <div class="menu-mobile-item d-flex justify-content-between" v-if="mobileSubMenu" @click="mobileSubMenu = null">
             <div class="menu-mobile-title">{{ mobileSubMenu.attributes.name }}</div>
             <img class="menu-left" src="/images/menu-left.png" />
           </div>
@@ -93,19 +92,34 @@
               {{ subMenu.attributes.name }}</div>
             </div>
           </div>
-          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
-            @click="openMobile = openMobile === 2 ? null : 2">
+          <div v-if="!mobileSubMenu" class="menu-mobile-item d-flex justify-content-between" @click="openMobile = openMobile === 2 ? null : 2">
             <div class="menu-mobile-title">
               {{ $i18n.locale === 'vn' ? listCollection[1].name : listCollection[1].name_en ?? listCollection[1].name }}
             </div>
             <img class="menu-open" :src="openMobile === 2 ? '/images/menu-up.png' : '/images/menu-down.png'" />
           </div>
-          <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
+
+          <div v-if="openMobile === 2 && !mobileSubMenu" class="menu-mobile-list-sub">
+            <div class="menu-mobile-sub-item d-flex justify-content-between"
+              v-for="(coll, idx) in listCollection[1].child" :key="idx" @click="mobileSubMenu = coll">
+              <div class="menu-mobile-title">{{ coll.attributes.name }}</div>
+              <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'" />
+            </div>
+          </div>
+
+          <div v-if="!mobileSubMenu" class="menu-mobile-item d-flex justify-content-between"
             @click="openMobile = openMobile === 3 ? null : 3">
             <div class="menu-mobile-title">
               {{ $i18n.locale === 'vn' ? listCollection[2].name : listCollection[2].name_en ?? listCollection[2].name }}
             </div>
             <img class="menu-open" :src="openMobile === 3 ? '/images/menu-up.png' : '/images/menu-down.png'" />
+          </div>
+          <div v-if="openMobile === 3 && !mobileSubMenu" class="menu-mobile-list-sub">
+            <div class="menu-mobile-sub-item d-flex justify-content-between"
+              v-for="(coll, idx) in listCollection[2].child" :key="idx" @click="mobileSubMenu = coll">
+              <div class="menu-mobile-title">{{ coll.attributes.name }}</div>
+              <img class="menu-open" :src="openSubMobile === idx ? '/images/menu-up.png' : '/images/menu-right.png'" />
+            </div>
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
             @click="() => { mobileSubMenu = null; openMobile = openMobile === 4 ? null : 4 }">
@@ -119,11 +133,11 @@
                 @click="goPage('/show')" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title">Lookbook</div>
+              <div class="menu-mobile-title" @click="goPage('/news')">Lookbook</div>
               <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title">Campaigns</div>
+              <div class="menu-mobile-title" @click="goPage('/news')">Campaigns</div>
               <img class="menu-open" :src="openSubMobile === 3 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
             <div class="menu-mobile-sub-item d-flex justify-content-between">
@@ -136,10 +150,6 @@
               <img class="menu-open" @click="goPage('/house-of-pdh')"
                 :src="openSubMobile === 5 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
-            <!-- <div class="menu-mobile-sub-item d-flex justify-content-between">
-              <div class="menu-mobile-title">Achievement of P.D.H</div>
-              <img class="menu-open" :src="openSubMobile === 6 ? '/images/menu-up.png' : '/images/menu-right.png'" />
-            </div> -->
           </div>
           <div v-if="!openSubChild" class="menu-mobile-item d-flex justify-content-between"
             @click="() => { mobileSubMenu = null; openMobile = openMobile === 5 ? null : 5 }">
@@ -161,9 +171,9 @@
         </div>
       </div>
     </div>
-    <div v-if="tab === 1" class="header-tab-menu" v-click-outside="closeTab">
+    <div v-if="tab === 1 || tab === 2 || tab === 3" class="header-tab-menu" v-click-outside="closeTab">
       <div class="container header-tab-menu-container d-flex justify-content-between">
-        <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[0].child" :key="idx">
+        <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[tab-1].child" :key="idx">
           <div class="header-tab-menu-title">{{ _menu.attributes.name }}</div>
           <div class="header-tab-menu-text" v-for="(_coll, index) in _menu.attributes.collections.data" :key="index"
             v-if="_coll?.attributes.state === 'active'"
@@ -426,7 +436,8 @@ export default {
       }
     },
     goPage(url,view_detail) {
-      if (url.includes('collection') && view_detail !== true) return
+      // if (url.includes('collection') && view_detail !== true) return
+      this.mobileSubMenu = null
       if (this.$router.history.current.path !== url) {
         this.tab = null
         this.showMenuMobile = false;
@@ -521,7 +532,7 @@ export default {
 <style lang="scss">
 .header {
   position: fixed;
-  z-index: 6;
+  z-index: 999;
   bottom: 0px;
   width: 100%;
   height: 67px;
@@ -669,7 +680,7 @@ export default {
 
     .header-tab-menu-col-1 {
       width: 250px;
-      min-height: 400px;
+      min-height: 200px;
     }
 
     .header-tab-menu-text {
@@ -727,7 +738,7 @@ export default {
 
     .header-tab-menu-col-1 {
       width: 250px;
-      min-height: 400px;
+      min-height: 200px;
     }
 
     .header-tab-menu-text {

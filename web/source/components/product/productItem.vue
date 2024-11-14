@@ -14,7 +14,7 @@
       <NuxtLink :to="`/san-pham/${item.attributes.slug}`">
         <div class="product-name">{{ $i18n.locale === 'vn' ? item.attributes.name : item.attributes.name_en }}</div>
       </NuxtLink>
-      <div class="product-price">${{ ' ' }}{{ item.attributes.price | numberWithCommas }}</div>
+      <div class="product-price">$ {{ item.attributes.price | numberWithCommas }}</div>
     </div>
     <!-- <div class="product-item-color">
       <Color v-if="!isMobile"></Color>
@@ -75,7 +75,7 @@ export default {
     if (this.isLike) {
       this.likeImage = '/images/liked.png'
     }
-    this.product_image = this.item.attributes.thub_main?.data.attributes.url
+    this.product_image = this.item.attributes.thub?.data.attributes.url
     // if (this.item.attributes && this.item.attributes.variants?.data) {
     //   this.item.attributes.variants.data.forEach(v => {
     //     if(v.attributes.color?.data && v.attributes.size?.data) {

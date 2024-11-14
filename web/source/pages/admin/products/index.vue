@@ -70,7 +70,7 @@
                 <div v-for="cate in subcategory" :key="cate.id">{{ cate.attributes.name }}</div>
             </span> -->
             <span slot="price" slot-scope="price">
-                {{ price | numberWithCommas }}{{ ' ' }}đ
+                $ {{ price | numberWithCommas }}
             </span>
             <span slot="sold" slot-scope="sold">
                 {{ sold ?? 0 }}

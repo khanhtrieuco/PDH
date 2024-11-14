@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="card-div-price">
-                            {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                            $ {{ item.price * item.quantity | numberWithCommas }}
                         </div>
                     </div>
                 </div>
@@ -38,11 +38,11 @@
                 <div class="cart-total-des">Show Promotional code</div>
                 <div class="d-flex justify-content-between">
                     <div class="cart-total-text">shipping cost</div>
-                    <div class="cart-total-text">0 đ</div>
+                    <div class="cart-total-text">$ 0</div>
                 </div>
                 <div class="cart-total-number d-flex justify-content-between">
                     <div>{{ $t('Cart_text_4') }}</div>
-                    <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
+                    <div>$ {{ total_price | numberWithCommas }}{{ ' ' }}</div>
                 </div>
                 <div class="cart-checkout-btn" @click="onGoPaymentPage">{{ $t('Cart_text_6') }}</div>
             </div>
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="card-div-price">
-                            {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                            $ {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}
                         </div>
                     </div>
                 </div>
@@ -81,11 +81,11 @@
                     <div class="cart-total-des">Show Promotional code</div>
                     <div class="d-flex justify-content-between">
                         <div class="cart-total-text">shipping cost</div>
-                        <div class="cart-total-text">0 đ</div>
+                        <div class="cart-total-text">$ 0</div>
                     </div>
                     <div class="cart-total-number d-flex justify-content-between">
                         <div>{{ $t('Cart_text_4') }}</div>
-                        <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
+                        <div>$ {{ total_price | numberWithCommas }}{{ ' ' }}</div>
                     </div>
                     <div class="cart-checkout-btn" @click="onGoPaymentPage">{{ $t('Cart_text_6') }}</div>
                 </div>

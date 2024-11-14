@@ -14,7 +14,7 @@
                 <div v-for="cate in subcategory" :key="cate.id">{{ cate.attributes.name }}</div>
             </span>
             <span slot="price" slot-scope="price">
-                {{ price | numberWithCommas }}{{ ' ' }}đ
+                $ {{ price | numberWithCommas }}
             </span>
             <span slot="state" slot-scope="state">
                 <a-tag color="green" v-if="state === 'active'">Active</a-tag>

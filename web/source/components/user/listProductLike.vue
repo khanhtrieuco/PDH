@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="product-list-product-price">
-                            {{ _product.attributes.price | numberWithCommas }}{{ ' ' }}đ
+                            $ {{ _product.attributes.price | numberWithCommas }}
                         </div>
                     </div>
                 </div>

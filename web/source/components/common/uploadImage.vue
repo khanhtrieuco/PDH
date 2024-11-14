@@ -70,6 +70,7 @@ export default {
                 let res = await this.postbyUrl({ url: '/api/upload', file: info.file.originFileObj })
                 if (res && res.length > 0) {
                     // this.thub = res[0].id
+                    console.log('uploadId', res[0].id)
                     this.$emit("update:thub", res[0].id);
                 } else {
                     this.$message.error('Có lỗi trong quá trình upload! Xin thử lại sau!');
@@ -77,13 +78,13 @@ export default {
             }
         },
         beforeUpload(file) {
-            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/webp';
+            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/webp' || file.type === 'video/mp4' || file.type === 'video/webm';
             if (!isJpgOrPng) {
-                this.$message.error('You can only upload JPG file!');
+                this.$message.error('You can only upload IMAGE file or VIDEO file!');
             }
-            const isLt2M = file.size / 1024 / 1024 < 2;
+            const isLt2M = file.size / 1024 / 1024 < 30;
             if (!isLt2M) {
-                this.$message.error('Image must smaller than 2MB!');
+                this.$message.error('Image must smaller than 30MB!');
             }
             return isJpgOrPng && isLt2M;
         }

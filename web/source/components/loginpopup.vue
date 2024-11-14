@@ -139,7 +139,7 @@ export default {
     left: 0px;
     top: 0px;
     background-color: #00000066;
-    z-index: 15;
+    z-index: 999;
 }
 
 .login-content {

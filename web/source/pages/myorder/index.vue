@@ -31,14 +31,14 @@
                                     <div class="my-order-item-product-info-des">Quantity: <span>{{
                                         _cart.attributes.quantity }}</span></div>
                                     <div class="my-order-item-product-info-price">
-                                        ${{ ' ' }}{{ _cart.attributes.total_price | numberWithCommas }}
+                                        $ {{ _cart.attributes.total_price | numberWithCommas }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="my-order-item-product-price">
-                        Total: ${{ ' ' }}{{ _order.attributes.price | numberWithCommas }}
+                        Total: $ {{ _order.attributes.price | numberWithCommas }}
                     </div>
                 </div>
             </div>

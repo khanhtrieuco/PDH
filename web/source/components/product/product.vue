@@ -6,7 +6,7 @@
       </div>
       <div class="list-product-item-info">
         <div class="list-product-item-info-name">{{ item.attributes.name }}</div>
-        <div class="list-product-item-info-text">${{ ' ' }}{{ item.attributes.price | numberWithCommas }}</div>
+        <div class="list-product-item-info-text">$ {{ item.attributes.price | numberWithCommas }}</div>
       </div>
     </div>
   </div>

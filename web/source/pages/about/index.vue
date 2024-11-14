@@ -91,8 +91,8 @@
                     <p>Despite experiencing Western civilization, receiving modern technologies, and encountering
                         groundbreaking new images, the designer still chooses to embrace the beautiful memories of
                         childhood.
-                        This choice is reflected in the creation of a brand identity with the concept of ""Fusion
-                        Fashion,""
+                        This choice is reflected in the creation of a brand identity with the concept of "Fusion
+                        Fashion,"
                         inspired by the image of a familiar sewing machine from childhood—a needle threading stitches
                         that
                         compose the soul of a shirt.</p>

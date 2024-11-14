@@ -18,7 +18,7 @@
                             <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
                             <b-form-input class="payment-step-input-login" v-model="username"
                                 placeholder="Email*"></b-form-input>
-                            <div class="payment-step-login-des">* Passwork</div>
+                            <div class="payment-step-login-des">* Password</div>
                             <b-form-input class="payment-step-input-login" v-model="password" type="password"
                                 placeholder="Password*"></b-form-input>
                             <div class="payment-step-input-btn" @click="onLogin()">continue</div>
@@ -99,7 +99,7 @@
                         <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
                         <b-form-input class="payment-step-input-login" v-model="username"
                             placeholder="Email*"></b-form-input>
-                        <div class="payment-step-login-des">* Passwork</div>
+                        <div class="payment-step-login-des">* Password</div>
                         <b-form-input class="payment-step-input-login" v-model="password" type="password"
                             placeholder="Password*"></b-form-input>
                         <div class="payment-step-input-btn" @click="onLogin()">continue</div>
@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="payment-product-des">Quantity : {{ _items.quantity }}</div>
                                 <div class="payment-product-price">
-                                    {{ _items.total_price | numberWithCommas }}{{ ' ' }}$
+                                    {{ _items.total_price | numberWithCommas }} $
                                 </div>
                             </div>
                         </div>
@@ -238,15 +238,15 @@
                     <div class="payment-step-extra-content">
                         <div class="payment-info-text d-flex justify-content-between">
                             <div>Subtotal</div>
-                            <div>{{ payment_order.price | numberWithCommas }}{{ ' ' }}$</div>
+                            <div>{{ payment_order.price | numberWithCommas }} $</div>
                         </div>
                         <!-- <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
-                            <div>{{ 0 | numberWithCommas }}{{ ' ' }}đ</div>
+                            <div>{{ 0 | numberWithCommas }} đ</div>
                         </div> -->
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
-                            <div><b>{{ payment_order.price + 0 | numberWithCommas }}{{ ' ' }}$</b></div>
+                            <div><b>{{ payment_order.price + 0 | numberWithCommas }} $</b></div>
                         </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@
                                 </div>
                                 <div class="payment-product-des">Quantity : {{ _items.quantity }}</div>
                                 <div class="payment-product-price">
-                                    {{ _items.total_price | numberWithCommas }}{{ ' ' }}$
+                                    {{ _items.total_price | numberWithCommas }} $
                                 </div>
                             </div>
                         </div>
@@ -331,15 +331,15 @@
                     <div class="payment-step-extra-content">
                         <div class="payment-info-text d-flex justify-content-between">
                             <div>Subtotal</div>
-                            <div>{{ payment_order.price | numberWithCommas }}{{ ' ' }}$</div>
+                            <div>{{ payment_order.price | numberWithCommas }} $</div>
                         </div>
                         <!-- <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
-                            <div>{{ 0 | numberWithCommas }}{{ ' ' }}đ</div>
+                            <div>{{ 0 | numberWithCommas }} đ</div>
                         </div> -->
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
-                            <div><b>{{ payment_order.price + 0 | numberWithCommas }}{{ ' ' }}$</b></div>
+                            <div><b>{{ payment_order.price + 0 | numberWithCommas }} $</b></div>
                         </div>
                     </div>
                 </div>
@@ -625,12 +625,15 @@ export default {
             position: absolute;
             left: 50%;
             transform: translate(-50%);
-            bottom: 90px;
-            color: #FFF;
+            bottom: 50px;
+            color: #000;
             text-align: center;
-            font-family: 'Aeroport-light';
-            font-size: 50px;
+            font-family: 'Aeroport';
+            font-size: 64px;
             text-transform: uppercase;
+            padding: 8px 16px;
+            background-color: #fff;
+            height: 120px;
         }
     }
 

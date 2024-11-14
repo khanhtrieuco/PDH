@@ -18,7 +18,7 @@
                             <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
                             <b-form-input class="payment-step-input-login" v-model="username"
                                 placeholder="Email*"></b-form-input>
-                            <div class="payment-step-login-des">* Passwork</div>
+                            <div class="payment-step-login-des">* Password</div>
                             <b-form-input class="payment-step-input-login" v-model="password" type="password"
                                 placeholder="Password*"></b-form-input>
                             <div class="payment-step-input-btn" @click="onLogin()">continue</div>
@@ -106,7 +106,7 @@
                         <div class="payment-step-login-des">* E-mail (mary.smith@email.com)</div>
                         <b-form-input class="payment-step-input-login" v-model="username"
                             placeholder="Email*"></b-form-input>
-                        <div class="payment-step-login-des">* Passwork</div>
+                        <div class="payment-step-login-des">* Password</div>
                         <b-form-input class="payment-step-input-login" v-model="password" type="password"
                             placeholder="Password*"></b-form-input>
                         <div class="payment-step-input-btn" @click="onLogin()">continue</div>

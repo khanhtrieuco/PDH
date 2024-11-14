@@ -28,7 +28,7 @@
                                         <div class="user-list-product-quantity">x{{ cart.attributes.quantity }}</div>
                                     </div>
                                     <div class="user-list-product-price">
-                                        {{ cart.attributes.total_price | numberWithCommas }}{{ ' ' }}đ
+                                        $ {{ cart.attributes.total_price | numberWithCommas }} 
                                     </div>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                             </div>
                             <div class="user-list-order-info">
                                 <div class="user-list-order-state-total">{{ $t('Order_text_11') }}:
-                                    <span>{{ (order.attributes.price - order.attributes.discount_price) | numberWithCommas
-                                    }}{{ ' ' }}đ</span>
+                                    <span>$ {{ (order.attributes.price - order.attributes.discount_price) | numberWithCommas
+                                    }} </span>
                                 </div>
                                 <div class="user-list-order-control d-flex">
                                     <div class="nas-btn btn-contact"
@@ -88,8 +88,8 @@
                             </div>
                             <div class="user-list-order-info">
                                 <div class="user-list-order-state-total">{{ $t('Order_text_11') }}:
-                                    <span>{{ (order.attributes.price - order.attributes.discount_price) | numberWithCommas
-                                    }}{{ ' ' }}đ</span>
+                                    <span>$ {{ (order.attributes.price - order.attributes.discount_price) | numberWithCommas
+                                    }} </span>
                                 </div>
                                 <div class="user-list-order-control">
                                     <div class="nas-btn btn-contact"
@@ -121,22 +121,22 @@
                             <div class="page-order-title">{{ $t('Order_text_7') }}</div>
                             <div class="d-flex">
                                 <div class="order-des">{{ $t('Order_text_8') }}</div>
-                                <div class="order-value">{{ order.attributes.price | numberWithCommas }}{{ ' ' }}đ</div>
+                                <div class="order-value">$ {{ order.attributes.price | numberWithCommas }} </div>
                             </div>
                             <div class="d-flex">
                                 <div class="order-des">{{ $t('Order_text_9') }}</div>
-                                <div class="order-value">{{ order.attributes.price_ship | numberWithCommas }}{{ ' ' }}đ
+                                <div class="order-value">$ {{ order.attributes.price_ship | numberWithCommas }} 
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <div class="order-des">{{ $t('Order_text_10') }}</div>
-                                <div class="order-value">{{ order.attributes.discount_price | numberWithCommas }}{{ ' ' }}đ
+                                <div class="order-value">$ {{ order.attributes.discount_price | numberWithCommas }} 
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <div class="order-des">{{ $t('Order_text_11') }}</div>
-                                <div class="order-value">{{ (order.attributes.price_ship + order.attributes.price -
-                                    order.attributes.discount_price) | numberWithCommas }}{{ ' ' }}đ</div>
+                                <div class="order-value">$ {{ (order.attributes.price_ship + order.attributes.price -
+                                    order.attributes.discount_price) | numberWithCommas }} </div>
                             </div>
                             <div class="d-flex">
                                 <div class="order-des">{{ $t('Order_text_12') }}</div>
@@ -144,7 +144,7 @@
                             </div>
                             <div class="d-flex">
                                 <div class="order-des">{{ $t('Order_text_13') }}</div>
-                                <div class="order-value">{{ order.attributes.cod | numberWithCommas }}{{ ' ' }}đ</div>
+                                <div class="order-value">$ {{ order.attributes.cod | numberWithCommas }} </div>
                             </div>
                             <div class="page-order-title">{{ $t('Order_text_14') }}</div>
                             <div class="d-flex">

@@ -120,7 +120,7 @@ export default {
     left: 0px;
     top: 0px;
     background-color: #FAFAFA;
-    z-index: 15;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;

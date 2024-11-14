@@ -23,8 +23,8 @@ class ApiService {
                 data.data = options.data || null
             if (options.blob)
                 data.responseType = 'blob'
-            if (options.timeout)
-                data.timeout = options.timeout
+           
+            data.timeout = 180000
 
             if (options.file) {
                 const formData = new FormData();
