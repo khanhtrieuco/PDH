@@ -1,12 +1,14 @@
 <template>
   <div>
     <div v-if="!isMobile" class="home-top-video">
-      <ThumbImage v-if="banner.attributes" :sourceVideo="banner.attributes?.imagelink.data?.attributes.url"
+      <ThumbImage v-if="banner.attributes && banner.attributes.type_source === 'video'" :sourceVideo="banner.attributes?.imagelink.data?.attributes.url"
         :nameClass="'image-banner'" :contain="false" :video="true" ratio="16-9" />
+      <ThumbImage v-if="banner.attributes && banner.attributes.type_source === 'image'" :src="banner.attributes?.imagelink.data?.attributes.url"
+        :nameClass="'image-banner'" :contain="false" ratio="16-9" />
       <div class="home-top-content">
         <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
         <div class="home-top-name-des">{{ banner.attributes?.description }}</div>
-        <div class="shop-now-link-home">
+        <div class="shop-now-link-home" @click="banner.attributes?.link ? goPage(banner.attributes?.link) : ()=>{}">
           <span class="shop-now-link-text">Shop now</span>
           <img class="shop-now-link-img" src="/images/more.png" />
         </div>
@@ -119,6 +121,9 @@ export default {
           return false
         }
       }
+    },
+    goPage(url) {
+      this.$router.push({ path: this.localePath(url) })
     },
     goAbout() {
       this.$router.push({ path: '/house-of-pdh' })

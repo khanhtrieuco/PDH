@@ -54,11 +54,9 @@
                             </div>
                             <div class="payment-step-address-info" v-if="shiping_type === 2">
                                 <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name
-            :
-            place.attributes?.name_en }}</div>
+            : place.attributes?.name_en }}</div>
                                 <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
-            place.attributes?.address :
-            place.attributes?.address_en }}</div>
+            place.attributes?.address : place.attributes?.address_en }}</div>
                                 <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
             `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}`
                                     }}
@@ -76,9 +74,20 @@
                                 <div class="payment-step-type-text">Paypal</div>
                             </div>
                             <div id="paypal-button-container"></div>
-                            <!-- <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
+                            <!-- <div class="payment-step-type-check">
+                                <Check :checked="paymentType === 'online'" @choice="onChoicePayment('online')"></Check>
+                                <div class="payment-step-type-text">Online</div>
                             </div>
-                            <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
+                             <div class="user-payment-menthod-list" v-if="paymentType && paymentType === 'online'">
+                                <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
+                                    v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3">
+                                    <img :src="_pay.attributes.thub.data.attributes.url" @click="onChoicePaymentType(_pay)"
+                                        class="user-payment-icon" />
+                                </div>
+                            </div>
+                            <div v-if="paymentType === 'online' && isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
+                            </div>
+                            <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
                         </div>
                     </div>
                 </div>
@@ -406,6 +415,7 @@ export default {
         await this.getListPayment()
         await this.getAddressByUser(this.profile.id)
         this.user_address = this.userAddress
+        
         await this.getPlace()
         if (this.listPayment.length > 0) {
             let _paypal = this.listPayment.find((o) => o.attributes.name == 'Paypal')
@@ -415,7 +425,7 @@ export default {
                     paypal
                         .Buttons({
                             createOrder: async () => {
-                                if(this.user_address.id) {
+                                if(!this.user_address.id) {
                                     this.showNotification('warning', `Please enter address information`)
                                     return
                                 }
@@ -533,15 +543,18 @@ export default {
             if (_payment && _payment === 'paypal') {
                 this.isPaymentAccept = true
                 this.paymentType = _payment
+            } else if (_payment && _payment === 'online') {
+                this.isPaymentAccept = true
+                this.paymentType = _payment
             }
         },
         onChoicePaymentType(_qr) {
             this.current_payment = _qr
             if (_qr && _qr.attributes && _qr.attributes.qr_code.data && _qr.attributes.qr_code.data.attributes.url) {
                 this.isPaymentAccept = true
-                this.paymentType = _qr.attributes.name
+                // this.paymentType = _qr.attributes.name
+                // this.modalQrOpen = true
             }
-            // this.modalQrOpen = true
         },
         onDonePayment() {
             this.modalQrOpen = false
@@ -549,6 +562,43 @@ export default {
         },
         goPage(url) {
             this.$router.push({ path: this.localePath(url) })
+        },
+        async onPushOrderOnline() {
+            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
+            let _order = {
+                code: `#${this.makeString(8)}`,
+                state: 'new',
+                payment_type: this.paymentType,
+                shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
+                totalPrice: priceTotal,
+                listProductItem: this.listCart.map(o => {
+                    return {
+                        id: o.id,
+                        variant_id: o.variant_id,
+                        name: o.name,
+                        quantity: o.quantity,
+                        price: o.price
+                    }
+                })
+            }
+            let rs = await this.createOrder(_order)
+            if (rs && rs.data) {
+                this.order = rs.data
+                if (this.paymentType === 'online') {
+                    this.showNotification('success', `Đã đặt đơn hàng thành công. Vui lòng thanh toán.`)
+                    this.resetUserCart()
+                    this.qrcode_info = {
+                        ..._order,
+                        address_name: this.user_address.attributes?.name,
+                        address_phone: this.user_address.attributes?.phone,
+                        address_full: this.user_address.attributes?.full_address
+                    }
+                    this.modalQrOpen = true
+                }
+            } else {
+                this.showNotification('danger', `Đặt đơn hàng thất bại`)
+                this.paymentDone = 'fail'
+            }
         },
         async onPushOrder() {
             let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
