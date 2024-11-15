@@ -222,7 +222,12 @@ export default {
                 "infinite": true,
                 "speed": 500,
                 "slidesToShow": 1,
-                "slidesToScroll": 1
+                "slidesToScroll": 1,
+                vertical:true,
+                verticalSwiping:true,
+                touchMove:true,
+                swipeToSlide:true,
+                swipe:true
             },
             listRelated: [],
             listSize: [],

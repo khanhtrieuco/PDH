@@ -1,7 +1,7 @@
 <template>
     <div class="payment-content">
         <div class="payment-content-top" v-if="!isMobile">
-            <img class="payment-content-image" src="/images/top-account.jpg" />
+            <!-- <img class="payment-content-image" src="/images/top-account.jpg" /> -->
             <div class="payment-content-name">checkout</div>
         </div>
         <div class="payment-content-name" v-if="isMobile && !paymentDone">checkout</div>
@@ -666,7 +666,8 @@ export default {
 .payment-content {
     .payment-content-top {
         position: relative;
-
+        padding: 110px;
+        border-bottom: 1px solid #D9D9D9;
         .payment-content-image {
             width: 100%;
         }
