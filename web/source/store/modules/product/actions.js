@@ -16,6 +16,7 @@ export default {
         commit('set_list_product', {
             list_product: res.data.filter(i => i.attributes.state === 'active')
         })
+        return res.data.filter(i => i.attributes.state === 'active')
     },
 
     getListProductLike: async ({ commit, rootState }, data = {}) => {

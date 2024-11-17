@@ -80,25 +80,25 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <img class="account-content-order-item-img"
-                                            :src="_order.cart.product.data.attributes.thub.data.attributes.url" />
+                                            :src="_order.cart.product.data?.attributes?.thub.data.attributes.url" />
                                         <div class="account-content-order-item-state">{{ $i18n.locale === 'vn' ?
-                                            getStateOrderUser(_order.attributes.state)
-                                            : getStateOrderUserEn(_order.attributes.state) }}</div>
+                                            getStateOrderUser(_order.attributes?.state)
+                                            : getStateOrderUserEn(_order.attributes?.state) }}</div>
                                     </div>
                                     <div class="account-content-order-item-info">
                                         <div class="account-content-order-item-info-name">
-                                            {{ _order.cart.product.data.attributes.name }}
+                                            {{ _order.cart.product.data?.attributes?.name }}
                                         </div>
                                         <div class="account-content-order-item-info-des">Color: <span>{{
-                                            _order.cart.variant.data.attributes.color.data.attributes.name }}</span>
+                                            _order.cart.variant.data?.attributes?.color.data.attributes.name }}</span>
                                         </div>
                                         <div class="account-content-order-item-info-des">Size: <span>{{
-                                            _order.cart.variant.data.attributes.size.data.attributes.name }}</span>
+                                            _order.cart.variant.data?.attributes?.size.data.attributes.name }}</span>
                                         </div>
                                         <div class="account-content-order-item-info-des">Quantity: <span>{{
                                             _order.cart.quantity }}</span></div>
                                         <div class="account-content-order-item-info-price">
-                                            $ {{ _order.attributes.price | numberWithCommas }}
+                                            $ {{ _order.attributes?.price | numberWithCommas }}
                                         </div>
                                     </div>
                                 </div>

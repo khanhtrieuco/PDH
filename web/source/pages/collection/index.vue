@@ -51,22 +51,23 @@ export default {
     data() {
         return {
             isMobile: false,
+            listProduct: []
         }
     },
     computed: {
         ...mapGetters({
             collection: "collection/getCollection",
-            listProduct: "product/getListProduct"
+            // listProduct: "product/getListProduct"
         }),
     },
     async mounted() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
+
         if (this.$route.params.id) {
             await this.getCollectionBySlug(this.$route.params.id) //(this.$route.params.id)
         }
         await this.loadProducts()
-        // this.listProduct = [1, 2, 3, 4, 5, 6]
     },
     methods: {
         ...mapActions({
@@ -97,7 +98,7 @@ export default {
                 if (_data && _data.filterSub) {
                     arrayFilter.push({ subcategories: _data.filterSub })
                 }
-                await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
+                this.listProduct = await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
             }
         }
     }

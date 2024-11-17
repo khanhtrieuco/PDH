@@ -50,7 +50,7 @@
             </div>
             <div class="qrcode-line d-flex justify-content-between" v-for="(_p, idx) in qrcode.listProductItem " :key="idx">
                 <div class="qrcode-sub-des">{{ _p.name }} x {{ _p.quantity }}</div>
-                <div class="qrcode-sub-des">{{ _p.quantity * _p.price | numberWithCommas }}{{ ' ' }}đ</div>
+                <div class="qrcode-sub-des">$ {{ _p.quantity * _p.price | numberWithCommas }}</div>
             </div>
             <div class="qrcode-line d-flex justify-content-between">
                 <div class="qrcode-sub-des">Phí shipping</div>
@@ -88,7 +88,7 @@ export default {
     data() {
         return {
             viewBtn: false,
-            time: 30
+            time: 180
         }
     },
     mounted() {
@@ -121,6 +121,7 @@ export default {
     .qrcode-image {
         margin-top: 10px;
         margin-bottom: 10px;
+        width: 100%;
     }
 }
 

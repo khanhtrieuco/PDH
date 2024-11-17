@@ -4,7 +4,7 @@
       @mouseleave="hideHover()">
       <div class="d-flex justify-content-center align-self-end" style="width: 100%;height: 100%;">
         <NuxtLink style="width: 100%;" :to="`/san-pham/${item.attributes.slug}`">
-          <img class="product-img-main" :src="product_image" fluid alt="image" />
+          <img class="product-img-main" :data-src="product_image" v-lazy-load alt="image" />
         </NuxtLink>
       </div>
       <img class="img-heart" :src="likeImage" @click="onLike(item)" @mouseover="showLike()" @mouseleave="hideLike()"

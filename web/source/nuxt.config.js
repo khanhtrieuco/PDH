@@ -187,6 +187,7 @@ module.exports = {
     '@nuxtjs/sitemap',
     '@nuxtjs/proxy',
     '@nuxtjs/markdownit',
+    'nuxt-lazy-load',
     ['nuxt-modernizr', {
       'feature-detects': ['css/scrollbars', 'css/overflow-scrolling'],
       options: ['setClasses'],

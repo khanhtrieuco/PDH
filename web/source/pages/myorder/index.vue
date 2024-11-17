@@ -17,16 +17,16 @@
                             :key="idx">
                             <div class="d-flex justify-content-between">
                                 <img class="my-order-item-product-img"
-                                    :src="_cart.attributes.product.data.attributes.thub.data.attributes.url" />
+                                    :src="_cart.attributes.product.data?.attributes.thub.data.attributes.url" />
                                 <div class="my-order-item-product-info">
                                     <div class="my-order-item-product-info-name">
-                                        {{ _cart.attributes.product.data.attributes.name }}
+                                        {{ _cart.attributes.product.data?.attributes.name }}
                                     </div>
                                     <div class="my-order-item-product-info-des">Color: <span>{{
-                                        _cart.attributes.variant.data.attributes.color.data.attributes.name }}</span>
+                                        _cart.attributes.variant.data?.attributes.color.data.attributes.name }}</span>
                                     </div>
                                     <div class="my-order-item-product-info-des">Size: <span>{{
-                                        _cart.attributes.variant.data.attributes.size.data.attributes.name }}</span>
+                                        _cart.attributes.variant.data?.attributes.size.data.attributes.name }}</span>
                                     </div>
                                     <div class="my-order-item-product-info-des">Quantity: <span>{{
                                         _cart.attributes.quantity }}</span></div>

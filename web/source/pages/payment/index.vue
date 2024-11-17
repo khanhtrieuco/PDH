@@ -202,24 +202,24 @@
             <div class="payment-step-card">
                 <div class="payment-step-title">2. Products</div>
                 <div class="payment-step-content">
-                    <div class="payment-product-item" v-for="(_items, index) in payment_order.cartitems" :key="index">
+                    <div class="payment-product-item" v-for="(_items, index) in listPaymentCart" :key="index">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="payment-product-img">
-                                <img class="payment-product-image" :src="_items.product?.thub?.url" />
+                                <img class="payment-product-image" :src="_items.imagelink" />
                             </div>
                             <div class="payment-product-info">
-                                <div class="payment-product-name">{{ _items.product?.name }}</div>
+                                <div class="payment-product-name">{{ _items.name }}</div>
                                 <div class="payment-product-des">Color:
-                                    <span>{{ _items.variant?.color?.name }}</span>
+                                    <span>{{ _items.variant?.attributes.color?.data?.attributes.name }}</span>
                                 </div>
                                 <div class="payment-product-des">Size:
                                     <span>
-                                        {{ _items.variant?.size?.name }}
+                                        {{ _items.variant?.attributes.size?.data?.attributes.name }}
                                     </span>
                                 </div>
                                 <div class="payment-product-des">Quantity : {{ _items.quantity }}</div>
                                 <div class="payment-product-price">
-                                    {{ _items.total_price | numberWithCommas }} $
+                                    {{ _items.price * _items.quantity | numberWithCommas }} $
                                 </div>
                             </div>
                         </div>
@@ -239,7 +239,7 @@
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Payment method</div>
-                        <div>Credit card</div>
+                        <div>{{ payment_order.payment_type }}</div>
                     </div>
                 </div>
                 <div class="payment-step-extra">
@@ -353,6 +353,10 @@
                 </div>
             </div>
         </div>
+        <a-modal title="Thông tin thanh toán" :visible="modalQrOpen" :destroyOnClose="true" :closable="false"
+            :maskClosable="false" :footer="null" width="800px" @cancel="() => this.modalQrOpen = false">
+            <Qrcode :isMobile="isMobile" :payment="current_payment" :qrcode="qrcode_info" @onDonePayment="onDonePayment" />
+        </a-modal>
         <HelpPayment :isMobile="isMobile" />
     </div>
 </template>
@@ -364,6 +368,7 @@ import general from "~/mixins/general"
 import HelpPayment from "~/components/payment/helpInfo.vue"
 import UserCart from "~/components/payment/myCart.vue"
 import Address from "~/components/account/address.vue"
+import Qrcode from "~/components/payment/paymentQrcode.vue"
 
 export default {
     name: 'IndexPage',
@@ -371,7 +376,8 @@ export default {
     components: {
         UserCart,
         HelpPayment,
-        Address
+        Address,
+        Qrcode
     },
     data() {
         return {
@@ -392,7 +398,10 @@ export default {
             current_payment: {},
             isPaymentAccept: false,
             order_id: null,
-            payment_order: {}
+            payment_order: {},
+            qrcode_info: {},
+            modalQrOpen: false,
+            listPaymentCart: [],
         }
     },
     computed: {
@@ -566,6 +575,7 @@ export default {
         },
         async onPushOrderOnline() {
             let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
+            this.listPaymentCart = this.listCart
             let _order = {
                 code: `#${this.makeString(8)}`,
                 state: 'new',
@@ -590,11 +600,16 @@ export default {
                     this.resetUserCart()
                     this.qrcode_info = {
                         ..._order,
+                        totalPrice: _order.totalPrice * 25000,
                         address_name: this.user_address.attributes?.name,
                         address_phone: this.user_address.attributes?.phone,
                         address_full: this.user_address.attributes?.full_address
                     }
+                    this.payment_order = rs.data
+
                     this.modalQrOpen = true
+                    // this.qrcode_info = _order
+
                 }
             } else {
                 this.showNotification('danger', `Đặt đơn hàng thất bại`)
