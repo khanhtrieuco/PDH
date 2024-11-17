@@ -62,8 +62,8 @@
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
             <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
-            <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
-            <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span>
+            <!-- <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
+            <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span> -->
           </div>
         </div>
         <div class="menu-mobile-list">

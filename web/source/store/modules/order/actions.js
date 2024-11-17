@@ -25,6 +25,15 @@ export default {
         })
     },
 
+    createOrderOnline: async function ({ commit }, data) {
+        let res = await ApiService.request({
+            method: "post",
+            url: "/api/app/createonline",
+            data: data
+        });
+        return res
+    },
+
     createOrder: async function ({ commit }, data) {
         let res = await ApiService.request({
             method: "post",

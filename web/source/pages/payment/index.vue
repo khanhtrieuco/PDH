@@ -74,20 +74,19 @@
                                 <div class="payment-step-type-text">Paypal</div>
                             </div>
                             <div id="paypal-button-container"></div>
-                            <!-- <div class="payment-step-type-check">
+                            <div class="payment-step-type-check">
                                 <Check :checked="paymentType === 'online'" @choice="onChoicePayment('online')"></Check>
                                 <div class="payment-step-type-text">Online</div>
                             </div>
                              <div class="user-payment-menthod-list" v-if="paymentType && paymentType === 'online'">
                                 <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
-                                    v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3">
-                                    <img :src="_pay.attributes.thub.data.attributes.url" @click="onChoicePaymentType(_pay)"
-                                        class="user-payment-icon" />
+                                    v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3" @click="onChoicePaymentType(_pay)">
+                                    <img :src="_pay.attributes.thub.data.attributes.url" class="user-payment-icon" />
                                 </div>
                             </div>
                             <div v-if="paymentType === 'online' && isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
                             </div>
-                            <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
+                            <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
                         </div>
                     </div>
                 </div>
@@ -449,6 +448,7 @@ export default {
         ...mapActions({
             loginEmail: "auth/loginEmail",
             createOrder: "order/createOrder",
+            createOrderOnline: "order/createOrderOnline",
             captureOrder: "order/captureOrder",
             resetUserCart: "cart/resetUserCart",
             getListCartUser: "cart/getListCartUser",
@@ -540,13 +540,14 @@ export default {
             }
         },
         onChoicePayment(_payment) {
-            if (_payment && _payment === 'paypal') {
-                this.isPaymentAccept = true
-                this.paymentType = _payment
-            } else if (_payment && _payment === 'online') {
-                this.isPaymentAccept = true
-                this.paymentType = _payment
-            }
+            this.paymentType = _payment
+            // if (_payment && _payment === 'paypal') {
+            //     // this.isPaymentAccept = true
+            //     this.paymentType = _payment
+            // } else if (_payment && _payment === 'online') {
+            //     // this.isPaymentAccept = true
+            //     this.paymentType = _payment
+            // }
         },
         onChoicePaymentType(_qr) {
             this.current_payment = _qr
@@ -581,7 +582,7 @@ export default {
                     }
                 })
             }
-            let rs = await this.createOrder(_order)
+            let rs = await this.createOrderOnline(_order)
             if (rs && rs.data) {
                 this.order = rs.data
                 if (this.paymentType === 'online') {

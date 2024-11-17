@@ -6,7 +6,7 @@
                 <img class="size-content-img" src="/images/size.svg" />
             </div>
             <div class="size-content" v-else>
-                <img class="size-content-img" src="/images/size.jpg" />
+                <img class="size-content-img" src="/images/size.svg" />
             </div>
         </div>
     </div>
@@ -81,7 +81,9 @@ export default {
 
     .popup-content {
         position: relative;
-
+        .size-content{
+            background-color: #fff;
+        }
         .size-content-img {
             max-width: 100%;
             width: 1024px;

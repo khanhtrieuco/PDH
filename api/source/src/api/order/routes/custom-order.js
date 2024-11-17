@@ -7,6 +7,11 @@ module.exports = {
     },
     {
       method: 'POST',
+      path: '/app/createonline', 
+      handler: 'apporder.createonline'
+    },
+    {
+      method: 'POST',
       path: '/app/captureorder', 
       handler: 'apporder.capture'
     },

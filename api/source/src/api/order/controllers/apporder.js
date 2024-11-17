@@ -137,7 +137,108 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 		}
 		return { message: 'Không tìm thấy thông tin giỏ hàng' };
 	},
+	async createonline(ctx) {
+		const { user } = ctx.state
+		let { shippingType, listProductItem, code, payment_type } = ctx.request.body;
+		if (!code) {
+			return { message: 'Không tìm thấy mã đơn' };
+		}
+		if (!payment_type) {
+			return { message: 'Không tìm thấy thông tin thanh toán' };
+		}
+		if (!shippingType) {
+			return { message: 'Không tìm thấy thông tin vận chuyển' };
+		}
+		let address = await strapi.db.query('api::address.address').findOne({
+			select: ['name', 'phone', 'email', 'full_address'],
+			where: { user_id: user.id }
+		});
 
+		if (!address) {
+			return { message: 'Không tìm thấy thông tin địa chỉ người nhận' };
+		}
+		if (listProductItem && listProductItem.length > 0) {
+			let listCartId = []
+			let listCartValue = []
+			let listProductId = []
+			let listVariantId = []
+			let listCartAdd = []
+			let total_price = 0
+			let priceShip = 0 //ship.price
+			let checkCart = true
+			let productName = ''
+			for (let i = 0; i < listProductItem.length; i++) {
+				let product = await strapi.db.query('api::product.product').findOne({
+					select: ['id', 'price', 'name'],
+					where: { id: listProductItem[i].id }
+				});
+				listVariantId.push(listProductItem[i].variant_id)
+				listProductId.push(product.id)
+				if (i === listProductItem.length - 1) {
+					productName += product.name
+				} else {
+					productName += product.name + ', '
+				}
+				total_price += listProductItem[i].quantity * product.price
+				listCartValue.push(listProductItem[i].quantity * product.price)
+
+				if (listProductItem[i].quantity <= 0) {
+					checkCart = false
+				}
+				listCartAdd.push({
+					id: listProductItem[i].id,
+					variant: listProductItem[i].variant_id,
+					quantity: listProductItem[i].quantity,
+					price: product.price
+				})
+			}
+
+			if (!checkCart || total_price <= 0) {
+				return { message: 'Thông tin giỏ hàng không hợp lệ' };
+			}
+			for (let i = 0; i < listCartAdd.length; i++) {
+				let cart = {
+					total_price: listCartAdd[i].quantity * listCartAdd[i].price,
+					product: listCartAdd[i].id,
+					quantity: listCartAdd[i].quantity,
+					user: user?.id
+				}
+				let resCart = await strapi.entityService.create('api::cart.cart', { data: cart });
+				if (resCart && resCart.id) {
+					listCartId.push(resCart.id)
+				}
+			}
+			let pick_date = moment().add(1, 'days').format('YYYY-MM-DD')
+			let end_date = moment().add(4, 'days').format('YYYY-MM-DD')
+			listProductId = listProductId.filter(function (item, pos) {
+				return listProductId.indexOf(item) == pos;
+			})
+			let _order = {
+				code,
+				state: 'new',
+				price: total_price,
+				price_ship: priceShip,
+				address_name: address.name,
+				address_email: address.email,
+				address_phone: address.phone,
+				address_full: address.full_address,
+				payment_type,
+				shippingType,
+				pick_date,
+				end_date,
+				discount_price: 0,
+				cod: payment_type === 'cod' ? total_price + priceShip : 0,
+				cartitems: listCartId,
+				products: listProductId,
+				variants: listVariantId,
+				user: user?.id
+			}
+			let res = await strapi.entityService.create('api::order.order', { data: _order });
+
+			ctx.send({ data: { ...res, productName } });
+		}
+		return { message: 'Không tìm thấy thông tin giỏ hàng' };
+	},
 	async capture(ctx) {
 		let { order_id } = ctx.request.body;
 		if(!order_id) {

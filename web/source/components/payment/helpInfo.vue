@@ -11,7 +11,7 @@
         <div class="help-card-title">MAY WE HELP?</div>
         <div class="help-card-des">By contacting Client Service, you agree that your data will be transferred outside your
           country.</div>
-        <div class="help-card-des">Call us: +84 764 976 754</div>
+        <div class="help-card-des">Call us: +84 986 375 167</div>
       </div>
       <div class="help-card">
         <div class="help-card-title">PAYMENT METHODS</div>
@@ -46,7 +46,7 @@
         <div class="help-card-title">MAY WE HELP?</div>
         <div class="help-card-des">By contacting Client Service, you agree that your data will be transferred outside your
           country.</div>
-        <div class="help-card-des">Call us: +84 764 976 754</div>
+        <div class="help-card-des">Call us: +84 986 375 167</div>
       </div>
       <div class="help-card">
         <div class="help-card-title">PAYMENT METHODS</div>

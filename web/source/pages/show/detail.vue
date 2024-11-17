@@ -36,8 +36,9 @@
             <img class="detail-show-content-img" :src="show.attributes.media3.data?.attributes.url" />
             <img class="detail-show-content-img" :src="show.attributes.media4.data?.attributes.url" />
         </div>
-        <div class="detail-show-video">
-            <img class="detail-show-img-video" src="/images/PDH.png" />
+        <div class="detail-show-video" v-if="show.attributes.video.data?.attributes.url">
+            <img v-if="!isMobile" class="detail-show-img-video" src="/images/PDH.png" />
+            <img v-else class="detail-show-img-video" src="/images/PDH_m.png" />
             <video id="videoRef-id" ref="videoRef" class="detail-show-video-inner" 
             :muted="true" autoplay playsinline preload="auto" loop @click="onStopVideo">
                 <source :src="show.attributes.video.data?.attributes.url" type="video/mp4" />
@@ -88,6 +89,8 @@ export default {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.isMobile = this.checkMobile()
         await this.loadData()
+        this.$refs.videoRef.load()
+        this.$refs.videoRef.play()
     },
     methods: {
         ...mapActions({

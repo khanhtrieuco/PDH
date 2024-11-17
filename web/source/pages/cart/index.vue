@@ -1,7 +1,7 @@
 <template>
     <div class="cart-content">
         <div class="cart-content-top" v-if="!isMobile">
-            <img class="cart-content-image" src="/images/top-account.jpg" />
+            <!-- <img class="cart-content-image" src="/images/top-account.jpg" /> -->
             <div class="cart-content-name">shopping bag ({{ listItem.length }})</div>
         </div>
         <div class="cart-content-name" v-if="isMobile">shopping cart</div>
@@ -165,6 +165,8 @@ export default {
 .cart-content {
     .cart-content-top {
         position: relative;
+        padding: 110px;
+        border-bottom: 1px solid #D9D9D9;
 
         .cart-content-image {
             width: 100%;
@@ -174,12 +176,15 @@ export default {
             position: absolute;
             left: 50%;
             transform: translate(-50%);
-            bottom: 90px;
-            color: #FFF;
+            bottom: 50px;
+            color: #000;
             text-align: center;
-            font-family: 'Aeroport-light';
-            font-size: 50px;
+            font-family: 'Aeroport';
+            font-size: 64px;
             text-transform: uppercase;
+            padding: 8px 16px;
+            background-color: #fff;
+            height: 120px;
         }
     }
 

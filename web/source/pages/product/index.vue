@@ -468,7 +468,7 @@ export default {
         }
 
         .product-detail-img {
-            max-width: 38%;
+            max-width: 500px;
         }
 
         .product-detail-name {

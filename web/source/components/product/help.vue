@@ -7,7 +7,7 @@
             <div class="help-text">We only allow orders to be changed once, for free. Please call & email to assist with any
                 adjustments you would like to make to your order.</div>
             <div class="help-bold">Call us: 0986375167</div>
-            <div class="help-bold">Mail us: p.d.h.brand@gmail.com </div>
+            <div class="help-bold">Mail us: phanhoangg0305@gmail.com </div>
         </div>
     </div>
 </template>
