@@ -51,15 +51,18 @@
                         v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.material : product.attributes?.material_en)">
                     </div>
                     <div class="product-detail-data-title">Care your item:</div>
-                    <div class="product-detail-data-text"
-                        v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
+                    <div :style="viewmore ? 'max-height:200px;overflow: hidden;position: relative;margin-bottom:20px;': ''">
+                        <div class="product-detail-data-text"
+                            v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
+                        </div>
+                        <div v-if="viewmore" @click="viewmore = false" class="product-detail-data-more">View more</div>
                     </div>
                     <div class="product-detail-help-box">
                         <div class="product-detail-help-item" @click="showShiping = true">Shipping and packaging</div>
                         <div class="product-detail-help-item" @click="showExchange = true">Exchange and return</div>
                         <div class="product-detail-help-item" @click="showHelp = true">Need help</div>
                     </div>
-                    <div class="product-detail-data-color">
+                    <div id="scrollToAdd" class="product-detail-data-color">
                         <span class="product-detail-data-color-text">Color:</span>
                         <div v-for="_color, index in listColor" @click="choiceColor(_color)" :key="index">
                             <Color :color="_color.attributes.value" :selected="selectColor === _color.id"
@@ -106,15 +109,18 @@
                     v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.material : product.attributes?.material_en)">
                 </div>
                 <div class="product-detail-data-title">Care your item:</div>
-                <div class="product-detail-data-text"
-                    v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
+                <div :style="viewmore ? 'max-height:200px;overflow: hidden;position: relative;margin-bottom:20px;': ''">
+                    <div class="product-detail-data-text"
+                        v-html="showHtmlText($i18n.locale === 'vn' ? product.attributes?.care : product.attributes?.care_en)">
+                    </div>
+                    <div v-if="viewmore" @click="viewmore = false" class="product-detail-data-more">View more</div>
                 </div>
                 <div class="product-detail-help-box">
                     <div class="product-detail-help-item" @click="showShiping = true">Shipping and packaging</div>
                     <div class="product-detail-help-item" @click="showExchange = true">Exchange and return</div>
                     <div class="product-detail-help-item" @click="showHelp = true">Need help</div>
                 </div>
-                <div class="product-detail-data-color">
+                <div id="scrollToAdd" class="product-detail-data-color">
                     <span class="product-detail-data-color-text">Color:</span>
                     <div v-for="_color, index in listColor" @click="choiceColor(_color)" :key="index">
                         <Color :color="_color.attributes.value" :selected="selectColor === _color.id" v-if="!isMobile">
@@ -191,6 +197,7 @@ export default {
     mixins: [general],
     data() {
         return {
+            viewmore: true,
             showImage: false,
             isMobile: false,
             settings: {
@@ -280,6 +287,9 @@ export default {
         //     this.menuTab = ''
         // }
         this.addView(this.product)
+        if(this.listColor.length === 1) {
+            this.choiceColor(this.listColor[0])
+        }
     },
     methods: {
         ...mapActions({
@@ -298,7 +308,8 @@ export default {
             }
         },
         scrollToAdd() {
-            window.scrollTo({ top: 1000, behavior: 'smooth' })
+            // window.scrollTo({ top: 1000, behavior: 'smooth' })
+            document.getElementById("scrollToAdd").scrollIntoView({behavior: 'smooth' });
         },
         async loadData() {
             if (this.$route.params.id) {
@@ -614,6 +625,18 @@ export default {
             font-family: 'Aeroport-light';
             font-size: 18px;
         }
+        .product-detail-data-more{
+            text-align: center;
+            cursor: pointer;
+            position: absolute;
+            bottom: 0px;
+            background: linear-gradient(180deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .91) 50%, #fff 55%);
+            width: 100%;
+            height: 50px;
+            line-height: 65px;
+            font-family: 'Aeroport';
+            font-size: 18px;
+        }
 
         .product-detail-help-box {
             padding: 10px 36px;
@@ -900,6 +923,7 @@ export default {
                 font-size: 10px;
             }
 
+
             .product-detail-help-box {
                 padding: 10px 25px;
                 border: 2px solid #717171;
@@ -1135,7 +1159,7 @@ export default {
             .product-detail-data-title {
                 color: #000;
                 font-family: 'Aeroport';
-                font-size: 12px;
+                font-size: 16px;
 
                 &:not(:first-child) {
                     margin-top: 20px;
@@ -1145,7 +1169,13 @@ export default {
             .product-detail-data-text {
                 color: #717171;
                 font-family: 'Aeroport-light';
-                font-size: 10px;
+                font-size: 14px;
+            }
+
+            .product-detail-data-more{
+                height: 40px;
+                line-height: 60px;
+                font-size: 14px;
             }
 
             .product-detail-help-box {
@@ -1216,13 +1246,13 @@ export default {
             .product-detail-data-btn {
                 margin-top: 30px;
                 width: 100%;
-                height: 30px;
-                line-height: 30px;
+                height: 50px;
+                line-height: 50px;
                 text-align: center;
                 cursor: pointer;
                 color: #000;
-                font-family: 'Aeroport-light';
-                font-size: 11px;
+                font-family: 'Aeroport';
+                font-size: 20px;
                 border: 1px solid;
             }
         }
@@ -1235,7 +1265,7 @@ export default {
             .product-detail-list-title {
                 color: #000;
                 font-family: 'Aeroport-light';
-                font-size: 12px;
+                font-size: 16px;
                 text-transform: uppercase;
                 margin-bottom: 20px;
             }

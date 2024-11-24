@@ -13,7 +13,13 @@ import { mapGetters, mapActions } from "vuex"
             let res = this.callBackGoogle({ access_token: this.$route.query.access_token })
             if(res) {
                 this.showNotification('success', `Logged in successfully`)
-                this.$router.push({ path: '/' })
+                let path = window.localStorage.getItem('googleback')
+                if(path) {
+                    window.localStorage.removeItem('googleback')
+                    this.$router.push({ path: `/${path}` })
+                } else {
+                    this.$router.push({ path: '/account' })
+                }                
             }
         }
     },

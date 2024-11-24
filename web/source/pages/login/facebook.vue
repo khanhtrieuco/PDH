@@ -13,7 +13,7 @@ import { mapGetters, mapActions } from "vuex"
             let res = this.callBackFacebook({ access_token: this.$route.query.access_token })
             if(res) {
                 this.showNotification('success', `Logged in successfully`)
-                this.$router.push({ path: '/' })
+                this.$router.push({ path: '/account' })
             }
         }
     },

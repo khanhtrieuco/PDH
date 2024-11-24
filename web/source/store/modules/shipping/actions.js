@@ -15,6 +15,7 @@ export default {
         commit('set_list_shipping', {
             list_shipping: res.data
         })
+        return res.data
     },
 
 }

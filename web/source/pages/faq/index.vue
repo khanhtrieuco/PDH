@@ -5,7 +5,7 @@
         </b-container>
         <b-container class="d-flex justify-content-between" v-if="!isMobile">
             <div class="faq-left-content">
-                <!-- <ThumbImage class="faq-image" ratio="9-16" src="/images/faq.jpg"></ThumbImage> -->
+                <!-- <ThumbImage class="faq-image" ratio="9-16" srcImg="/images/faq.jpg"></ThumbImage> -->
                 <img class="faq-image" :src="bannerInfo.faq?.data.attributes.url ?? '/images/faq.jpg'"></img>
             </div>
             <div class="faq-right-content">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </b-container>
-        <ThumbImage ratio="4-3" :src="bannerInfo.faq_mobile?.data.attributes.url ?? '/images/faq_mobile.jpg'" v-if="isMobile"></ThumbImage>
+        <ThumbImage ratio="4-3" :srcImg="bannerInfo.faq_mobile?.data.attributes.url ?? '/images/faq_mobile.jpg'" v-if="isMobile"></ThumbImage>
         <b-container v-if="isMobile">
             <h2 class="faq-title">Những câu hỏi thường gặp</h2>
             <div class="faq-item-block" v-for="(item, index) in listFaq" :key="index">

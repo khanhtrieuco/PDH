@@ -75,7 +75,7 @@ export default {
     mounted() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         if (this.loggedIn) {
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: '/account' })
         }
         this.isMobile = this.checkMobile()
     },
@@ -125,7 +125,7 @@ export default {
             })
             if (rs) {
                 this.showNotification('success', `Logged in successfully`)
-                this.$router.push({ path: '/' })
+                this.$router.push({ path: '/account' })
             } else {
                 this.showNotification('danger', `Login failed, please try again`)
             }
@@ -147,7 +147,7 @@ export default {
             })
             if (rs) {
                 this.showNotification('success', `Account successfully created`)
-                this.$router.push({ path: '/' })
+                this.$router.push({ path: '/account' })
             } else {
                 this.showNotification('danger', `Login failed, please try again`)
             }

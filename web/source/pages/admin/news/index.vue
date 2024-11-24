@@ -49,7 +49,7 @@
         <a-table bordered :columns="columns" :data-source="listItem.data" :pagination="listItem.pagination"
             :loading="loading" @change="handleRefesh" :row-key="record => record.id">
             <span slot="images" slot-scope="images">
-                <ThumbImage ratio="16-9" :src="images?.data?.attributes?.url"></ThumbImage>
+                <ThumbImage ratio="16-9" :srcImg="images?.data?.attributes?.url"></ThumbImage>
             </span>
             <span slot="new_category" slot-scope="new_category">
                 <div>{{ new_category.data?.attributes.name }}</div>

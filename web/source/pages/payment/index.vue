@@ -24,70 +24,82 @@
                             <div class="payment-step-input-btn" @click="onLogin()">continue</div>
                             <div class="page-login-google-btn d-flex justify-content-around align-items-center">
                                 <img class="page-login-google-image" src="/images/google.png" />
-                                <div class="page-login-google-text">CONTINUE WITH GOOGLE</div>
+                                <div class="page-login-google-text" @click="onGoogleLogin">CONTINUE WITH GOOGLE</div>
                             </div>
                         </div>
                     </div>
                     <div class="payment-step-card">
-                        <div class="payment-step-title">2. {{ $t('Payment_title_2') }}</div>
-                        <div class="payment-step-content">
-                            <div class="d-flex">
-                                <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
-                                    @click="shiping_type = 1">Ship to home</div>
-                                <div style="cursor: not-allowed;" :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
-                                    >Pick up Store</div>
-                            </div>
-                            <div class="payment-step-address-info" v-if="shiping_type === 1">
-                                <div class="payment-step-address-update" @click="openAddressPopup"
-                                    v-if="!user_address?.id">
-                                    You don't have an address yet. Click here to update the address.</div>
-                                <div v-else>
-                                    <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
-                                    <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}
+                        <div :class="stepName >= 1 ? 'payment-step-title' : 'payment-step-title-inactive'">2. {{ $t('Payment_title_2') }}</div>
+                            <div v-if="stepName >= 1">
+                                <div class="payment-step-content">
+                                    <div class="d-flex">
+                                        <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
+                                            @click="shiping_type = 1">Ship to home</div>
+                                        <div style="cursor: not-allowed;" :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
+                                            >Pick up Store</div>
                                     </div>
-                                    <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
+                                    <div class="payment-step-address-info" v-if="shiping_type === 1">
+                                        <div>
+                                            <div class="payment-step-address-info-title">SHIPPING OPTION</div>
+                                            <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;"
+                                            v-for="(_ship, index) in listShipping " :key="index">
+                                                <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" />
+                                                <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 10px;">
+                                                    <div :for="_ship.id">{{_ship.attributes.name}}</div>
+                                                    <div>{{_ship.attributes.price}} $</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="payment-step-address-update" @click="openAddressPopup"
+                                            v-if="!user_address?.id">
+                                            You don't have an address yet. Click here to update the address.</div>
+                                        <div v-else>
+                                            <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
+                                            <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}
+                                            </div>
+                                            <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
+                                            </div>
+                                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Save</div>
+                                        </div>
+                                        <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
+                                            @closeUpdate="closeUpdateAddress"></Address>
                                     </div>
-                                    <div class="payment-step-address-update mt-1" @click="openAddressPopup">Save</div>
-                                </div>
-                                <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
-                                    @closeUpdate="closeUpdateAddress"></Address>
-                            </div>
-                            <div class="payment-step-address-info" v-if="shiping_type === 2">
-                                <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name
-            : place.attributes?.name_en }}</div>
-                                <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
-            place.attributes?.address : place.attributes?.address_en }}</div>
-                                <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
-            `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}`
-                                    }}
-                                </div>
-                                <div class="payment-step-address-des">{{ `Hotline ${place.attributes?.phone}` }}</div>
+                                    <div class="payment-step-address-info" v-if="shiping_type === 2">
+                                        <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name
+                                            : place.attributes?.name_en }}</div>
+                                        <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
+                                            place.attributes?.address : place.attributes?.address_en }}</div>
+                                        <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
+                                            `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}` }}
+                                        </div>
+                                        <div class="payment-step-address-des">{{ `Hotline ${place.attributes?.phone}` }}</div>
+                                    </div>
                             </div>
                         </div>
                     </div>
                     <div class="payment-step-card">
-                        <div class="payment-step-title">3. {{ $t('Payment') }}</div>
-                        <div class="payment-step-content">
-                            <div class="payment-step-type-name">Payment method</div>
-                            <div class="payment-step-type-check">
-                                <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
-                                <div class="payment-step-type-text">Paypal</div>
-                            </div>
-                            <div id="paypal-button-container"></div>
-                            <div class="payment-step-type-check">
-                                <Check :checked="paymentType === 'online'" @choice="onChoicePayment('online')"></Check>
-                                <div class="payment-step-type-text">Online</div>
-                            </div>
-                             <div class="user-payment-menthod-list" v-if="paymentType && paymentType === 'online'">
-                                <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
-                                    v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3" @click="onChoicePaymentType(_pay)">
-                                    <img :src="_pay.attributes.thub.data.attributes.url" class="user-payment-icon" />
+                        <div :class="stepName >= 2 ? 'payment-step-title' : 'payment-step-title-inactive'">3. {{ $t('Payment') }}</div>
+                            <div class="payment-step-content" v-if="stepName >= 2">
+                                <div class="payment-step-type-name">Payment method</div>
+                                <div class="payment-step-type-check">
+                                    <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
+                                    <div class="payment-step-type-text">Paypal</div>
                                 </div>
+                                <div id="paypal-button-container"></div>
+                                <div class="payment-step-type-check">
+                                    <Check :checked="paymentType === 'online'" @choice="onChoicePayment('online')"></Check>
+                                    <div class="payment-step-type-text">Online</div>
+                                </div>
+                                 <div class="user-payment-menthod-list" v-if="paymentType && paymentType === 'online'">
+                                    <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
+                                        v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3" @click="onChoicePaymentType(_pay)">
+                                        <img :src="_pay.attributes.thub.data.attributes.url" class="user-payment-icon" />
+                                    </div>
+                                </div>
+                                <div v-if="paymentType === 'online' && isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
+                                </div>
+                                <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
                             </div>
-                            <div v-if="paymentType === 'online' && isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
-                            </div>
-                            <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
-                        </div>
                     </div>
                 </div>
                 <div class="payment-right-info">
@@ -113,55 +125,78 @@
                         <div class="payment-step-input-btn" @click="onLogin()">continue</div>
                         <div class="page-login-google-btn d-flex justify-content-around align-items-center">
                             <img class="page-login-google-image" src="/images/google.png" />
-                            <div class="page-login-google-text">CONTINUE WITH GOOGLE</div>
+                            <div class="page-login-google-text" @click="onGoogleLogin">CONTINUE WITH GOOGLE</div>
                         </div>
                     </div>
                 </div>
                 <div class="payment-step-card">
-                    <div class="payment-step-title">2. {{ $t('Payment_title_2') }}</div>
-                    <div class="payment-step-content">
-                        <div class="d-flex">
-                            <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
-                                @click="shiping_type = 1">Ship to home</div>
-                            <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`">
-                                Pick up Store</div>
-                        </div>
-                    </div>
-                    <div class="payment-step-address-info" v-if="shiping_type === 1">
-                        <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
-                            You don't have an address yet. Click here to update the address.</div>
-                        <div v-else>
-                            <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
-                            <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
-                            <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
+                    <div :class="stepName >= 1 ? 'payment-step-title' : 'payment-step-title-inactive'">2. {{ $t('Payment_title_2') }}</div>
+                    <div v-if="stepName >= 1">
+                        <div class="payment-step-content">
+                            <div class="d-flex">
+                                <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
+                                    @click="shiping_type = 1">Ship to home</div>
+                                <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`">
+                                    Pick up Store</div>
                             </div>
-                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
                         </div>
-                        <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
-                            @closeUpdate="closeUpdateAddress"></Address>
-                    </div>
-                    <div class="payment-step-address-info" v-if="shiping_type === 2">
-                        <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name :
-            place.attributes?.name_en }}</div>
-                        <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ? place.attributes?.address :
-            place.attributes?.address_en }}</div>
-                        <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
-            `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}` }}
+                        <div class="payment-step-address-info" v-if="shiping_type === 1">
+                            <div>
+                                <div class="payment-step-address-info-title">SHIPPING OPTION</div>
+                                <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;"
+                                v-for="(_ship, index) in listShipping " :key="index">
+                                    <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" />
+                                    <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 10px;">
+                                        <div :for="_ship.id">{{_ship.attributes.name}}</div>
+                                        <div>{{_ship.attributes.price}} $</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
+                                You don't have an address yet. Click here to update the address.</div>
+                            <div v-else>
+                                <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
+                                <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
+                                <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
+                                </div>
+                                <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
+                            </div>
+                            <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
+                                @closeUpdate="closeUpdateAddress"></Address>
                         </div>
-                        <div class="payment-step-address-des">{{ `Hotline ${place.attributes?.phone}` }}</div>
+                        <div class="payment-step-address-info" v-if="shiping_type === 2">
+                            <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name :
+                                place.attributes?.name_en }}</div>
+                            <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ? place.attributes?.address :
+                                place.attributes?.address_en }}</div>
+                            <div class="payment-step-address-des">{{ $i18n.locale === 'vn' ?
+                                `Giờ mở cửa ${place.attributes?.time}` : `Opening Hours ${place.attributes?.time}` }}
+                            </div>
+                            <div class="payment-step-address-des">{{ `Hotline ${place.attributes?.phone}` }}</div>
+                        </div>
                     </div>
                 </div>
                 <div class="payment-step-card">
-                    <div class="payment-step-title">3. {{ $t('Payment') }}</div>
+                    <div :class="stepName >= 2 ? 'payment-step-title' : 'payment-step-title-inactive'">3. {{ $t('Payment') }}</div>
                     <div class="payment-step-content">
-                        <div class="payment-step-type-check">
+                        <div class="payment-step-type-check" v-if="stepName >= 2">
                             <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
                             <div class="payment-step-type-text">Paypal</div>
                         </div>
                         <div id="paypal-button-container"></div>
-                        <!-- <div v-if="isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrder">Purchase
+                        <div class="payment-step-type-check">
+                            <Check :checked="paymentType === 'online'" @choice="onChoicePayment('online')"></Check>
+                            <div class="payment-step-type-text">Online</div>
                         </div>
-                        <div v-if="!isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div> -->
+                         <div class="user-payment-menthod-list" v-if="paymentType && paymentType === 'online'">
+                            <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
+                                v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3" @click="onChoicePaymentType(_pay)">
+                                <img :src="_pay.attributes.thub.data.attributes.url" class="user-payment-icon" />
+                            </div>
+                        </div>
+                        <div v-if="paymentType === 'online' && isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
+                        </div>
+                        <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
                     </div>
                 </div>
                 <UserCart :listItem="listCart" :isMobile="isMobile" :priceShip="priceShip" />
@@ -402,6 +437,9 @@ export default {
             qrcode_info: {},
             modalQrOpen: false,
             listPaymentCart: [],
+            stepName: 0,
+            listShipping: [],
+            shipItem: {}
         }
     },
     computed: {
@@ -421,13 +459,13 @@ export default {
         this.isMobile = this.checkMobile()
         await this.getListCartUser()
         await this.getListPayment()
+        this.listShipping = await this.getListShipping()
         await this.getAddressByUser(this.profile.id)
         this.user_address = this.userAddress
         
         await this.getPlace()
         if (this.listPayment.length > 0) {
             let _paypal = this.listPayment.find((o) => o.attributes.name == 'Paypal')
-            console.log(_paypal)
             if (_paypal) {
                 loadScript({ 'client-id': _paypal.attributes.description }).then((paypal) => {
                     paypal
@@ -444,6 +482,13 @@ export default {
                         .render('#paypal-button-container')
                 })
             }
+        }
+
+        if(this.loggedIn) {
+            this.stepName = 1
+        }
+        if(this.shipItem.id) {
+            this.stepName = 2
         }
     },
     watch: {
@@ -463,8 +508,9 @@ export default {
             getListCartUser: "cart/getListCartUser",
             createCart: "cart/createCart",
             getListPayment: "payment/getListPayment",
+            getListShipping: "shipping/getListShipping",
             getPlace: 'place/getPlace',
-            getAddressByUser: 'auth/getAddressByUser'
+            getAddressByUser: 'auth/getAddressByUser',
         }),
         async createPaypalOrder() {
             console.log('Creating order...')
@@ -657,6 +703,9 @@ export default {
                 this.paymentDone = 'fail'
             }
         },
+        async onGoogleLogin() {
+            window.location = '/api/connect/google'
+        },
         async onLogin() {
             if (!this.username || !this.password) {
                 this.showNotification('warning', `Vui lòng nhập đủ thông tin đăng nhập`)
@@ -668,11 +717,13 @@ export default {
             })
             if (rs) {
                 this.showNotification('success', `Đăng nhập thành công`)
+                location.reload();
             } else {
                 this.showNotification('danger', `Đăng nhập thất bại vui lòng thử lại`)
             }
         },
         async onGoogleLogin() {
+            window.localStorage.setItem('googleback', '/thanh-toan')
             window.location = '/api/connect/google'
         }
     }
@@ -835,6 +886,17 @@ export default {
             font-family: 'Aeroport-light';
             font-size: 16px;
             text-transform: uppercase;
+        }
+        .payment-step-title-inactive {
+            border-bottom: 1px solid #D9D9D9;
+            height: 50px;
+            line-height: 50px;
+            padding: 0px 25px;
+            color: #000;
+            font-family: 'Aeroport-light';
+            font-size: 16px;
+            text-transform: uppercase;
+            background-color: #D9D9D9;
         }
 
         .payment-step-content {
@@ -1017,6 +1079,11 @@ export default {
         .payment-step-address-info {
             margin-top: 30px;
             padding-left: 20px;
+
+            .payment-step-address-info-title{
+                font-size: 16px;
+                font-family: 'Aeroport-bold';
+            }
 
             .payment-step-address-update {
                 color: #000;
@@ -1248,6 +1315,18 @@ export default {
                 text-transform: uppercase;
             }
 
+            .payment-step-title-inactive {
+                border-bottom: 1px solid #D9D9D9;
+                height: 30px;
+                line-height: 30px;
+                padding: 0px 15px;
+                color: #000;
+                font-family: 'Aeroport-light';
+                font-size: 12px;
+                text-transform: uppercase;
+                background-color: #D9D9D9;
+            }
+
             .payment-step-content {
                 padding: 15px;
 
@@ -1429,6 +1508,10 @@ export default {
                 margin-top: 0px;
                 padding-left: 20px;
                 padding-bottom: 10px;
+
+                .payment-step-address-info-title{
+                    font-size: 10px;
+                }
 
                 .payment-step-address-update {
                     color: #000;

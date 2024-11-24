@@ -43,8 +43,8 @@
             </div>
         </div>
     </div>
-    <!-- <div class="my-cart-panel" v-else>
-        <h3 class="my-cart-title">{{ $t('Cart_your') }}</h3>
+    <div class="my-cart-panel" v-else>
+        <h3 class="my-cart-title">SHOPPING CART</h3>
         <div class="my-cart-list-product">
             <b-container>
                 <div class="my-cart-item" v-for="(item, index) in listItem" :key="index">
@@ -54,29 +54,36 @@
                         </div>
                         <div class="my-card-div-info">
                             <div class="my-cart-product-name">{{ item.name }}</div>
-                            <div class="my-card-div-price"> {{ item.price * item.quantity | numberWithCommas }}{{ ' ' }}đ
+                            <div class="my-cart-product-des">Color:
+                                <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
                             </div>
-                            <div>{{ item.quantity }}</div>
-
+                            <div class="my-cart-product-des">Size:
+                                <span>
+                                    {{ item.variant.attributes.size.data.attributes.name }}
+                                </span>
+                            </div>
+                            <div class="my-cart-product-des">Quantity: <span>{{ item.quantity }}</span></div>
+                            <div class="my-card-div-price">
+                                $ {{ item.price * item.quantity | numberWithCommas }}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="my-cart-info">
                     <div class="my-cart-edit" @click="goPage('/gio-hang')">{{ $t('Cart_edit') }}</div>
                     <b-row class="my-cart-price-total">
-                        <b-col>
-                            
+                        <b-col>                            
                             <div class="d-flex justify-content-between">
-                                <div>{{ $t('Cart_text_2') }}:</div>
-                                <div>{{ total_price | numberWithCommas }}{{ ' ' }}đ</div>
+                                <div style="text-transform: uppercase">{{ $t('Cart_text_2') }}:</div>
+                                <div>{{ total_price | numberWithCommas }}{{ ' ' }}$</div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div>{{ $t('Cart_text_3') }}:</div>
-                                <div>{{ priceShip | numberWithCommas }}{{ ' ' }}đ</div>
+                                <div style="text-transform: uppercase">Shipping cost:</div>
+                                <div>{{ priceShip | numberWithCommas }}{{ ' ' }}$</div>
                             </div>
                             <div class="cart-total d-flex justify-content-between">
                                 <div style="text-transform: uppercase;">{{ $t('Cart_text_4') }}:</div>
-                                <div><b>{{ total_price + priceShip | numberWithCommas }}{{ ' ' }}đ</b></div>
+                                <div><b>{{ total_price + priceShip | numberWithCommas }}{{ ' ' }}$</b></div>
                             </div>
                         </b-col>
                     </b-row>
@@ -86,7 +93,7 @@
                 </div>
             </b-container>
         </div>
-    </div> -->
+    </div>
 </template>
   
 <script>
@@ -246,19 +253,22 @@ export default {
 
 @media (max-width: 520px) {
     .my-cart-panel {
-        padding-top: 0px;
+        padding-top: 16px;
         padding-left: 0px;
-
+        width: 100%;
         .my-cart-title {
-            text-align: center;
+            text-align: left;
+            margin-left: 16px;
             font-size: 20px;
             color: #2F3036;
         }
 
         .my-cart-list-product {
-            margin-top: 30px;
-            padding-top: 20px;
-            padding-bottom: 20px;
+            margin-top: 0px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 0px;
+            padding-right: 0px;
             width: 100%;
 
             .my-cart-item {
@@ -266,28 +276,39 @@ export default {
                 margin-bottom: 20px;
 
                 .my-card-div-img {
-                    width: 120px;
+                    width: 90px;
                     text-align: center;
+                    .my-card-image{
+                        width: 100%;
+                        height: auto;
+                    }
                 }
 
                 .my-card-div-price {
                     width: 100%;
-                    font-size: 18px;
-                    margin-bottom: 8px;
-                    text-align: left;
+                    font-size: 12px;
+                    margin-bottom: 4px;
+                    text-align: right;
                 }
 
                 .my-card-div-info {
                     width: 200px;
+                    margin-left: 10px;
+                    .my-cart-product-name {
+                        font-size: 10px;
+                    }
+                    .my-cart-product-des{
+                        margin-top: 0px;
+                        font-size: 10px;
+                        margin-bottom: 0px;
+                    }
                 }
 
                 .my-card-image {
                     max-height: 100px;
                 }
 
-                .my-cart-product-name {
-                    font-size: 16px;
-                }
+                
             }
         }
 

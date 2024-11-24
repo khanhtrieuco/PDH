@@ -267,13 +267,13 @@ export default {
     .product-name {
       color: #000;
       font-family: 'Aeroport';
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .product-price {
       color: #000;
       font-family: 'Aeroport';
-      font-size: 10px;
+      font-size: 14px;
       font-weight: 300;
     }
 

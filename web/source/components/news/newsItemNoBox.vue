@@ -2,7 +2,7 @@
     <div class="news-item">
         <a target="_blank" :href="item.attributes?.slug">
             <div class="news-img-no-box">
-                <ThumbImage ratio="3-4" :src="item.attributes?.thub.data.attributes.url"></ThumbImage>
+                <ThumbImage ratio="3-4" :srcImg="item.attributes?.thub.data.attributes.url"></ThumbImage>
             </div>
         </a>
         <a target="_blank" :href="item.attributes?.slug">

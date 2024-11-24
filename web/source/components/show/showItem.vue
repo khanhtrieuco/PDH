@@ -2,7 +2,7 @@
     <div class="show-item">
         <NuxtLink :to="`/show/${item.attributes.slug}`">
             <div class="show-img">
-                <ThumbImage ratio="3-4" :src="item.attributes.thub_mobile.data.attributes.url"></ThumbImage>
+                <ThumbImage ratio="3-4" :srcImg="item.attributes.thub_mobile.data.attributes.url"></ThumbImage>
             </div>
         </NuxtLink>
         <div class="show-title"> {{ item.attributes.name }}</div>

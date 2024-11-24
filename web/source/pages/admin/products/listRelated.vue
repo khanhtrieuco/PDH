@@ -5,7 +5,7 @@
                 <a-checkbox :checked="record.had" @change="(e) => onChange(e.target.checked, record)" />
             </span>
             <span slot="images" slot-scope="images">
-                <ThumbImage ratio="16-9" :src="images?.data?.attributes?.url"></ThumbImage>
+                <ThumbImage ratio="16-9" :srcImg="images?.data?.attributes?.url"></ThumbImage>
             </span>
             <span slot="category" slot-scope="categories">
                 <div v-for="cate in categories" :key="cate.id">{{ cate.attributes.name }}</div>

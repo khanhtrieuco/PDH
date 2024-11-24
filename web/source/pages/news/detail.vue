@@ -1,7 +1,7 @@
 <template>
     <div class="detail-news-content">
         <div class="detail-news-image">
-            <ThumbImage ratio="21-9" :src="news.attributes?.thub.data?.attributes.url"></ThumbImage>
+            <ThumbImage ratio="21-9" :srcImg="news.attributes?.thub.data?.attributes.url"></ThumbImage>
         </div>
         <b-container class="d-flex justify-content-between" v-if="!isMobile">
             <div class="detail-left-info">

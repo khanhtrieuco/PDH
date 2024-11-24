@@ -3,8 +3,8 @@
         <b-container v-if="!isMobile" style="position: relative;">
             <b-breadcrumb class="breadcrumb" :items="breadcrumb"></b-breadcrumb>
         </b-container>
-        <ThumbImage class="customer-image" ratio="21-9" :src="bannerInfo.customer_care?.data.attributes.url ?? '/images/care.jpg'" v-if="!isMobile"></ThumbImage>
-        <ThumbImage class="customer-image" ratio="4-3" :src="bannerInfo.customer_care_mobile?.data.attributes.url ?? '/images/care_mobile.jpg'" v-else></ThumbImage>
+        <ThumbImage class="customer-image" ratio="21-9" :srcImg="bannerInfo.customer_care?.data.attributes.url ?? '/images/care.jpg'" v-if="!isMobile"></ThumbImage>
+        <ThumbImage class="customer-image" ratio="4-3" :srcImg="bannerInfo.customer_care_mobile?.data.attributes.url ?? '/images/care_mobile.jpg'" v-else></ThumbImage>
         <b-container v-if="!isMobile">
             <b-row>
                 <b-col cols="4">

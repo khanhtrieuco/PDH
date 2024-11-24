@@ -19,7 +19,7 @@
     <div v-if="isMobile" class="home-top-video">
       <ThumbImage v-if="banner.attributes && banner.attributes.type_source === 'video'" :sourceVideo="banner.attributes?.imagelink_mobile.data?.attributes.url"
         :nameClass="'image-banner'" :contain="false" :video="true" ratio="9-21" />
-        <ThumbImage v-if="banner.attributes && banner.attributes.type_source === 'image'" :src="banner.attributes?.imagelink_mobile.data?.attributes.url"
+      <ThumbImage v-if="banner.attributes && banner.attributes.type_source === 'image'" :srcImg="banner.attributes?.imagelink_mobile.data?.attributes.url"
         :nameClass="'image-banner'" :contain="false" ratio="9-21" />
       <div class="home-top-content container">
         <img class="home-top-name-img" :src="banner.attributes?.name.data?.attributes.url" />
@@ -33,11 +33,11 @@
 
     <Collections :isMobile="isMobile" />
     <!-- <BannerAbout v-if="isMobile" :isMobile="isMobile" /> -->
+
     <div class="about-home" style="background-image: url('/images/home_bg_about.jpg');" v-if="!isMobile">
       <div class="about-home-content container">
         <img class="about-home-img-model" src="/images/home-about-model.jpg" />
         <div class="about-home-text-content">
-          <!-- <img class="about-home-img-text" src="/images/home-about-text1.svg" /> -->
           <div class="about-home-name"><img class="about-home-img-text" src="/images/a1.svg" /></div>
           <div class="about-home-name"><img class="about-home-img-text" src="/images/a2.svg" /></div>
           <div class="about-home-name-1"><img class="about-home-img-text" src="/images/a3.svg" /></div>
@@ -48,12 +48,11 @@
         </div>
       </div>
     </div>
-    <div class="about-home" style="background-image: url('/images/home_bg_aboutm.jpg');" v-if="isMobile">
+    <!-- <div class="about-home" style="background-image: url('/images/home_bg_aboutm.jpg');" v-if="isMobile">
       <div class="about-home-img-left">
         <img class="about-home-img-mobile" src="/images/home-about-modelm.jpg" />
       </div>
       <div class="about-home-right-content">
-        <!-- <img class="about-home-img-text" src="/images/about-text.svg" /> -->
         <div class="about-home-mobile-text">
           <div class="about-home-mobile-text-div">HOUSE OF</div>
         </div>
@@ -71,8 +70,9 @@
           <img class="about-home-read" src="/images/read-now.svg" @click="goAbout()" />
         </div>
       </div>
-    </div>
-    <News :isMobile="isMobile" />
+    </div> -->
+
+    <!-- <News :isMobile="isMobile" /> -->
     <!-- <Store :isMobile="isMobile" /> -->
   </div>
 </template>

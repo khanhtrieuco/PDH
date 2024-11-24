@@ -2,12 +2,12 @@
     <div class="menu-item">
         <NuxtLink :to="link" v-if="type == 'show'">
             <div class="menu-item-img">
-                <ThumbImage ratio="3-4" :src="image_link"></ThumbImage>
+                <ThumbImage ratio="3-4" :srcImg="image_link"></ThumbImage>
             </div>
         </NuxtLink>
         <a target="_blank" :href="link" v-if="type == 'news'">
             <div class="menu-item-img">
-                <ThumbImage ratio="3-4" :src="image_link"></ThumbImage>
+                <ThumbImage ratio="3-4" :srcImg="image_link"></ThumbImage>
             </div>
         </a>
         <div class="menu-item-title"> {{ get_excerpt(title,85) }}</div>

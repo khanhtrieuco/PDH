@@ -30,7 +30,7 @@
             @click="choicetab(5)">{{ $t('Friendship')
             }}</span>
           <div class="d-inline-flex menu-icon-div" style="position: relative;">
-            <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
+            <img class="menu-icon" src="/images/search.svg" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
             <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
           </div>
@@ -40,7 +40,7 @@
         <div class="d-flex justify-content-between">
           <img class="menu-logo" @click="goPage('/')" src="/images/logo.png" />
           <div class="d-inline-flex" style="position: relative;">
-            <img class="menu-icon" src="/images/search.svg" @click="onShowSearch()" />
+            <img class="menu-icon" src="/images/search.svg" />
             <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
             <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
             <div v-if="!loggedIn" @click="goLogin" class="menu-auth-btn">Sign in</div>
@@ -60,7 +60,7 @@
         <div class="menu-mobile-top d-flex justify-content-between">
           <img class="menu-logo" @click="goPage('/')" src="/images/logo.png" />
           <div class="d-inline-flex" style="position: relative;">
-            <img class="menu-icon" src="/images/Search.png" @click="onShowSearch()" />
+            <img class="menu-icon" src="/images/Search.png" />
             <img class="menu-icon-bag" src="/images/Bag.png" @click="onShowCart()" />
             <!-- <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
             <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span> -->
@@ -132,7 +132,7 @@
               <img class="menu-open" :src="openSubMobile === 1 ? '/images/menu-up.png' : '/images/menu-right.png'"
                 @click="goPage('/show')" />
             </div>
-            <div class="menu-mobile-sub-item d-flex justify-content-between">
+            <!-- <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/news')">Lookbook</div>
               <img class="menu-open" :src="openSubMobile === 2 ? '/images/menu-up.png' : '/images/menu-right.png'" />
             </div>
@@ -144,7 +144,7 @@
               <div class="menu-mobile-title" @click="goPage('/news')">News</div>
               <img class="menu-open" @click="goPage('/news')"
                 :src="openSubMobile === 4 ? '/images/menu-up.png' : '/images/menu-right.png'" />
-            </div>
+            </div> -->
             <div class="menu-mobile-sub-item d-flex justify-content-between">
               <div class="menu-mobile-title" @click="goPage('/house-of-pdh')">About P.D.H</div>
               <img class="menu-open" @click="goPage('/house-of-pdh')"
@@ -186,10 +186,10 @@
         style="position: absolute;bottom: 70px;margin-left: 30px;">
         <div class="header-tab-menu-col-1">
           <div @click="subTab = 1" @mouseover="subTab = 1" class="header-tab-menu-title">Shows</div>
-          <div @click="goPage('/news')" @mouseover="subTab = 2" type="news" class="header-tab-menu-title">Lookbook</div>
+          <!-- <div @click="goPage('/news')" @mouseover="subTab = 2" type="news" class="header-tab-menu-title">Lookbook</div>
           <div @click="goPage('/news')" @mouseover="subTab = 4" type="news" class="header-tab-menu-title">Campaigns
           </div>
-          <div @click="goPage('/news')" @mouseover="subTab = 5" type="news" class="header-tab-menu-title">News</div>
+          <div @click="goPage('/news')" @mouseover="subTab = 5" type="news" class="header-tab-menu-title">News</div> -->
           <div @click="goPage('/house-of-pdh')" class="header-tab-menu-title">About P.D.H</div>
         </div>
         <div class="header-tab-menu-col-2">
@@ -337,11 +337,16 @@ export default {
     }
   },
   async mounted() {
-    let llang = window.localStorage.getItem('lang')
-    if (llang) {
-      this.lang = llang
-      this.$i18n.locale = llang
-    }
+    // let llang = window.localStorage.getItem('lang')
+    // if (llang) {
+    //   this.lang = llang
+    //   this.$i18n.locale = llang
+    // }
+
+    this.lang = 'en'
+    this.$i18n.locale = 'en'
+    window.localStorage.setItem('lang', 'en')
+
     window.addEventListener('scroll', this.handleScroll);
     this.isMobile = this.checkMobile()
     this.setLoggedIn()
@@ -423,6 +428,7 @@ export default {
       } else {
         this.showListCart = true
       }
+      // this.showMenuMobile = false
     },
     changeLang() {
       if (this.lang === 'en') {

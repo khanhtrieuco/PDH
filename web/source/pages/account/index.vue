@@ -90,10 +90,10 @@
                                             {{ _order.cart.product.data?.attributes?.name }}
                                         </div>
                                         <div class="account-content-order-item-info-des">Color: <span>{{
-                                            _order.cart.variant.data?.attributes?.color.data.attributes.name }}</span>
+                                            _order.cart.variant.data?.attributes?.color.data?.attributes.name }}</span>
                                         </div>
                                         <div class="account-content-order-item-info-des">Size: <span>{{
-                                            _order.cart.variant.data?.attributes?.size.data.attributes.name }}</span>
+                                            _order.cart.variant.data?.attributes?.size.data?.attributes.name }}</span>
                                         </div>
                                         <div class="account-content-order-item-info-des">Quantity: <span>{{
                                             _order.cart.quantity }}</span></div>
@@ -187,10 +187,10 @@
                                         {{ _order.cart.product.data.attributes.name }}
                                     </div>
                                     <div class="account-content-order-item-info-des">Color: <span>{{
-                                        _order.cart.variant.data.attributes.color.data.attributes.name }}</span>
+                                        _order.cart.variant.data?.attributes.color.data.attributes.name }}</span>
                                     </div>
                                     <div class="account-content-order-item-info-des">Size: <span>{{
-                                        _order.cart.variant.data.attributes.size.data.attributes.name }}</span>
+                                        _order.cart.variant.data?.attributes.size.data.attributes.name }}</span>
                                     </div>
                                     <div class="account-content-order-item-info-des">Quantity: <span>{{
                                         _order.cart.quantity }}</span></div>

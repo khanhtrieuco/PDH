@@ -1,7 +1,7 @@
 <template>
     <a-upload list-type="picture-card" class="avatar-uploader" :show-upload-list="false" 
         :before-upload="beforeUpload" action="/api/app/upload" @change="handleChangeImage">
-        <ThumbImage ratio="16-9" v-if="imageUrl" :src="imageUrl"></ThumbImage>
+        <ThumbImage ratio="16-9" v-if="imageUrl" :srcImg="imageUrl"></ThumbImage>
         <div v-else>
             <a-icon :type="loading ? 'loading' : 'plus'" />
             <div class="ant-upload-text">

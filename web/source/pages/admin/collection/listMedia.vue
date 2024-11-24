@@ -6,7 +6,7 @@
             <a-list-item slot="renderItem" slot-scope="item, index">
                 <a-card>
                     <a-button slot="extra" type="danger" @click="deleteMedia(item.id)">Xóa</a-button>
-                    <ThumbImage ratio="21-9" :src="item?.attributes.url"></ThumbImage>
+                    <ThumbImage ratio="21-9" :srcImg="item?.attributes.url"></ThumbImage>
                 </a-card>
             </a-list-item>
         </a-list>

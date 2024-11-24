@@ -341,5 +341,5 @@ module.exports =  {
   Footer_text_20: 'Womenswear',
   Footer_text_21: 'Menswear',
   Footer_text_22: 'By entering your email address below, you consent to receiving our newsletter with access to our latest collections, events and initiatives. More details on this are provided in our Privacy Policy. Opt out at any time y clicking Unsubcribe at the bottom of any of out emails. ',
-  Footer_text_23: 'Sign up',
+  Footer_text_23: 'Subscribe',
 }

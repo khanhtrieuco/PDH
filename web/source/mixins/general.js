@@ -437,6 +437,7 @@ export default {
             this.$bvToast.toast(message, {
                 title: 'Notification',
                 variant: type,
+                autoHideDelay: 500000,
                 solid: true
             })
         },

@@ -4,8 +4,8 @@
             <b-breadcrumb class="breadcrumb" :items="breadcrumb"></b-breadcrumb>
         </b-container>
         <div class="place-image">
-            <ThumbImage ratio="21-9" :src="bannerInfo.customer_care?.data.attributes.url ?? '/images/place.jpg'" src="/images/place.jpg" v-if="!isMobile"></ThumbImage>
-            <ThumbImage ratio="4-3" :src="bannerInfo.customer_care_mobile?.data.attributes.url ?? '/images/place_mobile.jpg'" v-if="isMobile"></ThumbImage>
+            <ThumbImage ratio="21-9" :srcImg="bannerInfo.customer_care?.data.attributes.url ?? '/images/place.jpg'" src="/images/place.jpg" v-if="!isMobile"></ThumbImage>
+            <ThumbImage ratio="4-3" :srcImg="bannerInfo.customer_care_mobile?.data.attributes.url ?? '/images/place_mobile.jpg'" v-if="isMobile"></ThumbImage>
         </div>
         <b-container>
             <div class="place-info">

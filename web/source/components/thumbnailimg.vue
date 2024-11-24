@@ -9,8 +9,8 @@
       <source :src="sourceVideo" type="video/mp4" />
     </video>
     <img v-else :style="contain ? `object-fit: contain;` : `object-fit: ${coverimg};`"
-      :class="`${nameClass} thumbnail-inner ${isgray ? 'gray-hover' : ''}`" :alt="alt" :title="title" :src="src"
-      :data-srcset="src"></img>
+      :class="` ${nameClass} thumbnail-inner ${isgray ? 'gray-hover' : ''}`" :alt="alt" :title="title" :src="srcImg"
+      ></img>
   </div>
 </template>
 
@@ -48,6 +48,10 @@ export default {
     coverimg: {
       type: String,
       default: "cover",
+    },
+    srcImg: {
+      type: String,
+      default: "img",
     },
     sourceVideo: {
       type: String,

@@ -88,10 +88,10 @@ export default {
         width: 100%;
 
         .input-choice {
-            font-size: 10px;
+            font-size: 14px;
             font-family: 'Aeroport-light';
-            height: 30px;
-            line-height: 30px;
+            height: 50px;
+            line-height: 50px;
         }
 
         .input-choice-image {
@@ -100,7 +100,7 @@ export default {
         }
 
         .select-item {
-            font-size: 10px;
+            font-size: 14px;
             font-family: 'Aeroport-light';
         }
     }
