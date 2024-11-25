@@ -3,7 +3,7 @@
         <img class="show-title-image" src="/images/show.png" />
         <div class="list-main-show">
             <b-row v-if="listShow && listShow.length > 0">
-                <b-col class="mb-3" cols="6" lg="3" v-for="(show, idx) in listShow" :key="idx">
+                <b-col class="mb-3 px-1" cols="6" lg="3" v-for="(show, idx) in listShow" :key="idx">
                     <NuxtLink :to="`/show/${show.attributes.slug}`">
                         <ShowItem :isMobile="isMobile" :item="show" />
                     </NuxtLink>

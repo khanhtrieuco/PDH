@@ -43,8 +43,8 @@
                                             <div class="payment-step-address-info-title">SHIPPING OPTION</div>
                                             <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;"
                                             v-for="(_ship, index) in listShipping " :key="index">
-                                                <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" />
-                                                <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 10px;">
+                                                <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" @click="onCheckShipping(_ship.id)" />
+                                                <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 16px;">
                                                     <div :for="_ship.id">{{_ship.attributes.name}}</div>
                                                     <div>{{_ship.attributes.price}} $</div>
                                                 </div>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="payment-step-card">
                         <div :class="stepName >= 2 ? 'payment-step-title' : 'payment-step-title-inactive'">3. {{ $t('Payment') }}</div>
-                            <div class="payment-step-content" v-if="stepName >= 2">
+                            <div class="payment-step-content" v-show="stepName >= 2">
                                 <div class="payment-step-type-name">Payment method</div>
                                 <div class="payment-step-type-check">
                                     <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
@@ -145,7 +145,7 @@
                                 <div class="payment-step-address-info-title">SHIPPING OPTION</div>
                                 <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;"
                                 v-for="(_ship, index) in listShipping " :key="index">
-                                    <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" />
+                                    <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" @click="onCheckShipping(_ship.id)" />
                                     <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 10px;">
                                         <div :for="_ship.id">{{_ship.attributes.name}}</div>
                                         <div>{{_ship.attributes.price}} $</div>
@@ -439,7 +439,8 @@ export default {
             listPaymentCart: [],
             stepName: 0,
             listShipping: [],
-            shipItem: {}
+            shipItem: {},
+            shipChoice: null
         }
     },
     computed: {
@@ -496,7 +497,12 @@ export default {
             if (val !== 'payment') {
                 this.isPaymentAccept = false
             }
-        }
+        },
+        shipChoice: function (val) {
+            if (val && val.id && this.user_address && this.user_address.id) {
+                this.stepName = 2
+            }
+        },
     },
     methods: {
         ...mapActions({
@@ -512,13 +518,18 @@ export default {
             getPlace: 'place/getPlace',
             getAddressByUser: 'auth/getAddressByUser',
         }),
+        onCheckShipping(_id) {
+            this.shipChoice = this.listShipping.find(o=> o.id === _id)
+            this.priceShip = this.shipChoice?.attributes.price
+        },
         async createPaypalOrder() {
             console.log('Creating order...')
             
-            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
+            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0) + this.priceShip
             let _order = {
                 code: `#${this.makeString(8)}`,
                 state: 'new',
+                price_ship: this.priceShip,
                 payment_type: this.paymentType,
                 shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
                 totalPrice: priceTotal,
@@ -549,8 +560,6 @@ export default {
                 this.paymentDone = 'fail'
                 this.payment_order = rs.order
             }
-
-
         },
         checkMobile() {
             if (!process.server) {
@@ -581,8 +590,7 @@ export default {
         },
         async closeUpdateAddress() {
             this.showUpdateAddress = false
-            await this.getAddressByUser(this.profile.id)
-            this.user_address = this.userAddress
+            this.user_address = await this.getAddressByUser(this.profile.id)
         },
         onChoiceAddress(_user) {
             this.stepShow = 'shipping'
@@ -596,20 +604,11 @@ export default {
         },
         onChoicePayment(_payment) {
             this.paymentType = _payment
-            // if (_payment && _payment === 'paypal') {
-            //     // this.isPaymentAccept = true
-            //     this.paymentType = _payment
-            // } else if (_payment && _payment === 'online') {
-            //     // this.isPaymentAccept = true
-            //     this.paymentType = _payment
-            // }
         },
         onChoicePaymentType(_qr) {
             this.current_payment = _qr
             if (_qr && _qr.attributes && _qr.attributes.qr_code.data && _qr.attributes.qr_code.data.attributes.url) {
                 this.isPaymentAccept = true
-                // this.paymentType = _qr.attributes.name
-                // this.modalQrOpen = true
             }
         },
         onDonePayment() {
@@ -663,10 +662,11 @@ export default {
             }
         },
         async onPushOrder() {
-            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
+            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0) + this.priceShip
             let _order = {
                 code: `#${this.makeString(8)}`,
                 state: 'new',
+                price_ship: this.priceShip,
                 payment_type: this.paymentType,
                 shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
                 totalPrice: priceTotal,
@@ -687,7 +687,7 @@ export default {
                     this.showNotification('success', `Đã đặt đơn hàng thành công. Vui lòng thanh toán.`)
                     this.resetUserCart()
                     this.qrcode_info = {
-                        ..._order,
+                        ..._order,                        
                         address_name: this.user_address.attributes?.name,
                         address_phone: this.user_address.attributes?.phone,
                         address_full: this.user_address.attributes?.full_address

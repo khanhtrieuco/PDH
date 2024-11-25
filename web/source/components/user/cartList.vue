@@ -7,7 +7,7 @@
             </div>
             <div class="list-cart-main-list">
                 <div class="list-cart-item" v-for="(item, index) in listItem" :key="index">
-                    <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div class="list-card-div-img">
                             <img class="list-card-image" :src="item.imagelink" />
                         </div>
@@ -21,13 +21,21 @@
                                     {{ item.variant.attributes.size.data.attributes.name }}
                                 </span>
                             </div>
-                            <div class="list-cart-product-des">Quantity
+                            <div class="list-cart-product-des" v-if="!isMobile">Quantity
                                 <CartButton :inumber="item.quantity"
                                     @updateValue="(e) => updateCartValue(item.variant_id, e)" />
                                 <div class="list-cart-product-remove" @click="deleteItemCart(item.variant_id)">Remove</div>
                             </div>
+                            <div class="list-cart-product-des" v-if="isMobile">Quantity
+                                <CartButton :inumber="item.quantity"
+                                    @updateValue="(e) => updateCartValue(item.variant_id, e)" />
+                            </div>
+                            <div style="display:flex;justify-content: space-between; align-items: center;" v-if="isMobile">
+                                <div class="list-cart-product-remove" @click="deleteItemCart(item.variant_id)">Remove</div>
+                                <div class="list-card-div-price">$ {{ item.price * item.quantity | numberWithCommas }}</div>
+                            </div>
                         </div>
-                        <div class="list-card-div-price">
+                        <div class="list-card-div-price" v-if="!isMobile">
                             $ {{ item.price * item.quantity | numberWithCommas }}
                         </div>
                     </div>
@@ -333,8 +341,8 @@ export default {
 
                 .list-card-div-img {
                     .list-card-image {
-                        width: 70px;
-                        height: 95px;
+                        width: 155px;
+                        height: 200px;
                         object-fit: cover;
                     }
                 }
@@ -346,17 +354,19 @@ export default {
 
                     .list-cart-product-name {
                         color: #000;
-                        font-family: 'Aeroport-light';
-                        font-size: 10px;
+                        font-family: 'Aeroport';
+                        font-size: 14px;
                         text-transform: uppercase;
                         line-height: 15px;
+                        margin-bottom: 10px;
                     }
 
                     .list-cart-product-des {
                         color: #717171;
                         font-family: 'Aeroport-light';
-                        font-size: 9px;
+                        font-size: 14px;
                         line-height: 15px;
+                        margin: 5px 0px;
 
                         span {
                             color: #000;
@@ -367,7 +377,7 @@ export default {
                             color: #000;
                             margin-left: 10px;
                             font-family: 'Aeroport-light';
-                            font-size: 9px;
+                            font-size: 14px;
                             text-decoration-line: underline;
                             cursor: pointer;
                         }
@@ -375,12 +385,12 @@ export default {
                 }
 
                 .list-card-div-price {
-                    margin-top: 10px;
+                    margin-top: 0px;
                     width: 70px;
                     color: #000;
-                    text-align: right;
+                    text-align: left;
                     font-family: 'Aeroport-light';
-                    font-size: 11px;
+                    font-size: 14px;
                     text-transform: uppercase;
                     line-height: initial;
                 }

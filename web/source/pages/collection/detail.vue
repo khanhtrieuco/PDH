@@ -37,7 +37,6 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
-
 export default {
     name: 'IndexPage',
     mixins: [general],

@@ -197,6 +197,7 @@ export default {
             commit('set_address', {
                 address: res?.data[0]
             })
+            return res?.data[0]
         }
     },
 

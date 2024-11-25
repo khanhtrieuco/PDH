@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-layout">
     <div id="scrollTop"></div>
     <Header />
     <div id="main">
@@ -78,6 +78,9 @@ export default {
 }
 
 @media (max-width: 520px) {
+  .main-layout{
+    padding-top: 50px;
+  }
   .zalo-support-content {
     width: 70px;
     position: fixed;

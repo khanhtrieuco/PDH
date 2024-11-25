@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="container-header" v-if="isMobile">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" v-if="showMenuScroll">
           <img class="menu-logo" @click="goPage('/')" src="/images/logo.png" />
           <div class="d-inline-flex" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" />
@@ -988,12 +988,13 @@ export default {
 
 @media (max-width: 520px) {
   .header {
-    position: relative;
+    position: fixed;
     top: 0px;
     width: 100%;
     height: 47px;
     line-height: 47px;
     overflow: hidden;
+    background-color: transparent;
 
     .lang-btn {
       cursor: pointer;

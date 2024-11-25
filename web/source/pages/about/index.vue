@@ -1669,22 +1669,26 @@ export default {
             .slider_nav {
                 .slider_nav_prev {
                     position: absolute;
-                    left: 80px;
-                    top: auto;
-                    bottom: 50px;
+                    left: 50px;
+                    top: 85px;
+                    bottom: auto;
                     transform: translateY(-50%);
                     cursor: pointer;
                     z-index: 4;
+                    padding: 15px;
+                    width: 40px;
                 }
 
                 .slider_nav_next {
                     position: absolute;
-                    right: 80px;
-                    top: auto;
-                    bottom: 50px;
+                    right: 50px;
+                    top: 85px;
+                    bottom: auto;
                     transform: translateY(-50%);
                     cursor: pointer;
                     z-index: 4;
+                    padding: 15px;
+                    width: 40px;
                 }
             }
         }

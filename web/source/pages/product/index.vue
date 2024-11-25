@@ -146,16 +146,16 @@
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recommend</div>
                 <b-row v-if="listRelated && listRelated.length > 0">
-                    <b-col class="mb-4" cols="6" lg="3" v-for="_item, index in listRelated" :key="index">
-                        <ProductItem :item="_item" :isMobile="isMobile" height="290px" />
+                    <b-col class="mb-4 px-1" cols="6" lg="3" v-for="_item, index in listRelated" :key="index">
+                        <ProductItem :item="_item" :isMobile="isMobile" height="260px" />
                     </b-col>
                 </b-row>
             </div>
             <div class="product-detail-list-related">
                 <div class="product-detail-list-title">Recently viewed</div>
                 <b-row v-if="listView && listView.length > 0">
-                    <b-col class="mb-4" cols="6" lg="3" v-for="_item, index in listView" :key="index">
-                        <ProductItem :item="_item" :isMobile="isMobile" height="290px" />
+                    <b-col class="mb-4 px-1" cols="6" lg="3" v-for="_item, index in listView" :key="index">
+                        <ProductItem :item="_item" :isMobile="isMobile" height="260px" />
                     </b-col>
                 </b-row>
                 <!-- <div class="product-detail-list-btn">More items from collection</div> -->
@@ -206,21 +206,19 @@ export default {
                 // "edgeFriction": 0.35,
                 // "infinite": true,
                 // "speed": 500,
-                // "slidesToShow": 1,
-                // "slidesToScroll": 1,
-                vertical:true,
-                verticalSwiping:true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
+                "vertical": true,
+                "verticalSwiping": true,
+                "swipe": true,
+                "swipeToSlide": true,
+                "slidesToShow": 1,
+                "slidesToScroll": 1,
                 autoplay: false,
                 autoplaySpeed: 0,
                 speed: 500,
                 cssEase: 'linear',
                 infinite: true,
                 arrows:false,
-                touchMove:true,
-                swipeToSlide:true,
-                swipe:true
+                // touchMove:true
             },
             settings_m: {
                 "dots": true,

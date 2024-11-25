@@ -4,10 +4,11 @@
         <div class="save-item-des">You Have {{ listLike.length }} Items In Saved Items.</div>
         <div class="container save-item-products">
             <b-row v-if="listLike">
-                <b-col class="mb-3" cols="6" lg="3" v-for="_pro, index in listLike" :key="index">
-                    <ProductItem :item="_pro" :isMobile="isMobile" :height="isMobile ? '215px' : '330px'" />
+                <b-col class="mb-3 px-1" cols="6" lg="3" v-for="_pro, index in listLike" :key="index">
+                    <ProductItem :item="_pro" :isMobile="isMobile" :height="isMobile ? '260px' : '330px'" />
                 </b-col>
             </b-row>
+            <div class="back-btn" @click="$router.go(-1)">back to my account</div>
         </div>
     </div>
 </template>
@@ -92,6 +93,15 @@ export default {
         margin-top: 80px;
     }
 }
-
+.back-btn {
+        font-family: 'Aeroport-light';
+        text-align: center;
+        font-size: 16px;
+        text-decoration-line: underline;
+        text-transform: uppercase;
+        color: #000;
+        cursor: pointer;
+        margin-top: 30px;
+    }
 @media (max-width: 520px) {}
 </style>

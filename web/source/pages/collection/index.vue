@@ -23,9 +23,9 @@
             </NuxtLink>
             <div class="collection-products">
                 <b-row v-if="listProduct && listProduct.length > 0">
-                    <b-col class="collection-product-item mb-3" cols="6" lg="4" v-for="_pro, index in listProduct"
+                    <b-col class="collection-product-item mb-3 px-1" cols="6" lg="4" v-for="_pro, index in listProduct"
                         :key="index">
-                        <ProductItem :item="_pro" :isMobile="isMobile" :height="isMobile ? '215px' : '600px'" />
+                        <ProductItem :item="_pro" :isMobile="isMobile" :height="isMobile ? '260px' : '600px'" />
                     </b-col>
                 </b-row>
                 <div v-else>
@@ -41,6 +41,7 @@
 import { mapGetters, mapActions } from "vuex"
 import general from "~/mixins/general"
 import ProductItem from "~/components/product/productItem.vue"
+import ServerService from '@/service/server.service'
 
 export default {
     name: 'IndexPage',
@@ -48,6 +49,79 @@ export default {
         ProductItem
     },
     mixins: [general],
+        async asyncData({ route, req, app, redirect, store }) {
+        let res = await ServerService.request({
+          method: 'get',
+          url: `https://phandanghoang.com/api/collections?populate=*&filters[slug][$eq]=${route.params.id}`
+        })
+        let item = {}
+        if (res && res.data && res.data.length > 0) {
+          item = res.data[0]
+          item.titleShare = res.data[0].attributes.name
+          item.description = res.data[0].attributes.description
+          item.image = res.data[0].attributes.main_thub ? 'https://phandanghoang.com/uploads/' + res.data[0].attributes.main_thub.data?.attributes.url : ''
+          item.current_url = 'https://phandanghoang.com/collection/' + route.params.id
+        }
+        return { s_item: item }
+      },
+    head() {
+      let headJson = {
+          title:
+            this.s_item !== undefined
+              ? this.s_item.titleShare
+              : "PHAN DANG HOANG",
+          meta: [
+            {
+              hid: "og:title",
+              property: "og:title",
+              content: this.s_item !== undefined ? this.s_item.titleShare : ""
+            },
+            {
+              hid: "description",
+              property: "description",
+              content: this.s_item !== undefined ? this.s_item.description : ""
+            },
+            {
+              hid: "og:description",
+              property: "og:description",
+              content: this.s_item !== undefined ? this.s_item.description : ""
+            },
+            {
+              hid: "robots",
+              property: "robots",
+              content:
+                this.s_item !== undefined && this.s_item.meta_robots
+                  ? this.s_item.meta_robots
+                  : "INDEX,FOLLOW"
+            },
+            {
+              hid: "og:image",
+              property: "og:image",
+              content:
+                this.s_item !== undefined && this.s_item.image !== ""
+                  ? this.s_item.image
+                  : ""
+            },
+            {
+              hid: "og:url",
+              property: "og:url",
+              content: this.s_item !== undefined ? this.s_item.current_url : ""
+            },
+            {
+              hid: "keywords",
+              property: "keywords",
+              content: this.s_item !== undefined ? this.s_item.keywords : ""
+            }
+          ],
+          link: [
+            {
+              rel: "canonical",
+              href: this.s_item.current_url
+            }
+          ]
+        }
+        return headJson
+    },
     data() {
         return {
             isMobile: false,
