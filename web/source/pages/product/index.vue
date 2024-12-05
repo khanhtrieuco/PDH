@@ -1,5 +1,11 @@
 <template>
     <div class="product-detail-content">
+        <VueSlickCarousel v-bind="settings_m" class="product-detail-media"
+            v-if="isMobile && product.attributes?.media.data">
+            <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
+                <img class="product-detail-media-img" :src="imgData.attributes?.url" />
+            </div>
+        </VueSlickCarousel>
         <div class="container">
             <div class="product-detail-info">
                 <div class="product-detail-color" @click="scrollToAdd">
@@ -13,7 +19,7 @@
                     <div class="size-value" v-for="_size, index in listSize" :key="index">{{ _size.attributes.name
                         }}</div>
                 </div>
-                <img class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
+                <img v-if="!isMobile" class="product-detail-img" :src="product.attributes?.thub_main.data?.attributes.url" />
                 <div class="product-detail-name">
                     <div class="product-detail-name-title">{{ product.attributes?.name }}</div>
                     <div class="product-detail-name-price">$ {{ product.attributes?.price | numberWithCommas }}
@@ -91,12 +97,6 @@
                     </div>
                 </div>
             </div>
-            <VueSlickCarousel v-bind="settings_m" class="product-detail-media"
-                v-if="isMobile && product.attributes?.media.data">
-                <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
-                    <img class="product-detail-media-img" :src="imgData.attributes?.url" />
-                </div>
-            </VueSlickCarousel>
             <div class="product-detail-data" v-if="isMobile">
                 <div class="product-detail-data-title">Product details</div>
                 <div class="product-detail-data-text"
@@ -228,8 +228,6 @@ export default {
                 "speed": 500,
                 "slidesToShow": 1,
                 "slidesToScroll": 1,
-                vertical:true,
-                verticalSwiping:true,
                 touchMove:true,
                 swipeToSlide:true,
                 swipe:true
@@ -874,6 +872,8 @@ export default {
             .slick-dots {
                 top: auto;
                 bottom: 20px;
+                width: 100%;
+                left: 0px;
 
                 li {
                     margin: 0px 5px;
@@ -1044,7 +1044,7 @@ export default {
 
             .product-detail-color {
                 position: absolute;
-                top: 0px;
+                top: 80px;
                 left: 0px;
                 display: inline-flex;
                 align-items: center;
@@ -1068,7 +1068,7 @@ export default {
 
             .product-detail-size {
                 position: absolute;
-                top: 0px;
+                top: 80px;
                 right: 0px;
                 display: inline-flex;
                 align-items: center;
@@ -1102,20 +1102,20 @@ export default {
                 position: relative;
                 bottom: unset;
                 text-align: left;
-
+                margin-bottom: 5rem;
                 .product-detail-name-title {
                     width: 100%;
                     color: #000;
                     font-family: 'Aeroport';
                     font-size: 20px;
-                    margin-top: 50x;
+                    margin-top: 10px;
                 }
 
                 .product-detail-name-price {
                     color: #000;
                     font-family: 'Aeroport-light';
-                    font-size: 12px;
-                    margin-top: 10px;
+                    font-size: 14px;
+                    margin-top: 4px;
                     margin-bottom: 10px;
                 }
             }
@@ -1139,9 +1139,11 @@ export default {
             width: 100%;
             display: inline-block;
             margin-bottom: 50px;
+            height: 700px;
 
             .product-detail-media-img {
                 width: 100%;
+                height: 700px;
 
                 &:nth-child(even) {
                     margin-left: 10px;

@@ -5,7 +5,7 @@
             <div class="account-content-name">welcome, {{ profile?.username }}</div>
         </div>
         <div class="account-content-top" v-if="isMobile">
-            <img class="account-content-image" src="/images/top-mobile.jpg" />
+            <!-- <img class="account-content-image" src="/images/top-mobile.jpg" /> -->
             <div class="account-content-name">welcome, <span>{{ profile?.username }}</span></div>
         </div>
         <div class="account-content-data" v-if="!isMobile">
@@ -115,97 +115,105 @@
         </div>
         <div class="account-content-data" v-if="isMobile">
             <div class="container">
-                <div class="account-content-card">
-                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
-                        <div class="account-content-card-head-title">Profile</div>
-                        <div class="account-content-card-head-edit" @click="showUpdateProfile = true">Edit</div>
-                    </div>
-                    <div class="account-content-body">
-                        <div class="account-content-body-text">Full Name: {{ profile.username }}</div>
-                        <div class="account-content-body-text">Email Address: {{ profile.email }}</div>
-                        <div class="account-content-body-text">Phone: {{ profile.phone }}</div>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center" style="width: 80%;margin: auto;">
+                    <div :class="tab === 1 ? 'account-content-tab tab-active' : 'account-content-tab'" @click="tab=1">Personal Detail</div>
+                    <div :class="tab === 2 ? 'account-content-tab tab-active' : 'account-content-tab'" @click="tab=2">Orders</div>
                 </div>
-                <div class="account-content-card">
-                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
-                        <div class="account-content-card-head-title">Edit password</div>
-                        <div class="account-content-card-head-edit" @click="showUpdatePassword = true">Edit</div>
-                    </div>
-                    <div class="account-content-body">
-                        <div class="account-content-body-text">Password: *******</div>
-                    </div>
-                </div>
-                <div class="account-content-card">
-                    <div class=" account-content-card-head d-flex justify-content-between align-items-center">
-                        <div class="account-content-card-head-title">Address book</div>
-                        <div class="account-content-card-head-edit" @click="showUpdateAddress = true">Edit</div>
-                    </div>
-                    <div class="account-content-body">
-                        <div class="account-content-body-text">
-                            {{ address.attributes?.name }}
+                <div v-show="tab === 1">
+                    <div class="account-content-card">
+                        <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                            <div class="account-content-card-head-title">Profile</div>
+                            <div class="account-content-card-head-edit" @click="showUpdateProfile = true">Edit</div>
                         </div>
-                        <div class="account-content-body-text">
-                            {{ address.attributes?.email }}
-                        </div>
-                        <div class="account-content-body-text">
-                            {{ address.attributes?.phone }}
-                        </div>
-                        <div class="account-content-body-text">
-                            {{ address.attributes?.full_address }}
+                        <div class="account-content-body">
+                            <div class="account-content-body-text">Full Name: {{ profile.username }}</div>
+                            <div class="account-content-body-text">Email Address: {{ profile.email }}</div>
+                            <div class="account-content-body-text">Phone: {{ profile.phone }}</div>
                         </div>
                     </div>
-                </div>
-                <div class="account-content-card">
-                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
-                        <div class="account-content-card-head-title">Saved items</div>
-                    </div>
-                    <div class="account-content-body">
-                        <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
-                    </div>
-                    <NuxtLink to="/save-item">
-                        <div class="account-content-footer">
-                            show all
+                    <div class="account-content-card">
+                        <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                            <div class="account-content-card-head-title">Edit password</div>
+                            <div class="account-content-card-head-edit" @click="showUpdatePassword = true">Edit</div>
                         </div>
-                    </NuxtLink>
-                </div>
-                <div class="account-content-card">
-                    <div class="account-content-card-head d-flex justify-content-between align-items-center">
-                        <div class="account-content-card-head-title">My orders</div>
+                        <div class="account-content-body">
+                            <div class="account-content-body-text">Password: *******</div>
+                        </div>
                     </div>
-                    <div class="account-content-body">
-                        <div class="account-content-order-item" v-if="index < 3" v-for="_order, index in listUserOrder" :key="index">
-                            <div class="d-flex justify-content-between">
-                                <div class="account-content-order-item-media">
-                                    <img class="account-content-order-item-img"
-                                        :src="_order.cart.product.data.attributes.thub.data.attributes.url" />
-                                    <div class="account-content-order-item-state">{{ $i18n.locale === 'vn' ?
-                                        getStateOrderUser(_order.attributes.state)
-                                        : getStateOrderUserEn(_order.attributes.state) }}</div>
-                                </div>
-                                <div class="account-content-order-item-info">
-                                    <div class="account-content-order-item-info-name">
-                                        {{ _order.cart.product.data.attributes.name }}
+                    <div class="account-content-card">
+                        <div class=" account-content-card-head d-flex justify-content-between align-items-center">
+                            <div class="account-content-card-head-title">Address book</div>
+                            <div class="account-content-card-head-edit" @click="showUpdateAddress = true">Edit</div>
+                        </div>
+                        <div class="account-content-body">
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.name }}
+                            </div>
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.email }}
+                            </div>
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.phone }}
+                            </div>
+                            <div class="account-content-body-text">
+                                {{ address.attributes?.full_address }}
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div v-show="tab === 2">
+                    <div class="account-content-card">
+                        <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                            <div class="account-content-card-head-title">Saved items</div>
+                        </div>
+                        <div class="account-content-body">
+                            <div class="account-content-body-text">All your favorite pieces in one beautiful place.</div>
+                        </div>
+                        <NuxtLink to="/save-item">
+                            <div class="account-content-footer">
+                                show all
+                            </div>
+                        </NuxtLink>
+                    </div>
+                    <div class="account-content-card">
+                        <div class="account-content-card-head d-flex justify-content-between align-items-center">
+                            <div class="account-content-card-head-title">My orders</div>
+                        </div>
+                        <div class="account-content-body">
+                            <div class="account-content-order-item" v-if="index < 3" v-for="_order, index in listUserOrder" :key="index">
+                                <div class="d-flex justify-content-between">
+                                    <div class="account-content-order-item-media">
+                                        <img class="account-content-order-item-img"
+                                            :src="_order.cart.product.data.attributes.thub.data.attributes.url" />
+                                        <div class="account-content-order-item-state">{{ $i18n.locale === 'vn' ?
+                                            getStateOrderUser(_order.attributes.state)
+                                            : getStateOrderUserEn(_order.attributes.state) }}</div>
                                     </div>
-                                    <div class="account-content-order-item-info-des">Color: <span>{{
-                                        _order.cart.variant.data?.attributes.color.data.attributes.name }}</span>
-                                    </div>
-                                    <div class="account-content-order-item-info-des">Size: <span>{{
-                                        _order.cart.variant.data?.attributes.size.data.attributes.name }}</span>
-                                    </div>
-                                    <div class="account-content-order-item-info-des">Quantity: <span>{{
-                                        _order.cart.quantity }}</span></div>
-                                    <div class="account-content-order-item-info-price">
-                                        $ {{ _order.attributes.price | numberWithCommas }}
+                                    <div class="account-content-order-item-info">
+                                        <div class="account-content-order-item-info-name">
+                                            {{ _order.cart.product.data.attributes.name }}
+                                        </div>
+                                        <div class="account-content-order-item-info-des">Color: <span>{{
+                                            _order.cart.variant.data?.attributes.color.data.attributes.name }}</span>
+                                        </div>
+                                        <div class="account-content-order-item-info-des">Size: <span>{{
+                                            _order.cart.variant.data?.attributes.size.data.attributes.name }}</span>
+                                        </div>
+                                        <div class="account-content-order-item-info-des">Quantity: <span>{{
+                                            _order.cart.quantity }}</span></div>
+                                        <div class="account-content-order-item-info-price">
+                                            $ {{ _order.attributes.price | numberWithCommas }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <NuxtLink to="/my-order">
+                            <div class="account-content-footer">
+                                show all
+                            </div>
+                        </NuxtLink>
                     </div>
-                    <NuxtLink to="/my-order">
-                        <div class="account-content-footer">
-                            show all
-                        </div>
-                    </NuxtLink>
                 </div>
             </div>
         </div>
@@ -250,7 +258,8 @@ export default {
             isShowOrders: false,
             isShowProducts: false,
             isShowLike: false,
-            listUserOrder: []
+            listUserOrder: [],
+            tab:1
         }
     },
     async mounted() {
@@ -519,17 +528,18 @@ export default {
     .account-content {
         .account-content-top {
             position: relative;
+            padding: 2rem 0px;
 
             .account-content-image {
                 width: 100%;
             }
 
             .account-content-name {
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%);
-                bottom: 300px;
-                color: #FFF;
+                position: relative;
+                left: auto;
+                transform: translate(0px);
+                bottom: auto;
+                color: #000;
                 text-align: center;
                 font-family: 'Aeroport';
                 font-size: 30px;
@@ -542,9 +552,17 @@ export default {
         }
 
         .account-content-data {
-            background-color: #EEEEEE;
-            padding: 65px 0px;
-
+            background-color: #fff;
+            padding: 0px 0px;
+            .account-content-tab{
+                padding: 0.5rem 1rem;
+                font-family: 'Aeroport';
+                font-size: 16px;
+                margin-bottom: 2rem;
+            }
+            .tab-active{
+                border: 1px solid #D9D9D9;
+            }
             .account-content-left {
                 width: calc(50% - 10px);
                 display: inline-block;
@@ -558,7 +576,8 @@ export default {
             .account-content-card {
                 background-color: #fff;
                 margin-bottom: 20px;
-
+                border: 1px solid #D9D9D9;
+                
                 .account-content-card-head {
                     height: 35px;
                     line-height: 35px;

@@ -14,13 +14,14 @@
 					<div class="client-service-item-des">Mon to Sat: 09am - 09pm</div>
 				</div>
 				<div class="client-service-item">
-					<div class="client-service-item-title">Mail us</div>
-					<a href="mailto:phanhoangg0305@gmail.com"><div class="client-service-item-des">phanhoangg0305@gmail.com</div></a>
-					<div class="client-service-item-des">Mon to Sat: 09am - 09pm</div>
+					<div class="client-service-item-title">CALL us</div>
+					<a href="mailto:phanhoangg0305@gmail.com"><div class="client-service-item-des">+66 2459 0250</div></a>
+					<div class="client-service-item-des">Mon to Sat: 10am-8pm</div>
 				</div>
 				<div class="client-service-item">
 					<div class="client-service-item-title">contact us</div>
-					<a href="mailto:phanhoangg0305@gmail.com"><div class="client-service-item-des">phanhoangg0305@gmail.com</div></a>
+					<div class="client-service-item-des">Send a message</div>
+					<div class="client-service-item-des"> We’ll reply within 48 hours</div>
 				</div>
 				<div class="client-service-item">
 					<div class="client-service-item-title">store appointment</div>

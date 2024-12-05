@@ -128,7 +128,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 				await strapi.db.query('api::order.order').update({
 					where: { id: rorder.id },
 					data: {
-						state: 'confirm',
+						state: 'new',
 						order_paypal_id :res_order.id
 					},
 				})

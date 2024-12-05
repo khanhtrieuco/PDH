@@ -23,45 +23,35 @@
         </div>
         <div class="w-100" v-if="isMobile">
             <div class="qrcode-img">
-                <!-- <div style="font-size: 13px;">{{ payment.attributes?.description }}</div> -->
-                <div class="qrcode-img-title">Số tiền đơn hàng của bạn là: {{ qrcode.totalPrice | numberWithCommas }}{{ ' '
-                }}đ</div>
-                <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
-                <div>Nhập lời nhắn cho người nhận là : <b>{{ qrcode.code }}</b></div>
-                <div v-show="time > 0">Thời gian thanh toán: {{ time }}</div>
-            </div>
-            <div class="qrcode-info">
                 <div class="qrcode-info-title">Cảm ơn bạn. Đơn hàng của bạn đã được nhận</div>
-                <div class="qrcode-info-des">Mã đơn hàng: <span>{{ qrcode.code }}</span></div>
-                <div class="qrcode-info-des">Ngày đặt: <span>{{ toDateAdd(0) }}</span></div>
-                <div class="qrcode-info-des">Người đặt: <span>{{ qrcode.address_name }}</span></div>
-                <div class="qrcode-info-des">Số điện thoại: <span>{{ qrcode.address_phone }}</span></div>
-                <div class="qrcode-info-des">Địa chỉ: <span>{{ qrcode.address_full }}</span></div>
-                <div class="qrcode-info-des">Tổng cộng: <span>{{ qrcode.totalPrice | numberWithCommas }}{{ ' ' }}đ</span>
-                </div>
-                <div class="qrcode-info-des">Thanh toán: <span>{{ payment.attributes?.name }}</span></div>
+                <div class="qrcode-info-title">Số tiền đơn hàng của bạn là</div>
+                <div class="qrcode-img-title">{{ qrcode.totalPrice | numberWithCommas }}{{ ' '}}Đ</div>
+                <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
+                <div>Message for the recipient: <b>{{ qrcode.code }}</b></div>
+                <div v-show="time > 0">Payment time: {{ time }}</div>
             </div>
         </div>
         <div class="qrcode-order">
             <div class="qrcode-order-title">Chi tiết đơn hàng</div>
-            <div class="qrcode-line d-flex justify-content-between">
-                <div class="qrcode-sub-title">Sản phẩm</div>
-                <div class="qrcode-sub-title">Tổng</div>
-            </div>
-            <div class="qrcode-line d-flex justify-content-between" v-for="(_p, idx) in qrcode.listProductItem " :key="idx">
+            <div class="qrcode-line" v-for="(_p, idx) in qrcode.listProductItem " :key="idx">
                 <div class="qrcode-sub-des">{{ _p.name }} x {{ _p.quantity }}</div>
-                <div class="qrcode-sub-des">$ {{ _p.quantity * _p.price | numberWithCommas }}</div>
+                <div class="qrcode-sub-price">$ {{ _p.quantity * _p.price | numberWithCommas }}</div>
             </div>
-            <div class="qrcode-line d-flex justify-content-between">
-                <div class="qrcode-sub-des">Phí shipping</div>
+            <div class="d-flex justify-content-between">
+                <div class="qrcode-sub-des">SUBTOTAL</div>
+                <div class="qrcode-sub-des">{{ qrcode.totalPrice - qrcode.shippingPrice | numberWithCommas }}{{ ' ' }}đ</div>
+            </div>
+            <div class="qrcode-line d-flex justify-content-between pb-3">
+                <div class="qrcode-sub-des">SHIPPING COST</div>
                 <div class="qrcode-sub-des">{{ qrcode.shippingPrice | numberWithCommas }}{{ ' ' }}đ</div>
             </div>
-            <div class="qrcode-line d-flex justify-content-between">
-                <div class="qrcode-sub-last">Tổng cộng</div>
+
+            <div class="d-flex justify-content-between mt-2">
+                <div class="qrcode-sub-last">TOTAL</div>
                 <div class="qrcode-sub-last">{{ qrcode.totalPrice | numberWithCommas }}{{ ' ' }}đ</div>
             </div>
             <div v-show="viewBtn">
-                <div class="nas-btn qrcode-btn" @click="onClickOrder">Hoàn tất thanh toán</div>
+                <div class="nas-btn qrcode-btn" @click="onClickOrder">COMPLETE</div>
             </div>
         </div>
     </div>
@@ -83,6 +73,10 @@ export default {
         qrcode: {
             type: Object,
             default: {},
+        },
+        shippingText: {
+            type: String,
+            default: null,
         },
     },
     data() {
@@ -110,34 +104,40 @@ export default {
 </script>
 <style lang="scss">
 .qrcode-img {
-    width: 50%;
-
+    width: 100%;
+    color: #000;
+    text-align: center;
     .qrcode-img-title {
         font-family: 'inter';
         font-weight: bolder;
-        font-size: 18px;
+        font-family: 'Aeroport';
+        text-align: center;
+        font-size: 16px;
     }
 
     .qrcode-image {
         margin-top: 10px;
         margin-bottom: 10px;
-        width: 100%;
+        width: 50%;
+    }
+
+    .qrcode-info-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-family: 'Aeroport-light';
+        text-align: center;
     }
 }
 
 .qrcode-info {
     width: 50%;
 
-    .qrcode-info-title {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
-
     .qrcode-info-des {
         font-size: 14px;
         font-family: 'Aeroport-light';
         margin-top: 5px;
+        color: #000;
 
         span {
             font-family: 'inter';
@@ -150,8 +150,9 @@ export default {
     margin-top: 30px;
 
     .qrcode-order-title {
-        font-size: 20px;
+        font-size: 16px;
         margin-bottom: 20px;
+        text-transform: uppercase;
     }
 
     .qrcode-line {
@@ -168,8 +169,12 @@ export default {
 
     .qrcode-sub-des {
         font-size: 14px;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        font-family: 'Aeroport';
+        color: #000;
+    }
+
+    .qrcode-sub-price {
+        font-size: 14px;
         font-family: 'Aeroport-light';
     }
 
@@ -177,6 +182,7 @@ export default {
         font-size: 16px;
         font-weight: 600;
         margin-top: 5px;
+        color: #000;
         margin-bottom: 5px;
     }
 }
@@ -198,93 +204,6 @@ export default {
 }
 
 @media (max-width: 520px) {
-    .qrcode-img {
-        width: 100%;
 
-        .qrcode-img-title {
-            font-family: 'inter';
-            font-weight: bolder;
-            font-size: 14px;
-        }
-
-        .qrcode-image {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-    }
-
-    .qrcode-info {
-        margin-top: 30px;
-        width: 100%;
-
-        .qrcode-info-title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .qrcode-info-des {
-            font-size: 9px;
-            font-family: 'Aeroport-light';
-            margin-top: 5px;
-
-            span {
-                font-family: 'inter';
-                font-weight: 600;
-            }
-        }
-    }
-
-    .qrcode-order {
-        margin-top: 20px;
-
-        .qrcode-order-title {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-
-        .qrcode-line {
-            border-bottom: 1px solid #a3a3a3;
-            padding: 5px 0px;
-        }
-
-        .qrcode-sub-title {
-            font-size: 12px;
-            font-weight: 600;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-        .qrcode-sub-des {
-            font-size: 9px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            font-family: 'Aeroport-light';
-        }
-
-        .qrcode-sub-last {
-            font-size: 12px;
-            font-weight: 600;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-    }
-
-    .qrcode-btn {
-        width: 300px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        background-color: #000;
-        color: #fff;
-        text-align: center;
-        cursor: pointer;
-        height: 30px;
-        line-height: 28px;
-        font-family: 'Aeroport-light';
-        font-size: 12px;
-    }
 }
 </style>

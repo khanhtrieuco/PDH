@@ -17,19 +17,15 @@
         <div class="help-card-title">PAYMENT METHODS</div>
         <div class="help-card-des-last">
           <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-visa.svg" />
-            <div class="help-card-item-text">Visa</div>
+            <img class="help-card-image" src="/images/p1.svg" />
+            <div class="help-card-item-text">Momo</div>
+          </div>
+          <div class="help-card-item-1">
+            <img class="help-card-image" src="/images/p2.svg" />
+            <div class="help-card-item-text">Napas</div>
           </div>
           <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-master.svg" />
-            <div class="help-card-item-text">Mastercard</div>
-          </div>
-          <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-ae.svg" />
-            <div class="help-card-item-text">American Express</div>
-          </div>
-          <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-paypal.svg" />
+            <img class="help-card-image" src="/images/p3.svg" />
             <div class="help-card-item-text">Paypal</div>
           </div>
         </div>
@@ -52,19 +48,15 @@
         <div class="help-card-title">PAYMENT METHODS</div>
         <div class="help-card-des-last">
           <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-visa.svg" />
-            <div class="help-card-item-text">Visa</div>
+            <img class="help-card-image" src="/images/p1.svg" />
+            <div class="help-card-item-text">Momo</div>
+          </div>
+          <div class="help-card-item-1">
+            <img class="help-card-image" src="/images/p2.svg" />
+            <div class="help-card-item-text">Napas</div>
           </div>
           <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-master.svg" />
-            <div class="help-card-item-text">Mastercard</div>
-          </div>
-          <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-ae.svg" />
-            <div class="help-card-item-text">American Express</div>
-          </div>
-          <div class="help-card-item">
-            <img class="help-card-image" src="/images/p-paypal.svg" />
+            <img class="help-card-image" src="/images/p3.svg" />
             <div class="help-card-item-text">Paypal</div>
           </div>
         </div>
@@ -116,20 +108,36 @@ export default {
       text-align: center;
       font-family: 'Aeroport-light';
       font-size: 13px;
-      margin-bottom: 10px;
-      padding-left: 30px;
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
 
       .help-card-item {
-        width: 50%;
+        width: 26%;
         display: inline-block;
         float: left;
         text-align: left;
 
         .help-card-image {
           height: 25px;
-          margin-right: 15px;
-          margin-bottom: 10px;
-          margin-top: 5px;
+          margin-right: 5px;
+        }
+
+        .help-card-item-text {
+          line-height: 25px;
+          display: inline-block;
+        }
+      }
+      .help-card-item-1 {
+        width: 38%;
+        display: inline-block;
+        float: left;
+        text-align: left;
+
+        .help-card-image {
+          height: 25px;
+          margin-right: 5px;
         }
 
         .help-card-item-text {
@@ -191,16 +199,33 @@ export default {
         margin-bottom: 10px;
         padding-left: 0px;
         .help-card-item {
-          width: 50%;
+          width: 26%;
           display: inline-block;
           float: left;
           text-align: left;
+          display: flex;
 
           .help-card-image {
-            height: 25px;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            margin-top: 5px;
+            height: auto;
+            margin-right: 5px;
+          }
+
+          .help-card-item-text {
+            line-height: 25px;
+            display: inline-block;
+            font-size: 10px;
+          }
+        }
+        .help-card-item-1 {
+          width: 38%;
+          display: inline-block;
+          float: left;
+          text-align: left;
+          display: flex;
+
+          .help-card-image {
+            height: auto;
+            margin-right: 5px;
           }
 
           .help-card-item-text {

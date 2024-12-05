@@ -1,7 +1,7 @@
 <template>
   <div :class="className">
-    <header class="container">
-      <div class="container-header" v-if="!isMobile">
+    <header class="container" v-if="!isMobile">
+      <div class="container-header">
         <div class="d-flex justify-content-between">
           <!-- <div class="header-lang-content">
             <span :class="`lang-btn ${$i18n.locale === 'en' ? 'lang-btn-active' : ''}`" @click="changeLang()">EN</span>
@@ -36,17 +36,18 @@
           </div>
         </div>
       </div>
-      <div class="container-header" v-if="isMobile">
-        <div class="d-flex justify-content-between" v-if="showMenuScroll">
-          <img class="menu-logo" @click="goPage('/')" src="/images/logo.png" />
+    </header>
+    <header :class="menuColor ? '' : 'mobile-container'" v-if="isMobile && showMenuScroll">
+      <div class="container container-header">
+        <div class="d-flex justify-content-between">
+          <img class="menu-logo" @click="goPage('/')" :src="menuColor ? '/images/logo_w.svg' : '/images/logo.png'" />
           <div class="d-inline-flex" style="position: relative;">
-            <img class="menu-icon" src="/images/search.svg" />
-            <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
+            
+            <img class="menu-icon-bag" :src="menuColor ? '/images/bag_w.svg' : '/images/bag_b.svg'" @click="onShowCart()" />
             <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
-            <div v-if="!loggedIn" @click="goLogin" class="menu-auth-btn">Sign in</div>
-            <div v-else @click="logoutAction" class="menu-auth-btn">Log out</div>
-            <!-- <span class="lang-btn" v-if="$i18n.locale === 'en'" @click="changeLang()">EN</span>
-            <span class="lang-btn" v-if="$i18n.locale === 'vn'" @click="changeLang()">VI</span> -->
+            <img class="menu-icon" :src="menuColor ? '/images/search_w.svg' : '/images/search_b.svg'" />
+            <div v-if="!loggedIn" @click="goLogin" :class="menuColor ? 'menu-auth-btn' : 'menu-auth-btn-b'">Sign in</div>
+            <div v-else @click="logoutAction" :class="menuColor ? 'menu-auth-btn' : 'menu-auth-btn-b'">Log out</div>
           </div>
         </div>
         <img class="menu-mobile-icon" v-if="!showMenuMobile && showMenuScroll" src="/images/menu-mobile.png"
@@ -291,6 +292,7 @@ export default {
       listNewsType2: [],
       listNewsType3: [],
       menuActive: null,
+      menuColor: false,
       num_cart: 0
     }
   },
@@ -330,6 +332,11 @@ export default {
         this.menuActive = 3
       } else {
         this.menuActive = null
+      }
+      if(this.$route.fullPath === "/") {
+        this.menuColor = true
+      } else {
+        this.menuColor = false
       }
     },
     updateCart: function (val) {
@@ -499,6 +506,15 @@ export default {
         this.showMenuScroll = true
       }
       this.lastScrollTop = st <= 0 ? 0 : st;
+      if(this.$route.fullPath === "/") {
+        if(st < 700) {
+          this.menuColor = true
+        } else {
+          this.menuColor = false
+        }
+      } else{
+        this.menuColor = false
+      }
     }
   },
   directives: {
@@ -544,6 +560,10 @@ export default {
   height: 67px;
   line-height: 67px;
   background-color: #fff;
+
+  .mobile-container{
+    background-color: #fff;
+  }
 
   .header-lang-content {
     display: inline-flex;
@@ -642,7 +662,7 @@ export default {
     font-size: 18px;
     margin-right: 15px;
     padding-right: 15px;
-    color: #000;
+    color: #fff;
     position: relative;
 
     &::after {
@@ -653,6 +673,26 @@ export default {
       border-right: 0.8px solid black;
       top: 25px;
       right: 0px;
+    }
+  }
+
+  .menu-auth-btn-b {
+    font-family: 'Aeroport';
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 15px;
+    padding-left: 15px;
+    color: #000;
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 0;
+      height: 20px;
+      position: absolute;
+      border-left: 0.8px solid black;
+      top: 14px;
+      left: 0px;
     }
   }
 
@@ -831,10 +871,33 @@ export default {
       position: absolute;
       right: auto;
       top: 10px;
-      left: 58px;
+      left: 20px;
     }
 
     .menu-auth-btn {
+      font-family: 'Aeroport';
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 15px;
+      padding-left: 15px;
+      margin-right: 0px;
+      padding-right: 0px;
+      color: #fff;
+      position: relative;
+
+      &::after {
+        content: '';
+        width: 0;
+        height: 15px;
+        position: absolute;
+        border-right: 0.8px solid black;
+        top: 18px;
+        right: auto;
+        left: 0px;
+      }
+    }
+
+    .menu-auth-btn-b {
       font-family: 'Aeroport';
       cursor: pointer;
       font-size: 14px;

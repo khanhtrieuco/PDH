@@ -32,28 +32,25 @@
                         <div :class="stepName >= 1 ? 'payment-step-title' : 'payment-step-title-inactive'">2. {{ $t('Payment_title_2') }}</div>
                             <div v-if="stepName >= 1">
                                 <div class="payment-step-content">
-                                    <div class="d-flex">
-                                        <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
-                                            @click="shiping_type = 1">Ship to home</div>
-                                        <div style="cursor: not-allowed;" :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`"
-                                            >Pick up Store</div>
-                                    </div>
                                     <div class="payment-step-address-info" v-if="shiping_type === 1">
                                         <div>
-                                            <div class="payment-step-address-info-title">SHIPPING OPTION</div>
-                                            <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;"
-                                            v-for="(_ship, index) in listShipping " :key="index">
-                                                <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" @click="onCheckShipping(_ship.id)" />
-                                                <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 16px;">
-                                                    <div :for="_ship.id">{{_ship.attributes.name}}</div>
-                                                    <div>{{_ship.attributes.price}} $</div>
+                                            <div class="payment-step-address-info-title">Shipping Option</div>
+                                            <div v-for="(_ship, index) in listShipping " :key="index">
+                                                <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;">
+                                                    <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" @click="onCheckShipping(_ship.id)" />
+                                                    <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 10px;">
+                                                        <div class="payment-shipping-name" :for="_ship.id">{{_ship.attributes.name}}</div>
+                                                        <div class="payment-shipping-price" >{{_ship.attributes.price}} $</div>
+                                                    </div>                                        
                                                 </div>
+                                                <div  class="payment-shipping-des">{{ _ship.attributes.description }}</div>
                                             </div>
                                         </div>
                                         <div class="payment-step-address-update" @click="openAddressPopup"
                                             v-if="!user_address?.id">
                                             You don't have an address yet. Click here to update the address.</div>
                                         <div v-else>
+                                            <div class="payment-step-address-info-title">Shipping Address</div>
                                             <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
                                             <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}
                                             </div>
@@ -80,25 +77,22 @@
                     <div class="payment-step-card">
                         <div :class="stepName >= 2 ? 'payment-step-title' : 'payment-step-title-inactive'">3. {{ $t('Payment') }}</div>
                             <div class="payment-step-content" v-show="stepName >= 2">
-                                <div class="payment-step-type-name">Payment method</div>
-                                <div class="payment-step-type-check">
-                                    <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
-                                    <div class="payment-step-type-text">Paypal</div>
+                                <div class="payment-method-title">Payment Method</div>
+                                <div class="payment-method" v-for="(_pay, index) in listPayment " :key="index">
+                                    <input type="radio" :id="_pay.id" :value="_pay.id" v-model="payItem" @click="onChoicePayment(_pay)" />
+                                    <div style="display: flex;width: 100%;gap: 0.5rem;padding-right: 10px;align-items: center;">
+                                        <img :src="_pay.attributes.thub.data.attributes.url" class="payment-method-icon" />
+                                        <div class="payment-method-name" :for="_pay.id">{{_pay.attributes.name}}</div>
+                                    </div>   
                                 </div>
-                                <div id="paypal-button-container"></div>
-                                <div class="payment-step-type-check">
-                                    <Check :checked="paymentType === 'online'" @choice="onChoicePayment('online')"></Check>
-                                    <div class="payment-step-type-text">Online</div>
-                                </div>
-                                 <div class="user-payment-menthod-list" v-if="paymentType && paymentType === 'online'">
-                                    <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
-                                        v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3" @click="onChoicePaymentType(_pay)">
-                                        <img :src="_pay.attributes.thub.data.attributes.url" class="user-payment-icon" />
+                                <div v-show="payChoice > 0" class="payment-method-title mt-4">Payment Detail</div>
+                                <div v-show="payChoice === 3">
+                                    <div id="paypal-button-container"></div>
+                                </div>                        
+                                <div v-show="payChoice === 4 || payChoice === 1">
+                                    <div class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
                                     </div>
                                 </div>
-                                <div v-if="paymentType === 'online' && isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
-                                </div>
-                                <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
                             </div>
                     </div>
                 </div>
@@ -132,29 +126,24 @@
                 <div class="payment-step-card">
                     <div :class="stepName >= 1 ? 'payment-step-title' : 'payment-step-title-inactive'">2. {{ $t('Payment_title_2') }}</div>
                     <div v-if="stepName >= 1">
-                        <div class="payment-step-content">
-                            <div class="d-flex">
-                                <div :class="`payment-step-shipping-choice ${shiping_type === 1 ? 'shiping-active' : ''}`"
-                                    @click="shiping_type = 1">Ship to home</div>
-                                <div :class="`payment-step-shipping-choice ${shiping_type === 2 ? 'shiping-active' : ''}`">
-                                    Pick up Store</div>
-                            </div>
-                        </div>
                         <div class="payment-step-address-info" v-if="shiping_type === 1">
                             <div>
-                                <div class="payment-step-address-info-title">SHIPPING OPTION</div>
-                                <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;"
-                                v-for="(_ship, index) in listShipping " :key="index">
-                                    <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" @click="onCheckShipping(_ship.id)" />
-                                    <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 10px;">
-                                        <div :for="_ship.id">{{_ship.attributes.name}}</div>
-                                        <div>{{_ship.attributes.price}} $</div>
+                                <div class="payment-step-address-info-title">Shipping Option</div>
+                                <div v-for="(_ship, index) in listShipping " :key="index">
+                                    <div style="display: flex;gap: 4px;justify-items: center;align-items: center;margin: 5px 0px;">
+                                        <input type="radio" :id="_ship.id" :value="_ship.id" v-model="shipItem" @click="onCheckShipping(_ship.id)" />
+                                        <div style="display: flex;width: 100%;justify-content: space-between;padding-right: 10px;align-items: center; font-size: 10px;">
+                                            <div class="payment-shipping-name" :for="_ship.id">{{_ship.attributes.name}}</div>
+                                            <div class="payment-shipping-price" >{{_ship.attributes.price}} $</div>
+                                        </div>                                        
                                     </div>
+                                    <div  class="payment-shipping-des">{{ _ship.attributes.description }}</div>
                                 </div>
                             </div>
                             <div class="payment-step-address-update" @click="openAddressPopup" v-if="!user_address?.id">
                                 You don't have an address yet. Click here to update the address.</div>
                             <div v-else>
+                                <div class="payment-step-address-info-title">Shipping Address</div>
                                 <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
                                 <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
                                 <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
@@ -178,25 +167,23 @@
                 </div>
                 <div class="payment-step-card">
                     <div :class="stepName >= 2 ? 'payment-step-title' : 'payment-step-title-inactive'">3. {{ $t('Payment') }}</div>
-                    <div class="payment-step-content">
-                        <div class="payment-step-type-check" v-if="stepName >= 2">
-                            <Check :checked="paymentType === 'paypal'" @choice="onChoicePayment('paypal')"></Check>
-                            <div class="payment-step-type-text">Paypal</div>
+                    <div class="payment-step-content" v-show="stepName >= 2">
+                        <div class="payment-method-title">Payment Method</div>
+                        <div class="payment-method" v-for="(_pay, index) in listPayment " :key="index">
+                            <input type="radio" :id="_pay.id" :value="_pay.id" v-model="payItem" @click="onChoicePayment(_pay)" />
+                            <div style="display: flex;width: 100%;gap: 0.5rem;padding-right: 10px;align-items: center;">
+                                <img :src="_pay.attributes.thub.data.attributes.url" class="payment-method-icon" />
+                                <div class="payment-method-name" :for="_pay.id">{{_pay.attributes.name}}</div>
+                            </div>   
                         </div>
-                        <div id="paypal-button-container"></div>
-                        <div class="payment-step-type-check">
-                            <Check :checked="paymentType === 'online'" @choice="onChoicePayment('online')"></Check>
-                            <div class="payment-step-type-text">Online</div>
-                        </div>
-                         <div class="user-payment-menthod-list" v-if="paymentType && paymentType === 'online'">
-                            <div :class="`user-payment-menthod-item ${_pay.id === current_payment?.id ? 'user-payment-menthod-item-active' : ''}`"
-                                v-for="(_pay, index) in listPayment " :key="index" v-if="_pay.id != 3" @click="onChoicePaymentType(_pay)">
-                                <img :src="_pay.attributes.thub.data.attributes.url" class="user-payment-icon" />
+                        <div v-show="payChoice > 0" class="payment-method-title mt-4">Payment Detail</div>
+                        <div v-show="payChoice === 3">
+                            <div id="paypal-button-container"></div>
+                        </div>                        
+                        <div v-show="payChoice === 4 || payChoice === 1">
+                            <div class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
                             </div>
                         </div>
-                        <div v-if="paymentType === 'online' && isPaymentAccept" class="payment-step-btn-perchase" @click="onPushOrderOnline">Purchase
-                        </div>
-                        <div v-if="paymentType === 'online' && !isPaymentAccept" class="payment-step-btn-unperchase">Purchase</div>
                     </div>
                 </div>
                 <UserCart :listItem="listCart" :isMobile="isMobile" :priceShip="priceShip" />
@@ -206,28 +193,28 @@
             <div class="payment-order-top">
                 <div class="payment-order-top-title">ORDERED SUCCESSFULLY</div>
                 <div class="payment-order-top-code">{{ payment_order.code }}</div>
-                <div class="payment-order-top-des">Your order is placed successfully, to track the order status, please
-                    click “My order” or add more products in the shopping cart </div>
+                <div class="payment-order-top-des">Your order is placed successfully.<br/>
+                Đơn hàng của bạn sẽ được PHAN DANG HOANG xác nhận trong vòng 24 tiếng sau khi đặt hàng thành công.</div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
-                    <div class="payment-order-btn" @click="goPage('/account')">my order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>
+                    <div class="payment-order-btn" @click="goPage('/account')">track your order</div>
                 </div>
                 <div v-if="isMobile">
-                    <div class="payment-order-btn" @click="goPage('/account')">my order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>
+                    <div class="payment-order-btn mt-2" @click="goPage('/account')">track your order</div>
                 </div>
             </div>
             <div class="payment-step-card">
                 <div class="payment-step-title">1. Customer Detail</div>
                 <div class="payment-step-content">
-                    <div class="d-flex justify-content-between">
-                        <div class="w-50">
+                    <div class="">
+                        <div class="payment-step-content-border">
                             <div class="payment-step-success-title">Contact</div>
                             <div class="payment-step-success-text">Email: {{ profile.email }}</div>
                             <div class="payment-step-success-text">Phone: {{ profile.phone }}</div>
                         </div>
-                        <div class="w-50">
-                            <div class="payment-step-success-title">Billing Address</div>
+                        <div class="">
+                            <div class="payment-step-success-title">Delivery Address</div>
                             <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
                             <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
@@ -283,10 +270,10 @@
                             <div>Subtotal</div>
                             <div>{{ payment_order.price | numberWithCommas }} $</div>
                         </div>
-                        <!-- <div class="payment-info-text d-flex justify-content-between">
+                        <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
-                            <div>{{ 0 | numberWithCommas }} đ</div>
-                        </div> -->
+                            <div>{{ payment_order.price_ship | numberWithCommas }} $</div>
+                        </div>
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
                             <div><b>{{ payment_order.price + 0 | numberWithCommas }} $</b></div>
@@ -299,28 +286,27 @@
             <div class="payment-order-top">
                 <div class="payment-order-top-title">ORDERED UNSUCCESSFULLY</div>
                 <div class="payment-order-top-code">{{ payment_order.code }}</div>
-                <div class="payment-order-top-des">Your order is unsuccessful in payment. Please re-order and check
-                    again your payment method to continue the shopping experiences</div>
+                <div class="payment-order-top-des">Your order is unsuccessful in payment. Please re-order and check again your payment method to continue the shopping experiences.</div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
-                    <div class="payment-order-btn" @click="goPage('/gio-hang')">Re-Order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">HomePage</div>
+                    <div class="payment-order-btn" @click="goPage('/gio-hang')">Re-Order</div>
                 </div>
                 <div v-if="isMobile">
-                    <div class="payment-order-btn" @click="goPage('/gio-hang')">Re-Order</div>
                     <div class="payment-order-btn-shop" @click="goPage('/')">HomePage</div>
+                    <div class="payment-order-btn mt-2" @click="goPage('/gio-hang')">Re-Order</div>
                 </div>
             </div>
             <div class="payment-step-card">
                 <div class="payment-step-title">1. Customer Detail</div>
                 <div class="payment-step-content">
-                    <div class="d-flex justify-content-between">
-                        <div class="w-50">
+                    <div class="">
+                        <div class="payment-step-content-border">
                             <div class="payment-step-success-title">Contact</div>
                             <div class="payment-step-success-text">Email: {{ profile.email }}</div>
                             <div class="payment-step-success-text">Phone: {{ profile.phone }}</div>
                         </div>
-                        <div class="w-50">
-                            <div class="payment-step-success-title">Billing Address</div>
+                        <div class="">
+                            <div class="payment-step-success-title">Delivery Address</div>
                             <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
                             <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
@@ -367,7 +353,7 @@
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Payment method</div>
-                        <div>Credit card</div>
+                        <div>{{ payment_order.payment_type }}</div>
                     </div>
                 </div>
                 <div class="payment-step-extra">
@@ -376,10 +362,10 @@
                             <div>Subtotal</div>
                             <div>{{ payment_order.price | numberWithCommas }} $</div>
                         </div>
-                        <!-- <div class="payment-info-text d-flex justify-content-between">
+                        <div class="payment-info-text d-flex justify-content-between">
                             <div>Shipping</div>
-                            <div>{{ 0 | numberWithCommas }} đ</div>
-                        </div> -->
+                            <div>{{ payment_order.price_ship | numberWithCommas }} $</div>
+                        </div>
                         <div class="payment-info-total d-flex justify-content-between">
                             <div class="">Total</div>
                             <div><b>{{ payment_order.price + 0 | numberWithCommas }} $</b></div>
@@ -388,7 +374,7 @@
                 </div>
             </div>
         </div>
-        <a-modal title="Thông tin thanh toán" :visible="modalQrOpen" :destroyOnClose="true" :closable="false"
+        <a-modal title="ORDER INFORMATION" :visible="modalQrOpen" :destroyOnClose="true" :closable="false"
             :maskClosable="false" :footer="null" width="800px" @cancel="() => this.modalQrOpen = false">
             <Qrcode :isMobile="isMobile" :payment="current_payment" :qrcode="qrcode_info" @onDonePayment="onDonePayment" />
         </a-modal>
@@ -440,7 +426,9 @@ export default {
             stepName: 0,
             listShipping: [],
             shipItem: {},
-            shipChoice: null
+            shipChoice: null,
+            payChoice: null,
+            payItem: {}
         }
     },
     computed: {
@@ -488,7 +476,7 @@ export default {
         if(this.loggedIn) {
             this.stepName = 1
         }
-        if(this.shipItem.id) {
+        if(this.shipChoice) {
             this.stepName = 2
         }
     },
@@ -530,7 +518,7 @@ export default {
                 code: `#${this.makeString(8)}`,
                 state: 'new',
                 price_ship: this.priceShip,
-                payment_type: this.paymentType,
+                payment_type: 'paypal',
                 shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
                 totalPrice: priceTotal,
                 listProductItem: this.listCart.map(o => {
@@ -603,7 +591,11 @@ export default {
             }
         },
         onChoicePayment(_payment) {
-            this.paymentType = _payment
+            this.payChoice = _payment.id
+            this.paymentType = _payment.attributes.name
+            if(_payment.id !== 3) {
+                this.current_payment = _payment
+            }
         },
         onChoicePaymentType(_qr) {
             this.current_payment = _qr
@@ -640,64 +632,17 @@ export default {
             let rs = await this.createOrderOnline(_order)
             if (rs && rs.data) {
                 this.order = rs.data
-                if (this.paymentType === 'online') {
-                    this.showNotification('success', `Đã đặt đơn hàng thành công. Vui lòng thanh toán.`)
-                    this.resetUserCart()
-                    this.qrcode_info = {
-                        ..._order,
-                        totalPrice: _order.totalPrice * 25000,
-                        address_name: this.user_address.attributes?.name,
-                        address_phone: this.user_address.attributes?.phone,
-                        address_full: this.user_address.attributes?.full_address
-                    }
-                    this.payment_order = rs.data
-
-                    this.modalQrOpen = true
-                    // this.qrcode_info = _order
-
+                this.showNotification('success', `Đã đặt đơn hàng thành công. Vui lòng thanh toán.`)
+                this.resetUserCart()
+                this.qrcode_info = {
+                    ..._order,
+                    totalPrice: _order.totalPrice * 25000,
+                    address_name: this.user_address.attributes?.name,
+                    address_phone: this.user_address.attributes?.phone,
+                    address_full: this.user_address.attributes?.full_address
                 }
-            } else {
-                this.showNotification('danger', `Đặt đơn hàng thất bại`)
-                this.paymentDone = 'fail'
-            }
-        },
-        async onPushOrder() {
-            let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0) + this.priceShip
-            let _order = {
-                code: `#${this.makeString(8)}`,
-                state: 'new',
-                price_ship: this.priceShip,
-                payment_type: this.paymentType,
-                shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
-                totalPrice: priceTotal,
-                listProductItem: this.listCart.map(o => {
-                    return {
-                        id: o.id,
-                        variant_id: o.variant_id,
-                        name: o.name,
-                        quantity: o.quantity,
-                        price: o.price
-                    }
-                })
-            }
-            let rs = await this.createOrder(_order)
-            if (rs && rs.data) {
-                this.order = rs.data
-                if (this.paymentType !== 'cod') {
-                    this.showNotification('success', `Đã đặt đơn hàng thành công. Vui lòng thanh toán.`)
-                    this.resetUserCart()
-                    this.qrcode_info = {
-                        ..._order,                        
-                        address_name: this.user_address.attributes?.name,
-                        address_phone: this.user_address.attributes?.phone,
-                        address_full: this.user_address.attributes?.full_address
-                    }
-                    this.modalQrOpen = true
-                } else {
-                    this.showNotification('success', `Đã đặt đơn hàng thành công`)
-                    this.resetUserCart()
-                    this.paymentDone = 'success'
-                }
+                this.payment_order = rs.data
+                this.modalQrOpen = true
             } else {
                 this.showNotification('danger', `Đặt đơn hàng thất bại`)
                 this.paymentDone = 'fail'
@@ -833,8 +778,8 @@ export default {
 
             .payment-product-img {
                 .payment-product-image {
-                    width: 150px;
-                    height: 170px;
+                    width: 145px;
+                    height: 180px;
                     object-fit: cover;
                 }
             }
@@ -902,6 +847,27 @@ export default {
         .payment-step-content {
             padding: 25px;
 
+            .payment-method{
+                display: flex;
+                gap: 0.5rem;
+                display: flex;
+                gap: 0.5rem;
+                background-color: #D9D9D9;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                padding: 0.5rem;
+            }
+
+            .payment-method-title{
+                font-family: 'Aeroport';
+                font-size: 18px;
+                margin-bottom: 1rem;
+            }
+
+            .payment-method-icon{
+                height: 25px;
+            }
+
             .payment-step-content-title {
                 color: #000;
                 font-family: 'Aeroport';
@@ -913,27 +879,6 @@ export default {
                 color: #000;
                 font-family: 'Aeroport-light';
                 font-size: 16px;
-            }
-
-            .payment-step-shipping-choice {
-                background-color: #fff;
-                height: 80px;
-                width: 50%;
-                line-height: 80px;
-                text-align: center;
-                cursor: pointer;
-                color: #000;
-                font-family: 'Aeroport-light';
-                font-size: 16px;
-                text-transform: uppercase;
-                border: 1px solid #D9D9D9;
-            }
-
-            .shiping-active {
-                font-family: 'Aeroport';
-                background-color: #D9D9D9;
-                font-weight: bolder;
-
             }
 
             .payment-step-btn-perchase {
@@ -969,6 +914,11 @@ export default {
                 font-family: 'Aeroport';
                 font-size: 18px;
                 margin-bottom: 10px;
+            }
+
+            .payment-step-content-border{
+                border-bottom: 1px solid #D9D9D9;
+                margin-bottom: 1rem;
             }
 
             .payment-step-success-text {
@@ -1077,12 +1027,13 @@ export default {
         }
 
         .payment-step-address-info {
-            margin-top: 30px;
+            margin-top: 0px;
             padding-left: 20px;
 
             .payment-step-address-info-title{
-                font-size: 16px;
-                font-family: 'Aeroport-bold';
+                font-size: 20px;
+                font-family: 'Aeroport';
+                margin-bottom: 1rem;
             }
 
             .payment-step-address-update {
@@ -1169,7 +1120,23 @@ export default {
         }
     }
 }
-
+.payment-shipping-name{
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: 'Aeroport';
+}
+.payment-shipping-price{
+    font-family: 'Aeroport';
+    font-size: 16px;
+}
+.payment-shipping-des{
+    margin-top: 0.5rem;
+    background-color: #D9D9D9;
+    color: #717171;
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
 @media (max-width: 520px) {
     .payment-content {
         .payment-content-name {
@@ -1333,47 +1300,17 @@ export default {
                 .payment-step-content-title {
                     color: #000;
                     font-family: 'Aeroport';
-                    font-size: 10px;
+                    font-size: 14px;
                     text-transform: uppercase;
                 }
 
                 .payment-step-content-text {
                     color: #000;
                     font-family: 'Aeroport-light';
-                    font-size: 10px;
-                }
-
-                .payment-step-shipping-choice {
-                    background-color: #fff;
-                    height: 40px;
-                    width: 50%;
-                    line-height: 40px;
-                    text-align: center;
-                    cursor: pointer;
-                    color: #000;
-                    font-family: 'Aeroport-light';
-                    font-size: 11px;
-                    text-transform: uppercase;
-                }
-
-                .shiping-active {
-                    font-family: 'Aeroport';
-                    background-color: #D9D9D9;
-                    font-weight: bolder;
-
+                    font-size: 14px;
                 }
 
                 .payment-step-btn-perchase {
-                    width: 100%;
-                    height: 30px;
-                    line-height: 30px;
-                    background-color: #000;
-                    color: #FFF;
-                    text-align: center;
-                    font-family: 'Aeroport';
-                    font-size: 12px;
-                    text-transform: uppercase;
-                    cursor: pointer;
                     margin-top: 20px;
                 }
 
@@ -1394,14 +1331,14 @@ export default {
                 .payment-step-success-title {
                     color: #000;
                     font-family: 'Aeroport';
-                    font-size: 11px;
+                    font-size: 14px;
                     margin-bottom: 10px;
                 }
 
                 .payment-step-success-text {
                     color: #000;
                     font-family: 'Aeroport-light';
-                    font-size: 11px;
+                    font-size: 14px;
                     margin-bottom: 10px;
                 }
             }
@@ -1508,9 +1445,10 @@ export default {
                 margin-top: 0px;
                 padding-left: 20px;
                 padding-bottom: 10px;
+                padding-top: 1rem;
 
                 .payment-step-address-info-title{
-                    font-size: 10px;
+                    font-size: 18px;
                 }
 
                 .payment-step-address-update {
@@ -1525,7 +1463,7 @@ export default {
                 .payment-step-address-name {
                     color: #000;
                     font-family: 'Aeroport-light';
-                    font-size: 10px;
+                    font-size: 14px;
                     text-transform: uppercase;
                     margin-bottom: 5px;
                 }
@@ -1533,7 +1471,7 @@ export default {
                 .payment-step-address-des {
                     color: #717171;
                     font-family: 'Aeroport-light';
-                    font-size: 9px;
+                    font-size: 12px;
                 }
             }
 
@@ -1596,6 +1534,15 @@ export default {
                 }
             }
         }
+    }
+    .payment-shipping-name{
+        font-size: 14px;
+    }
+    .payment-shipping-price{
+        font-size: 14px;
+    }
+    .payment-shipping-des{
+        font-size: 12px;
     }
 }
 </style>

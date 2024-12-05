@@ -111,7 +111,7 @@ export default {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     this.isMobile = this.checkMobile()
     this.getBannerTop()
-    setTimeout(() => { this.animateOnScroll() }, 300)
+    setTimeout(() => { this.animateOnScroll() }, 1000)
   },
   methods: {
     ...mapActions({
@@ -368,6 +368,7 @@ export default {
   .home-top-video {
     position: relative;
     min-height: 600px;
+    margin-top: -47px;
     .home-top-content {
       position: absolute;
       bottom: 120px;

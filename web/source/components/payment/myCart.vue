@@ -43,55 +43,64 @@
             </div>
         </div>
     </div>
-    <div class="my-cart-panel" v-else>
-        <h3 class="my-cart-title">SHOPPING CART</h3>
-        <div class="my-cart-list-product">
-            <b-container>
-                <div class="my-cart-item" v-for="(item, index) in listItem" :key="index">
-                    <div class="d-flex justify-content-between">
-                        <div class="my-card-div-img">
-                            <img class="my-card-image" :src="item.imagelink" />
-                        </div>
-                        <div class="my-card-div-info">
-                            <div class="my-cart-product-name">{{ item.name }}</div>
-                            <div class="my-cart-product-des">Color:
-                                <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+    <div class="my-cart-panel-mobile" v-else :style="isShow ? 'top: 0px;padding-top:1rem;height: 100vh;' : 'bottom: 0px;align-content: center;'">
+        <div class="container" v-show="isShow">
+            <h3 class="my-cart-title">SHOPPING CART</h3>
+            <div class="my-cart-list-product">
+
+                <div class="my-cart-list-data">
+                    <div class="my-cart-item" v-for="(item, index) in listItem" :key="index">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="my-card-div-img">
+                                <img class="my-card-image" :src="item.imagelink" />
                             </div>
-                            <div class="my-cart-product-des">Size:
-                                <span>
-                                    {{ item.variant.attributes.size.data.attributes.name }}
-                                </span>
-                            </div>
-                            <div class="my-cart-product-des">Quantity: <span>{{ item.quantity }}</span></div>
-                            <div class="my-card-div-price">
-                                $ {{ item.price * item.quantity | numberWithCommas }}
+                            <div class="my-card-div-info">
+                                <div class="my-cart-product-name">{{ item.name }}</div>
+                                <div class="my-cart-product-des">Color:
+                                    <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
+                                </div>
+                                <div class="my-cart-product-des">Size:
+                                    <span>
+                                        {{ item.variant.attributes.size.data.attributes.name }}
+                                    </span>
+                                </div>
+                                <div class="my-cart-product-des">Quantity: <span>{{ item.quantity }}</span></div>
+                                <div class="my-card-div-price">
+                                    $ {{ item.price * item.quantity | numberWithCommas }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="my-cart-info">
-                    <div class="my-cart-edit" @click="goPage('/gio-hang')">{{ $t('Cart_edit') }}</div>
-                    <b-row class="my-cart-price-total">
-                        <b-col>                            
-                            <div class="d-flex justify-content-between">
-                                <div style="text-transform: uppercase">{{ $t('Cart_text_2') }}:</div>
-                                <div>{{ total_price | numberWithCommas }}{{ ' ' }}$</div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div style="text-transform: uppercase">Shipping cost:</div>
-                                <div>{{ priceShip | numberWithCommas }}{{ ' ' }}$</div>
-                            </div>
-                            <div class="cart-total d-flex justify-content-between">
-                                <div style="text-transform: uppercase;">{{ $t('Cart_text_4') }}:</div>
-                                <div><b>{{ total_price + priceShip | numberWithCommas }}{{ ' ' }}$</b></div>
-                            </div>
-                        </b-col>
-                    </b-row>
+                    <!-- <div class="my-cart-edit" @click="goPage('/gio-hang')">{{ $t('Cart_edit') }}</div> -->
+                    <div class="my-cart-price-total">                          
+                        <div class="d-flex justify-content-between">
+                            <div >{{ $t('Cart_text_2') }}:</div>
+                            <div>{{ total_price | numberWithCommas }}{{ ' ' }}$</div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div >Shipping cost:</div>
+                            <div>{{ priceShip | numberWithCommas }}{{ ' ' }}$</div>
+                        </div>
+                        <!-- <div class="cart-total d-flex justify-content-between">
+                            <div style="text-transform: uppercase;">{{ $t('Cart_text_4') }}:</div>
+                            <div><b>{{ total_price + priceShip | numberWithCommas }}{{ ' ' }}$</b></div>
+                        </div> -->
+                    </div>
                     <div class="my-cart-btn" v-if="isPaymentAccept">
                         <div class="nas-btn my-cart-done-btn" @click="onClickOrder">{{ $t('Cart_text_7') }}</div>
                     </div>
                 </div>
-            </b-container>
+            </div>
+        </div>
+        <div class="container my-cart-menu">
+            <div class="my-cart-total">Total</div>
+            <div class="my-cart-number">
+                <div><b>{{ total_price + priceShip | numberWithCommas }}{{ ' ' }}$</b></div>
+                <img v-if="isShow" src="/images/downp.svg" @click="isShow = !isShow" />
+                <img v-else src="/images/downp.svg" @click="isShow = !isShow"/>
+            </div>
         </div>
     </div>
 </template>
@@ -124,7 +133,8 @@ export default {
     },
     data() {
         return {
-            total_price: 0
+            total_price: 0,
+            isShow: false,
         }
     },
     mounted() {
@@ -183,7 +193,6 @@ export default {
 
     .my-cart-list-product {
         padding: 25px;
-
         .my-cart-item {
             margin: 10px 0px;
 
@@ -250,96 +259,115 @@ export default {
     }
 
 }
+.my-cart-panel-mobile {
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    left: 0px;
+    background-color: #fff;
+    height: 70px;
+    .my-cart-title {
+        text-align: left;
+        font-size: 20px;
+        color: #2F3036;
+    }
 
-@media (max-width: 520px) {
-    .my-cart-panel {
-        padding-top: 16px;
-        padding-left: 0px;
-        width: 100%;
-        .my-cart-title {
-            text-align: left;
-            margin-left: 16px;
-            font-size: 20px;
-            color: #2F3036;
+    .my-cart-list-product {
+        .my-cart-list-data{
+            height: calc(100vh - 212px);
+            overflow-y: scroll;
         }
+        .my-cart-item {
+            margin-top: 8px;
+            margin-bottom: 20px;
 
-        .my-cart-list-product {
-            margin-top: 0px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 0px;
-            padding-right: 0px;
-            width: 100%;
-
-            .my-cart-item {
-                margin-top: 8px;
-                margin-bottom: 20px;
-
-                .my-card-div-img {
-                    width: 90px;
-                    text-align: center;
-                    .my-card-image{
-                        width: 100%;
-                        height: auto;
-                    }
-                }
-
-                .my-card-div-price {
-                    width: 100%;
-                    font-size: 12px;
-                    margin-bottom: 4px;
-                    text-align: right;
-                }
-
-                .my-card-div-info {
-                    width: 200px;
-                    margin-left: 10px;
-                    .my-cart-product-name {
-                        font-size: 10px;
-                    }
-                    .my-cart-product-des{
-                        margin-top: 0px;
-                        font-size: 10px;
-                        margin-bottom: 0px;
-                    }
-                }
-
-                .my-card-image {
-                    max-height: 100px;
-                }
-
-                
-            }
-        }
-
-        .my-cart-info {
-            margin-top: 50px;
-            padding-top: 16px;
-            border-top: 1px solid #AFAFAF;
-
-            .my-cart-edit {
+            .my-card-div-img {
+                width: 130px;
                 text-align: center;
             }
 
-            .my-cart-price-total {
-                margin-top: 24px;
+            .my-card-div-price {
                 width: 100%;
-                float: none;
+                font-size: 14px;
+                margin-bottom: 4px;
+                text-align: left;
+                font-weight: 600;
+                margin-top: 0.5 rem;
             }
+
+            .my-card-div-info {
+                width: 200px;
+                margin-left: 10px;
+                .my-cart-product-name {
+                    font-size: 14px;
+                    color: #000;
+                    font-family: 'Aeroport';
+                    margin-bottom: 0.5rem;
+                }
+                .my-cart-product-des{
+                    margin-top: 0px;
+                    font-size: 14px;
+                    margin-bottom: 0px;
+                }
+            }
+
+            .my-card-image {
+                width: 130px;
+                height: 200px;
+                max-height: 200px;
+                object-fit: cover;
+            }
+
+            
+        }
+    }
+
+    .my-cart-info {
+        margin-top: 2rem;
+        border-top: 1px solid #AFAFAF;
+
+        .my-cart-edit {
+            text-align: center;
         }
 
-        .my-cart-btn {
+        .my-cart-price-total {
+            margin-top: 24px;
+            font-family: 'Aeroport';
+            margin-bottom: 1rem;
             width: 100%;
-            height: 90px;
             float: none;
-
-            .my-cart-done-btn {
-                width: 100%;
-                margin-top: 30px;
-                float: none;
-            }
         }
+    }
 
+    .my-cart-btn {
+        width: 100%;
+        height: 90px;
+        float: none;
+
+        .my-cart-done-btn {
+            width: 100%;
+            margin-top: 30px;
+            float: none;
+        }
+    }
+}
+.my-cart-menu{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    .my-cart-total{
+        font-family: 'Aeroport';
+        font-size: 16px;
+        font-weight:600;
+    }
+    .my-cart-number{
+        display: flex;
+        align-items: center;
+        align-content: center;
+        gap: 0.5rem;
+    }
+    img{
+        height: 14px;
     }
 }
 </style>

@@ -79,7 +79,7 @@ export default {
 
 @media (max-width: 520px) {
   .main-layout{
-    padding-top: 50px;
+    padding-top: 47px;
   }
   .zalo-support-content {
     width: 70px;

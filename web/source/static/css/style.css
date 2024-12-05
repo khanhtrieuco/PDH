@@ -51,6 +51,10 @@
   animation: bounce-in 1.5s reverse;
 }
 
+.ant-modal-title{
+  font-family: 'Aeroport';
+  text-align: center;
+}
 @keyframes bounce-in {
   0% {
     transform: scale(0);
