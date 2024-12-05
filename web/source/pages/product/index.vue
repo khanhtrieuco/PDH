@@ -3,7 +3,7 @@
         <VueSlickCarousel v-bind="settings_m" class="product-detail-media"
             v-if="isMobile && product.attributes?.media.data">
             <div v-for="(imgData, index) in product.attributes?.media.data" :key="index">
-                <img class="product-detail-media-img" :src="imgData.attributes?.url" />
+                <img class="product-detail-media-img" :src="imgData.attributes?.formats?.medium?.url ?? imgData.attributes?.url" />
             </div>
         </VueSlickCarousel>
         <div class="container">
@@ -30,21 +30,17 @@
                 </div>
             </div>
             <div class="d-flex" v-if="!isMobile">
-                <VueSlickCarousel class="product-detail-media" v-bind="settings"
+                <!-- <VueSlickCarousel class="product-detail-media" v-bind="settings"
                     v-if="product.attributes?.media.data">
                     <img v-for="(imgData, index) in product.attributes?.media.data" :key="index"
                         class="product-detail-media-img-desktop" :src="imgData.attributes?.url" />
-                    <!-- <template slot="prevArrow" v-if="!isMobile">
-                        <div class="pre-arrow">
-                            <img src="/images/left-b.png" />
-                        </div>
-                    </template>
-                    <template slot="nextArrow" v-if="!isMobile">
-                        <div class="next-arrow">
-                            <img src="/images/right-b.png" />
-                        </div>
-                    </template> -->
-                </VueSlickCarousel>
+                </VueSlickCarousel> -->
+                <div class="product-list-image-panel">
+                    <div  class="product-list-image">
+                    <img v-for="(imgData, index) in product.attributes?.media.data" :key="index"
+                        class="product-detail-media-img-desktop" :src="imgData.attributes?.url" />
+                    </div>
+                </div>
                 <div class="product-detail-data">
                     <div class="product-detail-data-title">Product details</div>
                     <div class="product-detail-data-text"
@@ -750,7 +746,19 @@ export default {
         }
     }
 }
-
+.product-list-image-panel{
+    width: calc(50% - 100px);
+    height: 800px;
+    overflow: hidden;
+    .product-list-image{
+        width: calc(100% + 20px);
+        height: 100%;
+        overflow-y: scroll;
+        img{
+            width: 100%;
+        }
+    }
+}
 @media (max-width: 820px) {
     .product-detail-content {
         padding-bottom: 30px;

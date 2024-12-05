@@ -76,6 +76,9 @@ export default {
       this.likeImage = '/images/liked.png'
     }
     this.product_image = this.item.attributes.thub?.data.attributes.url
+    if(this.isMobile) {
+      this.product_image = this.item.attributes.thub?.data.attributes?.formats?.medium?.url  ?? this.item.attributes.thub?.data.attributes.url
+    }
     // if (this.item.attributes && this.item.attributes.variants?.data) {
     //   this.item.attributes.variants.data.forEach(v => {
     //     if(v.attributes.color?.data && v.attributes.size?.data) {
