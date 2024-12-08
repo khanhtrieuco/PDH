@@ -45,7 +45,7 @@
     </div>
     <div class="my-cart-panel-mobile" v-else :style="isShow ? 'top: 0px;padding-top:1rem;height: 100vh;' : 'bottom: 0px;align-content: center;'">
         <div class="container" v-show="isShow">
-            <h3 class="my-cart-title">SHOPPING CART</h3>
+            <h3 class="my-cart-title">Your Items ({{listItem.length}})</h3>
             <div class="my-cart-list-product">
 
                 <div class="my-cart-list-data">
@@ -64,8 +64,8 @@
                                         {{ item.variant.attributes.size.data.attributes.name }}
                                     </span>
                                 </div>
-                                <div class="my-cart-product-des">Quantity: <span>{{ item.quantity }}</span></div>
-                                <div class="my-card-div-price">
+                                <div class="my-cart-product-des mt-2">Quantity: <span class="ml-4">{{ item.quantity }}</span></div>
+                                <div class="my-card-div-price mt-2">
                                     $ {{ item.price * item.quantity | numberWithCommas }}
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                             <div>{{ total_price | numberWithCommas }}{{ ' ' }}$</div>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <div >Shipping cost:</div>
+                            <div >Shipping Fees:</div>
                             <div>{{ priceShip | numberWithCommas }}{{ ' ' }}$</div>
                         </div>
                         <!-- <div class="cart-total d-flex justify-content-between">
@@ -269,7 +269,10 @@ export default {
     .my-cart-title {
         text-align: left;
         font-size: 20px;
+        font-family: 'Aeroport';
         color: #2F3036;
+        border-bottom: 1px solid #AFAFAF;
+        padding-bottom: 1rem;
     }
 
     .my-cart-list-product {
@@ -292,7 +295,7 @@ export default {
                 margin-bottom: 4px;
                 text-align: left;
                 font-weight: 600;
-                margin-top: 0.5 rem;
+                color: #000;
             }
 
             .my-card-div-info {
@@ -323,7 +326,7 @@ export default {
     }
 
     .my-cart-info {
-        margin-top: 2rem;
+        margin-top: 1rem;
         border-top: 1px solid #AFAFAF;
 
         .my-cart-edit {
@@ -365,6 +368,9 @@ export default {
         align-items: center;
         align-content: center;
         gap: 0.5rem;
+        div{
+            white-space: nowrap;
+        }
     }
     img{
         height: 14px;

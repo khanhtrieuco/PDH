@@ -81,6 +81,7 @@ export default {
                         imagelink: data.imagelink,
                         name: data.name,
                         description: data.description,
+                        slug: data.slug,
                         price: data.price,
                         quantity: data.quantity ? data.quantity : 1
                     })
@@ -97,6 +98,7 @@ export default {
                     imagelink: data.imagelink,
                     name: data.name,
                     description: data.description,
+                    slug: data.slug,
                     price: data.price,
                     quantity: data.quantity ? data.quantity : 1
                 }]

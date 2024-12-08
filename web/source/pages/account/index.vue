@@ -280,6 +280,9 @@ export default {
                 cart: o.attributes.cartitems.data[0].attributes
             }
         })
+        if(this.$route.query?.order && this.$route.query?.order == 1) {
+            this.tab = 2
+        }
         // if (this.$route.hash) {
         //     this.setShow(parseInt(this.$route.hash.replace('#', '').replace('tab', '')))
         // }
@@ -528,7 +531,7 @@ export default {
     .account-content {
         .account-content-top {
             position: relative;
-            padding: 2rem 0px;
+            padding: 2rem 10px;
 
             .account-content-image {
                 width: 100%;
@@ -609,6 +612,9 @@ export default {
                         color: #717171;
                         font-family: 'Aeroport-light';
                         font-size: 16px;
+                        width: 100%;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }
                 }
 

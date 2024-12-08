@@ -59,7 +59,7 @@ export default {
           item = res.data[0]
           item.titleShare = res.data[0].attributes.name
           item.description = res.data[0].attributes.description
-          item.image = res.data[0].attributes.main_thub ? 'https://phandanghoang.com/uploads/' + res.data[0].attributes.main_thub.data?.attributes.url : ''
+          item.image = res.data[0].attributes.main_thub ? 'https://phandanghoang.com' + res.data[0].attributes.main_thub.data?.attributes.url : ''
           item.current_url = 'https://phandanghoang.com/collection/' + route.params.id
         }
         return { s_item: item }

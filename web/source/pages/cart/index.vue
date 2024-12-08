@@ -10,10 +10,10 @@
                 <div class="cart-item" v-for="(item, index) in listItem" :key="index">
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="card-div-img">
-                            <img class="card-image" :src="item.imagelink" />
+                            <img class="card-image" :src="item.imagelink" @click="goPage(item.slug)"/>
                         </div>
                         <div class="card-div-info">
-                            <div class="cart-product-name">{{ item.name }}</div>
+                            <div class="cart-product-name" @click="goPage(item.slug)">{{ item.name }}</div>
                             <div class="cart-product-des">Color:
                                 <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
                             </div>
@@ -52,10 +52,10 @@
                 <div class="cart-item" v-for="(item, index) in listItem" :key="index">
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="card-div-img">
-                            <img class="card-image" :src="item.imagelink" />
+                            <img class="card-image" :src="item.imagelink" @click="goPage(item.slug)"/>
                         </div>
                         <div class="card-div-info">
-                            <div class="cart-product-name">{{ item.name }}</div>
+                            <div class="cart-product-name" @click="goPage(item.slug)">{{ item.name }}</div>
                             <div class="cart-product-des">Color:
                                 <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
                             </div>
@@ -148,6 +148,9 @@ export default {
                 _i.quantity = _v
             }
             this.total_price = this.listItem.reduce((_sum, o) => _sum + o.price * o.quantity, 0);
+        },
+        goPage(slug) {
+            this.$router.push({ path: `/san-pham/${slug}` })
         },
         deleteItemCart(variant_id) {
             this.listItem = this.listItem.filter(o => o.variant_id !== variant_id)
@@ -265,6 +268,7 @@ export default {
                 font-family: 'Aeroport-light';
                 text-decoration-line: underline;
                 margin-bottom: 15px;
+                display: none;
             }
 
             .cart-total-text {
@@ -416,10 +420,10 @@ export default {
                 .cart-checkout-btn {
                     background-color: #000;
                     color: #fff;
-                    height: 30px;
+                    height: 50px;
                     font-size: 13px;
                     text-align: center;
-                    line-height: 30px;
+                    line-height: 50px;
                     cursor: pointer;
                     font-family: 'Aeroport-light';
                     margin-top: 20px;

@@ -386,7 +386,13 @@ export default {
     await this.getListCartUser()
     this.loadDataNews()
     this.num_cart = this.listUserCart.length
-
+    let st = document.documentElement.scrollTop;
+    if(this.$route.fullPath === "/") {
+      if(st < 700) this.menuColor = true
+    }
+    if(this.$route.fullPath === "/thanh-toan") {
+      this.showMenuScroll = false
+    }
   },
   methods: {
     ...mapActions({
@@ -514,6 +520,9 @@ export default {
         }
       } else{
         this.menuColor = false
+      }
+      if(this.$route.fullPath === "/thanh-toan") {
+        this.showMenuScroll = false
       }
     }
   },
@@ -670,7 +679,7 @@ export default {
       width: 0;
       height: 20px;
       position: absolute;
-      border-right: 0.8px solid black;
+      border-right: 0.8px solid #fff;
       top: 25px;
       right: 0px;
     }
@@ -890,7 +899,7 @@ export default {
         width: 0;
         height: 15px;
         position: absolute;
-        border-right: 0.8px solid black;
+        border-right: 0.8px solid #fff;
         top: 18px;
         right: auto;
         left: 0px;

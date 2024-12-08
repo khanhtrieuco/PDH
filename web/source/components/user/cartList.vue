@@ -9,10 +9,10 @@
                 <div class="list-cart-item" v-for="(item, index) in listItem" :key="index">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="list-card-div-img">
-                            <img class="list-card-image" :src="item.imagelink" />
+                            <img class="list-card-image" :src="item.imagelink" @click="goPage(item.slug)"/>
                         </div>
                         <div class="list-card-div-info">
-                            <div class="list-cart-product-name">{{ item.name }}</div>
+                            <div class="list-cart-product-name"  @click="goPage(item.slug)">{{ item.name }}</div>
                             <div class="list-cart-product-des">Color:
                                 <span>{{ item.variant.attributes.color.data.attributes.name }}</span>
                             </div>
@@ -26,7 +26,8 @@
                                     @updateValue="(e) => updateCartValue(item.variant_id, e)" />
                                 <div class="list-cart-product-remove" @click="deleteItemCart(item.variant_id)">Remove</div>
                             </div>
-                            <div class="list-cart-product-des" v-if="isMobile">Quantity
+                            <div class="list-cart-product-des" style="display: flex;justify-content: space-between;" v-if="isMobile">
+                                <span>Quantity</span>
                                 <CartButton :inumber="item.quantity"
                                     @updateValue="(e) => updateCartValue(item.variant_id, e)" />
                             </div>
@@ -122,6 +123,10 @@ export default {
             this.setCartCheckoutItem({ listCheckout: this.listItem })
             this.updateCart(this.listItem)
         },
+        goPage(slug) {
+            this.$emit('update:showListCart', false)
+            this.$router.push({ path: `/san-pham/${slug}` })
+        },
         // setCheckItem(_item) {
         //     for (let i = 0; i < this.listItem.length; i++) {
         //         if (this.listItem[i].id === _item.id) {
@@ -208,7 +213,6 @@ export default {
                     color: #000;
                     font-family: 'Aeroport-light';
                     font-size: 16px;
-                    text-transform: uppercase;
                     line-height: 30px;
                 }
 
@@ -317,8 +321,8 @@ export default {
                 font-family: 'Aeroport';
                 font-size: 15px;
                 text-transform: uppercase;
-                margin-top: 40px;
-                margin-bottom: 35px;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
             }
 
             .list-cart-close {
@@ -329,15 +333,17 @@ export default {
         }
 
         .list-cart-main-list {
-            padding-top: 5px;
+            padding-top: 10px;
+            padding-bottom: 10px;
             padding-left: 0px;
             padding-right: 0px;
-            height: calc(100vh - 350px);
+            height: calc(100vh - 400px);
             overflow-y: scroll;
 
             .list-cart-item {
-                padding: 20px 0px;
-                border-bottom: 1px solid #D9D9D9;
+                padding-bottom: 5px;
+                padding-top: 0px;
+                border-bottom: none;
 
                 .list-card-div-img {
                     .list-card-image {
@@ -356,7 +362,6 @@ export default {
                         color: #000;
                         font-family: 'Aeroport';
                         font-size: 14px;
-                        text-transform: uppercase;
                         line-height: 15px;
                         margin-bottom: 10px;
                     }
@@ -369,7 +374,7 @@ export default {
                         margin: 5px 0px;
 
                         span {
-                            color: #000;
+                            color: #717171;
                         }
 
                         .list-cart-product-remove {
@@ -402,7 +407,7 @@ export default {
             width: 100%;
             bottom: 0px;
             background-color: #F5F5F5;
-            padding: 50px;
+            padding: 50px 50px 100px 50px;
 
             .list-cart-total {
                 text-transform: uppercase;
@@ -421,10 +426,10 @@ export default {
             .list-cart-checkout-btn {
                 background-color: #000;
                 color: #fff;
-                height: 30px;
+                height: 50px;
                 font-size: 13px;
                 text-align: center;
-                line-height: 30px;
+                line-height: 50px;
                 cursor: pointer;
                 font-family: 'Aeroport-light';
                 margin-top: 10px;
@@ -434,10 +439,10 @@ export default {
             .list-cart-btn {
                 background-color: #fff;
                 color: #000;
-                height: 30px;
+                height: 50px;
                 font-size: 13px;
                 text-align: center;
-                line-height: 30px;
+                line-height: 50px;
                 cursor: pointer;
                 font-family: 'Aeroport-light';
                 border: 1px solid #000;

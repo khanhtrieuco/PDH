@@ -194,14 +194,14 @@
                 <div class="payment-order-top-title">ORDERED SUCCESSFULLY</div>
                 <div class="payment-order-top-code">{{ payment_order.code }}</div>
                 <div class="payment-order-top-des">Your order is placed successfully.<br/>
-                Đơn hàng của bạn sẽ được PHAN DANG HOANG xác nhận trong vòng 24 tiếng sau khi đặt hàng thành công.</div>
+                Your order will be confirmed by PHAN DANG HOANG within 24 hours after a successful placement.</div>
                 <div class="d-flex justify-content-between" v-if="!isMobile">
                     <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>
-                    <div class="payment-order-btn" @click="goPage('/account')">track your order</div>
+                    <div class="payment-order-btn" @click="goPage('/account?order=1')">track your order</div>
                 </div>
                 <div v-if="isMobile">
                     <div class="payment-order-btn-shop" @click="goPage('/')">continue shopping</div>
-                    <div class="payment-order-btn mt-2" @click="goPage('/account')">track your order</div>
+                    <div class="payment-order-btn mt-2" @click="goPage('/account?order=1')">track your order</div>
                 </div>
             </div>
             <div class="payment-step-card">
@@ -374,7 +374,7 @@
                 </div>
             </div>
         </div>
-        <a-modal title="ORDER INFORMATION" :visible="modalQrOpen" :destroyOnClose="true" :closable="false"
+        <a-modal title="ORDER INFORMATION" :visible="modalQrOpen" :destroyOnClose="true" :closable="true"
             :maskClosable="false" :footer="null" width="800px" @cancel="() => this.modalQrOpen = false">
             <Qrcode :isMobile="isMobile" :payment="current_payment" :qrcode="qrcode_info" @onDonePayment="onDonePayment" />
         </a-modal>
@@ -479,6 +479,7 @@ export default {
         if(this.shipChoice) {
             this.stepName = 2
         }
+
     },
     watch: {
         stepShow: function (val) {
@@ -616,6 +617,7 @@ export default {
             let _order = {
                 code: `#${this.makeString(8)}`,
                 state: 'new',
+                price_ship: this.priceShip,
                 payment_type: this.paymentType,
                 shippingType: this.shiping_type === 1 ? 'ShipToHome' : 'PickUpStore',
                 totalPrice: priceTotal,
@@ -1195,8 +1197,8 @@ export default {
 
                 .payment-order-btn {
                     width: 100%;
-                    height: 30px;
-                    line-height: 30px;
+                    height: 50px;
+                    line-height: 50px;
                     border: 1px solid #000;
                     cursor: pointer;
                     font-family: 'Aeroport-light';
@@ -1209,8 +1211,8 @@ export default {
 
                 .payment-order-btn-shop {
                     width: 100%;
-                    height: 30px;
-                    line-height: 30px;
+                    height: 50px;
+                    line-height: 50px;
                     background-color: #000;
                     cursor: pointer;
                     font-family: 'Aeroport-light';

@@ -389,6 +389,7 @@ export default {
                 name: this.product.attributes.name,
                 description: this.product.attributes.description,
                 price: this.product.attributes.price,
+                slug: this.product.attributes.slug,
                 quantity: 1
             }
             this.addCartItem(_t)
@@ -651,6 +652,7 @@ export default {
             height: 40px;
             display: flex;
             gap: 8px;
+            align-items: center;
 
             .product-detail-data-color-text {
                 color: #000;
@@ -878,17 +880,17 @@ export default {
             }
 
             .slick-dots {
-                top: auto;
-                bottom: 20px;
+                top: 10px;
+                bottom: auto;
                 width: 100%;
                 left: 0px;
 
                 li {
-                    margin: 0px 5px;
+                    margin: 0px 3px;
                     border-radius: 50%;
-                    border: 1px solid #000;
-                    width: 13px;
-                    height: 13px;
+                    border: 1px solid #717171;
+                    width: 6px;
+                    height: 6px;
                     overflow: hidden;
 
                     button:before {
@@ -898,11 +900,12 @@ export default {
                 }
 
                 .slick-active {
-                    border: 1px solid #000;
-
+                    border: 1px solid #ffffff;
+                    width: 7px;
+                    height: 7px;
                     button:before {
                         font-size: 0px;
-                        background-color: #000;
+                        background-color: #ffffff;
                     }
                 }
             }
@@ -932,7 +935,7 @@ export default {
 
             .product-detail-help-box {
                 padding: 10px 25px;
-                border: 2px solid #717171;
+                border: 1px solid #717171;
 
                 .product-detail-help-item {
                     color: #717171;
@@ -1131,13 +1134,13 @@ export default {
             .product-detail-btn {
                 position: relative;
                 width: 100%;
-                height: 30px;
-                line-height: 30px;
+                height: 50px;
+                line-height: 50px;
                 text-align: center;
                 cursor: pointer;
                 color: #000;
                 font-family: 'Aeroport-light';
-                font-size: 11px;
+                font-size: 20px;
                 border: 1px solid;
             }
 
@@ -1188,12 +1191,12 @@ export default {
 
             .product-detail-help-box {
                 padding: 10px 25px;
-                border: 2px solid #717171;
+                border: 1px solid #717171;
 
                 .product-detail-help-item {
                     color: #717171;
                     font-family: 'Aeroport-light';
-                    font-size: 11px;
+                    font-size: 12px;
                     margin: 6px 0px;
                     text-decoration-line: underline;
                     text-transform: uppercase;
@@ -1210,7 +1213,7 @@ export default {
                 .product-detail-data-color-text {
                     color: #000;
                     font-family: 'Aeroport';
-                    font-size: 11px;
+                    font-size: 16px;
                     line-height: 15px;
                 }
             }
@@ -1218,16 +1221,17 @@ export default {
             .product-detail-data-size-text {
                 color: #000;
                 font-family: 'Aeroport';
-                font-size: 10px;
+                font-size: 16px;
                 margin-bottom: 10px;
             }
 
             .product-detail-data-size-des {
                 color: #717171;
                 font-family: 'Aeroport-light';
-                font-size: 10px;
+                font-size: 12px;
                 text-decoration-line: underline;
                 margin-bottom: 10px;
+                text-transform: uppercase;
             }
 
             .product-detail-data-inventory {

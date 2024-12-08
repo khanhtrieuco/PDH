@@ -23,7 +23,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 	},
 	async create(ctx) {
 		const { user } = ctx.state
-		let { shippingType, listProductItem, code, payment_type } = ctx.request.body;
+		let { shippingType, listProductItem, price_ship, code, payment_type } = ctx.request.body;
 		if (!code) {
 			return { message: 'Không tìm thấy mã đơn' };
 		}
@@ -52,7 +52,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			let listVariantId = []
 			let listCartAdd = []
 			let total_price = 0
-			let priceShip = 0 //ship.price
+			let priceShip = price_ship //ship.price
 			let checkCart = true
 			let productName = ''
 			for (let i = 0; i < listProductItem.length; i++) {
@@ -139,7 +139,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 	},
 	async createonline(ctx) {
 		const { user } = ctx.state
-		let { shippingType, listProductItem, code, payment_type } = ctx.request.body;
+		let { shippingType, listProductItem, price_ship, code, payment_type } = ctx.request.body;
 		if (!code) {
 			return { message: 'Không tìm thấy mã đơn' };
 		}
@@ -164,7 +164,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 			let listVariantId = []
 			let listCartAdd = []
 			let total_price = 0
-			let priceShip = 0 //ship.price
+			let priceShip = price_ship //ship.price
 			let checkCart = true
 			let productName = ''
 			for (let i = 0; i < listProductItem.length; i++) {
