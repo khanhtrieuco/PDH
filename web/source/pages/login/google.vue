@@ -14,12 +14,16 @@ import { mapGetters, mapActions } from "vuex"
             if(res) {
                 this.showNotification('success', `Logged in successfully`)
                 let path = window.localStorage.getItem('googleback')
-                if(path) {
-                    window.localStorage.removeItem('googleback')
-                    this.$router.push({ path: `/${path}` })
-                } else {
-                    this.$router.push({ path: '/account' })
-                }                
+                console.log('path',path)
+                setTimeout(()=>{                    
+                    if(path) {
+                        window.localStorage.removeItem('googleback')
+                        this.$router.push({ path: `/${path}` })
+                    } else {
+                        this.$router.push({ path: '/account' })
+                    }
+                },500)
+                
             }
         }
     },
