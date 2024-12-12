@@ -65,7 +65,7 @@ export default {
             width: 17px;
             height: 17px;
             text-align: center;
-            line-height: 16px;
+            line-height: 14px;
             border: 1px solid #515151;
 
         }

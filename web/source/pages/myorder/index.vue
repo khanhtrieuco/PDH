@@ -5,7 +5,7 @@
                 <div class="my-order-title">Order history</div>
             </div>
             <div class="my-order-item" v-for="_order, index in listOrder" :key="index">
-                <div class="container">
+                <div class="container mx-0 px-0">
                     <div class="my-order-item-head d-flex justify-content-between">
                         <div class="my-order-item-code">{{ _order.attributes.code }}</div>
                         <div class="my-order-item-state">{{ $i18n.locale === 'vn' ?
@@ -42,6 +42,7 @@
                     </div>
                 </div>
             </div>
+            <div style="margin: 1rem;" v-if="listOrder && listOrder.length === 0">You currently have no orders</div>
         </div>
         <div class="my-order-back" @click="$router.go(-1)">back to my account</div>
     </div>
@@ -240,7 +241,7 @@ export default {
 
     .my-order-content {
         padding-bottom: 100px;
-        min-height: 700px;
+        min-height: 600px;
         max-width: 80%;
         margin: auto;
         background-color: #fff;
@@ -283,18 +284,19 @@ export default {
             .my-order-item-product-list {
                 border-top: 1px solid #D9D9D9;
                 border-bottom: 1px solid #D9D9D9;
-
+                padding-bottom: 1rem;
                 .my-order-item-product {
-                    padding: 20px 0px;
+                    padding: 10px 0px 0px 0px;
 
 
                     .my-order-item-product-img {
-                        width: 90px;
-                        height: 110px;
+                        width: 120px;
+                        height: 190px;
+                        object-fit: cover;
                     }
 
                     .my-order-item-product-info {
-                        width: calc(100% - 100px);
+                        width: calc(100% - 130px);
                         position: relative;
 
                         .my-order-item-product-info-name {

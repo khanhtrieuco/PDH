@@ -480,6 +480,8 @@ export default {
             this.stepName = 2
         }
 
+        // this.modalQrOpen = true
+        // this.current_payment = this.listPayment[0]
     },
     watch: {
         stepShow: function (val) {
@@ -1451,6 +1453,7 @@ export default {
 
                 .payment-step-address-info-title{
                     font-size: 18px;
+                    color: #000;
                 }
 
                 .payment-step-address-update {
@@ -1538,13 +1541,15 @@ export default {
         }
     }
     .payment-shipping-name{
-        font-size: 14px;
+        font-size: 12px;
+        color: #000;
     }
     .payment-shipping-price{
-        font-size: 14px;
+        color: #000;
+        font-size: 12px;
     }
     .payment-shipping-des{
-        font-size: 12px;
+        font-size: 9px;
     }
 }
 </style>

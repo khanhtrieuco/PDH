@@ -1,6 +1,6 @@
 <template>
   <div :class="className">
-    <header class="container" v-if="!isMobile">
+    <header class="container" v-if="isMobile === false">
       <div class="container-header">
         <div class="d-flex justify-content-between">
           <!-- <div class="header-lang-content">
@@ -42,10 +42,13 @@
         <div class="d-flex justify-content-between">
           <img class="menu-logo" @click="goPage('/')" :src="menuColor ? '/images/logo_w.svg' : '/images/logo.png'" />
           <div class="d-inline-flex" style="position: relative;">
-            
-            <img class="menu-icon-bag" :src="menuColor ? '/images/bag_w.svg' : '/images/bag_b.svg'" @click="onShowCart()" />
-            <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
-            <img class="menu-icon" :src="menuColor ? '/images/search_w.svg' : '/images/search_b.svg'" />
+            <div class="menu-icon-bag">
+              <img style="margin-bottom: 5px;" :src="menuColor ? '/images/bag_w.svg' : '/images/bag_b.svg'" @click="onShowCart()" />
+              <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
+            </div>
+            <div class="menu-icon">
+              <img :src="menuColor ? '/images/search_w.svg' : '/images/search_b.svg'" />
+            </div>
             <div v-if="!loggedIn" @click="goLogin" :class="menuColor ? 'menu-auth-btn' : 'menu-auth-btn-b'">Sign in</div>
             <div v-else @click="logoutAction" :class="menuColor ? 'menu-auth-btn' : 'menu-auth-btn-b'">Log out</div>
           </div>
@@ -261,7 +264,7 @@ export default {
     return {
       className: 'header',
       lang: 'en',
-      isMobile: false,
+      isMobile: null,
       tab: null,
       isOpenTab: false,
       subTab: null,
@@ -693,6 +696,7 @@ export default {
     padding-left: 15px;
     color: #000;
     position: relative;
+    white-space: nowrap;
 
     &::before {
       content: '';
@@ -1097,18 +1101,20 @@ export default {
 
     .menu-icon {
       cursor: pointer;
-      margin-left: 20px;
-      width: 15px;
-      height: 15px;
-      margin-top: 17px;
+      margin-left: 0px;
+      width: 100%;
+      height: 100%;
+      margin-top: 0px;
     }
 
     .menu-icon-bag {
       cursor: pointer;
-      margin-left: 12px;
-      width: 15px;
-      height: 15px;
-      margin-top: 16px;
+      margin-left: 0px;
+      width: 100%;
+      height: 100%;
+      margin-top: 0px;
+      padding-right: 1rem;
+      padding-left: 1rem;
     }
 
     .menu-mobile-icon {

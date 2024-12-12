@@ -68,7 +68,7 @@ export default {
 
     .select-list-list {
         position: absolute;
-        top: 29px;
+        top: 49px;
         left: 0px;
         width: 100%;
         background-color: white;

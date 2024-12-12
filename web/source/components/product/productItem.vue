@@ -301,7 +301,7 @@ export default {
       position: relative;
       margin-bottom: 10px;
       width: 100%;
-      padding-bottom: 10px;
+      padding-bottom: 0px;
       // background-color: #F5F5F5;
 
       img {
@@ -319,6 +319,7 @@ export default {
     .product-name {
       color: #000;
       font-family: 'Aeroport';
+      line-height: 1rem;
       font-size: 14px;
     }
 

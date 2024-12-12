@@ -83,7 +83,7 @@
               {{ $t('Footer_text_21') }}
             </label>
           </div>
-          <div class="footer-des my-4">{{ $t('Footer_text_22') }}</div>
+          <div class="footer-des my-2">{{ $t('Footer_text_22') }}</div>
           <div class="footer-btn-login">{{ $t('Footer_text_23') }}</div>
         </div>
         <div class="col-12">
@@ -174,10 +174,6 @@ export default {
     margin-bottom: 15px;
   }
 
-  .footer-break {
-    margin-bottom: 45px !important;
-  }
-
   .footer-text {
     font-family: 'Aeroport-light';
     font-size: 16px;
@@ -186,6 +182,9 @@ export default {
     cursor: pointer;
     margin-bottom: 15px;
     color: #fff;
+  }
+  .footer-break {
+    margin-bottom: 45px;
   }
 
   .footer-des {
@@ -336,7 +335,7 @@ export default {
     }
 
     .footer-break {
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
     }
 
     .footer-des {
@@ -347,6 +346,7 @@ export default {
 
     .footer-text-span {
       font-family: 'Aeroport-light';
+      margin-top: 1rem;
       font-size: 10px;
     }
 
@@ -360,7 +360,7 @@ export default {
       color: #fff;
       margin-top: 10px;
       font-size: 10px;
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
     }
 
     .footer-check {
@@ -429,7 +429,8 @@ export default {
     }
 
     .footer-btn-login {
-      margin-top: 50px;
+      margin-bottom: 2rem;
+      margin-top: 1.5rem;
       width: 100%;
       height: 40px;
       line-height: 40px;
@@ -441,7 +442,6 @@ export default {
       text-transform: uppercase;
       cursor: pointer;
       background-color: #FFF;
-      margin-bottom: 40px;
     }
 
     .footer-icon {

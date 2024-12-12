@@ -25,7 +25,7 @@
             <div class="qrcode-img">
                 <div class="qrcode-info-title">Thank you. Your order has been received.</div>
                 <div class="qrcode-info-title">Your order amount is</div>
-                <div class="qrcode-img-title">{{ qrcode.totalPrice | numberWithCommas }}{{ ' '}}$</div>
+                <div class="qrcode-img-title">{{ qrcode.totalPrice | numberWithCommas }}{{ ' '}}Đ</div>
                 <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
                 <div>Message for the recipient: <b>{{ qrcode.code }}</b></div>
                 <div v-show="time > 0">Payment time: {{ time }}</div>
@@ -37,9 +37,9 @@
                 <div class="qrcode-sub-des">{{ _p.name }} x {{ _p.quantity }}</div>
                 <div class="qrcode-sub-price">$ {{ _p.quantity * _p.price | numberWithCommas }}</div>
             </div>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between mt-4">
                 <div class="qrcode-sub-des">SUBTOTAL</div>
-                <div class="qrcode-sub-des">{{ (qrcode.totalPrice ?? 0 - (qrcode.price_ship ?? 0)) }}{{ ' ' }}$</div>
+                <div class="qrcode-sub-des">{{ (qrcode.totalPrice ?? 0 - (qrcode.price_ship ?? 0))/25000 }}{{ ' ' }}$</div>
             </div>
             <div class="qrcode-line d-flex justify-content-between pb-3">
                 <div class="qrcode-sub-des">SHIPPING COST</div>
@@ -48,9 +48,9 @@
 
             <div class="d-flex justify-content-between mt-2">
                 <div class="qrcode-sub-last">TOTAL</div>
-                <div class="qrcode-sub-last">{{ qrcode.totalPrice | numberWithCommas }}{{ ' ' }}$</div>
+                <div class="qrcode-sub-last">{{ qrcode.totalPrice/25000 | numberWithCommas }}{{ ' ' }}$</div>
             </div>
-            <div v-show="viewBtn">
+            <div>
                 <div class="nas-btn qrcode-btn" @click="onClickOrder">COMPLETE</div>
             </div>
         </div>

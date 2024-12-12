@@ -225,16 +225,15 @@ export default {
                     span {
                         color: #000;
                     }
-
-                    .list-cart-product-remove {
-                        display: inline-block;
-                        color: #000;
-                        margin-left: 25px;
-                        font-family: 'Aeroport-light';
-                        font-size: 16px;
-                        text-decoration-line: underline;
-                        cursor: pointer;
-                    }
+                }
+                .list-cart-product-remove {
+                    display: inline-block;
+                    color: #000;
+                    margin-left: 25px;
+                    font-family: 'Aeroport-light';
+                    font-size: 16px;
+                    text-decoration-line: underline;
+                    cursor: pointer;
                 }
             }
 
@@ -376,16 +375,15 @@ export default {
                         span {
                             color: #717171;
                         }
-
-                        .list-cart-product-remove {
-                            display: inline-block;
-                            color: #000;
-                            margin-left: 10px;
-                            font-family: 'Aeroport-light';
-                            font-size: 14px;
-                            text-decoration-line: underline;
-                            cursor: pointer;
-                        }
+                    }
+                    .list-cart-product-remove {
+                        display: inline-block;
+                        color: #000;
+                        margin-left: 0px;
+                        font-family: 'Aeroport';
+                        text-decoration-line: none;
+                        font-size: 10px;
+                        cursor: pointer;
                     }
                 }
 

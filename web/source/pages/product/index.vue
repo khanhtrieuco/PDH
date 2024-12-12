@@ -139,23 +139,29 @@
                     Add to cart
                 </div>
             </div>
-            <div class="product-detail-list-related">
-                <div class="product-detail-list-title">Recommend</div>
-                <b-row v-if="listRelated && listRelated.length > 0">
-                    <b-col class="mb-4 px-1" cols="6" lg="3" v-for="_item, index in listRelated" :key="index">
-                        <ProductItem :item="_item" :isMobile="isMobile" height="260px" />
-                    </b-col>
-                </b-row>
+        </div>
+        <div v-if="isMobile">
+            <div class="container">
+                <div class="product-detail-list-related">
+                    <div class="product-detail-list-title">Recommend</div>
+                </div>
             </div>
-            <div class="product-detail-list-related">
-                <div class="product-detail-list-title">Recently viewed</div>
-                <b-row v-if="listView && listView.length > 0">
-                    <b-col class="mb-4 px-1" cols="6" lg="3" v-for="_item, index in listView" :key="index">
-                        <ProductItem :item="_item" :isMobile="isMobile" height="260px" />
-                    </b-col>
-                </b-row>
-                <!-- <div class="product-detail-list-btn">More items from collection</div> -->
+            <div class="product-list-grid" v-if="listRelated && listRelated.length > 0">
+                <div class="product-list-grid-item" v-for="_item, index in listRelated" :key="index">
+                    <ProductItem :item="_item" :isMobile="isMobile" height="260px" />
+                </div>
             </div>
+            <div class="container">
+                <div class="product-detail-list-related">
+                    <div class="product-detail-list-title">Recently viewed</div>
+                </div>
+            </div>
+            <div class="product-list-grid" v-if="listView && listView.length > 0">
+                <div class="product-list-grid-item" v-for="_item, index in listView" :key="index">
+                    <ProductItem :item="_item" :isMobile="isMobile" height="260px" />
+                </div>
+            </div>
+            <!-- <div class="product-detail-list-btn">More items from collection</div> -->
         </div>
         <Size v-if="showSize" :isMobile="isMobile" @closeUpdate="showSize = false" />
         <Shipping v-if="showShiping" :isMobile="isMobile" @closeUpdate="showShiping = false" />
@@ -728,7 +734,6 @@ export default {
             color: #000;
             font-family: 'Aeroport-light';
             font-size: 20px;
-            text-transform: uppercase;
             margin-bottom: 20px;
         }
 
@@ -1021,7 +1026,6 @@ export default {
                 color: #000;
                 font-family: 'Aeroport-light';
                 font-size: 12px;
-                text-transform: uppercase;
                 margin-bottom: 20px;
             }
 
@@ -1271,14 +1275,13 @@ export default {
 
         .product-detail-list-related {
             margin-top: 60px;
-            padding: 60px 0px 0px 0px;
+            padding: 16px 0px 0px 0px;
             border-top: 1px solid #717171;
 
             .product-detail-list-title {
                 color: #000;
                 font-family: 'Aeroport-light';
                 font-size: 16px;
-                text-transform: uppercase;
                 margin-bottom: 20px;
             }
 
@@ -1296,6 +1299,15 @@ export default {
                 margin-right: auto;
                 margin-top: 60px;
             }
+        }
+    }
+    .product-list-grid{
+        display: inline-grid;
+        grid-template-columns: 50% 50%;
+        gap: 8px;
+        width: 100%;
+        .product-list-grid-item{
+            width: 100%;
         }
     }
 }

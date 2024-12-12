@@ -1,6 +1,7 @@
 <template>
     <div class="backgroud-black" @click="$emit('closeUpdate')">
         <div class="popup-content" @click.stop="">
+            <div class="close-btn-address" @click="$emit('closeUpdate')">X</div>
             <div class="address-content">
                 <!-- <img class="address-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
                 <div class="address-title">Add new address</div>
@@ -364,15 +365,23 @@ export default {
         margin-top: 30px;
         position: relative;
     }
-
 }
-
+.close-btn-address{
+    position: absolute;
+    right: 0rem;
+    top: -0.5rem;
+    z-index: 1;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 1rem;
+}
 @media (max-width: 520px) {
     .address-content {
         position: relative;
         top: calc(50% - 730px/2);
         margin: auto;
-        width: 90%;
+        width: 100%;
         height: 730px;
         background-color: #ffffff;
         padding: 20px;
@@ -433,7 +442,16 @@ export default {
             margin-top: 30px;
             position: relative;
         }
-
+    }
+    .close-btn-address{
+        position: absolute;
+        right: 0rem;
+        top: -0.5rem;
+        z-index: 1;
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 1rem;
     }
 }
 </style>
