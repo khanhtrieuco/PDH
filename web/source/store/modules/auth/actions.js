@@ -240,4 +240,32 @@ export default {
         return res
     },
 
+    getForgotPass: async function ({
+        commit
+    }, data) {
+        let res = await ApiService.request({
+            method: "post",
+            url: "api/auth/forgot-password",
+            data: data
+        });
+        if (res) {
+            return true
+        }
+        return false
+    },
+
+    resetPass: async function ({
+        commit
+    }, data) {
+        let res = await ApiService.request({
+            method: "post",
+            url: "api/auth/reset-password",
+            data: data
+        });
+        if (res) {
+            return true
+        }
+        return false
+    },
+
 }

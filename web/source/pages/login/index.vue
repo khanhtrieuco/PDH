@@ -8,6 +8,7 @@
         <div class="page-login-des">or </br> CONTINUE WITH YOUR EMAIL </br> ADDRESS</div>
         <div class="page-login-sub">Sign in with your PHANDANGHOANG email and password or create a profile if you are new.
         </div>
+        <div class="page-forgotpass" @click="showReset = true">Forgot password</div>
         <b-input-group>
             <template #append>
                 <img class="input-icon" src="/images/Edit_light.svg" v-if="onlogin" />
@@ -16,16 +17,16 @@
         </b-input-group>
         <b-input-group v-if="hadaccount">
             <template #append>
-                <img class="input-icon" src="/images/View_fill.svg" @click="onSwitchType" />
+                <img class="input-icon-eye" src="/images/View_fill.svg" @click="onSwitchType" />
             </template>
-            <b-form-input class="page-input-login" v-model="password" :type="typeshow"
+            <b-form-input class="page-input-login mt-4" v-model="password" :type="typeshow"
                 placeholder="Password*"></b-form-input>
         </b-input-group>
         <b-input-group v-if="onlogin">
             <template #append>
-                <img class="input-icon" src="/images/View_fill.svg" @click="onSwitchType" />
+                <img class="input-icon-eye" src="/images/View_fill.svg" @click="onSwitchType" />
             </template>
-            <b-form-input class="page-input-login" v-model="newpassword" :type="typeshow"
+            <b-form-input class="page-input-login  mt-4" v-model="newpassword" :type="typeshow"
             placeholder="Create Password*"></b-form-input>
         </b-input-group>
 
@@ -35,7 +36,7 @@
         <div class="text-pass" v-if="onlogin">- Please enter one special character (!+,-./:;<=>?@)</div>
         <div class="page-input-btn" v-if="!hadaccount && !onlogin" @click="onCheck()">continue</div>
         <div class="page-input-btn" v-if="hadaccount" @click="onLogin()">continue</div>
-        <b-form-input class="page-input-login" v-if="onlogin" v-model="username" placeholder="User Name*"></b-form-input>
+        <b-form-input class="page-input-login mt-4" v-if="onlogin" v-model="username" placeholder="User Name*"></b-form-input>
         <div class="text-pass-sub" v-if="onlogin">By choosing "Create my profile", you confirm that
             you agree to our <u>Terms of Use</u>, that you have acknowledged
             our privacy policy, and that you want to create your PHANDANGHOANG profile.</div>
@@ -45,15 +46,20 @@
             guardian also agrees to such
             registration).</div>
         <div class="page-input-btn" v-if="onlogin" @click="onRegister()">continue</div>
+        <ResetPass :isMobile="isMobile" :show="showReset" @closeUpdate="showReset = false" />
     </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex"
+import ResetPass from "~/components/account/forgotpass.vue"
 import general from "~/mixins/general"
 export default {
     mixins: [general],
     name: 'LoginPage',
+    components: {
+        ResetPass
+    },
     data() {
         return {
             isMobile: false,
@@ -63,7 +69,8 @@ export default {
             newpassword: null,
             hadaccount: false,
             onlogin: false,
-            typeshow:'password'
+            typeshow:'password',
+            showReset: false
         }
     },
     computed: {
@@ -216,13 +223,19 @@ export default {
         font-size: 16px;
         margin-top: 70px;
     }
-
+    .page-forgotpass{
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+        font-family: 'Aeroport-light';
+        text-align: right;
+        cursor: pointer;
+    }
     .page-input-login {
         width: 100%;
         height: 60px;
         padding: 11px 16px;
         border: 1px solid #000;
-        margin-top: 30px;
+        margin-top: 0px;
         border-radius: 0px;
         font-family: 'Aeroport-light';
         color: #000;
@@ -230,7 +243,15 @@ export default {
 
     .input-icon {
         position: absolute;
-        top: 45px;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .input-icon-eye {
+        position: absolute;
+        top: 40px;
         right: 15px;
         cursor: pointer;
         z-index: 10;

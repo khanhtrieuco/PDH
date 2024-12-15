@@ -30,6 +30,7 @@ const Login = () => interopDefault(import('./pages/login/index.vue'))
 const LoginAdmin = () => interopDefault(import('./pages/login/admin.vue'))
 const CallBackGoogle = () => interopDefault(import('./pages/login/google.vue'))
 const CallBackFacebook = () => interopDefault(import('./pages/login/facebook.vue'))
+const ResetPass = () => interopDefault(import('./pages/resetpass/index.vue'))
 const DashboardCrm = () => interopDefault(import('./pages/admin/index.vue'))
 const UserCrm = () => interopDefault(import('./pages/admin/users/index.vue'))
 const ProductCrm = () => interopDefault(import('./pages/admin/products/index.vue'))
@@ -58,6 +59,10 @@ export function createRouter() {
             {
                 path: '/dang-nhap',
                 component: Login
+            },
+            {
+                path: '/reset-password',
+                component: ResetPass
             },
             {
                 path: '/login-crm',

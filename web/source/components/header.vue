@@ -1,5 +1,5 @@
 <template>
-  <div :class="className">
+  <div :class="className" v-click-outside="closeTab">
     <header class="container" v-if="isMobile === false">
       <div class="container-header">
         <div class="d-flex justify-content-between">
@@ -31,8 +31,12 @@
             }}</span>
           <div class="d-inline-flex menu-icon-div" style="position: relative;">
             <img class="menu-icon" src="/images/search.svg" />
-            <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" />
-            <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
+            <!-- <img class="menu-icon-bag" src="/images/bag.svg" @click="onShowCart()" /> -->
+            <div class="menu-icon-bag">
+              <img style="margin-bottom: 35px;width: 100%;" src="/images/bag.svg" @click="onShowCart()" />
+              <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div>
+            </div>
+            <!-- <div class="menu-icon-bag-num" v-if="num_cart > 0">{{ num_cart }}</div> -->
           </div>
         </div>
       </div>
@@ -175,7 +179,7 @@
         </div>
       </div>
     </div>
-    <div v-if="tab === 1 || tab === 2 || tab === 3" class="header-tab-menu" v-click-outside="closeTab">
+    <div v-if="tab === 1 || tab === 2 || tab === 3" class="header-tab-menu">
       <div class="container header-tab-menu-container d-flex justify-content-between">
         <div class="header-tab-menu-col-1" v-for="(_menu, idx) in listCollection[tab-1].child" :key="idx">
           <div class="header-tab-menu-title">{{ _menu.attributes.name }}</div>
@@ -185,7 +189,7 @@
         </div>
       </div>
     </div>
-    <div v-if="tab === 4" class="header-tab-menu-about" v-click-outside="closeTab">
+    <div v-if="tab === 4" class="header-tab-menu-about">
       <div class="container header-tab-menu-container d-flex justify-content-start"
         style="position: absolute;bottom: 70px;margin-left: 30px;">
         <div class="header-tab-menu-col-1">
@@ -236,15 +240,15 @@
         </div>
       </div>
     </div>
-    <div v-if="tab === 5" class="header-tab-menu" v-click-outside="closeTab">
+    <div v-if="tab === 5" class="header-tab-menu">
       <div class="container header-tab-menu-container">
         <div @click="goPage('/account')" class="header-tab-menu-title">My account
         </div>
         <div @click="goPage('/client-service')" class="header-tab-menu-title">Client service</div>
       </div>
     </div>
-    <div v-show="showListCart" class="backgroud-black">
-      <div id="list-cart-content" class="list-cart-content" v-click-outside="hideCart">
+    <div v-show="showListCart" class="backgroud-black" @click="hideCart()">
+      <div id="list-cart-content" class="list-cart-content" @click.stop="">
         <ListCartItem :showListCart.sync="showListCart" :isMobile="isMobile" :listCart="listUserCart"
           @hideListCart="() => { showListCart = false; isOpen = false }" />
       </div>
@@ -422,20 +426,15 @@ export default {
       })
     },
     closeTab() {
-      if (this.isOpenTab) {
+      // if (this.isOpenTab) {
         this.tab = null
-        this.isOpenTab = false
-      } else {
-        this.isOpenTab = true
-      }
+      //   this.isOpenTab = false
+      // } else {
+      //   this.isOpenTab = true
+      // }
     },
     hideCart() {
-      if (this.isOpen) {
-        this.showListCart = false
-        this.isOpen = false
-      } else {
-        this.isOpen = true
-      }
+      this.showListCart = false
     },
     async onShowCart() {
       await this.getListCartUser()
@@ -648,10 +647,11 @@ export default {
 
   .menu-icon-bag {
     cursor: pointer;
-    margin-left: 20px;
-    width: 17px;
-    height: 17px;
-    margin-top: 25px;
+    margin-left: 0px;
+    width: 45px;
+    height: 45px;
+    margin-top: 0px;
+    padding: 15px;
   }
 
   .menu-icon-bag-num {
@@ -664,8 +664,8 @@ export default {
     border-radius: 4px;
     font-size: 10px;
     position: absolute;
-    right: -10px;
-    top: 21px;
+    right: 5px;
+    top: 20px;
   }
 
   .menu-auth-btn {
@@ -768,9 +768,10 @@ export default {
   width: 100vw;
   background-color: #fff;
   padding: 50px;
+  padding-bottom: 0px;
   padding-top: 100px;
   bottom: 67px;
-  height: calc(100vh - 65px);
+  height: 700px;
 
   .header-tab-menu-col-2 {
     width: calc(100% - 250px);
