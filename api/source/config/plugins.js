@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = ({ env }) => ({
     'users-permissions': {
         config: {
           jwt: {
@@ -19,7 +19,7 @@ module.exports = {
           auth: {
             // type: "OAuth2",
             user: 'trieuqk@gmail.com',
-            pass: 'ucrq hxiz bdwu gucy'
+            pass: env('MAILKEY')
           },
         },
         settings: {
@@ -31,4 +31,4 @@ module.exports = {
     // 'google-auth': {
     //     enabled: true,
     // },
-}
+})
