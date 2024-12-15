@@ -759,6 +759,7 @@ export default {
       float: left;
       width: 280px;
       margin-right: 35px;
+      max-width: 400px;
     }
   }
 }
@@ -818,6 +819,7 @@ export default {
       float: left;
       width: calc(50% - 20px);
       margin-right: 20px;
+      max-width: 400px;
     }
   }
 }
