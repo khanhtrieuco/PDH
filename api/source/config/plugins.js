@@ -9,6 +9,25 @@ module.exports = {
           },
         },
     },
+    email: {
+      config: {
+        provider: 'nodemailer',
+        providerOptions: {
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
+          auth: {
+            // type: "OAuth2",
+            user: 'trieuqk@gmail.com',
+            pass: 'ucrq hxiz bdwu gucy'
+          },
+        },
+        settings: {
+          defaultFrom: 'trieuqk@gmail.com',
+          defaultReplyTo: 'trieuqk@gmail.com',
+        },
+      },
+    },
     // 'google-auth': {
     //     enabled: true,
     // },
