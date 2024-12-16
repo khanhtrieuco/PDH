@@ -1106,7 +1106,7 @@ export default {
       cursor: pointer;
       margin-left: 0px;
       width: 100%;
-      height: 100%;
+      height: 47px;
       margin-top: 0px;
     }
 
@@ -1114,10 +1114,17 @@ export default {
       cursor: pointer;
       margin-left: 0px;
       width: 100%;
-      height: 100%;
+      height: 47px;
       margin-top: 0px;
       padding-right: 1rem;
       padding-left: 1rem;
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+    }
+
+    .menu-auth-btn{
+      height: 47px;
+      white-space: nowrap;
     }
 
     .menu-mobile-icon {
