@@ -1,6 +1,6 @@
 <template>
-    <div class="backgroud-black" @click="$emit('closeUpdate')">
-        <div class="popup-content" @click.stop="">
+    <!-- <div class="backgroud-black" @click="$emit('closeUpdate')"> -->
+        <div class="popup-content">
             <div class="prodile-content">
                 <!-- <img class="prodile-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
                 <div class="prodile-title">Edit Profile</div>
@@ -56,7 +56,7 @@
             </div>
             <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>
         </div>
-    </div>
+    <!-- </div> -->
 </template>
   
 <script>
@@ -134,19 +134,17 @@ export default {
     .popup-content {
         position: relative;
     }
-
-    .back-close-popup {
-        font-family: 'Aeroport-light';
-        text-align: center;
-        font-size: 16px;
-        text-decoration-line: underline;
-        text-transform: uppercase;
-        color: #000;
-        cursor: pointer;
-        margin-top: 30px;
-    }
 }
-
+.back-close-popup {
+    font-family: 'Aeroport-light';
+    text-align: center;
+    font-size: 16px;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    margin-top: 30px;
+}
 .prodile-content {
     position: relative;
     margin: auto;

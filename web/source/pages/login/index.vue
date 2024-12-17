@@ -8,7 +8,6 @@
         <div class="page-login-des">or </br> CONTINUE WITH YOUR EMAIL </br> ADDRESS</div>
         <div class="page-login-sub">Sign in with your PHANDANGHOANG email and password or create a profile if you are new.
         </div>
-        <div class="page-forgotpass" @click="showReset = true">Forgot password</div>
         <b-input-group>
             <template #append>
                 <img class="input-icon" src="/images/Edit_light.svg" v-if="onlogin" />
@@ -21,6 +20,7 @@
             </template>
             <b-form-input class="page-input-login mt-4" v-model="password" :type="typeshow"
                 placeholder="Password*"></b-form-input>
+            <div class="page-forgotpass" @click="showReset = true">Forgot password</div>
         </b-input-group>
         <b-input-group v-if="onlogin">
             <template #append>
@@ -224,11 +224,12 @@ export default {
         margin-top: 70px;
     }
     .page-forgotpass{
-        margin-top: 2rem;
+        margin-top: 0.5rem;
         margin-bottom: 0.5rem;
-        font-family: 'Aeroport-light';
+        font-family: "Aeroport-light";
         text-align: right;
         cursor: pointer;
+        width: 100%;
     }
     .page-input-login {
         width: 100%;
@@ -271,7 +272,7 @@ export default {
         letter-spacing: 2px;
         text-transform: uppercase;
         cursor: pointer;
-        margin-top: 30px;
+        margin-top: 1rem;
     }
 
     .text-pass {

@@ -21,6 +21,7 @@
                             <div class="payment-step-login-des">* Password</div>
                             <b-form-input class="payment-step-input-login" v-model="password" type="password"
                                 placeholder="Password*"></b-form-input>
+                            <div class="payment-forgotpass" @click="showReset = true">Forgot password</div>
                             <div class="payment-step-input-btn" @click="onLogin()">continue</div>
                             <div class="page-login-google-btn d-flex justify-content-around align-items-center">
                                 <img class="page-login-google-image" src="/images/google.png" />
@@ -52,7 +53,9 @@
                                         <div v-else>
                                             <div class="payment-step-address-info-title">Shipping Address</div>
                                             <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
-                                            <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}
+                                            <div class="payment-step-address-des">
+                                                <!-- {{ user_address?.attributes?.full_address }}{{ user_address?.attributes?.wards.data?.length > 0 ? `, ${user_address?.attributes?.wards.data[0].attributes.prefix} ${user_address?.attributes?.districts.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.districts.data?.length > 0 ? `, ${user_address?.attributes?.districts.data[0].attributes.prefix} ${user_address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.provinces.data?.length > 0 ? ", " + user_address?.attributes?.provinces.data[0].attributes.name : ""}} -->
+                                                {{ getFullAddress(user_address) }}
                                             </div>
                                             <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                             </div>
@@ -116,6 +119,7 @@
                         <div class="payment-step-login-des">* Password</div>
                         <b-form-input class="payment-step-input-login" v-model="password" type="password"
                             placeholder="Password*"></b-form-input>
+                        <div class="payment-forgotpass" @click="showReset = true">Forgot password</div>
                         <div class="payment-step-input-btn" @click="onLogin()">continue</div>
                         <div class="page-login-google-btn d-flex justify-content-around align-items-center">
                             <img class="page-login-google-image" src="/images/google.png" />
@@ -145,7 +149,10 @@
                             <div v-else>
                                 <div class="payment-step-address-info-title">Shipping Address</div>
                                 <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
-                                <div class="payment-step-address-des">{{ user_address?.attributes?.full_address }}</div>
+                                <div class="payment-step-address-des">
+                                    {{ getFullAddress(user_address) }}
+                                <!-- {{ user_address?.attributes?.full_address }}{{ user_address?.attributes?.wards.data?.length > 0 ? `, ${user_address?.attributes?.wards.data[0].attributes.prefix} ${user_address?.attributes?.districts.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.districts.data?.length > 0 ? `, ${user_address?.attributes?.districts.data[0].attributes.prefix} ${user_address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.provinces.data?.length > 0 ? ", " + user_address?.attributes?.provinces.data[0].attributes.name : ""}} -->
+                            </div>
                                 <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                 </div>
                                 <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
@@ -215,7 +222,7 @@
                         </div>
                         <div class="">
                             <div class="payment-step-success-title">Delivery Address</div>
-                            <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
+                            <div class="payment-step-success-text">{{ address_full }}</div>
                             <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
                     </div>
@@ -253,7 +260,7 @@
                 <div class="payment-step-content">
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Order number</div>
-                        <div>{{ payment_order.code }}</div>
+                        <div><b>{{ payment_order.code }}</b></div>
                     </div>
                     <div class="payment-step-success-text d-flex justify-content-between">
                         <div>Date</div>
@@ -307,7 +314,7 @@
                         </div>
                         <div class="">
                             <div class="payment-step-success-title">Delivery Address</div>
-                            <div class="payment-step-success-text">{{ payment_order.address_full }}</div>
+                            <div class="payment-step-success-text">{{ address_full }}</div>
                             <div class="payment-step-success-text">{{ payment_order.address_phone }}</div>
                         </div>
                     </div>
@@ -379,6 +386,7 @@
             <Qrcode :isMobile="isMobile" :payment="current_payment" :qrcode="qrcode_info" @onDonePayment="onDonePayment" />
         </a-modal>
         <HelpPayment :isMobile="isMobile" />
+        <ResetPass :isMobile="isMobile" :show="showReset" @closeUpdate="showReset = false" />
     </div>
 </template>
 
@@ -390,6 +398,7 @@ import HelpPayment from "~/components/payment/helpInfo.vue"
 import UserCart from "~/components/payment/myCart.vue"
 import Address from "~/components/account/address.vue"
 import Qrcode from "~/components/payment/paymentQrcode.vue"
+import ResetPass from "~/components/account/forgotpass.vue"
 
 export default {
     name: 'IndexPage',
@@ -398,7 +407,8 @@ export default {
         UserCart,
         HelpPayment,
         Address,
-        Qrcode
+        Qrcode,
+        ResetPass
     },
     data() {
         return {
@@ -410,6 +420,7 @@ export default {
             shiping_type: 1,
             stepShow: 'address',
             paymentDone: null,
+            address_full: null,
             user: {},
             total_price: 0,
             order: {},
@@ -428,6 +439,7 @@ export default {
             shipItem: {},
             shipChoice: null,
             payChoice: null,
+            showReset: false,
             payItem: {}
         }
     },
@@ -451,7 +463,6 @@ export default {
         this.listShipping = await this.getListShipping()
         await this.getAddressByUser(this.profile.id)
         this.user_address = this.userAddress
-        
         await this.getPlace()
         if (this.listPayment.length > 0) {
             let _paypal = this.listPayment.find((o) => o.attributes.name == 'Paypal')
@@ -509,6 +520,21 @@ export default {
             getPlace: 'place/getPlace',
             getAddressByUser: 'auth/getAddressByUser',
         }),
+        getFullAddress(address){
+            if(address.attributes.full_address){
+                this.address_full = address.attributes.full_address
+            }
+            if(address?.attributes?.wards.data?.length > 0){
+                this.address_full += `, ${address?.attributes?.wards.data[0].attributes.prefix} ${address?.attributes?.wards.data[0].attributes.name}`
+            }
+            if(address?.attributes?.districts.data?.length > 0){
+                this.address_full += `, ${address?.attributes?.districts.data[0].attributes.prefix} ${address?.attributes?.districts.data[0].attributes.name}`
+            }
+            if(address?.attributes?.provinces.data?.length > 0){
+                this.address_full += `, ${address?.attributes?.provinces.data[0].attributes.name}`
+            }
+            return this.address_full
+        },
         onCheckShipping(_id) {
             this.shipChoice = this.listShipping.find(o=> o.id === _id)
             this.priceShip = this.shipChoice?.attributes.price
@@ -825,7 +851,6 @@ export default {
     .payment-step-card {
         border: 1px solid #D9D9D9;
         margin-bottom: 30px;
-
         .payment-step-title {
             border-bottom: 1px solid #D9D9D9;
             height: 50px;
@@ -1006,6 +1031,15 @@ export default {
             }
         }
 
+        .payment-forgotpass{
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-family: "Aeroport-light";
+            text-align: right;
+            cursor: pointer;
+            width: 100%;
+        }
+
         .page-login-google-btn {
             width: 100%;
             height: 75px;
@@ -1033,6 +1067,7 @@ export default {
         .payment-step-address-info {
             margin-top: 0px;
             padding-left: 20px;
+            padding-right: 20px;
 
             .payment-step-address-info-title{
                 font-size: 20px;
@@ -1183,7 +1218,7 @@ export default {
                     margin-top: 20px;
                     color: #000;
                     text-align: center;
-                    font-family: 'Aeroport-light';
+                    font-family: 'Aeroport-medium';
                     font-size: 17px;
                     text-transform: uppercase;
                 }
@@ -1194,34 +1229,34 @@ export default {
                     color: #000;
                     text-align: center;
                     font-family: 'Aeroport-light';
-                    font-size: 10px;
+                    font-size: 14px;
                 }
 
                 .payment-order-btn {
                     width: 100%;
                     height: 50px;
-                    line-height: 50px;
+                    line-height: 46px;
                     border: 1px solid #000;
                     cursor: pointer;
-                    font-family: 'Aeroport-light';
+                    font-family: 'Aeroport-bold';
                     color: #000;
                     text-align: center;
                     text-transform: uppercase;
-                    font-size: 11px;
+                    font-size: 16px;
                     margin-bottom: 20px;
                 }
 
                 .payment-order-btn-shop {
                     width: 100%;
                     height: 50px;
-                    line-height: 50px;
+                    line-height: 46px;
                     background-color: #000;
                     cursor: pointer;
-                    font-family: 'Aeroport-light';
+                    font-family: 'Aeroport-bold';
                     color: #fff;
                     text-align: center;
                     text-transform: uppercase;
-                    font-size: 11px;
+                    font-size: 16px;
                 }
             }
 
@@ -1230,8 +1265,8 @@ export default {
 
                 .payment-product-img {
                     .payment-product-image {
-                        width: 70px;
-                        height: 90px;
+                        width: 140px;
+                        height: 185px;
                         object-fit: cover;
                     }
                 }
@@ -1244,15 +1279,15 @@ export default {
 
                     .payment-product-name {
                         color: #000;
-                        font-family: 'Aeroport-light';
-                        font-size: 10px;
+                        font-family: 'Aeroport-medium';
+                        font-size: 14px;
                         text-transform: uppercase;
                     }
 
                     .payment-product-des {
                         color: #717171;
                         font-family: 'Aeroport-light';
-                        font-size: 9px;
+                        font-size: 14px;
                         margin-top: 8px;
                         margin-bottom: 8px;
 
@@ -1262,10 +1297,11 @@ export default {
                     }
 
                     .payment-product-price {
-                        position: absolute;
+                        position: relative;
                         bottom: 0px;
                         right: 0px;
-                        font-size: 11px;
+                        color: #000;
+                        font-size: 14px;
                     }
                 }
             }
@@ -1334,7 +1370,7 @@ export default {
 
                 .payment-step-success-title {
                     color: #000;
-                    font-family: 'Aeroport';
+                    font-family: 'Aeroport-medium';
                     font-size: 14px;
                     margin-bottom: 10px;
                 }
@@ -1382,27 +1418,27 @@ export default {
 
             .payment-step-input-login {
                 width: 100%;
-                height: 30px;
+                height: 50px;
                 padding: 11px 16px;
                 border: 1px solid #000;
                 margin-top: 5px;
                 margin-bottom: 10px;
                 border-radius: 0px;
                 font-family: 'Aeroport-light';
-                font-size: 9px;
+                font-size: 14px;
                 color: #000;
             }
 
             .payment-step-input-btn {
                 width: 100%;
-                height: 30px;
-                line-height: 28px;
+                height: 50px;
+                line-height: 48px;
                 text-align: center;
                 color: #FFF;
                 border: 1px solid #000;
                 background-color: #000;
                 font-family: 'Aeroport';
-                font-size: 10px;
+                font-size: 16px;
                 font-weight: 700;
                 letter-spacing: 2px;
                 text-transform: uppercase;
@@ -1423,8 +1459,8 @@ export default {
 
             .page-login-google-btn {
                 width: 100%;
-                height: 40px;
-                line-height: 40px;
+                height: 50px;
+                line-height: 50px;
                 margin-top: 40px;
                 border: 1px solid #000;
                 cursor: pointer;
@@ -1449,6 +1485,7 @@ export default {
                 margin-top: 0px;
                 padding-left: 20px;
                 padding-bottom: 10px;
+                padding-right: 10px;
                 padding-top: 1rem;
 
                 .payment-step-address-info-title{

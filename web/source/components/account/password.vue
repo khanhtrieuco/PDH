@@ -1,6 +1,6 @@
 <template>
-    <div class="backgroud-black" @click="$emit('closeUpdate')">
-        <div class="popup-content" @click.stop="">
+    <!-- <div class="backgroud-black" @click="$emit('closeUpdate')"> -->
+        <div class="popup-content">
             <div class="password-content">
                 <!-- <img class="password-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
                 <div class="password-title">Change password</div>
@@ -47,7 +47,7 @@
             </div>
             <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>
         </div>
-    </div>
+    <!-- </div> -->
 </template>
   
 <script>
@@ -211,7 +211,7 @@ export default {
         top: calc(50% - 400px/2);
         margin: auto;
         width: 90%;
-        height: 400px;
+        height: 450px;
         background-color: #ffffff;
         padding: 30px;
 

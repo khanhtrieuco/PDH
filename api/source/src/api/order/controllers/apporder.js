@@ -201,6 +201,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 					total_price: listCartAdd[i].quantity * listCartAdd[i].price,
 					product: listCartAdd[i].id,
 					quantity: listCartAdd[i].quantity,
+					variant: listCartAdd[i].variant,
 					user: user?.id
 				}
 				let resCart = await strapi.entityService.create('api::cart.cart', { data: cart });

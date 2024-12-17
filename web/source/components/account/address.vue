@@ -1,7 +1,7 @@
 <template>
-    <div class="backgroud-black" @click="$emit('closeUpdate')">
-        <div class="popup-content" @click.stop="">
-            <div class="close-btn-address" @click="$emit('closeUpdate')">X</div>
+    <!-- <div class="backgroud-black" @click="$emit('closeUpdate')"> -->
+        <div class="popup-content">
+            <!-- <div class="close-btn-address" @click="$emit('closeUpdate')">X</div> -->
             <div class="address-content">
                 <!-- <img class="address-close" src="/images/close-outline.png" @click="$emit('closeUpdate')" /> -->
                 <div class="address-title">Add new address</div>
@@ -89,9 +89,9 @@
                 <div class="up-add-btn" @click="type === 'create' ? onAddNew() : onUpdate()">Save
                 </div>
             </div>
-            <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div>
+            <!-- <div class="back-close-popup" @click="$emit('closeUpdate')">back to my account</div> -->
         </div>
-    </div>
+    <!-- </div> -->
 </template>
   
 <script>

@@ -6,8 +6,8 @@
                 <div class="qrcode-img-title">Your order amount is: {{ qrcode.totalPrice | numberWithCommas }}{{ ' '
                 }}$</div>
                 <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
-                <div>Message for the recipient: <b>{{ qrcode.code }}</b></div>
-                <div v-show="time > 0">Payment time: {{ time }}</div>
+                <div class="qrcode-font">Message for the recipient: <b>{{ qrcode.code }}</b></div>
+                <div  class="qrcode-font" v-show="time > 0">Payment time: {{ time }}</div>
             </div>
             <div class="qrcode-info">
                 <div class="qrcode-info-title">Thank you. Your order has been received.</div>
@@ -27,14 +27,14 @@
                 <div class="qrcode-info-title">Your order amount is</div>
                 <div class="qrcode-img-title">{{ qrcode.totalPrice | numberWithCommas }}{{ ' '}}Đ</div>
                 <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
-                <div>Message for the recipient: <b>{{ qrcode.code }}</b></div>
-                <div v-show="time > 0">Payment time: {{ time }}</div>
+                <div class="qrcode-font">Message for the recipient: <b>{{ qrcode.code }}</b></div>
+                <div class="qrcode-font" v-show="time > 0">Payment time: {{ time }}</div>
             </div>
         </div>
         <div class="qrcode-order">
             <div class="qrcode-order-title">Order Details</div>
-            <div class="qrcode-line" v-for="(_p, idx) in qrcode.listProductItem " :key="idx">
-                <div class="qrcode-sub-des">{{ _p.name }} x {{ _p.quantity }}</div>
+            <div class="" v-for="(_p, idx) in qrcode.listProductItem " :key="idx">
+                <div class="qrcode-sub-des">{{ _p.name.length > 38 ? `${_p.name.substring(0, 36)}...` : _p.name.length }} x {{ _p.quantity }}</div>
                 <div class="qrcode-sub-price">$ {{ _p.quantity * _p.price | numberWithCommas }}</div>
             </div>
             <div class="d-flex justify-content-between mt-4">
@@ -128,7 +128,9 @@ export default {
         text-align: center;
     }
 }
-
+.qrcode-font{
+    font-family: 'Aeroport-light';
+}
 .qrcode-info {
     width: 50%;
 
@@ -152,6 +154,7 @@ export default {
         font-size: 16px;
         margin-bottom: 20px;
         color: #000;
+        font-family: 'Aeroport-light';
 
     }
 
@@ -169,13 +172,14 @@ export default {
 
     .qrcode-sub-des {
         font-size: 14px;
-        font-family: 'Aeroport';
+        font-family: 'Aeroport-medium';
         color: #000;
     }
 
     .qrcode-sub-price {
         font-size: 14px;
         font-family: 'Aeroport-light';
+        color: #000;
     }
 
     .qrcode-sub-last {

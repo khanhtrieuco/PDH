@@ -84,10 +84,10 @@
                     </div>
                     <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
                         @onChange="choiceSize"></Select>
-                    <div class="product-detail-data-inventory" v-if="variant">
+                    <!-- <div class="product-detail-data-inventory" v-if="variant">
                         <div class="product-detail-data-inventory-text">Inventory:</div>
                         <div class="product-detail-data-inventory-des">{{ variant.attributes?.inventory }}</div>
-                    </div>
+                    </div> -->
                     <div class="product-detail-data-btn" @click="addProductToCart">
                         Add to cart
                     </div>
@@ -131,10 +131,10 @@
                 </div>
                 <Select :default="$i18n.locale === 'vn' ? 'Select Size' : 'Select Size'" :listItem="listSizeChoice"
                     @onChange="choiceSize"></Select>
-                <div class="product-detail-data-inventory" v-if="variant">
+                <!-- <div class="product-detail-data-inventory" v-if="variant">
                     <div class="product-detail-data-inventory-text">Inventory:</div>
                     <div class="product-detail-data-inventory-des">{{ variant.attributes?.inventory }}</div>
-                </div>
+                </div> -->
                 <div class="product-detail-data-btn" @click="addProductToCart">
                     Add to cart
                 </div>

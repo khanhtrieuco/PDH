@@ -52,7 +52,7 @@
 }
 
 .ant-modal-title{
-  font-family: 'Aeroport';
+  font-family: 'Aeroport-medium';
   text-align: center;
 }
 @keyframes bounce-in {
@@ -130,6 +130,7 @@
 
 .anticon svg {
   margin-top: -7px;
+  color: #000;
 }
 
 .ant-form-item-control {

@@ -240,8 +240,8 @@ export default {
     }
 
     .my-order-content {
-        padding-bottom: 100px;
-        min-height: 600px;
+        padding-bottom: 10px;
+        min-height: auto;
         max-width: 80%;
         margin: auto;
         background-color: #fff;
@@ -253,8 +253,9 @@ export default {
             font-size: 12px;
             font-weight: 500;
             padding-top: 10px;
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-transform: uppercase;
         }
 
         .my-order-item {
@@ -307,10 +308,11 @@ export default {
                         }
 
                         .my-order-item-product-info-name {
-                            color: #717171;
-                            font-family: 'Aeroport-light';
-                            font-size: 10px;
-                            line-height: 25px;
+                            color: #000;
+                            font-family: 'Aeroport-medium';
+                            font-size: 14px;
+                            line-height: 14px;
+                            margin-bottom: 8px;
 
                             span {
                                 color: #000;
@@ -318,14 +320,19 @@ export default {
                         }
 
                         .my-order-item-product-info-des{
-                            font-size: 10px;
+                            font-family: 'Aeroport-light';
+                            font-size: 14px;
+                            color: #717171;
+                            span {
+                                color: #000;
+                            }
                         }
 
                         .my-order-item-product-info-price {
                             color: #000;
                             text-align: right;
                             font-family: 'Aeroport-light';
-                            font-size: 10px;
+                            font-size: 14px;
                             position: absolute;
                             bottom: 0px;
                             right: 0px;

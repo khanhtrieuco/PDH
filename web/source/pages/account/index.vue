@@ -49,7 +49,8 @@
                                 {{ address.attributes?.phone }}
                             </div>
                             <div class="account-content-body-text">
-                                {{ address.attributes?.full_address }}
+                                <!-- {{ address.attributes?.full_address }} -->
+                                {{ address?.attributes?.full_address + (address?.attributes?.wards.data?.length > 0 ? `, ${address?.attributes?.wards.data[0].attributes.prefix} ${address?.attributes?.districts.data[0].attributes.name}` : "")}}{{ address?.attributes?.districts.data?.length > 0 ? `, ${address?.attributes?.districts.data[0].attributes.prefix} ${address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ address?.attributes?.provinces.data?.length > 0 ? ", " + address?.attributes?.provinces.data[0].attributes.name : ""}}
                             </div>
                         </div>
 
@@ -156,7 +157,7 @@
                                 {{ address.attributes?.phone }}
                             </div>
                             <div class="account-content-body-text">
-                                {{ address.attributes?.full_address }}
+                                {{ address?.attributes?.full_address + (address?.attributes?.wards.data?.length > 0 ? `, ${address?.attributes?.wards.data[0].attributes.prefix} ${address?.attributes?.districts.data[0].attributes.name}` : "")}}{{ address?.attributes?.districts.data?.length > 0 ? `, ${address?.attributes?.districts.data[0].attributes.prefix} ${address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ address?.attributes?.provinces.data?.length > 0 ? ", " + address?.attributes?.provinces.data[0].attributes.name : ""}}
                             </div>
                         </div>
                     </div>
@@ -217,11 +218,21 @@
                 </div>
             </div>
         </div>
-        <UserProfile v-if="showUpdateProfile" :isMobile="isMobile" @closeUpdate="showUpdateProfile = false">
-        </UserProfile>
-        <Password v-if="showUpdatePassword" :isMobile="isMobile" @closeUpdate="showUpdatePassword = false">
-        </Password>
-        <Address v-if="showUpdateAddress" :item="address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
+        <a-modal title="" :visible="showUpdateProfile" :destroyOnClose="true" :closable="true"
+            :maskClosable="false" :footer="null" width="800px" @cancel="() => this.showUpdateProfile = false">
+            <UserProfile  :isMobile="isMobile" @closeUpdate="showUpdateProfile = false">
+            </UserProfile>
+        </a-modal>
+        <a-modal title="" :visible="showUpdatePassword" :destroyOnClose="true" :closable="true"
+            :maskClosable="false" :footer="null" width="800px" @cancel="() => this.showUpdatePassword = false">
+            <Password  :isMobile="isMobile" @closeUpdate="showUpdatePassword = false">
+            </Password>
+        </a-modal>
+        <a-modal title="" :visible="showUpdateAddress" :destroyOnClose="true" :closable="true"
+            :maskClosable="false" :footer="null" width="800px" @cancel="() => this.showUpdateAddress = false">
+            <Address :item="address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
+        </a-modal>
+
     </div>
 </template>
 
@@ -232,6 +243,7 @@ import Address from "~/components/account/address.vue"
 import Password from "~/components/account/password.vue"
 import UserProfile from "~/components/account/profile.vue"
 export default {
+
     name: 'IndexPage',
     components: {
         Address,
@@ -321,6 +333,7 @@ export default {
             this.show_address = false
         },
         async closeUpdateAddress() {
+            console.log("onclose update")
             await this.getAddressByUser(this.profile.id)
             this.showUpdateAddress = false
         },
@@ -659,16 +672,16 @@ export default {
 
                         .account-content-order-item-info-name {
                             color: #000;
-                            font-family: 'Aeroport-light';
-                            font-size: 12px;
-                            text-transform: uppercase;
+                            font-family: 'Aeroport-medium';
+                            font-size: 14px;
+                            text-transform: none;
                             margin-bottom: 5px;
                         }
 
                         .account-content-order-item-info-des {
                             color: #717171;
                             font-family: 'Aeroport-light';
-                            font-size: 10px;
+                            font-size: 14px;
                             line-height: 16px;
 
                             span {
