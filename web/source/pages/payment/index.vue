@@ -54,8 +54,8 @@
                                             <div class="payment-step-address-info-title">Shipping Address</div>
                                             <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
                                             <div class="payment-step-address-des">
-                                                <!-- {{ user_address?.attributes?.full_address }}{{ user_address?.attributes?.wards.data?.length > 0 ? `, ${user_address?.attributes?.wards.data[0].attributes.prefix} ${user_address?.attributes?.districts.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.districts.data?.length > 0 ? `, ${user_address?.attributes?.districts.data[0].attributes.prefix} ${user_address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.provinces.data?.length > 0 ? ", " + user_address?.attributes?.provinces.data[0].attributes.name : ""}} -->
-                                                {{ getFullAddress(user_address) }}
+                                                {{ user_address?.attributes?.full_address }}{{ user_address?.attributes?.wards.data?.length > 0 ? `, ${user_address?.attributes?.wards.data[0].attributes.prefix} ${user_address?.attributes?.districts.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.districts.data?.length > 0 ? `, ${user_address?.attributes?.districts.data[0].attributes.prefix} ${user_address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.provinces.data?.length > 0 ? ", " + user_address?.attributes?.provinces.data[0].attributes.name : ""}}
+                                                <!-- {{ getFullAddress(user_address) }} -->
                                             </div>
                                             <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                             </div>
@@ -65,7 +65,7 @@
                                             @closeUpdate="closeUpdateAddress"></Address> -->
                                         <a-modal title="" :visible="showUpdateAddress" :destroyOnClose="true" :closable="true"
                                             :maskClosable="false" :footer="null" width="800px" @cancel="() => this.showUpdateAddress = false">
-                                            <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
+                                            <Address v-show="showUpdateAddress" :item="user_address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
                                         </a-modal>
                                     </div>
                                     <div class="payment-step-address-info" v-if="shiping_type === 2">
@@ -154,18 +154,16 @@
                                 <div class="payment-step-address-info-title">Shipping Address</div>
                                 <div class="payment-step-address-name">{{ user_address?.attributes?.name }}</div>
                                 <div class="payment-step-address-des">
-                                    {{ getFullAddress(user_address) }}
-                                <!-- {{ user_address?.attributes?.full_address }}{{ user_address?.attributes?.wards.data?.length > 0 ? `, ${user_address?.attributes?.wards.data[0].attributes.prefix} ${user_address?.attributes?.districts.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.districts.data?.length > 0 ? `, ${user_address?.attributes?.districts.data[0].attributes.prefix} ${user_address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.provinces.data?.length > 0 ? ", " + user_address?.attributes?.provinces.data[0].attributes.name : ""}} -->
+                                    <!-- {{ getFullAddress(user_address) }} -->
+                                {{ user_address?.attributes?.full_address }}{{ user_address?.attributes?.wards.data?.length > 0 ? `, ${user_address?.attributes?.wards.data[0].attributes.prefix} ${user_address?.attributes?.districts.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.districts.data?.length > 0 ? `, ${user_address?.attributes?.districts.data[0].attributes.prefix} ${user_address?.attributes?.wards.data[0].attributes.name}` : ""}}{{ user_address?.attributes?.provinces.data?.length > 0 ? ", " + user_address?.attributes?.provinces.data[0].attributes.name : ""}}
                             </div>
                                 <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                 </div>
                                 <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
                             </div>
-                            <!-- <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
-                                @closeUpdate="closeUpdateAddress"></Address> -->
                             <a-modal title="" :visible="showUpdateAddress" :destroyOnClose="true" :closable="true"
                                 :maskClosable="false" :footer="null" width="360px" @cancel="() => this.showUpdateAddress = false">
-                                <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
+                                <Address v-show="showUpdateAddress" :item="user_address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
                             </a-modal>
                         </div>
                         <div class="payment-step-address-info" v-if="shiping_type === 2">
@@ -458,7 +456,7 @@ export default {
             listCart: "cart/getListUserCart",
             listPayment: 'payment/getListPayment',
             place: 'place/getPlace',
-            userAddress: 'auth/getAddress'
+            // userAddress: 'auth/getAddress'
         }),
     },
     async mounted() {
@@ -568,6 +566,7 @@ export default {
                     }
                 })
             }
+            this.getFullAddress(this.user_address)
             let rs = await this.createOrder(_order)
             this.order_id = rs.id
             return rs.id;
@@ -650,6 +649,7 @@ export default {
         async onPushOrderOnline() {
             let priceTotal = this.listCart.reduce((_sum, o) => _sum + o.price * o.quantity, 0)
             this.listPaymentCart = this.listCart
+            this.getFullAddress(this.user_address)
             let _order = {
                 code: `#${this.makeString(8)}`,
                 state: 'new',
