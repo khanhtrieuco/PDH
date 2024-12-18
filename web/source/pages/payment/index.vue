@@ -61,8 +61,12 @@
                                             </div>
                                             <div class="payment-step-address-update mt-1" @click="openAddressPopup">Save</div>
                                         </div>
-                                        <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
-                                            @closeUpdate="closeUpdateAddress"></Address>
+                                        <!-- <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
+                                            @closeUpdate="closeUpdateAddress"></Address> -->
+                                        <a-modal title="" :visible="showUpdateAddress" :destroyOnClose="true" :closable="true"
+                                            :maskClosable="false" :footer="null" width="800px" @cancel="() => this.showUpdateAddress = false">
+                                            <Address :item="user_address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
+                                        </a-modal>
                                     </div>
                                     <div class="payment-step-address-info" v-if="shiping_type === 2">
                                         <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name
@@ -157,8 +161,12 @@
                                 </div>
                                 <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
                             </div>
-                            <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
-                                @closeUpdate="closeUpdateAddress"></Address>
+                            <!-- <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
+                                @closeUpdate="closeUpdateAddress"></Address> -->
+                            <a-modal title="" :visible="showUpdateAddress" :destroyOnClose="true" :closable="true"
+                                :maskClosable="false" :footer="null" width="800px" @cancel="() => this.showUpdateAddress = false">
+                                <Address :item="user_address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
+                            </a-modal>
                         </div>
                         <div class="payment-step-address-info" v-if="shiping_type === 2">
                             <div class="payment-step-address-name">{{ $i18n.locale === 'vn' ? place.attributes?.name :
