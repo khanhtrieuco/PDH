@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="payment-step-address-des">{{ `${user_address?.attributes?.phone}` }}
                                             </div>
-                                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Save</div>
+                                            <div class="payment-step-address-update mt-1" @click="openAddressPopup">Update</div>
                                         </div>
                                         <!-- <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
                                             @closeUpdate="closeUpdateAddress"></Address> -->
