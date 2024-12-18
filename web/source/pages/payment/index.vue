@@ -698,7 +698,7 @@ export default {
             }
         },
         async onGoogleLogin() {
-            window.localStorage.setItem('googleback', '/thanh-toan')
+            window.localStorage.setItem('googleback', 'thanh-toan')
             window.location = '/api/connect/google'
         }
     }
