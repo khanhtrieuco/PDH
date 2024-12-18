@@ -18,11 +18,11 @@ import { mapGetters, mapActions } from "vuex"
                 setTimeout(()=>{                    
                     if(path) {
                         window.localStorage.removeItem('googleback')
-                        this.$router.push({ path: `/${path}` })
+                        this.$router.push({ path: `/thanh-toan` })
                     } else {
                         this.$router.push({ path: '/account' })
                     }
-                },500)
+                },1000)
                 
             }
         }
