@@ -198,7 +198,7 @@ export default {
                 address: res?.data[0]
             })
             return res?.data[0]
-        }
+        } else return {}
     },
 
     me: async ({ commit, rootState }, data) => {

@@ -164,7 +164,7 @@
                             <!-- <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile"
                                 @closeUpdate="closeUpdateAddress"></Address> -->
                             <a-modal title="" :visible="showUpdateAddress" :destroyOnClose="true" :closable="true"
-                                :maskClosable="false" :footer="null" width="800px" @cancel="() => this.showUpdateAddress = false">
+                                :maskClosable="false" :footer="null" width="360px" @cancel="() => this.showUpdateAddress = false">
                                 <Address v-if="showUpdateAddress" :item="user_address" :isMobile="isMobile" @closeUpdate="closeUpdateAddress"></Address>
                             </a-modal>
                         </div>
@@ -469,8 +469,8 @@ export default {
         await this.getListCartUser()
         await this.getListPayment()
         this.listShipping = await this.getListShipping()
-        await this.getAddressByUser(this.profile.id)
-        this.user_address = this.userAddress
+        this.user_address = await this.getAddressByUser(this.profile.id)
+        // this.user_address = this.userAddress
         await this.getPlace()
         if (this.listPayment.length > 0) {
             let _paypal = this.listPayment.find((o) => o.attributes.name == 'Paypal')
