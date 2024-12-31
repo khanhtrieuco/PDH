@@ -1305,7 +1305,9 @@ export default {
         display: inline-grid;
         grid-template-columns: 50% 50%;
         gap: 8px;
-        width: 100%;
+        width: calc(100% - 24px);
+        margin-right: 8px;
+        margin-left: 8px;
         .product-list-grid-item{
             width: 100%;
         }

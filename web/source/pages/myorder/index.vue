@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div style="margin: 1rem;" v-if="listOrder && listOrder.length === 0">You currently have no orders</div>
+            <div style="margin: 1rem;font-family: 'Aeroport-light';" v-if="listOrder && listOrder.length === 0">You currently have no orders</div>
         </div>
         <div class="my-order-back" @click="$router.go(-1)">back to my account</div>
     </div>

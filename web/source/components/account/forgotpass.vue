@@ -1,5 +1,5 @@
 <template>
-    <div v-if="show" class="backgroud-black" @click="$emit('closeUpdate')">
+    <div v-if="show" class="backgroud-black-forgot" @click="$emit('closeUpdate')">
         <div class="reset-content" @click.stop="">
             <div class="reset-title">Reset Password</div>
             <input v-if="!sendmail" class="input-email" v-model="email"
@@ -63,7 +63,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.backgroud-black {
+.backgroud-black-forgot {
     width: 100%;
     height: 100vh;
     position: fixed;
@@ -71,6 +71,9 @@ export default {
     top: 0px;
     background-color: #000000b3;
     z-index: 15;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .reset-content {
