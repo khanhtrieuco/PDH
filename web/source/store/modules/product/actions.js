@@ -4,6 +4,7 @@ export default {
     getListProduct: async ({ commit, rootState }, data = {}) => {
         const query = qs.stringify({
             filters: data.filters,
+            pagination: data.pagination,
             sort: data.sort,
             populate: '*'
         }, {
@@ -13,10 +14,16 @@ export default {
             method: 'get',
             url: `/api/products?${query}`
         })
-        commit('set_list_product', {
-            list_product: res.data.filter(i => i.attributes.state === 'active')
-        })
-        return res.data.filter(i => i.attributes.state === 'active')
+        if(data.pagination?.page > 1) {
+            commit('set_add_list_product', {
+                list_product: res.data.filter(i => i.attributes.state === 'active')
+            })
+        } else {
+            commit('set_list_product', {
+                list_product: res.data.filter(i => i.attributes.state === 'active')
+            })
+        }
+        return res
     },
 
     getListProductLike: async ({ commit, rootState }, data = {}) => {

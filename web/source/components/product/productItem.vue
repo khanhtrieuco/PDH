@@ -75,9 +75,11 @@ export default {
     if (this.isLike) {
       this.likeImage = '/images/liked.png'
     }
-    this.product_image = this.item.attributes.thub?.data.attributes.url
+   
     if(this.isMobile) {
-      this.product_image = this.item.attributes.thub?.data.attributes?.formats?.medium?.url  ?? this.item.attributes.thub?.data.attributes.url
+      this.product_image = this.item.attributes.thub?.data.attributes?.formats?.medium?.url ?? this.item.attributes.thub?.data.attributes.url
+    } else {
+      this.product_image = this.item.attributes.thub?.data.attributes?.formats?.large?.url ?? this.item.attributes.thub?.data.attributes.url
     }
     // if (this.item.attributes && this.item.attributes.variants?.data) {
     //   this.item.attributes.variants.data.forEach(v => {
@@ -110,10 +112,18 @@ export default {
         this.likeImage = '/images/heart.png'
     },
     showHover() {
-      this.product_image = this.item.attributes.thub_main.data.attributes.url
+      if(this.isMobile) {
+        this.product_image = this.item.attributes.thub_main?.data.attributes?.formats?.medium?.url ?? this.item.attributes.thub_main?.data.attributes.url
+      } else {
+        this.product_image = this.item.attributes.thub_main?.data.attributes?.formats?.large?.url ?? this.item.attributes.thub_main?.data.attributes.url
+      }
     },
     hideHover() {
-      this.product_image = this.item.attributes.thub.data.attributes.url
+      if(this.isMobile) {
+        this.product_image = this.item.attributes.thub?.data.attributes?.formats?.medium?.url ?? this.item.attributes.thub?.data.attributes.url
+      } else {
+        this.product_image = this.item.attributes.thub?.data.attributes?.formats?.large?.url ?? this.item.attributes.thub?.data.attributes.url
+      }
     },
     async onLike(_product) {
       if (!this.loggedIn) {

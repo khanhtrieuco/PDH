@@ -2,6 +2,9 @@ export default {
     set_list_product(state, payload) {
         state.list_product = payload.list_product;
     },
+    set_add_list_product(state, payload) {
+        state.list_product = state.list_product?.concat(payload.list_product);
+    },
     set_data(state, payload) {
         state[payload.name] = payload.data;
     },

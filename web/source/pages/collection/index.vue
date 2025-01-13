@@ -125,7 +125,11 @@ export default {
     data() {
         return {
             isMobile: false,
-            listProduct: []
+            listProduct: [],
+            pagination: {
+                page: 1,
+                total: 0
+            }
         }
     },
     computed: {
@@ -142,12 +146,25 @@ export default {
             await this.getCollectionBySlug(this.$route.params.id) //(this.$route.params.id)
         }
         await this.loadProducts()
+        window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
         ...mapActions({
             getCollectionBySlug: "collection/getCollectionBySlug",
             getListProduct: "product/getListProduct"
         }),
+        handleScroll (event) {
+            window.removeEventListener("scroll", this.handleScroll);
+            console.log("stop listening");
+            setTimeout(() => {
+                window.addEventListener("scroll", this.handleScroll, { passive: true });
+                console.log("start listening");
+                if(this.pagination.total > this.listProduct.length){
+                    this.pagination.page = this.pagination.page + 1
+                    this.loadProducts(null,this.pagination.page)
+                }
+            }, 2000);
+        },
         checkMobile() {
             if (!process.server) {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -160,9 +177,10 @@ export default {
         goTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' })
         },
-        async loadProducts(_data) {
+        async loadProducts(_data, page = 1) {
             if (this.collection && this.collection.id) {
                 let arrayFilter = [{ collection: this.collection.id }]
+                let pagination = { page : page }
                 let sort = 'order:desc,id:desc'
                 if (_data && _data.sort) {
                     sort = _data.sort + ',order:desc'
@@ -172,7 +190,15 @@ export default {
                 if (_data && _data.filterSub) {
                     arrayFilter.push({ subcategories: _data.filterSub })
                 }
-                this.listProduct = await this.getListProduct({ filters: { '$and': arrayFilter }, sort })
+                arrayFilter.push({ 'state': 'active' })
+                let res = await this.getListProduct({ filters: { '$and': arrayFilter }, sort , pagination })
+                this.pagination = res.meta?.pagination
+                if(page > 1) {
+                    this.listProduct = this.listProduct.concat(res.data)
+                }
+                else {
+                    this.listProduct = res.data
+                }
             }
         }
     }
