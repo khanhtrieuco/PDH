@@ -4,7 +4,7 @@
             <div class="qrcode-img">
                 <!-- <div>{{ payment.attributes?.description }}</div> -->
                 <div class="qrcode-img-title">Your order amount is: {{ qrcode.totalPrice | numberWithCommas }}{{ ' '
-                }}$</div>
+                }}Đ</div>
                 <img :src="payment.attributes?.qr_code.data?.attributes.url" class="qrcode-image" />
                 <div class="qrcode-font">Message for the recipient: <b>{{ qrcode.code }}</b></div>
                 <div  class="qrcode-font" v-show="time > 0">Payment time: {{ time }}</div>
@@ -16,7 +16,7 @@
                 <div class="qrcode-info-des">Placed by: <span>{{ qrcode.address_name }}</span></div>
                 <div class="qrcode-info-des">Phone Number: <span>{{ qrcode.address_phone }}</span></div>
                 <div class="qrcode-info-des">Address: <span>{{ qrcode.address_full }}</span></div>
-                <div class="qrcode-info-des">Total: <span>{{ qrcode.totalPrice | numberWithCommas }}{{ ' ' }}$</span>
+                <div class="qrcode-info-des">Total: <span>{{ qrcode.totalPrice | numberWithCommas }}{{ ' ' }}Đ</span>
                 </div>
                 <div class="qrcode-info-des">Payment Method: <span>{{ payment.attributes?.name }}</span></div>
             </div>

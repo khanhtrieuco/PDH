@@ -615,16 +615,13 @@ export default {
         async closeUpdateAddress() {
             this.showUpdateAddress = false
             this.user_address = await this.getAddressByUser(this.profile.id)
+            if (this.shipChoice && this.shipChoice?.id && this.user_address && this.user_address?.id) {
+                this.stepName = 2
+            }
         },
         onChoiceAddress(_user) {
             this.stepShow = 'shipping'
             this.user = _user
-        },
-        choiceShipping(_shipping) {
-            this.user_shipping = _shipping
-            if (_shipping.id) {
-                this.priceShip = _shipping.attributes.price
-            }
         },
         onChoicePayment(_payment) {
             this.payChoice = _payment.id

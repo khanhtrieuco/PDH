@@ -209,6 +209,8 @@ export default {
                 width: calc(100% - 180px);
                 margin-left: 25px;
                 position: relative;
+                font-family: 'Aeroport-light';
+
 
                 .my-cart-product-name {
                     color: #000;
@@ -252,9 +254,12 @@ export default {
             padding-top: 15px;
             border-top: 1px solid #D9D9D9;
             color: #000;
-            font-family: 'Aeroport';
+            font-family: 'Aeroport-bold';
             font-size: 16px;
             text-transform: uppercase;
+            b{
+                font-family: 'Aeroport-bold';
+            }
         }
     }
 
